@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="287" y="-306"/>
         </scene>
-        <!--View Controller-->
+        <!--Meeting Table View Controller-->
         <scene sceneID="gja-4r-W3C">
             <objects>
-                <tableViewController id="rhm-8l-29H" customClass="ViewController" sceneMemberID="viewController">
+                <tableViewController id="rhm-8l-29H" customClass="MeetingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0lq-qO-89k">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
