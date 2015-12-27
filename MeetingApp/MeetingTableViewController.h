@@ -11,5 +11,7 @@
 @interface MeetingTableViewController : UITableViewController
 
 
+@property(strong) NSArray *meetings;
+
 @end
 

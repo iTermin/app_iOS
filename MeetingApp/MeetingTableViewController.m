@@ -20,13 +20,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    NSArray *meetings = @[
+    self.meetings = @[
             @{
                     @"active" : @(true),
-                    @"date" : @(1448008691974),
+                    @"date" : @"2015-12-11",
                     @"meetingId" : @"m1",
                     @"name" : @"Meeting 1"
-            }];
+            },
+            @{
+                    @"active" : @(true),
+                    @"date" : @"2015-11-15",
+                    @"meetingId" : @"m2",
+                    @"name" : @"Meeting 2"
+            }
+    ];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -35,13 +42,14 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return [self.meetings count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"IDENTIFIER"];
-    [cell setBackgroundColor: indexPath.row == 0 ? [UIColor redColor] : [UIColor greenColor] ];
+    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
+    [[cell textLabel] setText: self.meetings[indexPath.row][@"name"]];
+    [[cell detailTextLabel] setText: self.meetings[indexPath.row][@"date"] ];
     return cell;
 }
 
