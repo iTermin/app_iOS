@@ -87,7 +87,22 @@
                             <outlet property="delegate" destination="rhm-8l-29H" id="rln-bg-q4O"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="x2G-hv-kw0"/>
+                    <navigationItem key="navigationItem" id="x2G-hv-kw0">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="YTL-K5-T1d">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gww-Hg-4hD">
+                                <rect key="frame" x="20" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="menu"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Usq-Tu-G92">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="awR-oN-QAG">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="newMeeting"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Et8-Mc-bnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -113,4 +128,8 @@
             <point key="canvasLocation" x="1007" y="-306"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="22" height="22"/>
+        <image name="newMeeting" width="22" height="22"/>
+    </resources>
 </document>
