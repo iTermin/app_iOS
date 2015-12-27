@@ -50,12 +50,18 @@
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
     [[cell textLabel] setText: self.meetings[indexPath.row][@"name"]];
     [[cell detailTextLabel] setText: self.meetings[indexPath.row][@"date"] ];
+    [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+    
     return cell;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 @end
