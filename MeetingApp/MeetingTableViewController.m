@@ -7,6 +7,7 @@
 //
 
 #import "MeetingTableViewController.h"
+#import "MeetingDetailViewController.h"
 
 
 @interface MeetingTableViewController ()
@@ -36,6 +37,12 @@
     ];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary * selectedMeeting = self.meetings[indexPath.row];
+    [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -62,6 +69,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    MeetingDetailViewController * detailViewController = (MeetingDetailViewController *)segue.destinationViewController;
+    [detailViewController setTitle:sender[@"name"]];
+    [detailViewController setCurrentMeeting: sender];
 }
 
 @end

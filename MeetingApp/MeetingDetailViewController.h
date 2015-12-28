@@ -10,4 +10,9 @@
 
 @interface MeetingDetailViewController : UIViewController
 
+@property(nonatomic, strong) NSDictionary * currentMeeting;
+
+@property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
+@property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;
+
 @end
