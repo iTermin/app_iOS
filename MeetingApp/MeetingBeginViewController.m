@@ -1,18 +1,20 @@
 //
-//  ViewController.m
+//  MeetingBeginViewController.m
 //  MeetingApp
 //
-//  Created by Estefania Chavez Guardado on 12/26/15.
+//  Created by Estefania Chavez Guardado on 12/28/15.
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ViewController.h"
 
-@interface ViewController ()
+#import "MeetingBeginViewController.h"
+
+
+@interface MeetingBeginViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MeetingBeginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

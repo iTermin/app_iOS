@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
-		7C30FA871C2ED3C70059EAE3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA861C2ED3C70059EAE3 /* ViewController.m */; };
+		7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */; };
 		7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA881C2ED3C70059EAE3 /* Main.storyboard */; };
 		7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */; };
 		7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */; };
 		7C30FA9A1C2ED3C70059EAE3 /* MeetingAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA991C2ED3C70059EAE3 /* MeetingAppTests.m */; };
 		7C30FAA51C2ED3C70059EAE3 /* MeetingAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */; };
+		7C6F4F0C1C3127FE00608696 /* MeetingBeginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* MeetingBeginViewController.m */; };
+		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +41,8 @@
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7C30FA851C2ED3C70059EAE3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7C30FA861C2ED3C70059EAE3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7C30FA851C2ED3C70059EAE3 /* MeetingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingTableViewController.h; sourceTree = "<group>"; };
+		7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingTableViewController.m; sourceTree = "<group>"; };
 		7C30FA891C2ED3C70059EAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C30FA8E1C2ED3C70059EAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,10 @@
 		7C30FAA01C2ED3C70059EAE3 /* MeetingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingAppUITests.m; sourceTree = "<group>"; };
 		7C30FAA61C2ED3C70059EAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C6F4F0B1C3127FE00608696 /* MeetingBeginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingBeginViewController.m; sourceTree = "<group>"; };
+		7C6F4F0D1C31281600608696 /* MeetingBeginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingBeginViewController.h; sourceTree = "<group>"; };
+		7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
+		7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +109,12 @@
 			children = (
 				7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */,
 				7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */,
-				7C30FA851C2ED3C70059EAE3 /* ViewController.h */,
-				7C30FA861C2ED3C70059EAE3 /* ViewController.m */,
+				7C30FA851C2ED3C70059EAE3 /* MeetingTableViewController.h */,
+				7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */,
+				7C6F4F0D1C31281600608696 /* MeetingBeginViewController.h */,
+				7C6F4F0B1C3127FE00608696 /* MeetingBeginViewController.m */,
+				7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */,
+				7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -270,8 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C30FA871C2ED3C70059EAE3 /* ViewController.m in Sources */,
+				7C6F4F0C1C3127FE00608696 /* MeetingBeginViewController.m in Sources */,
+				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
+				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +510,7 @@
 				7C30FAAB1C2ED3C70059EAE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C30FAAC1C2ED3C70059EAE3 /* Build configuration list for PBXNativeTarget "MeetingAppTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +519,7 @@
 				7C30FAAE1C2ED3C70059EAE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C30FAAF1C2ED3C70059EAE3 /* Build configuration list for PBXNativeTarget "MeetingAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +528,7 @@
 				7C30FAB11C2ED3C70059EAE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

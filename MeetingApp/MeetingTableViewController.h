@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MeetingTableViewController : UITableViewController
 
+
+@property(strong) NSArray *meetings;
 
 @end
 
