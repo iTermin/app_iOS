@@ -37,12 +37,6 @@
     ];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * selectedMeeting = self.meetings[indexPath.row];
-    [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
-}
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -55,6 +49,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
+    cell.textLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:15];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Book" size:11];
     [[cell textLabel] setText: self.meetings[indexPath.row][@"name"]];
     [[cell detailTextLabel] setText: self.meetings[indexPath.row][@"date"] ];
     [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
@@ -68,7 +64,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 60;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary * selectedMeeting = self.meetings[indexPath.row];
+    [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
