@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MeetingDetailViewController : UIViewController
+@interface MeetingDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) NSDictionary * currentMeeting;
 
@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UIView *reminderNotification;
 @property (strong, nonatomic) IBOutlet UIView *emailNotification;
 @property (strong, nonatomic) IBOutlet UIView *calendarNotification;
+
+@property(strong) NSArray *guests;
 
 
 - (IBAction)pushButtonPressed:(id)sender;
