@@ -198,6 +198,9 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="calendarNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="J0h-0G-ZAN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
                                 <rect key="frame" x="247" y="582" width="50" height="31"/>
@@ -209,6 +212,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="emailNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="ZUx-eo-FNB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
                                 <rect key="frame" x="131" y="582" width="50" height="33"/>
@@ -220,6 +226,9 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="pushButtonPress:" destination="xny-kL-2zx" eventType="touchUpInside" id="71S-s8-KhN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ih-2qd">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
@@ -239,6 +248,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="reminderNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="L8w-hp-oal"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -246,7 +258,11 @@
                     <navigationItem key="navigationItem" id="Tk7-L9-WC7"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="calendarNotification" destination="T8F-yz-yxc" id="IhV-JI-2uK"/>
                         <outlet property="dateOfMeeting" destination="Coh-EO-t8u" id="OTf-Zf-5z9"/>
+                        <outlet property="emailNotification" destination="T8F-yz-yxc" id="og2-Oq-O86"/>
+                        <outlet property="pushNotification" destination="T8F-yz-yxc" id="bsc-mh-fb8"/>
+                        <outlet property="reminderNotification" destination="T8F-yz-yxc" id="pJN-2h-oD2"/>
                         <outlet property="timeOfMeeting" destination="a0F-DZ-xP4" id="nRt-7E-weL"/>
                     </connections>
                 </viewController>
