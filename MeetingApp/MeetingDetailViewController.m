@@ -30,19 +30,19 @@
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }
 
-- (IBAction)pushButtonPress:(id)sender {
+- (IBAction)pushButtonPressed:(id)sender {
     NSLog(@"Push Notification");
 }
 
-- (IBAction)reminderNotification:(id)sender{
+- (IBAction)reminderNotificationPressed:(id)sender{
     NSLog(@"Reminder Notification");
 }
 
-- (IBAction)emailNotification:(id)sender{
+- (IBAction)emailNotificationPressed:(id)sender{
     NSLog(@"Email Notification");
 }
 
-- (IBAction)calendarNotification:(id)sender{
+- (IBAction)calendarNotificationPressed:(id)sender{
     NSLog(@"Calendar Notification");
 }
 

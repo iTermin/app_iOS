@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DCw-ZF-P27">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
@@ -199,7 +198,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="calendarNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="J0h-0G-ZAN"/>
+                                    <action selector="calendarNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="bcO-ht-rgb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
@@ -213,7 +212,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="emailNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="ZUx-eo-FNB"/>
+                                    <action selector="emailNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="Ph6-U8-RPN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
@@ -227,7 +226,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="pushButtonPress:" destination="xny-kL-2zx" eventType="touchUpInside" id="71S-s8-KhN"/>
+                                    <action selector="pushButtonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="GRw-Ud-OJZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ih-2qd">
@@ -249,7 +248,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="reminderNotification:" destination="xny-kL-2zx" eventType="touchUpInside" id="L8w-hp-oal"/>
+                                    <action selector="reminderNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="e20-Jd-xFw"/>
                                 </connections>
                             </button>
                         </subviews>

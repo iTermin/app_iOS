@@ -21,10 +21,10 @@
 @property (strong, nonatomic) IBOutlet UIView *calendarNotification;
 
 
-- (IBAction)pushButtonPress:(id)sender;
-- (IBAction)reminderNotification:(id)sender;
-- (IBAction)emailNotification:(id)sender;
-- (IBAction)calendarNotification:(id)sender;
+- (IBAction)pushButtonPressed:(id)sender;
+- (IBAction)reminderNotificationPressed:(id)sender;
+- (IBAction)emailNotificationPressed:(id)sender;
+- (IBAction)calendarNotificationPressed:(id)sender;
 
 
 @end
