@@ -20,16 +20,19 @@
     
     self.guests = @[
                       @{
-                          @"active" : @(true),
-                          @"date" : @"2015-12-11",
-                          @"meetingId" : @"m1",
-                          @"name" : @"Meeting 1"
+                          @"email" : @"fachinacg@gmail.com",
+                          @"name" : @"Estefania Guardado",
+                          @"photo" : @"14241341.png"
                           },
                       @{
-                          @"active" : @(true),
-                          @"date" : @"2015-11-15",
-                          @"meetingId" : @"m2",
-                          @"name" : @"Meeting 2"
+                          @"email" : @"xlarsx@gmail.com",
+                          @"name" : @"Luis Alejandro Rangel",
+                          @"photo" : @"14241323.png"
+                          },
+                      @{
+                          @"email" : @"set311@gmail.com",
+                          @"name" : @"Jesus Cagide",
+                          @"photo" : @"14298723.png"
                           }
                       ];
 }
@@ -74,7 +77,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:15];
     cell.detailTextLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Book" size:11];
     [[cell textLabel] setText: self.guests[indexPath.row][@"name"]];
-    [[cell detailTextLabel] setText: self.guests[indexPath.row][@"date"] ];
+    [[cell detailTextLabel] setText: self.guests[indexPath.row][@"email"] ];
     [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
