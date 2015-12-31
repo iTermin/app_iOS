@@ -10,4 +10,12 @@
 
 @implementation GuestDetailViewController
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    
+    [self.nameOfGuest setText: self.currentGuest[@"name"]];
+    [self.emailOfGuest setText: self.currentGuest[@"email"]];
+
+}
+
 @end

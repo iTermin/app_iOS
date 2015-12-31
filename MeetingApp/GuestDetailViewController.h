@@ -11,5 +11,7 @@
 @interface GuestDetailViewController : UIViewController
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
+@property (weak, nonatomic) IBOutlet UILabel *nameOfGuest;
+@property (weak, nonatomic) IBOutlet UILabel *emailOfGuest;
 
 @end
