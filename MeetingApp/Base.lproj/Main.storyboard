@@ -268,11 +268,40 @@
                         <outlet property="pushNotification" destination="T8F-yz-yxc" id="bsc-mh-fb8"/>
                         <outlet property="reminderNotification" destination="T8F-yz-yxc" id="pJN-2h-oD2"/>
                         <outlet property="timeOfMeeting" destination="a0F-DZ-xP4" id="nRt-7E-weL"/>
+                        <segue destination="vsP-VU-T7a" kind="push" identifier="guestDetail" id="quK-4A-wsB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nsk-Ur-yxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="389.5" y="565.5"/>
+        </scene>
+        <!--Guest Detail View Controller-->
+        <scene sceneID="gQG-xo-cFF">
+            <objects>
+                <viewController id="vsP-VU-T7a" customClass="GuestDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wig-cO-Wza"/>
+                        <viewControllerLayoutGuide type="bottom" id="nJD-ME-ZMF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hBv-y4-Y06">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbK-xC-2jr">
+                                <rect key="frame" x="162" y="254" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="55G-JU-ZIv"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWG-EG-yZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911.5" y="565.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U1c-qm-2em">

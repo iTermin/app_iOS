@@ -7,6 +7,7 @@
 //
 
 #import "MeetingDetailViewController.h"
+#import "GuestDetailViewController.h"
 
 @interface MeetingDetailViewController ()
 
@@ -83,13 +84,21 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    /*UIAlertView *messageAlert = [[UIAlertView alloc]
-                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
-    [messageAlert show];
-    */
+    NSDictionary * selectedMeeting = self.guests[indexPath.row];
+    [self performSegueWithIdentifier:@"guestDetail" sender: selectedMeeting];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
+    [guestDetailViewController setTitle:sender[@"name"]];
+    [guestDetailViewController setCurrentGuest: sender];
 }
 
 @end
