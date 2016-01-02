@@ -118,18 +118,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="x2G-hv-kw0">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="YTL-K5-T1d">
+                        <barButtonItem key="leftBarButtonItem" title="menuApp" style="plain" id="YTL-K5-T1d">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gww-Hg-4hD">
                                 <rect key="frame" x="16" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="menu"/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Usq-Tu-G92">
+                        <barButtonItem key="rightBarButtonItem" title="newMeeting" style="plain" id="Usq-Tu-G92">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="awR-oN-QAG">
                                 <rect key="frame" x="337" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="newMeeting"/>
+                                <connections>
+                                    <segue destination="3ui-UR-gmk" kind="modal" identifier="newMeeting" id="ea2-2Y-c7u"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
