@@ -92,7 +92,9 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="trash" id="YLU-9T-56E"/>
-                        <barButtonItem style="plain" systemItem="compose" id="5rm-i1-odX"/>
+                        <barButtonItem style="plain" systemItem="action" id="5rm-i1-odX">
+                            <inset key="imageInsets" minX="585" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="2Uu-ig-UVX">
                         <nil key="title"/>
