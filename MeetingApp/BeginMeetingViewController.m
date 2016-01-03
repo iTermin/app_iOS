@@ -7,14 +7,14 @@
 //
 
 
-#import "MeetingBeginViewController.h"
+#import "BeginMeetingViewController.h"
 
 
-@interface MeetingBeginViewController ()
+@interface BeginMeetingViewController ()
 
 @end
 
-@implementation MeetingBeginViewController
+@implementation BeginMeetingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,6 +24,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)cancelButtonPressed:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -73,9 +73,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    MeetingDetailViewController * detailViewController = (MeetingDetailViewController *)segue.destinationViewController;
-    [detailViewController setTitle:sender[@"name"]];
-    [detailViewController setCurrentMeeting: sender];
+    if ([segue.identifier isEqualToString:@"meetingDetail"]){
+        MeetingDetailViewController * detailViewController = (MeetingDetailViewController *)segue.destinationViewController;
+        [detailViewController setTitle:sender[@"name"]];
+        [detailViewController setCurrentMeeting: sender];
+    }
+    if ([segue.identifier isEqualToString:@"newMeeting"]){
+        
+    }
 }
 
 @end
