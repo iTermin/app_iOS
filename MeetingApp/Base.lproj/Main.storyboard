@@ -90,11 +90,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="trash" id="YLU-9T-56E"/>
+                        <barButtonItem style="plain" systemItem="compose" id="5rm-i1-odX"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="2Uu-ig-UVX">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="uBC-FY-F7c">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -152,15 +158,11 @@
                                 <state key="normal" image="menu"/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="newMeeting" style="plain" id="Usq-Tu-G92">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="awR-oN-QAG">
-                                <rect key="frame" x="337" y="11" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="newMeeting"/>
-                                <connections>
-                                    <segue destination="3ui-UR-gmk" kind="modal" identifier="newMeeting" id="ea2-2Y-c7u"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="Usq-Tu-G92">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="3ui-UR-gmk" kind="modal" identifier="newMeeting" id="Q6e-Yl-ysx"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -387,7 +389,6 @@
         <image name="calendar" width="22" height="22"/>
         <image name="email" width="22" height="22"/>
         <image name="menu" width="22" height="22"/>
-        <image name="newMeeting" width="22" height="22"/>
         <image name="push" width="22" height="22"/>
         <image name="reminder" width="22" height="22"/>
     </resources>
