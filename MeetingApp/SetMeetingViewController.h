@@ -10,4 +10,8 @@
 
 @interface SetMeetingViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *startMeeting;
+
+@property (weak, nonatomic) IBOutlet UITextField *endMeeting;
+
 @end

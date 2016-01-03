@@ -144,6 +144,10 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="endMeeting" destination="Jwa-Zz-QRN" id="don-yy-099"/>
+                        <outlet property="startMeeting" destination="fXV-Wt-hJh" id="95I-mF-FuA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
