@@ -68,6 +68,9 @@
                                 <state key="normal" title="Next 〉">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="zmI-nF-ehI" kind="push" identifier="setMeeting" id="YXN-2s-2mK"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -94,6 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2Uu-ig-UVX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
