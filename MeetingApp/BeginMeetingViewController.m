@@ -7,14 +7,14 @@
 //
 
 
-#import "MeetingBeginViewController.h"
+#import "BeginMeetingViewController.h"
 
 
-@interface MeetingBeginViewController ()
+@interface BeginMeetingViewController ()
 
 @end
 
-@implementation MeetingBeginViewController
+@implementation BeginMeetingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

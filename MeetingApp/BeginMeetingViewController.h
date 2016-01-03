@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MeetingBeginViewController : UIViewController
+@interface BeginMeetingViewController : UIViewController
 
 @property(nonatomic, weak) IBOutlet UIButton * cancelButton;
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
