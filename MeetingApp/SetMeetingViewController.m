@@ -19,6 +19,7 @@
     [datePicker setDate:[NSDate date]];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.startMeeting setInputView:datePicker];
+    [self.endMeeting setInputView:datePicker];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +33,16 @@
 -(void)updateTextField:(id)sender
 {
     UIDatePicker *picker = (UIDatePicker*)self.startMeeting.inputView;
-    self.startMeeting.text = [NSString stringWithFormat:@"%@",picker.date];
+    
+    
+    NSDate *date = picker.date;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"cccc, MMM d, hh:mm aa"];
+    NSString *format = [dateFormat stringFromDate:date];
+    
+    self.startMeeting.text = [NSString stringWithFormat:@"%@",format];
+    self.endMeeting.text = [NSString stringWithFormat:@"%@",format];
+    
 }
 
 
