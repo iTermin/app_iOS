@@ -34,14 +34,28 @@
 {
     UIDatePicker *picker = (UIDatePicker*)self.startMeeting.inputView;
     
-    
     NSDate *date = picker.date;
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"cccc, MMM d, hh:mm aa"];
-    NSString *format = [dateFormat stringFromDate:date];
+    NSString *startFormat = [dateFormat stringFromDate:date];
+
+    self.startMeeting.text = [NSString stringWithFormat:@"%@",startFormat];
     
-    self.startMeeting.text = [NSString stringWithFormat:@"%@",format];
-    self.endMeeting.text = [NSString stringWithFormat:@"%@",format];
+    NSTimeInterval addDifference = 3600;
+    NSDate * endDate = [date dateByAddingTimeInterval:addDifference];
+    
+    NSDateFormatter *endDateFormat = [[NSDateFormatter alloc] init];
+    [endDateFormat setDateFormat:@"cccc, MMM d, hh:mm aa"];
+    NSString *endFormat = [endDateFormat stringFromDate:endDate];
+    
+    self.endMeeting.text = [NSString stringWithFormat:@"%@",endFormat];
+    
+    
+    /*NSCalendar *calendar = [NSCalendar currentCalendar];
+     NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+     NSInteger hour = [components hour];
+     NSInteger minute = [components minute];*/
     
 }
 
