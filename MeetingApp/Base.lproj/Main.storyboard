@@ -47,24 +47,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="liG-JS-3mS">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="cew-ja-Z15">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j1x-A9-f4o">
-                                <rect key="frame" x="16" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonPressed:" destination="2QN-cd-kZ6" eventType="touchUpInside" id="P2M-kW-PQz"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="cew-ja-Z15">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="2QN-cd-kZ6" id="u9u-LL-zkF"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="OTq-qb-AGh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Nft-7K-gBD">
                                 <rect key="frame" x="226" y="5" width="133" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Next 〉">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -76,7 +69,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="cancelButton" destination="j1x-A9-f4o" id="x7g-1O-OwD"/>
+                        <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
                         <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                     </connections>
                 </viewController>
@@ -97,7 +90,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2Uu-ig-UVX"/>
+                    <navigationItem key="navigationItem" id="2Uu-ig-UVX">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="uBC-FY-F7c">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,8 +27,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelButtonPressed:(id)sender{
+- (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
