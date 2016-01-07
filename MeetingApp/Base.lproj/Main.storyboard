@@ -140,6 +140,9 @@
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="uBC-FY-F7c">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="QpW-v9-pdh" kind="push" id="PPk-1q-mtr"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -152,6 +155,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="389.5" y="1533.5"/>
+        </scene>
+        <!--Set Meeting Table View Controller-->
+        <scene sceneID="RxD-Y0-Wrk">
+            <objects>
+                <tableViewController id="QpW-v9-pdh" customClass="SetMeetingTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Eui-tN-JZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ibM-S0-e4A">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ibM-S0-e4A" id="MM9-Yj-eaS">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QpW-v9-pdh" id="DUc-bW-iJD"/>
+                            <outlet property="delegate" destination="QpW-v9-pdh" id="M5a-ve-Ota"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="vVU-VC-eJC"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eww-aN-bNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899.5" y="1533.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s2z-pc-Yp9">

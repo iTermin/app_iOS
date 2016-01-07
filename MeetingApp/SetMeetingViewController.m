@@ -58,6 +58,9 @@
      NSInteger minute = [components minute];*/
     
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+
+}
 
 
 @end
