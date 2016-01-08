@@ -10,6 +10,5 @@
 
 @interface SetMeetingTableViewController : UITableViewController
 
-@property(strong) NSArray *guests;
 
 @end
