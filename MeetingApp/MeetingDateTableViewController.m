@@ -20,8 +20,6 @@
 
 static NSString *kDateCellID = @"dateCell";     // the cells with the start or end date
 static NSString *kDatePickerID = @"datePicker"; // the cell containing the date picker
-static NSString *kOtherCell = @"otherCell";     // the remaining cells at the end
-
 
 @interface MeetingDateTableViewController ()
 
@@ -49,18 +47,15 @@ static NSString *kOtherCell = @"otherCell";     // the remaining cells at the en
     [super viewDidLoad];
     
     // setup our data source
-    NSMutableDictionary *itemOne = [@{ kTitleKey : @"Tap a cell to change its date:" } mutableCopy];
     NSMutableDictionary *itemTwo = [@{ kTitleKey : @"Start Date",
                                        kDateKey : [NSDate date] } mutableCopy];
     NSMutableDictionary *itemThree = [@{ kTitleKey : @"End Date",
                                          kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *itemFour = [@{ kTitleKey : @"(other item1)" } mutableCopy];
-    NSMutableDictionary *itemFive = [@{ kTitleKey : @"(other item2)" } mutableCopy];
-    self.dataArray = @[itemOne, itemTwo, itemThree, itemFour, itemFive];
+    self.dataArray = @[itemTwo, itemThree];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
-    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
     // obtain the picker view cell's height, works because the cell was pre-defined in our storyboard
     UITableViewCell *pickerViewCellToCheck = [self.tableView dequeueReusableCellWithIdentifier:kDatePickerID];
@@ -210,7 +205,7 @@ NSUInteger DeviceSystemMajorVersion()
 {
     UITableViewCell *cell = nil;
     
-    NSString *cellID = kOtherCell;
+    NSString *cellID = kDateCellID;
     
     if ([self indexPathHasPicker:indexPath])
     {
@@ -225,11 +220,11 @@ NSUInteger DeviceSystemMajorVersion()
     
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    if (indexPath.row == 0)
+    /*if (indexPath.row == 0)
     {
         // we decide here that first cell in the table is not selectable (it's just an indicator)
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    }*/
     
     // if we have a date picker open whose cell is above the cell we want to update,
     // then we have one more cell than the model allows
@@ -249,12 +244,6 @@ NSUInteger DeviceSystemMajorVersion()
         //
         cell.textLabel.text = [itemData valueForKey:kTitleKey];
         cell.detailTextLabel.text = [self.dateFormatter stringFromDate:[itemData valueForKey:kDateKey]];
-    }
-    else if ([cellID isEqualToString:kOtherCell])
-    {
-        // this cell is a non-date cell, just assign it's text label
-        //
-        cell.textLabel.text = [itemData valueForKey:kTitleKey];
     }
     
     return cell;
