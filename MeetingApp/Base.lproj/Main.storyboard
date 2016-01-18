@@ -176,6 +176,26 @@
             </objects>
             <point key="canvasLocation" x="-881" y="566"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="915-qq-U3G">
+            <objects>
+                <viewController id="Kzj-Wd-VNa" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wgn-zG-df2"/>
+                        <viewControllerLayoutGuide type="bottom" id="cj9-cR-KkX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8QD-we-y2v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="XSI-sk-Or8"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="twg-DA-PfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674.5" y="-163.5"/>
+        </scene>
         <!--Meetings-->
         <scene sceneID="gja-4r-W3C">
             <objects>
@@ -541,11 +561,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ejz-vK-5Ks"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n3K-Js-lW7">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="rhm-8l-29H" kind="relationship" relationship="viewControllers" id="Lk7-11-Uha"/>
+                        <segue destination="Kzj-Wd-VNa" kind="relationship" relationship="viewControllers" id="dhr-tI-DcB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0w0-FO-L8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -554,6 +576,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SettingsIcon" width="35" height="33"/>
         <image name="calendar" width="22" height="22"/>
         <image name="email" width="22" height="22"/>
         <image name="meetingTabBar" width="35" height="29"/>
