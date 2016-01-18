@@ -557,7 +557,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gl9-QC-Vww">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wHX-Ce-Slq" sceneMemberID="viewController">
+                <tabBarController id="wHX-Ce-Slq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ejz-vK-5Ks"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n3K-Js-lW7">
