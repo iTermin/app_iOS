@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DCw-ZF-P27">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s3e-Re-dav">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -156,10 +156,11 @@
             </objects>
             <point key="canvasLocation" x="389.5" y="1533.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Meetings-->
         <scene sceneID="s2z-pc-Yp9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DCw-ZF-P27" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Meetings" image="meetingTabBar" selectedImage="meetingTabBar" id="uyw-1c-KBr"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EPs-1a-hlV">
@@ -169,14 +170,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="wHX-Ce-Slq" kind="relationship" relationship="rootViewController" id="5Lp-OC-Mq4"/>
+                        <segue destination="rhm-8l-29H" kind="relationship" relationship="rootViewController" id="Hzp-SJ-EcL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9oK-UC-Odh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-881" y="566"/>
+            <point key="canvasLocation" x="942.5" y="565.5"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="915-qq-U3G">
             <objects>
                 <viewController id="Kzj-Wd-VNa" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -189,14 +190,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="XSI-sk-Or8"/>
+                    <navigationItem key="navigationItem" id="H1P-27-TN7"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twg-DA-PfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674.5" y="-163.5"/>
+            <point key="canvasLocation" x="1486.5" y="-175.5"/>
         </scene>
-        <!--Meetings-->
+        <!--Meeting Table View Controller-->
         <scene sceneID="gja-4r-W3C">
             <objects>
                 <tableViewController id="rhm-8l-29H" customClass="MeetingTableViewController" sceneMemberID="viewController">
@@ -219,7 +220,7 @@
                             <outlet property="delegate" destination="rhm-8l-29H" id="rln-bg-q4O"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Meetings" image="meetingTabBar" selectedImage="meetingTabBar" id="qbp-gA-pYW"/>
+                    <tabBarItem key="tabBarItem" title="" id="qbp-gA-pYW"/>
                     <navigationItem key="navigationItem" id="x2G-hv-kw0">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Usq-Tu-G92">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -235,7 +236,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Et8-Mc-bnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674.5" y="565.5"/>
+            <point key="canvasLocation" x="1486.5" y="565.5"/>
         </scene>
         <!--Meeting Detail View Controller-->
         <scene sceneID="63m-oX-BFG">
@@ -282,13 +283,13 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9b-Px-ScR">
-                                <rect key="frame" x="20" y="514" width="101" height="21"/>
+                                <rect key="frame" x="20" y="521" width="101" height="21"/>
                                 <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNw-V2-K7D">
-                                <rect key="frame" x="305" y="508" width="50" height="31"/>
+                                <rect key="frame" x="305" y="515" width="50" height="31"/>
                                 <color key="backgroundColor" red="1" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="calendar"/>
                                 <userDefinedRuntimeAttributes>
@@ -302,7 +303,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
-                                <rect key="frame" x="247" y="508" width="50" height="31"/>
+                                <rect key="frame" x="247" y="515" width="50" height="31"/>
                                 <color key="backgroundColor" red="1" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="email"/>
                                 <userDefinedRuntimeAttributes>
@@ -316,7 +317,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
-                                <rect key="frame" x="131" y="508" width="50" height="33"/>
+                                <rect key="frame" x="131" y="515" width="50" height="33"/>
                                 <color key="backgroundColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="push"/>
                                 <userDefinedRuntimeAttributes>
@@ -329,16 +330,8 @@
                                     <action selector="pushButtonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="GRw-Ud-OJZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ih-2qd">
-                                <rect key="frame" x="0.0" y="543" width="375" height="40"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="16"/>
-                                <state key="normal" title="Delete Meeting">
-                                    <color key="titleColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJS-ZC-AEr">
-                                <rect key="frame" x="189" y="508" width="50" height="32"/>
+                                <rect key="frame" x="189" y="515" width="50" height="32"/>
                                 <color key="backgroundColor" red="1" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="reminder"/>
                                 <userDefinedRuntimeAttributes>
@@ -350,6 +343,14 @@
                                 <connections>
                                     <action selector="reminderNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="e20-Jd-xFw"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ih-2qd">
+                                <rect key="frame" x="120" y="565" width="134" height="40"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="16"/>
+                                <state key="normal" title="Delete Meeting">
+                                    <color key="titleColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -368,7 +369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nsk-Ur-yxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1201.5" y="565.5"/>
+            <point key="canvasLocation" x="2013.5" y="565.5"/>
         </scene>
         <!--Guest Detail View Controller-->
         <scene sceneID="gQG-xo-cFF">
@@ -425,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWG-EG-yZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1723.5" y="565.5"/>
+            <point key="canvasLocation" x="2535.5" y="565.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U1c-qm-2em">
@@ -555,24 +556,44 @@
             <point key="canvasLocation" x="1044" y="1560"/>
         </scene>
         <!--Tab Bar Controller-->
-        <scene sceneID="gl9-QC-Vww">
+        <scene sceneID="TDZ-ll-M33">
             <objects>
-                <tabBarController id="wHX-Ce-Slq" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="s3e-Re-dav" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ejz-vK-5Ks"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="n3K-Js-lW7">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ATb-Uu-CDu">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rhm-8l-29H" kind="relationship" relationship="viewControllers" id="Lk7-11-Uha"/>
-                        <segue destination="Kzj-Wd-VNa" kind="relationship" relationship="viewControllers" id="dhr-tI-DcB"/>
+                        <segue destination="DCw-ZF-P27" kind="relationship" relationship="viewControllers" id="XwG-WW-1BS"/>
+                        <segue destination="ImN-FS-ccv" kind="relationship" relationship="viewControllers" id="xs8-sp-xMa"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0w0-FO-L8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wEI-Lu-B3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25" y="565"/>
+            <point key="canvasLocation" x="243" y="565"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="uFe-ZU-YsE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ImN-FS-ccv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="XSI-sk-Or8"/>
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AZg-5g-D5k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.090196078430000007" green="0.20392156859999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Kzj-Wd-VNa" kind="relationship" relationship="rootViewController" id="kgL-D5-bNv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Wb-lc-eCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="942.5" y="-180.5"/>
         </scene>
     </scenes>
     <resources>
