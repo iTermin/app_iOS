@@ -11,9 +11,10 @@
 
 @interface BeginMeetingViewController : UIViewController
 
-@property(nonatomic, weak) IBOutlet UIButton * cancelButton;
-@property(nonatomic, weak) IBOutlet UIButton * nextButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
+@property(nonatomic, weak) IBOutlet UIButton * nextButton;
 - (IBAction)cancelButtonPressed:(id)sender;
+
 
 @end

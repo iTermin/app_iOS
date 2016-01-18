@@ -17,12 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJY-U4-cfs">
-                                <rect key="frame" x="20" y="89" width="50" height="21"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
-                                <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-Tv-K5s">
                                 <rect key="frame" x="20" y="118" width="335" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -43,37 +37,39 @@
                                 <rect key="frame" x="0.0" y="249" width="375" height="418"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Meeting:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJY-U4-cfs">
+                                <rect key="frame" x="20" y="89" width="120" height="21"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="liG-JS-3mS">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="cew-ja-Z15">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j1x-A9-f4o">
-                                <rect key="frame" x="16" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonPressed:" destination="2QN-cd-kZ6" eventType="touchUpInside" id="P2M-kW-PQz"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="cew-ja-Z15">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="2QN-cd-kZ6" id="u9u-LL-zkF"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="OTq-qb-AGh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Nft-7K-gBD">
                                 <rect key="frame" x="226" y="5" width="133" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Book" family="Bodoni 72" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Next 〉">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="zmI-nF-ehI" kind="push" identifier="setMeeting" id="YXN-2s-2mK"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="cancelButton" destination="j1x-A9-f4o" id="x7g-1O-OwD"/>
+                        <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
                         <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                     </connections>
                 </viewController>
@@ -92,9 +88,69 @@
                     <view key="view" contentMode="scaleToFill" id="knP-X3-3Tp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RqW-Fk-SMQ">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="action" id="5rm-i1-odX">
+                                        <inset key="imageInsets" minX="655" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="trash" id="YLU-9T-56E">
+                                        <inset key="imageInsets" minX="-60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Starts:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl5-XX-cSI">
+                                <rect key="frame" x="20" y="83" width="50" height="21"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ends:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-o7-zz2">
+                                <rect key="frame" x="20" y="134" width="59" height="21"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fXV-Wt-hJh">
+                                <rect key="frame" x="78" y="79" width="277" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jwa-Zz-QRN">
+                                <rect key="frame" x="78" y="130" width="277" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NCR-2v-tC2">
+                                <rect key="frame" x="0.0" y="224" width="375" height="399"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfc-2p-k5G">
+                                <rect key="frame" x="158" y="195" width="59" height="21"/>
+                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2Uu-ig-UVX">
+                        <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="uBC-FY-F7c">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="PqS-hf-wCs" kind="push" id="OfM-rv-PQ1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="endMeeting" destination="Jwa-Zz-QRN" id="don-yy-099"/>
+                        <outlet property="startMeeting" destination="fXV-Wt-hJh" id="95I-mF-FuA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -151,15 +207,11 @@
                                 <state key="normal" image="menu"/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="newMeeting" style="plain" id="Usq-Tu-G92">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="awR-oN-QAG">
-                                <rect key="frame" x="337" y="11" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="newMeeting"/>
-                                <connections>
-                                    <segue destination="3ui-UR-gmk" kind="modal" identifier="newMeeting" id="ea2-2Y-c7u"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="Usq-Tu-G92">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="3ui-UR-gmk" kind="modal" identifier="newMeeting" id="Q6e-Yl-ysx"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -381,12 +433,118 @@
             </objects>
             <point key="canvasLocation" x="-873" y="1534"/>
         </scene>
+        <!--DateCell-->
+        <scene sceneID="pYf-dP-Ce4">
+            <objects>
+                <tableViewController id="PqS-hf-wCs" customClass="MeetingDateTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hcJ-KG-Qkd">
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="dateCell" textLabel="Gc8-fT-yaB" detailTextLabel="Lky-Uf-9ZL" style="IBUITableViewCellStyleValue1" id="g4z-oH-U7j">
+                                <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g4z-oH-U7j" id="QPA-D9-NVO">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gc8-fT-yaB">
+                                            <rect key="frame" x="15" y="11" width="37" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lky-Uf-9ZL">
+                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="datePicker" rowHeight="216" id="WEz-M2-4Hl">
+                                <rect key="frame" x="0.0" y="94" width="375" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WEz-M2-4Hl" id="Awa-M8-ela">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker tag="99" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SGE-fh-9Kh">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="393205466.33293098">
+                                                <!--2013-06-17 23:44:26 +0000-->
+                                            </date>
+                                            <connections>
+                                                <action selector="dateAction:" destination="PqS-hf-wCs" eventType="valueChanged" id="dc4-2J-bUN"/>
+                                            </connections>
+                                        </datePicker>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="SGE-fh-9Kh" firstAttribute="top" secondItem="WEz-M2-4Hl" secondAttribute="top" id="M5p-x4-aca"/>
+                                    <constraint firstItem="SGE-fh-9Kh" firstAttribute="trailing" secondItem="WEz-M2-4Hl" secondAttribute="trailing" id="Xh9-Ca-x53"/>
+                                    <constraint firstItem="SGE-fh-9Kh" firstAttribute="centerY" secondItem="WEz-M2-4Hl" secondAttribute="centerY" id="fTY-AU-24a"/>
+                                    <constraint firstItem="SGE-fh-9Kh" firstAttribute="leading" secondItem="WEz-M2-4Hl" secondAttribute="leading" id="q8O-J8-xbl"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="otherCell" textLabel="3cL-Ou-GBs" style="IBUITableViewCellStyleDefault" id="0LH-Sx-iRP">
+                                <rect key="frame" x="0.0" y="310" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0LH-Sx-iRP" id="ccV-75-cf9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3cL-Ou-GBs">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="DateCell" id="HWM-Q5-oUI"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="doneButton" destination="cR5-Iq-YiL" id="Bqg-Ux-biB"/>
+                        <outlet property="pickerView" destination="DhD-8M-aik" id="HVa-Wo-Ok0"/>
+                        <outlet property="view" destination="hcJ-KG-Qkd" id="ebh-hc-aJg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dXX-PO-Uv2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="DhD-8M-aik">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <date key="date" timeIntervalSinceReferenceDate="377204788.09288597">
+                        <!--2012-12-14 19:06:28 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="dateAction:" destination="PqS-hf-wCs" eventType="valueChanged" id="cFH-9y-PMa"/>
+                    </connections>
+                </datePicker>
+                <barButtonItem title="Done" style="done" id="cR5-Iq-YiL" userLabel="Done Button">
+                    <connections>
+                        <action selector="doneAction:" destination="PqS-hf-wCs" id="SPg-Qd-0g6"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="1044" y="1560"/>
+        </scene>
     </scenes>
     <resources>
         <image name="calendar" width="22" height="22"/>
         <image name="email" width="22" height="22"/>
         <image name="menu" width="22" height="22"/>
-        <image name="newMeeting" width="22" height="22"/>
         <image name="push" width="22" height="22"/>
         <image name="reminder" width="22" height="22"/>
     </resources>

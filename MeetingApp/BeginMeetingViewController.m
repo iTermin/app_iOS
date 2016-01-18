@@ -8,6 +8,7 @@
 
 
 #import "BeginMeetingViewController.h"
+#import "SetMeetingViewController.h"
 
 
 @interface BeginMeetingViewController ()
@@ -26,8 +27,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelButtonPressed:(id)sender{
+- (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    SetMeetingViewController * setMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
 }
 
 @end

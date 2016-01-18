@@ -18,6 +18,7 @@
 		7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */; };
 		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
+		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDetailViewController.m; sourceTree = "<group>"; };
 		7C92B78B1C394B8A00DAA583 /* SetMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMeetingViewController.h; sourceTree = "<group>"; };
 		7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMeetingViewController.m; sourceTree = "<group>"; };
+		7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDateTableViewController.h; sourceTree = "<group>"; };
+		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
 		7CD500911C354DF9000FA090 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestDetailViewController.h; sourceTree = "<group>"; };
 		7CD500921C354DF9000FA090 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +128,8 @@
 				7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */,
 				7C92B78B1C394B8A00DAA583 /* SetMeetingViewController.h */,
 				7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */,
+				7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */,
+				7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -292,6 +297,7 @@
 			files = (
 				7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */,
 				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
+				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
