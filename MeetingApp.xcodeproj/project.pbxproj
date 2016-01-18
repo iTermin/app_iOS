@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
 		7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C2949251C4CEC1F007BF7C7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 				7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */,
 				7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */,
 				7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */,
+				7C2949251C4CEC1F007BF7C7 /* SettingsViewController.h */,
+				7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -298,6 +303,7 @@
 				7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */,
 				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
 				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
+				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
