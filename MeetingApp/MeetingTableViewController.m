@@ -35,6 +35,7 @@
                     @"name" : @"Meeting 2"
             }
     ];
+    self.tableView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
