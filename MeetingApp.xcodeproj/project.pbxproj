@@ -23,6 +23,8 @@
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
 		7CFD97A01C4EDCB600C1095F /* ProfilePhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD979E1C4EDCB600C1095F /* ProfilePhotoTableViewCell.m */; };
 		7CFD97A11C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD979F1C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib */; };
+		7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97A31C4EE01C00C1095F /* HeaderTableViewCell.m */; };
+		7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97A41C4EE01C00C1095F /* HeaderTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,9 @@
 		7CFD979D1C4EDCB600C1095F /* ProfilePhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePhotoTableViewCell.h; path = Artifacts/ProfilePhotoTableViewCell.h; sourceTree = "<group>"; };
 		7CFD979E1C4EDCB600C1095F /* ProfilePhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePhotoTableViewCell.m; path = Artifacts/ProfilePhotoTableViewCell.m; sourceTree = "<group>"; };
 		7CFD979F1C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfilePhotoTableViewCell.xib; path = Artifacts/ProfilePhotoTableViewCell.xib; sourceTree = "<group>"; };
+		7CFD97A21C4EE01C00C1095F /* HeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderTableViewCell.h; path = Artifacts/HeaderTableViewCell.h; sourceTree = "<group>"; };
+		7CFD97A31C4EE01C00C1095F /* HeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderTableViewCell.m; path = Artifacts/HeaderTableViewCell.m; sourceTree = "<group>"; };
+		7CFD97A41C4EE01C00C1095F /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderTableViewCell.xib; path = Artifacts/HeaderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +187,9 @@
 				7CFD979D1C4EDCB600C1095F /* ProfilePhotoTableViewCell.h */,
 				7CFD979E1C4EDCB600C1095F /* ProfilePhotoTableViewCell.m */,
 				7CFD979F1C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib */,
+				7CFD97A21C4EE01C00C1095F /* HeaderTableViewCell.h */,
+				7CFD97A31C4EE01C00C1095F /* HeaderTableViewCell.m */,
+				7CFD97A41C4EE01C00C1095F /* HeaderTableViewCell.xib */,
 			);
 			name = Artifacts;
 			sourceTree = "<group>";
@@ -292,6 +300,7 @@
 				7CFD97A11C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib in Resources */,
 				7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */,
 				7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */,
+				7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */,
 				7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +330,7 @@
 				7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */,
 				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
 				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
+				7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */,
 				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,

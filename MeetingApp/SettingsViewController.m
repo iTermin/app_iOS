@@ -19,6 +19,20 @@
             @"nib" : @"ProfilePhotoTableViewCell",
             @"height" : @(100),
         },
+        @{
+            @"nib" : @"HeaderTableViewCell",
+            @"height" : @(80),
+            @"data" : @{
+                @"text" : @"Informacion General"
+            }
+        },
+        @{
+            @"nib" : @"HeaderTableViewCell",
+            @"height" : @(80),
+            @"data" : @{
+                @"text" : @"Ayuda"
+            }
+        }
     ];
     
     __weak UITableView * tableView = self.tableView;
@@ -46,6 +60,11 @@
     
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
     return cell;
 }
 
