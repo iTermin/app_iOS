@@ -12,45 +12,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    self.meetings = @[
-                      @{
-                          @"active" : @(true),
-                          @"email" : @"correo@",
-                          @"name" : @"Estefania"
-                          },
-                      ];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    self.viewModel =
+    @[
+        @{
+            @"nib" : @"ProfilePhotoTableViewCell",
+            @"height" : @(100),
+        },
+    ];
+    
+    __weak UITableView * tableView = self.tableView;
+    NSMutableSet * registeredNibs = [NSMutableSet set];
+    
+    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
+        
+        NSString * nibFile = cellViewModel[@"nib"];
+        
+        if(![registeredNibs containsObject: nibFile]) {
+            [registeredNibs addObject: nibFile];
+            
+            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
+        }
+    }];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.viewModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
-    cell.textLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:15];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Book" size:11];
-    [[cell textLabel] setText: self.meetings[indexPath.row][@"name"]];
-    [[cell detailTextLabel] setText: self.meetings[indexPath.row][@"email"] ];
-    [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
-    
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
     return cell;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    return [cellViewModel[@"height"] floatValue];
 }
 
 @end

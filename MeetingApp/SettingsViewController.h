@@ -10,6 +10,6 @@
 
 @interface SettingsViewController : UITableViewController
 
-@property(strong) NSArray *meetings;
+@property(strong) NSArray *viewModel;
 
 @end
