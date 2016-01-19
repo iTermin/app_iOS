@@ -18,5 +18,6 @@
 @property(strong) NSArray *guests;
 
 - (IBAction)buttonPressed:(id)sender;
+- (IBAction)deleteMeetingPressed:(id)sender;
 
 @end
