@@ -288,7 +288,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNw-V2-K7D">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="calendarNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNw-V2-K7D">
                                 <rect key="frame" x="305" y="515" width="50" height="31"/>
                                 <color key="backgroundColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="calendar"/>
@@ -299,10 +299,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="Kl3-sQ-Ixp"/>
                                     <action selector="calendarNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="bcO-ht-rgb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="emailNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
                                 <rect key="frame" x="247" y="515" width="50" height="31"/>
                                 <color key="backgroundColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="email"/>
@@ -313,10 +314,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="bPp-rz-xKN"/>
                                     <action selector="emailNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="Ph6-U8-RPN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="pushNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
                                 <rect key="frame" x="131" y="515" width="50" height="33"/>
                                 <color key="backgroundColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="push"/>
@@ -327,10 +329,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchDown" id="41o-bJ-yna"/>
                                     <action selector="pushButtonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="GRw-Ud-OJZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJS-ZC-AEr">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="reminderNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJS-ZC-AEr">
                                 <rect key="frame" x="189" y="515" width="50" height="32"/>
                                 <color key="backgroundColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="reminder"/>
@@ -341,6 +344,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="iMP-xn-C6Q"/>
                                     <action selector="reminderNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="e20-Jd-xFw"/>
                                 </connections>
                             </button>

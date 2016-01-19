@@ -23,5 +23,6 @@
 - (IBAction)emailNotificationPressed:(id)sender;
 - (IBAction)calendarNotificationPressed:(id)sender;
 
+- (IBAction)buttonPressed:(id)sender;
 
 @end

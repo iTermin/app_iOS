@@ -74,20 +74,21 @@
 }
 
 - (IBAction)pushButtonPressed:(id)sender {
-    NSLog(@"Push Notification");
-
 }
 
 - (IBAction)reminderNotificationPressed:(id)sender{
-    NSLog(@"Reminder Notification");
 }
 
 - (IBAction)emailNotificationPressed:(id)sender{
-    NSLog(@"Email Notification");
 }
 
 - (IBAction)calendarNotificationPressed:(id)sender{
-    NSLog(@"Calendar Notification");
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    UIButton *buttonPress = (UIButton *)sender;
+    
+    NSLog(buttonPress.restorationIdentifier);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
