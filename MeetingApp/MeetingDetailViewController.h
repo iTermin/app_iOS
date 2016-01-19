@@ -17,12 +17,6 @@
 
 @property(strong) NSArray *guests;
 
-
-- (IBAction)pushButtonPressed:(id)sender;
-- (IBAction)reminderNotificationPressed:(id)sender;
-- (IBAction)emailNotificationPressed:(id)sender;
-- (IBAction)calendarNotificationPressed:(id)sender;
-
 - (IBAction)buttonPressed:(id)sender;
 
 @end

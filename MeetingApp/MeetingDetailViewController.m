@@ -58,28 +58,49 @@
         button.selected = YES;
         button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
     }
-    UIButton *buttonPress = (UIButton *)button;
-    
-    if (buttonPress == pushNotification) {
-        NSLog(@"Push");
-    } else if (buttonPress == _calendarNotification) {
-        NSLog(@"Calendar");
-    } else if (buttonPress == _emailNotification) {
-        NSLog(@"Email");
-    } else if (buttonPress == _reminderNotification) {
-        NSLog(@"Reminder");
-    }
-
 }
 
 - (IBAction)buttonPressed:(id)sender {
+    UIButton *buttonPress = (UIButton *)sender;
+    NSString *title = @"";
+    NSString *message = @"";
+    BOOL statusSelected = buttonPress.selected;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert"
-                                                                   message:@"This is an action sheet."
+    if (statusSelected == NO) {
+        if (buttonPress == pushNotification) {
+            title = @"Push Notification";
+            message = @"You have activated the push notifications for send you before the meeting.";
+        } else if (buttonPress == _calendarNotification) {
+            title = @"Calendar Notifaction";
+            message = @"You have added the meeting to the calendar.";
+        } else if (buttonPress == _emailNotification) {
+            title = @"Email Notification";
+            message = @"You have activated email notifications for send you before the meeting..";
+        } else if (buttonPress == _reminderNotification) {
+            title = @"Reminder Notifaction";
+            message = @"You have added the meeting to the reminders.";
+        }
+    } else {
+        if (buttonPress == pushNotification) {
+            title = @"Push Notification";
+            message = @"You have deactivated the push notifications.";
+        } else if (buttonPress == _calendarNotification) {
+            title = @"Calendar Notifaction";
+            message = @"You have removed the meeting of the calendar.";
+        } else if (buttonPress == _emailNotification) {
+            title = @"Email Notifaction";
+            message = @"You have deactivated email notifications.";
+        } else if (buttonPress == _reminderNotification) {
+            title = @"Reminder Notifaction";
+            message = @"You have removed the meeting of the calendar.";
+        }
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { NSLog(@"You pressed button OK");
-    }];
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
     
     [alert addAction:firstAction];
     
@@ -96,22 +117,6 @@
     [super viewWillAppear: animated];
     
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
-}
-
-- (IBAction)pushButtonPressed:(id)sender {
-}
-
-- (IBAction)reminderNotificationPressed:(id)sender{
-}
-
-- (IBAction)emailNotificationPressed:(id)sender{
-}
-
-- (IBAction)calendarNotificationPressed:(id)sender{
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

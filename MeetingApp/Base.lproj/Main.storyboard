@@ -299,8 +299,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="Kl3-sQ-Ixp"/>
-                                    <action selector="calendarNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="bcO-ht-rgb"/>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchDown" id="UVD-2w-8gW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="emailNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-z7-O2m">
@@ -314,8 +313,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="bPp-rz-xKN"/>
-                                    <action selector="emailNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="Ph6-U8-RPN"/>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchDown" id="hUq-hP-JpY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="pushNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idz-WT-Tkb">
@@ -330,7 +328,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchDown" id="41o-bJ-yna"/>
-                                    <action selector="pushButtonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="GRw-Ud-OJZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="reminderNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJS-ZC-AEr">
@@ -344,8 +341,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="iMP-xn-C6Q"/>
-                                    <action selector="reminderNotificationPressed:" destination="xny-kL-2zx" eventType="touchUpInside" id="e20-Jd-xFw"/>
+                                    <action selector="buttonPressed:" destination="xny-kL-2zx" eventType="touchDown" id="hMN-03-Ta3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsg-ih-2qd">
