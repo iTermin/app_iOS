@@ -15,18 +15,9 @@
 @property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;
 
-@property (strong, nonatomic) IBOutlet UIView *pushNotification;
-@property (strong, nonatomic) IBOutlet UIView *reminderNotification;
-@property (strong, nonatomic) IBOutlet UIView *emailNotification;
-@property (strong, nonatomic) IBOutlet UIView *calendarNotification;
-
 @property(strong) NSArray *guests;
 
-
-- (IBAction)pushButtonPressed:(id)sender;
-- (IBAction)reminderNotificationPressed:(id)sender;
-- (IBAction)emailNotificationPressed:(id)sender;
-- (IBAction)calendarNotificationPressed:(id)sender;
-
+- (IBAction)buttonPressed:(id)sender;
+- (IBAction)deleteMeetingPressed:(id)sender;
 
 @end

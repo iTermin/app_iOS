@@ -11,9 +11,16 @@
 
 @interface MeetingDetailViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *pushNotification;
+@property (weak, nonatomic) IBOutlet UIButton *emailNotification;
+@property (weak, nonatomic) IBOutlet UIButton *reminderNotification;
+@property (weak, nonatomic) IBOutlet UIButton *calendarNotification;
+
 @end
 
 @implementation MeetingDetailViewController
+
+@synthesize pushNotification;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +43,95 @@
                           @"photo" : @"14298723.png"
                           }
                       ];
+
+    [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+}
+
+-(void)buttonTouchDown:(UIButton *)button{
+    if (button.selected == YES) {
+        button.selected = NO;
+        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
+    }else{
+        button.selected = YES;
+        button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+    }
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    UIButton *buttonPress = (UIButton *)sender;
+    NSString *title = @"";
+    NSString *message = @"";
+    BOOL statusSelected = buttonPress.selected;
+    
+    if (statusSelected == NO) {
+        if (buttonPress == pushNotification) {
+            title = @"Push Notification";
+            message = @"You have activated the push notifications for send you before the meeting.";
+        } else if (buttonPress == _calendarNotification) {
+            title = @"Calendar Notifaction";
+            message = @"You have added the meeting to the calendar.";
+        } else if (buttonPress == _emailNotification) {
+            title = @"Email Notification";
+            message = @"You have activated email notifications for send you before the meeting..";
+        } else if (buttonPress == _reminderNotification) {
+            title = @"Reminder Notifaction";
+            message = @"You have added the meeting to the reminders.";
+        }
+    } else {
+        if (buttonPress == pushNotification) {
+            title = @"Push Notification";
+            message = @"You have deactivated the push notifications.";
+        } else if (buttonPress == _calendarNotification) {
+            title = @"Calendar Notifaction";
+            message = @"You have removed the meeting of the calendar.";
+        } else if (buttonPress == _emailNotification) {
+            title = @"Email Notifaction";
+            message = @"You have deactivated email notifications.";
+        } else if (buttonPress == _reminderNotification) {
+            title = @"Reminder Notifaction";
+            message = @"You have removed the meeting of the calendar.";
+        }
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:firstAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (IBAction)deleteMeetingPressed:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Meeting"
+                                                                   message:@"Are you sure you want to delete this meeting? This meeting will be deleted for all."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       //Do some thing here
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       //Do some thing here
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,26 +143,6 @@
     [super viewWillAppear: animated];
     
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
-}
-
-- (IBAction)pushButtonPressed:(id)sender {
-    NSLog(@"Push Notification");
-}
-
-- (IBAction)reminderNotificationPressed:(id)sender{
-    NSLog(@"Reminder Notification");
-}
-
-- (IBAction)emailNotificationPressed:(id)sender{
-    NSLog(@"Email Notification");
-}
-
-- (IBAction)calendarNotificationPressed:(id)sender{
-    NSLog(@"Calendar Notification");
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
