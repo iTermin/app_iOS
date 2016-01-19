@@ -10,7 +10,11 @@
 #import "GuestDetailViewController.h"
 
 @interface MeetingDetailViewController ()
+
 @property (weak, nonatomic) IBOutlet UIButton *pushNotification;
+@property (weak, nonatomic) IBOutlet UIButton *emailNotification;
+@property (weak, nonatomic) IBOutlet UIButton *reminderNotification;
+@property (weak, nonatomic) IBOutlet UIButton *calendarNotification;
 
 @end
 
@@ -41,10 +45,21 @@
                       ];
     
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
 }
 
+
 -(void)buttonTouchDown:(UIButton *)button{
-    button.backgroundColor = [UIColor redColor];
+    UIColor *pressed = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+    UIColor *colorButton = button.backgroundColor;
+    
+    if (colorButton == pressed) {
+        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
+    } else {
+        button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

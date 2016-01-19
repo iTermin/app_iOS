@@ -15,10 +15,6 @@
 @property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;
 
-@property (strong, nonatomic) IBOutlet UIView *reminderNotification;
-@property (strong, nonatomic) IBOutlet UIView *emailNotification;
-@property (strong, nonatomic) IBOutlet UIView *calendarNotification;
-
 @property(strong) NSArray *guests;
 
 
