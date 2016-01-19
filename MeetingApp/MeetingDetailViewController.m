@@ -58,13 +58,21 @@
         button.selected = YES;
         button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
     }
+    UIButton *buttonPress = (UIButton *)button;
+    
+    if (buttonPress == pushNotification) {
+        NSLog(@"Push");
+    } else if (buttonPress == _calendarNotification) {
+        NSLog(@"Calendar");
+    } else if (buttonPress == _emailNotification) {
+        NSLog(@"Email");
+    } else if (buttonPress == _reminderNotification) {
+        NSLog(@"Reminder");
+    }
+
 }
 
 - (IBAction)buttonPressed:(id)sender {
-    UIButton *buttonPress = (UIButton *)sender;
-    NSString *identifier = buttonPress.restorationIdentifier;
-    
-    NSLog(identifier);
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert"
                                                                    message:@"This is an action sheet."
