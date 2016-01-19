@@ -10,10 +10,13 @@
 #import "GuestDetailViewController.h"
 
 @interface MeetingDetailViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *pushNotification;
 
 @end
 
 @implementation MeetingDetailViewController
+
+@synthesize pushNotification;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +39,12 @@
                           @"photo" : @"14298723.png"
                           }
                       ];
+    
+    [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+}
+
+-(void)buttonTouchDown:(UIButton *)button{
+    button.backgroundColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +60,7 @@
 
 - (IBAction)pushButtonPressed:(id)sender {
     NSLog(@"Push Notification");
+
 }
 
 - (IBAction)reminderNotificationPressed:(id)sender{
