@@ -43,23 +43,40 @@
                           @"photo" : @"14298723.png"
                           }
                       ];
-    
+
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
 }
 
-
 -(void)buttonTouchDown:(UIButton *)button{
-    UIColor *pressed = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
-    UIColor *colorButton = button.backgroundColor;
-    
-    if (colorButton == pressed) {
+    if (button.selected == YES) {
+        button.selected = NO;
         button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
-    } else {
+    }else{
+        button.selected = YES;
         button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
     }
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    UIButton *buttonPress = (UIButton *)sender;
+    NSString *identifier = buttonPress.restorationIdentifier;
+    
+    NSLog(identifier);
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+                                                                   message:@"This is an action sheet."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { NSLog(@"You pressed button OK");
+    }];
+    
+    [alert addAction:firstAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,25 +100,6 @@
 }
 
 - (IBAction)calendarNotificationPressed:(id)sender{
-}
-
-- (IBAction)buttonPressed:(id)sender {
-    UIButton *buttonPress = (UIButton *)sender;
-    NSString *identifier = buttonPress.restorationIdentifier;
-
-    NSLog(identifier);
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert"
-                                                                   message:@"This is an action sheet."
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { NSLog(@"You pressed button OK");
-    }];
-        
-    [alert addAction:firstAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
