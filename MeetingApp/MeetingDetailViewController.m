@@ -87,8 +87,21 @@
 
 - (IBAction)buttonPressed:(id)sender {
     UIButton *buttonPress = (UIButton *)sender;
+    NSString *identifier = buttonPress.restorationIdentifier;
+
+    NSLog(identifier);
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+                                                                   message:@"This is an action sheet."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     
-    NSLog(buttonPress.restorationIdentifier);
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { NSLog(@"You pressed button OK");
+    }];
+        
+    [alert addAction:firstAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
