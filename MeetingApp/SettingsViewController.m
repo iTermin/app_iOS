@@ -38,6 +38,13 @@
             }
         },
         @{
+            @"nib" : @"OptionsSettingsTableViewCell",
+            @"height" : @(45),
+            @"data" : @{
+                    @"option" : @"Report Bug"
+                    }
+            },
+        @{
             @"nib" : @"HeaderTableViewCell",
             @"height" : @(50),
             @"data" : @{

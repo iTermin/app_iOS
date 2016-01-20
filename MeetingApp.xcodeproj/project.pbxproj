@@ -27,6 +27,8 @@
 		7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97A41C4EE01C00C1095F /* HeaderTableViewCell.xib */; };
 		7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97A91C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m */; };
 		7CFD97AC1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97AA1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib */; };
+		7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */; };
+		7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,9 @@
 		7CFD97A81C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeneralInformationUserTableViewCell.h; path = Artifacts/GeneralInformationUserTableViewCell.h; sourceTree = "<group>"; };
 		7CFD97A91C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralInformationUserTableViewCell.m; path = Artifacts/GeneralInformationUserTableViewCell.m; sourceTree = "<group>"; };
 		7CFD97AA1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GeneralInformationUserTableViewCell.xib; path = Artifacts/GeneralInformationUserTableViewCell.xib; sourceTree = "<group>"; };
+		7CFD97AD1C4F94D300C1095F /* OptionsSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionsSettingsTableViewCell.h; path = Artifacts/OptionsSettingsTableViewCell.h; sourceTree = "<group>"; };
+		7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionsSettingsTableViewCell.m; path = Artifacts/OptionsSettingsTableViewCell.m; sourceTree = "<group>"; };
+		7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OptionsSettingsTableViewCell.xib; path = Artifacts/OptionsSettingsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +203,9 @@
 				7CFD97A81C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.h */,
 				7CFD97A91C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m */,
 				7CFD97AA1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib */,
+				7CFD97AD1C4F94D300C1095F /* OptionsSettingsTableViewCell.h */,
+				7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */,
+				7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */,
 			);
 			name = Artifacts;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */,
 				7CFD97AC1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib in Resources */,
 				7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */,
+				7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */,
 				7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */,
 				7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */,
 			);
@@ -344,6 +353,7 @@
 				7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
+				7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
 				7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
