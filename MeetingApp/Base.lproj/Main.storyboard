@@ -203,6 +203,9 @@
                     <navigationItem key="navigationItem" id="BEg-r4-VWG">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="tDL-5i-fpo">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="lHU-Zt-mFZ" kind="modal" id="6lg-40-uNi"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -210,6 +213,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IK-HR-PBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-922.5" y="-144.5"/>
+        </scene>
+        <!--Edit Profile User View Controller-->
+        <scene sceneID="CpG-Tb-bbu">
+            <objects>
+                <viewController id="lHU-Zt-mFZ" customClass="EditProfileUserViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bV5-Ph-ZBR"/>
+                        <viewControllerLayoutGuide type="bottom" id="SvD-gs-eyl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tWK-x1-kxI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYS-DH-Q1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-337.5" y="-144.5"/>
         </scene>
         <!--Meeting Table View Controller-->
         <scene sceneID="gja-4r-W3C">
