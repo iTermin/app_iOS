@@ -17,20 +17,28 @@
     @[
         @{
             @"nib" : @"ProfilePhotoTableViewCell",
-            @"height" : @(140),
+            @"height" : @(120),
+        },
+        @{
+            @"nib" : @"GeneralInformationUserTableViewCell",
+            @"height" : @(80),
+            @"data" : @{
+                    @"name" : @"Estefania Chavez Guardado",
+                    @"email" : @"correo@gmail.com.mx"
+                    }
         },
         @{
             @"nib" : @"HeaderTableViewCell",
             @"height" : @(50),
             @"data" : @{
-                @"text" : @"Informacion General"
+                @"text" : @"Notifications"
             }
         },
         @{
             @"nib" : @"HeaderTableViewCell",
             @"height" : @(50),
             @"data" : @{
-                @"text" : @"Ayuda"
+                @"text" : @"Help"
             }
         }
     ];
