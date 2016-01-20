@@ -200,7 +200,11 @@
                             <outlet property="delegate" destination="Xcf-op-y7d" id="z6e-Tc-PCt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="BEg-r4-VWG"/>
+                    <navigationItem key="navigationItem" id="BEg-r4-VWG">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="tDL-5i-fpo">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IK-HR-PBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
