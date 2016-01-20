@@ -34,7 +34,7 @@
             @"nib" : @"HeaderTableViewCell",
             @"height" : @(50),
             @"data" : @{
-                @"text" : @"Notifications"
+                @"text" : @"Help"
             }
         },
         @{
@@ -45,10 +45,24 @@
                     }
             },
         @{
+            @"nib" : @"OptionsSettingsTableViewCell",
+            @"height" : @(45),
+            @"data" : @{
+                    @"option" : @"Privacy"
+                    }
+            },
+        @{
+            @"nib" : @"OptionsSettingsTableViewCell",
+            @"height" : @(45),
+            @"data" : @{
+                    @"option" : @"Terms of Service"
+                    }
+            },
+        @{
             @"nib" : @"HeaderTableViewCell",
             @"height" : @(50),
             @"data" : @{
-                @"text" : @"Help"
+                @"text" : @"Notifications"
             }
         }
     ];
