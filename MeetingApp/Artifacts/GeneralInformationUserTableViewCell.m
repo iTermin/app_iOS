@@ -25,6 +25,7 @@
     
     [self.nameText setText: data[@"name"]];
     [self.emailText setText: data[@"email"]];
+    [self.locationText setText: data[@"location"]];
     
 }
 

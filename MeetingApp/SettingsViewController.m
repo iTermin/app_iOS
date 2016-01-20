@@ -21,10 +21,11 @@
         },
         @{
             @"nib" : @"GeneralInformationUserTableViewCell",
-            @"height" : @(80),
+            @"height" : @(100),
             @"data" : @{
                     @"name" : @"Estefania Chavez Guardado",
-                    @"email" : @"correo@gmail.com.mx"
+                    @"email" : @"correo@gmail.com.mx",
+                    @"location": @"Mexico"
                     }
         },
         @{

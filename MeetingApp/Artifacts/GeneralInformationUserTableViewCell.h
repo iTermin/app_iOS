@@ -14,5 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UILabel *emailText;
+@property (weak, nonatomic) IBOutlet UILabel *locationText;
 
 @end
