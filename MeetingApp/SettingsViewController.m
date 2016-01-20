@@ -21,14 +21,14 @@
         },
         @{
             @"nib" : @"HeaderTableViewCell",
-            @"height" : @(80),
+            @"height" : @(50),
             @"data" : @{
                 @"text" : @"Informacion General"
             }
         },
         @{
             @"nib" : @"HeaderTableViewCell",
-            @"height" : @(80),
+            @"height" : @(50),
             @"data" : @{
                 @"text" : @"Ayuda"
             }
