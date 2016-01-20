@@ -10,4 +10,6 @@
 
 @interface ProfilePhotoTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+
 @end

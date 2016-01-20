@@ -17,7 +17,7 @@
     @[
         @{
             @"nib" : @"ProfilePhotoTableViewCell",
-            @"height" : @(100),
+            @"height" : @(140),
         },
         @{
             @"nib" : @"HeaderTableViewCell",
