@@ -22,6 +22,9 @@
     self.photoProfileEdit.clipsToBounds = YES;
     self.photoProfileEdit.layer.borderWidth = 4.0f;
     self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
