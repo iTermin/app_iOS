@@ -14,6 +14,10 @@
 
 @implementation EditProfileUserViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -22,9 +26,6 @@
     self.photoProfileEdit.clipsToBounds = YES;
     self.photoProfileEdit.layer.borderWidth = 4.0f;
     self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
@@ -35,7 +36,7 @@
     emailBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailText.layer addSublayer:emailBorder];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
