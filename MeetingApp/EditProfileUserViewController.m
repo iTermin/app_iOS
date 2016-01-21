@@ -10,6 +10,7 @@
 
 @interface EditProfileUserViewController ()
 
+
 @end
 
 @implementation EditProfileUserViewController
@@ -37,6 +38,12 @@
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailText.layer addSublayer:emailBorder];
     
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //hides keyboard when another part of layout was touched
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)didReceiveMemoryWarning {
