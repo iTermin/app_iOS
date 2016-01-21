@@ -106,4 +106,11 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    if ([segue.identifier isEqualToString:@"editProfile"]){
+        //SettingsViewController * informationViewController = (SettingsViewController *)segue.destinationViewController;
+        //[informationViewController setViewModel:self.viewModel];
+    }
+}
+
 @end

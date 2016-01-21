@@ -204,7 +204,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="tDL-5i-fpo">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="lHU-Zt-mFZ" kind="modal" id="6lg-40-uNi"/>
+                                <segue destination="lHU-Zt-mFZ" kind="push" identifier="editProfile" id="NGM-Q6-JFX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -227,6 +227,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EKi-Tc-kT1"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYS-DH-Q1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
