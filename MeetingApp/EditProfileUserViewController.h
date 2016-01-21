@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 
+@property(strong) NSDictionary *dataModel;
+
 @end

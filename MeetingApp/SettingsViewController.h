@@ -11,5 +11,6 @@
 @interface SettingsViewController : UITableViewController
 
 @property(strong) NSArray *viewModel;
+@property(strong) NSDictionary *dataModel;
 
 @end

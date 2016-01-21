@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "EditProfileUserViewController.h"
 
 @implementation SettingsViewController
 
@@ -14,6 +15,11 @@
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
+    self.dataModel = @{
+        @"name" : @"Estefania Chavez Guardado",
+        @"email" : @"correo@gmail.com.mx",
+        @"location": @"Mexico"
+    };
     
     self.viewModel =
     @[
@@ -24,11 +30,7 @@
         @{
             @"nib" : @"GeneralInformationUserTableViewCell",
             @"height" : @(100),
-            @"data" : @{
-                    @"name" : @"Estefania Chavez Guardado",
-                    @"email" : @"correo@gmail.com.mx",
-                    @"location": @"Mexico"
-                    }
+            @"data" : [self.dataModel copy]
         },
         @{
             @"nib" : @"HeaderTableViewCell",
@@ -100,7 +102,6 @@
     return cell;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     return [cellViewModel[@"height"] floatValue];
@@ -110,8 +111,8 @@
     if ([segue.identifier isEqualToString:@"editProfile"]){
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
         
-        //SettingsViewController * informationViewController = (SettingsViewController *)segue.destinationViewController;
-        //[informationViewController setViewModel:self.viewModel];
+        EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;
+        [informationViewController setDataModel: self.dataModel];
     }
 }
 

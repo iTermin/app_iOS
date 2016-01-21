@@ -17,6 +17,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self.nameText setText: self.dataModel[@"name"]];
+    [self.emailText setText: self.dataModel[@"email"]];
 }
 
 - (void)viewDidLoad {
