@@ -10,4 +10,6 @@
 
 @interface EditProfileUserViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
+
 @end

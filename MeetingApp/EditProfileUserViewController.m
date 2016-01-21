@@ -17,12 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
+    self.photoProfileEdit.clipsToBounds = YES;
+    self.photoProfileEdit.layer.borderWidth = 4.0f;
+    self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation
