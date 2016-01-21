@@ -25,13 +25,23 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameText.layer addSublayer:nameBorder];
+    
+    CALayer *emailBorder = [CALayer layer];
+    emailBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
+    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.emailText.layer addSublayer:emailBorder];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 /*
