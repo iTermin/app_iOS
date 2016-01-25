@@ -101,6 +101,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+
     NSString *country = self.dataModel[@"location"];
     [self performSegueWithIdentifier:@"selectCountry" sender: country];
 }

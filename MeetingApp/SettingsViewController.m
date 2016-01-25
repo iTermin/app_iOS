@@ -18,7 +18,8 @@
     self.dataModel = @{
         @"name" : @"Estefania Chavez Guardado",
         @"email" : @"correo@gmail.com.mx",
-        @"location": @"Mexico"
+        @"location": @"Mexico",
+        @"code":@"MX"
     };
     
     self.viewModel =
@@ -114,6 +115,10 @@
         EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;
         [informationViewController setDataModel: self.dataModel];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 }
 
 @end
