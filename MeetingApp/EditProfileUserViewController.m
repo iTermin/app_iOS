@@ -99,6 +99,10 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"selectCountry" sender: @"country"];
+}
+
 /*
 #pragma mark - Navigation
 

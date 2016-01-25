@@ -279,7 +279,7 @@
                         <outlet property="locationTableView" destination="mrb-Ti-ijy" id="qaa-1e-7lf"/>
                         <outlet property="nameText" destination="og4-jk-LnB" id="o2p-bS-wQ4"/>
                         <outlet property="photoProfileEdit" destination="Exh-wY-agr" id="SLa-bX-G48"/>
-                        <segue destination="Un2-Yb-nBu" kind="push" identifier="asdf" id="TTs-B9-Ial"/>
+                        <segue destination="Un2-Yb-nBu" kind="push" identifier="selectCountry" id="TTs-B9-Ial"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYS-DH-Q1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
