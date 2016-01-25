@@ -132,6 +132,21 @@
     NSLog(@"%@", country);
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    NSArray *prueba = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
+
+    for (int i=0; i < prueba.count; ++i) {
+        if (prueba[i] == self.currentLocation) {
+            //NSLog(@"%@", prueba[i]);
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+    }
+}
+
 - (NSDictionary *) getCountryAtIndex:(NSUInteger)index{
     return self.dataModel[@"countries"][index];
 }
