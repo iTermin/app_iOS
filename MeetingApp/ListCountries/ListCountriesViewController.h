@@ -14,4 +14,6 @@
 
 @property(strong) NSArray *viewModel;
 
+@property(nonatomic, strong) NSDictionary * currentLocation;
+
 @end

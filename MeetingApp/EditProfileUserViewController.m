@@ -7,6 +7,7 @@
 //
 
 #import "EditProfileUserViewController.h"
+#import "ListCountries/ListCountriesViewController.h"
 
 @interface EditProfileUserViewController ()
 
@@ -100,7 +101,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"selectCountry" sender: @"country"];
+    NSString *country = self.dataModel[@"location"];
+    [self performSegueWithIdentifier:@"selectCountry" sender: country];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
+    [locationViewController setCurrentLocation:sender];
 }
 
 /*
