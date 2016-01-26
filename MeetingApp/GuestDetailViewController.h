@@ -13,5 +13,6 @@
 @property(nonatomic, strong) NSDictionary * currentGuest;
 @property (weak, nonatomic) IBOutlet UILabel *nameOfGuest;
 @property (weak, nonatomic) IBOutlet UILabel *emailOfGuest;
+@property (weak, nonatomic) IBOutlet UITableView *locationGuestTableView;
 
 @end

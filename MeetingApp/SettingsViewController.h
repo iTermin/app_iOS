@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UITableViewController
+
+@property(strong) NSArray *viewModel;
+@property(strong) NSDictionary *dataModel;
 
 @end

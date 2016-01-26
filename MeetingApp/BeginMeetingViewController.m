@@ -33,7 +33,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    SetMeetingViewController * setMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
+    //SetMeetingViewController * setMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
 }
 
 @end

@@ -10,6 +10,11 @@
 
 @implementation GuestDetailViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.locationGuestTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     
