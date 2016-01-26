@@ -129,22 +129,41 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary * country = [self getCountryAtIndex:indexPath.row];
+
+    if (country[@"name"] != self.currentLocation) {
+        NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
+        int indice=0;
+        for ( ; indice < countries.count; ++indice) {
+            if (countries[indice] == self.currentLocation) {
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:indice inSection:0];
+                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+                
+                break;
+            }
+        }
+    }
+    
     NSLog(@"%@", country);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    NSArray *prueba = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
-
-    for (int i=0; i < prueba.count; ++i) {
-        if (prueba[i] == self.currentLocation) {
+    NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
+    int indice=0;
+    for ( ; indice < countries.count; ++indice) {
+        if (countries[indice] == self.currentLocation) {
             //NSLog(@"%@", prueba[i]);
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:indice inSection:0];
             [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
             break;
         }
     }
+    
+}
+
+- (void) deselectedCell:(NSString*)countrySelectedBefore{
+
 }
 
 - (NSDictionary *) getCountryAtIndex:(NSUInteger)index{
