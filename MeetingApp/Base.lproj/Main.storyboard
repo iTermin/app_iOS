@@ -47,6 +47,9 @@
                                 <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="Tj1-LK-AAp">
+                                <rect key="frame" x="334" y="192" width="15" height="15"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -763,5 +766,6 @@
         <image name="meetingTabBar" width="35" height="29"/>
         <image name="push" width="22" height="22"/>
         <image name="reminder" width="22" height="22"/>
+        <image name="search" width="40" height="40"/>
     </resources>
 </document>
