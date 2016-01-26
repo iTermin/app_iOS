@@ -16,5 +16,7 @@
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
 - (IBAction)cancelButtonPressed:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
+@property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 
 @end

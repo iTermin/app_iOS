@@ -19,7 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f, self.nameMeeting.frame.size.height - 1, self.nameMeeting.frame.size.width, 1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameMeeting.layer addSublayer:nameBorder];
+    
+    CALayer *guestBorder = [CALayer layer];
+    guestBorder.frame = CGRectMake(0.0f, self.nameGuest.frame.size.height - 1, self.nameGuest.frame.size.width, 1.0f);
+    guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameGuest.layer addSublayer:guestBorder];
+    
 }
 
 - (void)didReceiveMemoryWarning {
