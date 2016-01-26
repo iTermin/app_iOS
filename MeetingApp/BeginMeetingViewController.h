@@ -19,4 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 
+- (IBAction)inviteGuests:(id)sender;
+
+
 @end

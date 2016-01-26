@@ -26,6 +26,7 @@
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
 		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
+		7CE7F9621C57843100CD67CC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */; };
 		7CFD97A01C4EDCB600C1095F /* ProfilePhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD979E1C4EDCB600C1095F /* ProfilePhotoTableViewCell.m */; };
 		7CFD97A11C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD979F1C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib */; };
 		7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97A31C4EE01C00C1095F /* HeaderTableViewCell.m */; };
@@ -91,6 +92,8 @@
 		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
 		7CD500911C354DF9000FA090 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestDetailViewController.h; sourceTree = "<group>"; };
 		7CD500921C354DF9000FA090 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestDetailViewController.m; sourceTree = "<group>"; };
+		7CE7F9601C57843100CD67CC /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTableViewController.h; path = Adressbook/ContactsTableViewController.h; sourceTree = "<group>"; };
+		7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTableViewController.m; path = Adressbook/ContactsTableViewController.m; sourceTree = "<group>"; };
 		7CFD979D1C4EDCB600C1095F /* ProfilePhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePhotoTableViewCell.h; path = Artifacts/ProfilePhotoTableViewCell.h; sourceTree = "<group>"; };
 		7CFD979E1C4EDCB600C1095F /* ProfilePhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePhotoTableViewCell.m; path = Artifacts/ProfilePhotoTableViewCell.m; sourceTree = "<group>"; };
 		7CFD979F1C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfilePhotoTableViewCell.xib; path = Artifacts/ProfilePhotoTableViewCell.xib; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */ = {
 			isa = PBXGroup;
 			children = (
+				7CE7F95F1C57840700CD67CC /* Adressbook */,
 				7C3B809E1C5558E400678EF4 /* ListCountries */,
 				7CFD97971C4EDB4D00C1095F /* Artifacts */,
 				7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */,
@@ -228,6 +232,15 @@
 				7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */,
 			);
 			name = Artifacts;
+			sourceTree = "<group>";
+		};
+		7CE7F95F1C57840700CD67CC /* Adressbook */ = {
+			isa = PBXGroup;
+			children = (
+				7CE7F9601C57843100CD67CC /* ContactsTableViewController.h */,
+				7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */,
+			);
+			name = Adressbook;
 			sourceTree = "<group>";
 		};
 		7CFD97971C4EDB4D00C1095F /* Artifacts */ = {
@@ -396,6 +409,7 @@
 				7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */,
 				7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */,
 				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,
+				7CE7F9621C57843100CD67CC /* ContactsTableViewController.m in Sources */,
 				7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */,

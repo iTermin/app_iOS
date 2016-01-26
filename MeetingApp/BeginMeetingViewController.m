@@ -44,6 +44,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     //SetMeetingViewController * setMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
+
+    if ([segue.identifier isEqualToString:@"inviteGuests"]){
+        
+    }
 }
 
+- (IBAction)inviteGuests:(id)sender {
+    [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
+}
 @end
