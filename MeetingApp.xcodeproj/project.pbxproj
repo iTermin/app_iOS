@@ -21,6 +21,10 @@
 		7C3B80A11C55596B00678EF4 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B80A01C55596B00678EF4 /* ListCountriesViewController.m */; };
 		7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B80A41C555A6300678EF4 /* CountryViewCell.m */; };
 		7C3B80A71C555A6300678EF4 /* CountryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */; };
+		7C3B846D1C5809590047F8D4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C3B846B1C5809590047F8D4 /* AddressBook.framework */; };
+		7C3B846E1C5809590047F8D4 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C3B846C1C5809590047F8D4 /* AddressBookUI.framework */; };
+		7C3B84731C580AAA0047F8D4 /* ContactBookViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */; };
+		7C3B84741C580AAA0047F8D4 /* ContactBookViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */; };
 		7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */; };
 		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
@@ -82,6 +86,11 @@
 		7C3B80A31C555A6300678EF4 /* CountryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryViewCell.h; path = ListCountries/Artifacts/CountryViewCell.h; sourceTree = "<group>"; };
 		7C3B80A41C555A6300678EF4 /* CountryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryViewCell.m; path = ListCountries/Artifacts/CountryViewCell.m; sourceTree = "<group>"; };
 		7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryViewCell.xib; path = ListCountries/Artifacts/CountryViewCell.xib; sourceTree = "<group>"; };
+		7C3B846B1C5809590047F8D4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7C3B846C1C5809590047F8D4 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		7C3B84701C580AAA0047F8D4 /* ContactBookViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactBookViewCell.h; path = Adressbook/Artifacts/ContactBookViewCell.h; sourceTree = "<group>"; };
+		7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactBookViewCell.m; path = Adressbook/Artifacts/ContactBookViewCell.m; sourceTree = "<group>"; };
+		7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactBookViewCell.xib; path = Adressbook/Artifacts/ContactBookViewCell.xib; sourceTree = "<group>"; };
 		7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeginMeetingViewController.m; sourceTree = "<group>"; };
 		7C6F4F0D1C31281600608696 /* BeginMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeginMeetingViewController.h; sourceTree = "<group>"; };
 		7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
@@ -115,6 +124,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C3B846D1C5809590047F8D4 /* AddressBook.framework in Frameworks */,
+				7C3B846E1C5809590047F8D4 /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +149,8 @@
 		7C30FA731C2ED3C60059EAE3 = {
 			isa = PBXGroup;
 			children = (
+				7C3B846B1C5809590047F8D4 /* AddressBook.framework */,
+				7C3B846C1C5809590047F8D4 /* AddressBookUI.framework */,
 				7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */,
 				7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */,
 				7C30FAA31C2ED3C70059EAE3 /* MeetingAppUITests */,
@@ -234,9 +247,20 @@
 			name = Artifacts;
 			sourceTree = "<group>";
 		};
+		7C3B846F1C580A410047F8D4 /* Artifacts */ = {
+			isa = PBXGroup;
+			children = (
+				7C3B84701C580AAA0047F8D4 /* ContactBookViewCell.h */,
+				7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */,
+				7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */,
+			);
+			name = Artifacts;
+			sourceTree = "<group>";
+		};
 		7CE7F95F1C57840700CD67CC /* Adressbook */ = {
 			isa = PBXGroup;
 			children = (
+				7C3B846F1C580A410047F8D4 /* Artifacts */,
 				7CE7F9601C57843100CD67CC /* ContactsTableViewController.h */,
 				7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */,
 			);
@@ -376,6 +400,7 @@
 				7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */,
 				7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */,
 				7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */,
+				7C3B84741C580AAA0047F8D4 /* ContactBookViewCell.xib in Resources */,
 				7C3B80A71C555A6300678EF4 /* CountryViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +439,7 @@
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
+				7C3B84731C580AAA0047F8D4 /* ContactBookViewCell.m in Sources */,
 				7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
 				7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */,
