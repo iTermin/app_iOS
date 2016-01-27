@@ -6,6 +6,7 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import <Contacts/Contacts.h>
 
 #import "BeginMeetingViewController.h"
 #import "SetMeetingViewController.h"
@@ -29,6 +30,7 @@
     guestBorder.frame = CGRectMake(0.0f, self.nameGuest.frame.size.height - 1, self.nameGuest.frame.size.width, 1.0f);
     guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -5,10 +5,14 @@
 //  Created by Estefania Chavez Guardado on 1/26/16.
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
+#import <Contacts/Contacts.h>
 
 #import "ContactsTableViewController.h"
 
-@interface ContactsTableViewController ()
+@interface ContactsTableViewController () <UISplitViewControllerDelegate>
+
+@property (nonatomic,strong) NSMutableArray *groupOfContacts;
+@property (nonatomic,strong) NSMutableArray *phoneNumerArray;
 
 @end
 
@@ -17,11 +21,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.groupOfContacts = [@[] mutableCopy];
+    [self getAllContact];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.phoneNumerArray = [@[] mutableCopy];
+    for (CNContact *contact in self.groupOfContacts){
+        NSArray *thisOne = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
+        [self.phoneNumerArray addObjectsFromArray:thisOne];
+    }
+    
+    //NSLog(@"%@", self.groupOfContacts);
+}
+
+- (void) getAllContact{
+    if ([CNContactStore class]) {
+        CNContactStore *addressBook = [[CNContactStore alloc]init];
+        
+        NSArray *KeyToFetch = @[CNContactEmailAddressesKey,
+                                CNContactFamilyNameKey,
+                                CNContactGivenNameKey,
+                                CNContactPhoneNumbersKey,
+                                CNContactPostalAddressesKey];
+        
+        CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:KeyToFetch];
+        
+        [addressBook enumerateContactsWithFetchRequest:fetchRequest
+                                                 error:nil usingBlock:^(CNContact * const contact, BOOL * _Nonnull stop) {
+                                                     [self.groupOfContacts addObject:contact];
+                                                 }];
+        NSLog(@"%@", self.groupOfContacts);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
