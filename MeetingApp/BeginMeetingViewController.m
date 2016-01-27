@@ -52,6 +52,8 @@
 }
 
 - (IBAction)inviteGuests:(id)sender {
-    [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
+    if ([CNContactStore class]) {
+        [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
+    }
 }
 @end
