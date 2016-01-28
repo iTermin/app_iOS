@@ -46,8 +46,7 @@
 
 }
 
-- (IBAction)inviteGuests:(id)sender {
-    
+- (IBAction)searchContacts:(id)sender {
     switch (ABAddressBookGetAuthorizationStatus())
     {
             // Update our UI if the user has granted access to their Contacts
@@ -73,6 +72,10 @@
         default:
             break;
     }
+}
+
+- (IBAction)inviteGuests:(id)sender {
+    
 }
 
 -(void)requestAddressBookAccess

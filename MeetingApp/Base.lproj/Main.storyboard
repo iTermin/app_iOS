@@ -29,9 +29,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Invite Guests..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPD-tT-gwQ">
-                                <rect key="frame" x="20" y="185" width="335" height="30"/>
+                                <rect key="frame" x="20" y="185" width="307" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="inviteGuests:" destination="2QN-cd-kZ6" eventType="touchDown" id="jdO-NA-tJf"/>
                                 </connections>
@@ -46,9 +46,13 @@
                                 <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="Tj1-LK-AAp">
-                                <rect key="frame" x="334" y="192" width="15" height="15"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oet-MG-E15">
+                                <rect key="frame" x="335" y="190" width="20" height="20"/>
+                                <state key="normal" title="Button" image="plus"/>
+                                <connections>
+                                    <action selector="searchContacts:" destination="2QN-cd-kZ6" eventType="touchDown" id="tnw-9E-Tqe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -79,6 +83,7 @@
                         <outlet property="nameGuest" destination="NPD-tT-gwQ" id="eRt-Fa-mhF"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
                         <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
+                        <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOz-tr-dwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -733,8 +738,8 @@
         <image name="email" width="22" height="22"/>
         <image name="fondo" width="150" height="200"/>
         <image name="meetingTabBar" width="35" height="29"/>
+        <image name="plus" width="22" height="22"/>
         <image name="push" width="22" height="22"/>
         <image name="reminder" width="22" height="22"/>
-        <image name="search" width="40" height="40"/>
     </resources>
 </document>

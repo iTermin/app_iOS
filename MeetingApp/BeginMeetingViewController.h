@@ -18,7 +18,9 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
+@property (strong, nonatomic) IBOutlet UIButton *search;
 
+- (IBAction)searchContacts:(id)sender;
 - (IBAction)inviteGuests:(id)sender;
 
 
