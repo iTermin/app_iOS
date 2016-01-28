@@ -46,14 +46,6 @@
 
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    //SetMeetingViewController * setMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-
-    if ([segue.identifier isEqualToString:@"inviteGuests"]){
-        
-    }
-}
-
 - (IBAction)inviteGuests:(id)sender {
     
     switch (ABAddressBookGetAuthorizationStatus())
@@ -61,12 +53,10 @@
             // Update our UI if the user has granted access to their Contacts
         case  kABAuthorizationStatusAuthorized:
             [self accessGrantedForAddressBook];
-            [self performSegueWithIdentifier:@"inviteGuests" sender:self.menuArray];
             break;
             // Prompt the user for access to Contacts if there is no definitive answer
         case  kABAuthorizationStatusNotDetermined :
             [self requestAddressBookAccess];
-            [self performSegueWithIdentifier:@"inviteGuests" sender:self.menuArray];
             break;
             // Display a message if the user has denied or restricted access to Contacts
         case  kABAuthorizationStatusDenied:
@@ -83,9 +73,6 @@
         default:
             break;
     }
-    /*if ([CNContactStore class]) {
-        [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
-    }*/
 }
 
 -(void)requestAddressBookAccess
@@ -109,7 +96,52 @@
     // Load data from the plist file
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Menu" ofType:@"plist"];
     self.menuArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
+    [self showPeoplePickerController];
+
     //[self.tableView reloadData];
+}
+
+-(void)showPeoplePickerController
+{
+    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+    picker.peoplePickerDelegate = self;
+    // Display only a person's phone, email, and birthdate
+    NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty],
+                               [NSNumber numberWithInt:kABPersonEmailProperty],
+                               [NSNumber numberWithInt:kABPersonBirthdayProperty], nil];
+    
+    
+    picker.displayedProperties = displayedItems;
+    // Show the picker
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark ABPeoplePickerNavigationControllerDelegate methods
+// Displays the information of a selected person
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+    return YES;
+}
+
+// Does not allow users to perform default actions such as dialing a phone number, when they select a person property.
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
+{
+    return NO;
+}
+
+// Dismisses the people picker and shows the application when users tap Cancel.
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark ABPersonViewControllerDelegate methods
+// Does not allow users to perform default actions such as dialing a phone number, when they select a contact property.
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
+                    property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
+{
+    return NO;
 }
 
 @end

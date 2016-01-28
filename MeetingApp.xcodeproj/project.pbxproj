@@ -21,14 +21,11 @@
 		7C3B80A11C55596B00678EF4 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B80A01C55596B00678EF4 /* ListCountriesViewController.m */; };
 		7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B80A41C555A6300678EF4 /* CountryViewCell.m */; };
 		7C3B80A71C555A6300678EF4 /* CountryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */; };
-		7C3B84731C580AAA0047F8D4 /* ContactBookViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */; };
-		7C3B84741C580AAA0047F8D4 /* ContactBookViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */; };
 		7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */; };
 		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
 		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
-		7CE7F9621C57843100CD67CC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */; };
 		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
 		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
@@ -88,11 +85,6 @@
 		7C3B80A31C555A6300678EF4 /* CountryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryViewCell.h; path = ListCountries/Artifacts/CountryViewCell.h; sourceTree = "<group>"; };
 		7C3B80A41C555A6300678EF4 /* CountryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryViewCell.m; path = ListCountries/Artifacts/CountryViewCell.m; sourceTree = "<group>"; };
 		7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryViewCell.xib; path = ListCountries/Artifacts/CountryViewCell.xib; sourceTree = "<group>"; };
-		7C3B84701C580AAA0047F8D4 /* ContactBookViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactBookViewCell.h; path = Adressbook/Artifacts/ContactBookViewCell.h; sourceTree = "<group>"; };
-		7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactBookViewCell.m; path = Adressbook/Artifacts/ContactBookViewCell.m; sourceTree = "<group>"; };
-		7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactBookViewCell.xib; path = Adressbook/Artifacts/ContactBookViewCell.xib; sourceTree = "<group>"; };
-		7C3B84791C58D3F60047F8D4 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
-		7C3B847A1C58D3F60047F8D4 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeginMeetingViewController.m; sourceTree = "<group>"; };
 		7C6F4F0D1C31281600608696 /* BeginMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeginMeetingViewController.h; sourceTree = "<group>"; };
 		7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
@@ -103,8 +95,6 @@
 		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
 		7CD500911C354DF9000FA090 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestDetailViewController.h; sourceTree = "<group>"; };
 		7CD500921C354DF9000FA090 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestDetailViewController.m; sourceTree = "<group>"; };
-		7CE7F9601C57843100CD67CC /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTableViewController.h; path = Adressbook/ContactsTableViewController.h; sourceTree = "<group>"; };
-		7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTableViewController.m; path = Adressbook/ContactsTableViewController.m; sourceTree = "<group>"; };
 		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
@@ -157,8 +147,6 @@
 			children = (
 				7CF9343C1C5A14BA00D928EA /* AddressBook.framework */,
 				7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */,
-				7C3B84791C58D3F60047F8D4 /* Contacts.framework */,
-				7C3B847A1C58D3F60047F8D4 /* ContactsUI.framework */,
 				7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */,
 				7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */,
 				7C30FAA31C2ED3C70059EAE3 /* MeetingAppUITests */,
@@ -179,7 +167,6 @@
 		7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */ = {
 			isa = PBXGroup;
 			children = (
-				7CE7F95F1C57840700CD67CC /* Adressbook */,
 				7C3B809E1C5558E400678EF4 /* ListCountries */,
 				7CFD97971C4EDB4D00C1095F /* Artifacts */,
 				7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */,
@@ -255,26 +242,6 @@
 				7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */,
 			);
 			name = Artifacts;
-			sourceTree = "<group>";
-		};
-		7C3B846F1C580A410047F8D4 /* Artifacts */ = {
-			isa = PBXGroup;
-			children = (
-				7C3B84701C580AAA0047F8D4 /* ContactBookViewCell.h */,
-				7C3B84711C580AAA0047F8D4 /* ContactBookViewCell.m */,
-				7C3B84721C580AAA0047F8D4 /* ContactBookViewCell.xib */,
-			);
-			name = Artifacts;
-			sourceTree = "<group>";
-		};
-		7CE7F95F1C57840700CD67CC /* Adressbook */ = {
-			isa = PBXGroup;
-			children = (
-				7C3B846F1C580A410047F8D4 /* Artifacts */,
-				7CE7F9601C57843100CD67CC /* ContactsTableViewController.h */,
-				7CE7F9611C57843100CD67CC /* ContactsTableViewController.m */,
-			);
-			name = Adressbook;
 			sourceTree = "<group>";
 		};
 		7CFD97971C4EDB4D00C1095F /* Artifacts */ = {
@@ -412,7 +379,6 @@
 				7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */,
 				7CFD97A61C4EE01C00C1095F /* HeaderTableViewCell.xib in Resources */,
 				7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */,
-				7C3B84741C580AAA0047F8D4 /* ContactBookViewCell.xib in Resources */,
 				7C3B80A71C555A6300678EF4 /* CountryViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,12 +412,10 @@
 				7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */,
 				7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */,
 				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,
-				7CE7F9621C57843100CD67CC /* ContactsTableViewController.m in Sources */,
 				7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
-				7C3B84731C580AAA0047F8D4 /* ContactBookViewCell.m in Sources */,
 				7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
 				7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */,
