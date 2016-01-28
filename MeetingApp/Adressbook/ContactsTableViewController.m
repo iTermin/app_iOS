@@ -14,6 +14,9 @@
 @property (nonatomic,strong) NSMutableArray *groupOfContacts;
 @property (nonatomic,strong) NSMutableArray *phoneNumerArray;
 
+@property (nonatomic, strong) NSMutableArray *menuArray;
+
+
 @end
 
 @implementation ContactsTableViewController
@@ -71,7 +74,6 @@
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

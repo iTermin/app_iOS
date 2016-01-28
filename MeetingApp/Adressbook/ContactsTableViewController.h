@@ -11,4 +11,6 @@
 
 @interface ContactsTableViewController : UITableViewController <ABPeoplePickerNavigationControllerDelegate>
 
+-(void)accessGrantedForAddressBook;
+
 @end

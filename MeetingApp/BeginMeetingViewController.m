@@ -6,13 +6,16 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import <Contacts/Contacts.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 #import "BeginMeetingViewController.h"
 #import "SetMeetingViewController.h"
 
+@interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 
-@interface BeginMeetingViewController ()
+@property (nonatomic, assign) ABAddressBookRef addressBook;
+@property (nonatomic, strong) NSMutableArray *menuArray;
 
 @end
 
@@ -52,8 +55,61 @@
 }
 
 - (IBAction)inviteGuests:(id)sender {
-    if ([CNContactStore class]) {
-        [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
+    
+    switch (ABAddressBookGetAuthorizationStatus())
+    {
+            // Update our UI if the user has granted access to their Contacts
+        case  kABAuthorizationStatusAuthorized:
+            [self accessGrantedForAddressBook];
+            [self performSegueWithIdentifier:@"inviteGuests" sender:self.menuArray];
+            break;
+            // Prompt the user for access to Contacts if there is no definitive answer
+        case  kABAuthorizationStatusNotDetermined :
+            [self requestAddressBookAccess];
+            [self performSegueWithIdentifier:@"inviteGuests" sender:self.menuArray];
+            break;
+            // Display a message if the user has denied or restricted access to Contacts
+        case  kABAuthorizationStatusDenied:
+        case  kABAuthorizationStatusRestricted:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Privacy Warning"
+                                                            message:@"Permission was not granted for Contacts."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+            break;
+        default:
+            break;
     }
+    /*if ([CNContactStore class]) {
+        [self performSegueWithIdentifier:@"inviteGuests" sender: @"hola"];
+    }*/
 }
+
+-(void)requestAddressBookAccess
+{
+    BeginMeetingViewController * __weak weakSelf = self;
+    
+    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error)
+                                             {
+                                                 if (granted)
+                                                 {
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [weakSelf accessGrantedForAddressBook];
+                                                         
+                                                     });
+                                                 }
+                                             });
+}
+
+-(void)accessGrantedForAddressBook
+{
+    // Load data from the plist file
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Menu" ofType:@"plist"];
+    self.menuArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
+    //[self.tableView reloadData];
+}
+
 @end
