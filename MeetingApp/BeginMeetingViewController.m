@@ -34,6 +34,55 @@
     guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
     
+    
+    self.dataModel = @{
+                       @"guests" : @[
+                               @{
+                                   @"name": @"Luis Alejandro Rangel",
+                                   @"dial_code": @"(86)",
+                                   @"email": @"email@correo.mx",
+                                   @"photo": @"id"
+                                   },
+                               @{
+                                   @"name": @"Jesus Cagide",
+                                   @"dial_code": @"(86)",
+                                   @"email": @"email@correo.mx",
+                                   @"photo": @"id"
+                                   }
+                               ]};
+    
+    NSMutableArray * viewModel = [NSMutableArray array];
+    [self.dataModel[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+        
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        
+        UIImage * contactPhoto = [UIImage imageNamed: [NSString stringWithFormat:@"%@.png", guests[@"photo"]]];
+        if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
+        
+        [viewModel addObject:@{
+                               @"nib" : @"GuestViewCell",
+                               @"height" : @(60),
+                               @"data":cellModel }];
+    }];
+    
+    self.viewModel = viewModel;
+    
+    __weak UITableView * tableView = self.guestsTableView;
+    NSMutableSet * registeredNibs = [NSMutableSet set];
+    
+    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
+        
+        NSString * nibFile = cellViewModel[@"nib"];
+        
+        if(![registeredNibs containsObject: nibFile]) {
+            [registeredNibs addObject: nibFile];
+            
+            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
+        }
+    }];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -181,5 +230,43 @@
     
     [self dismissViewControllerAnimated:NO completion:^(){}];
 }
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.viewModel count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    return [cellViewModel[@"height"] floatValue];
+}
+/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    
+    NSDictionary * selectedMeeting = self.guests[indexPath.row];
+    [self performSegueWithIdentifier:@"guestDetail" sender: selectedMeeting];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
+    [guestDetailViewController setTitle:sender[@"name"]];
+    [guestDetailViewController setCurrentGuest: sender];
+}*/
 
 @end

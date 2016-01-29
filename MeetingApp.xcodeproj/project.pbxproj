@@ -26,6 +26,8 @@
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
 		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
+		7CEB6D911C5B71BC006E5D2C /* GuestViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB6D8F1C5B71BC006E5D2C /* GuestViewCell.m */; };
+		7CEB6D921C5B71BC006E5D2C /* GuestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEB6D901C5B71BC006E5D2C /* GuestViewCell.xib */; };
 		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
 		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
@@ -95,6 +97,9 @@
 		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
 		7CD500911C354DF9000FA090 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestDetailViewController.h; sourceTree = "<group>"; };
 		7CD500921C354DF9000FA090 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestDetailViewController.m; sourceTree = "<group>"; };
+		7CEB6D8E1C5B71BC006E5D2C /* GuestViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestViewCell.h; path = Artifacts/GuestViewCell.h; sourceTree = "<group>"; };
+		7CEB6D8F1C5B71BC006E5D2C /* GuestViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestViewCell.m; path = Artifacts/GuestViewCell.m; sourceTree = "<group>"; };
+		7CEB6D901C5B71BC006E5D2C /* GuestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestViewCell.xib; path = Artifacts/GuestViewCell.xib; sourceTree = "<group>"; };
 		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
@@ -262,6 +267,9 @@
 				7C1566541C5233C800B589A0 /* LocationUserTableViewCell.h */,
 				7C1566551C5233C800B589A0 /* LocationUserTableViewCell.m */,
 				7C1566561C5233C800B589A0 /* LocationUserTableViewCell.xib */,
+				7CEB6D8E1C5B71BC006E5D2C /* GuestViewCell.h */,
+				7CEB6D8F1C5B71BC006E5D2C /* GuestViewCell.m */,
+				7CEB6D901C5B71BC006E5D2C /* GuestViewCell.xib */,
 			);
 			name = Artifacts;
 			sourceTree = "<group>";
@@ -370,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CFD97A11C4EDCB600C1095F /* ProfilePhotoTableViewCell.xib in Resources */,
+				7CEB6D921C5B71BC006E5D2C /* GuestViewCell.xib in Resources */,
 				7C1566581C5233C800B589A0 /* LocationUserTableViewCell.xib in Resources */,
 				7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */,
 				7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */,
@@ -413,6 +422,7 @@
 				7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */,
 				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,
 				7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */,
+				7CEB6D911C5B71BC006E5D2C /* GuestViewCell.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
