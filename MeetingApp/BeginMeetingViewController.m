@@ -35,6 +35,21 @@
     [self.nameGuest.layer addSublayer:guestBorder];
     
     self.guestsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    /*
+    self.dataModel = @{
+      @{
+          @"name": @"Luis Alejandro Rangel",
+          @"dial_code": @"(86)",
+          @"email": @"email@correo.mx",
+          @"photo": @"id"
+          },
+      @{
+          @"name": @"Jesus Cagide",
+          @"dial_code": @"(86)",
+          @"email": @"email@correo.mx",
+          @"photo": @"id"
+          }
+      };*/
     
     self.dataModel = @{
                        @"guests" : @[
@@ -178,18 +193,19 @@
     NSString *lastName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
     
     ABMutableMultiValueRef multiEmail = ABRecordCopyValue(person, kABPersonEmailProperty);
-    NSString *email = CFBridgingRelease(ABMultiValueCopyLabelAtIndex(multiEmail, 0));
+    NSString *email = (__bridge NSString *) ABMultiValueCopyValueAtIndex(multiEmail, 0);
     
     ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    NSArray *phoneNumbers = CFBridgingRelease(ABMultiValueCopyArrayOfAllValues(phoneNumberProperty));
+    NSArray *phoneNumbers = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
     
+    UIImage *retrievedImage;
     if (person != nil && ABPersonHasImageData(person))
     {
-        UIImage *retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
+        retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
     }
     else
     {
-        UIImage *retrievedImage = nil;
+        retrievedImage = nil;
     }
     
     NSString *retrievedName;
@@ -229,7 +245,15 @@
         retrievedName = [[NSString alloc] initWithFormat:@"%@", lastName];
     }
     
+    [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+    
     [self dismissViewControllerAnimated:NO completion:^(){}];
+}
+
+-(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
+    NSDictionary *guestInformation = [NSDictionary dictionaryWithObjectsAndKeys:nameGuest, @"name", emailGuest, @"email", phoneGuest, @"phone", photoContact, @"photo", nil];
+    
+    //[self.dataModel[@"guests"] addEntriesFromDictionary:guestInformation];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
