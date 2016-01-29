@@ -12,14 +12,13 @@
 @interface BeginMeetingViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
-- (IBAction)cancelButtonPressed:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
 
+- (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;
 - (IBAction)inviteGuests:(id)sender;
 

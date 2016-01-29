@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameMeeting.frame.size.height - 1, self.nameMeeting.frame.size.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
@@ -43,7 +43,7 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 
 - (IBAction)searchContacts:(id)sender {
@@ -100,7 +100,7 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Menu" ofType:@"plist"];
     self.menuArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
     [self showPeoplePickerController];
-
+    
     //[self.tableView reloadData];
 }
 
@@ -119,32 +119,67 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-#pragma mark ABPeoplePickerNavigationControllerDelegate methods
-// Displays the information of a selected person
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    return YES;
-}
-
-// Does not allow users to perform default actions such as dialing a phone number, when they select a person property.
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-{
-    return NO;
-}
-
-// Dismisses the people picker and shows the application when users tap Cancel.
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-#pragma mark ABPersonViewControllerDelegate methods
-// Does not allow users to perform default actions such as dialing a phone number, when they select a contact property.
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person
-                    property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
-{
-    return NO;
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
+    
+    NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+    
+    NSString *middleName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
+    
+    NSString *lastName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
+    
+    ABMutableMultiValueRef multiEmail = ABRecordCopyValue(person, kABPersonEmailProperty);
+    NSString *email = CFBridgingRelease(ABMultiValueCopyLabelAtIndex(multiEmail, 0));
+    
+    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    NSArray *phoneNumbers = CFBridgingRelease(ABMultiValueCopyArrayOfAllValues(phoneNumberProperty));
+    
+    if (person != nil && ABPersonHasImageData(person))
+    {
+        UIImage *retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
+    }
+    else
+    {
+        UIImage *retrievedImage = nil;
+    }
+    
+    NSString *retrievedName;
+    
+    if (firstName != NULL && middleName != NULL && lastName != NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
+    }
+    
+    if (firstName != NULL && middleName != NULL & lastName == NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",firstName, middleName];
+    }
+    
+    if (firstName != NULL && middleName == NULL && lastName != NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",firstName,lastName];
+    }
+    
+    if (firstName != NULL && middleName == NULL && lastName == NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@",firstName];
+    }
+    
+    if (firstName == NULL && middleName != NULL && lastName != NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",middleName, lastName];
+    }
+    
+    if (firstName == NULL && middleName != NULL && lastName == NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@",middleName];
+    }
+    
+    if (firstName == NULL && middleName == NULL && lastName != NULL)
+    {
+        retrievedName = [[NSString alloc] initWithFormat:@"%@", lastName];
+    }
+    
+    [self dismissViewControllerAnimated:NO completion:^(){}];
 }
 
 @end
