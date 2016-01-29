@@ -34,6 +34,7 @@
     guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
     
+    self.guestsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.dataModel = @{
                        @"guests" : @[
@@ -248,6 +249,10 @@
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }
     
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
+    separatorLineView.backgroundColor = [UIColor lightGrayColor];
+    [cell.contentView addSubview:separatorLineView];
+    
     return cell;
 }
 
@@ -255,6 +260,7 @@
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     return [cellViewModel[@"height"] floatValue];
 }
+
 /*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
