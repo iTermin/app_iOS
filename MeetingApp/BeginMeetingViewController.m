@@ -35,8 +35,9 @@
     [self.nameGuest.layer addSublayer:guestBorder];
     
     self.guestsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    /*
-    self.dataModel = @{
+    
+    
+    self.dataModel = [NSMutableArray arrayWithArray:@[
       @{
           @"name": @"Luis Alejandro Rangel",
           @"dial_code": @"(86)",
@@ -49,39 +50,9 @@
           @"email": @"email@correo.mx",
           @"photo": @"id"
           }
-      };*/
+      ]];
     
-    self.dataModel = @{
-                       @"guests" : @[
-                               @{
-                                   @"name": @"Luis Alejandro Rangel",
-                                   @"dial_code": @"(86)",
-                                   @"email": @"email@correo.mx",
-                                   @"photo": @"id"
-                                   },
-                               @{
-                                   @"name": @"Jesus Cagide",
-                                   @"dial_code": @"(86)",
-                                   @"email": @"email@correo.mx",
-                                   @"photo": @"id"
-                                   }
-                               ]};
-    
-    NSMutableArray * viewModel = [NSMutableArray array];
-    [self.dataModel[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
-        
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
-        
-        UIImage * contactPhoto = [UIImage imageNamed: [NSString stringWithFormat:@"%@.png", guests[@"photo"]]];
-        if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestViewCell",
-                               @"height" : @(60),
-                               @"data":cellModel }];
-    }];
-    
-    self.viewModel = viewModel;
+    [self updateViewModel];
     
     __weak UITableView * tableView = self.guestsTableView;
     NSMutableSet * registeredNibs = [NSMutableSet set];
@@ -97,8 +68,24 @@
             [tableView registerNib:nib forCellReuseIdentifier:nibFile];
         }
     }];
+}
+
+- (void) updateViewModel {
+    NSMutableArray * viewModel = [NSMutableArray array];
+    [self.dataModel enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+        
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        
+        UIImage * contactPhoto = [UIImage imageNamed: [NSString stringWithFormat:@"%@.png", guests[@"photo"]]];
+        if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
+        
+        [viewModel addObject:@{
+                               @"nib" : @"GuestViewCell",
+                               @"height" : @(60),
+                               @"data":cellModel }];
+    }];
     
-    
+    self.viewModel = viewModel;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -251,9 +238,19 @@
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-    NSDictionary *guestInformation = [NSDictionary dictionaryWithObjectsAndKeys:nameGuest, @"name", emailGuest, @"email", phoneGuest, @"phone", photoContact, @"photo", nil];
+    NSDictionary * guestInformation = @{
+                                        @"photo" : photoContact ? photoContact : @"",
+                                        @"phone" : phoneGuest,
+                                        @"email" : emailGuest,
+                                        @"name" : nameGuest
+    };
     
-    //[self.dataModel[@"guests"] addEntriesFromDictionary:guestInformation];
+    [self.dataModel addObject: guestInformation];
+    [self updateViewModel];
+    
+    [self.guestsTableView beginUpdates];
+    [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.guestsTableView endUpdates];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *search;
 @property (strong, nonatomic) IBOutlet UITableView *guestsTableView;
 
-@property(strong) NSDictionary *dataModel;
+@property(strong) NSMutableArray *dataModel;
 @property(strong) NSArray *viewModel;
 
 - (IBAction)cancelButtonPressed:(id)sender;
