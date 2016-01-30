@@ -42,13 +42,13 @@
           @"name": @"Luis Alejandro Rangel",
           @"dial_code": @"(86)",
           @"email": @"email@correo.mx",
-          @"photo": @"id"
+          @"photo": @"fondo"
           },
       @{
           @"name": @"Jesus Cagide",
           @"dial_code": @"(86)",
           @"email": @"email@correo.mx",
-          @"photo": @"id"
+          @"photo": @""
           }
       ]];
     
