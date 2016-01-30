@@ -7,6 +7,7 @@
 //
 
 #import "GuestViewCell.h"
+#import "UIImageView+Letters.h"
 
 @implementation GuestViewCell
 
@@ -25,8 +26,9 @@
     
     [self.nameGuest setText: data[@"name"]];
     [self.emailGuest setText: data[@"email"]];
-    //[self.guestImage setImage: data[@"photo"]];
     
+    NSString *userName = self.data[@"name"];
+    [self.guestImage setImageWithString:userName color:nil circular:YES];
 }
 
 @end

@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21D8A2C63258A8CE16F1A8180DE6D0ED /* Pods-MeetingApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */; };
+		32EB5C8A707E6CFF8B9D40046E4F45F3 /* UIImageView+Letters.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6056C6F131EC46C34714413A8300F684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		8C9BBB7944BDEBDD3F1C1D5B4D9AE2FA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */; };
+		EF7C58413C92AE6F5350B1957CC751E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		F93553D0115E06D4127B0EEE353B9811 /* UIImageView-Letters-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D55388A585263C3547AA1D01866A8AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B970D0A4BD9CC369033DF3F4446146F3;
+			remoteInfo = "UIImageView-Letters";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		466B27DEA03656B34FCD704CFDCDE2EF /* Pods-MeetingApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MeetingApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4B7384C28C9BA614B9E16D543E1C1141 /* UIImageView-Letters-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImageView-Letters-prefix.pch"; sourceTree = "<group>"; };
+		4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Letters.h"; path = "UIImageView+Letters/UIImageView+Letters.h"; sourceTree = "<group>"; };
+		5899AAD00F87855E31A7EA4E34598FFA /* Pods-MeetingApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-frameworks.sh"; sourceTree = "<group>"; };
+		66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView-Letters-dummy.m"; sourceTree = "<group>"; };
+		78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MeetingApp-dummy.m"; sourceTree = "<group>"; };
+		87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Letters.m"; path = "UIImageView+Letters/UIImageView+Letters.m"; sourceTree = "<group>"; };
+		9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImageView-Letters.xcconfig"; sourceTree = "<group>"; };
+		D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
+		E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIImageView-Letters.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA9E38EE6C25346CC052AD3F45B215E6 /* Pods-MeetingApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-resources.sh"; sourceTree = "<group>"; };
+		FEF60D3B455310E5F0EB06477E839C53 /* Pods-MeetingApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MeetingApp-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17450EED0313981D64B654918C8940F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF7C58413C92AE6F5350B1957CC751E8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5CA76078BED1C05E76CC08801E12849 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6056C6F131EC46C34714413A8300F684 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		124EDA761DAFD87F0DD9A78B354FCF5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */,
+				E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38F637F8A2B1220B5416CEC26A228363 /* UIImageView-Letters */ = {
+			isa = PBXGroup;
+			children = (
+				4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */,
+				87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */,
+				AE390BB5E34D6B9319F942D0A6FC7FFA /* Support Files */,
+			);
+			path = "UIImageView-Letters";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				DAA5006E2B65B19F6E241CE9A1F42BAC /* Pods */,
+				124EDA761DAFD87F0DD9A78B354FCF5C /* Products */,
+				EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		AE390BB5E34D6B9319F942D0A6FC7FFA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */,
+				66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */,
+				4B7384C28C9BA614B9E16D543E1C1141 /* UIImageView-Letters-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/UIImageView-Letters";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D0EAD331F7C399929392C26DC979EAE2 /* Pods-MeetingApp */ = {
+			isa = PBXGroup;
+			children = (
+				466B27DEA03656B34FCD704CFDCDE2EF /* Pods-MeetingApp-acknowledgements.markdown */,
+				FEF60D3B455310E5F0EB06477E839C53 /* Pods-MeetingApp-acknowledgements.plist */,
+				78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */,
+				5899AAD00F87855E31A7EA4E34598FFA /* Pods-MeetingApp-frameworks.sh */,
+				EA9E38EE6C25346CC052AD3F45B215E6 /* Pods-MeetingApp-resources.sh */,
+				3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */,
+				D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */,
+			);
+			name = "Pods-MeetingApp";
+			path = "Target Support Files/Pods-MeetingApp";
+			sourceTree = "<group>";
+		};
+		DAA5006E2B65B19F6E241CE9A1F42BAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38F637F8A2B1220B5416CEC26A228363 /* UIImageView-Letters */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D0EAD331F7C399929392C26DC979EAE2 /* Pods-MeetingApp */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AD574CA1187F4D0CF83C5071C9FB38A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32EB5C8A707E6CFF8B9D40046E4F45F3 /* UIImageView+Letters.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8CC493BD0D046A202A1C831972708CE4 /* Pods-MeetingApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD7D2B6269C9D8F83CEB608673695E05 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */;
+			buildPhases = (
+				AF51EB04C70894C3546E4B4C3CAC8607 /* Sources */,
+				F5CA76078BED1C05E76CC08801E12849 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B096812C9812870EAC44196E55AAED77 /* PBXTargetDependency */,
+			);
+			name = "Pods-MeetingApp";
+			productName = "Pods-MeetingApp";
+			productReference = 9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C7B281FE97A234B2DDFF0EED50FBB11 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */;
+			buildPhases = (
+				3AB4C42B4EF749683AEE88C98CDD255E /* Sources */,
+				17450EED0313981D64B654918C8940F3 /* Frameworks */,
+				AD574CA1187F4D0CF83C5071C9FB38A9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UIImageView-Letters";
+			productName = "UIImageView-Letters";
+			productReference = E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 124EDA761DAFD87F0DD9A78B354FCF5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CC493BD0D046A202A1C831972708CE4 /* Pods-MeetingApp */,
+				B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3AB4C42B4EF749683AEE88C98CDD255E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C9BBB7944BDEBDD3F1C1D5B4D9AE2FA /* UIImageView+Letters.m in Sources */,
+				F93553D0115E06D4127B0EEE353B9811 /* UIImageView-Letters-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF51EB04C70894C3546E4B4C3CAC8607 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D8A2C63258A8CE16F1A8180DE6D0ED /* Pods-MeetingApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B096812C9812870EAC44196E55AAED77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "UIImageView-Letters";
+			target = B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */;
+			targetProxy = 3D55388A585263C3547AA1D01866A8AE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		09A3175246A4E0C2B17E8D2DFFB851FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2B7E18A948B9D4625851514D26C10DEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8D1534490D941DCA47C62AC4314182AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		98B431910CFAD6B46EE8640FDE3C39B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AA31F1B6483448AB1A624072F5A2279A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C5A18280E9321A9268D1C80B7DA43967 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D1534490D941DCA47C62AC4314182AF /* Debug */,
+				C5A18280E9321A9268D1C80B7DA43967 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C7B281FE97A234B2DDFF0EED50FBB11 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA31F1B6483448AB1A624072F5A2279A /* Debug */,
+				2B7E18A948B9D4625851514D26C10DEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD7D2B6269C9D8F83CEB608673695E05 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09A3175246A4E0C2B17E8D2DFFB851FF /* Debug */,
+				98B431910CFAD6B46EE8640FDE3C39B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

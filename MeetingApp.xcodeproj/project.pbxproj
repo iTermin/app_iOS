@@ -41,6 +41,7 @@
 		7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */; };
 		7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */; };
 		7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */; };
+		F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 837704A4712A97F96CAF554C /* libPods-MeetingApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,9 @@
 		7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OptionsSettingsTableViewCell.xib; path = Artifacts/OptionsSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		7CFD97B21C4FA00F00C1095F /* EditProfileUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileUserViewController.h; sourceTree = "<group>"; };
 		7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileUserViewController.m; sourceTree = "<group>"; };
+		837704A4712A97F96CAF554C /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 			files = (
 				7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */,
 				7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */,
+				F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +152,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08580127D798E4015B410B29 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				837704A4712A97F96CAF554C /* libPods-MeetingApp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30D093652DD13BA800B0726D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */,
+				D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7C30FA731C2ED3C60059EAE3 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +178,8 @@
 				7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */,
 				7C30FAA31C2ED3C70059EAE3 /* MeetingAppUITests */,
 				7C30FA7D1C2ED3C70059EAE3 /* Products */,
+				30D093652DD13BA800B0726D /* Pods */,
+				08580127D798E4015B410B29 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,9 +305,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C30FAA91C2ED3C70059EAE3 /* Build configuration list for PBXNativeTarget "MeetingApp" */;
 			buildPhases = (
+				301AD543E30BB6749A7C81D3 /* Check Pods Manifest.lock */,
 				7C30FA781C2ED3C70059EAE3 /* Sources */,
 				7C30FA791C2ED3C70059EAE3 /* Frameworks */,
 				7C30FA7A1C2ED3C70059EAE3 /* Resources */,
+				5EBE24DC14FCEB396A7A834A /* Embed Pods Frameworks */,
+				9A7E66E9057DC8D611D5AC9E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -407,6 +434,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		301AD543E30BB6749A7C81D3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5EBE24DC14FCEB396A7A834A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A7E66E9057DC8D611D5AC9E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7C30FA781C2ED3C70059EAE3 /* Sources */ = {
@@ -569,6 +644,7 @@
 		};
 		7C30FAAA1C2ED3C70059EAE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MeetingApp/Info.plist;
@@ -580,6 +656,7 @@
 		};
 		7C30FAAB1C2ED3C70059EAE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MeetingApp/Info.plist;
