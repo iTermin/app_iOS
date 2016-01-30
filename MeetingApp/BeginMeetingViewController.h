@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BeginMeetingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface BeginMeetingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
@@ -24,7 +24,6 @@
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;
-- (IBAction)inviteGuests:(id)sender;
 
 
 @end

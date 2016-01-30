@@ -17,6 +17,8 @@
 @property (nonatomic, assign) ABAddressBookRef addressBook;
 @property (nonatomic, strong) NSMutableArray *menuArray;
 
+- (BOOL)validateEmail:(NSString*) emailAddress ;
+
 @end
 
 @implementation BeginMeetingViewController
@@ -68,6 +70,8 @@
             [tableView registerNib:nib forCellReuseIdentifier:nibFile];
         }
     }];
+    
+    self.nameGuest.delegate = self;
 }
 
 - (void) updateViewModel {
@@ -95,7 +99,25 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.nameGuest) {
+        [textField resignFirstResponder];
+        BOOL validate = [self validateEmail:self.nameGuest.text];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL) validateEmail:(NSString*) emailAddress{
+    BOOL stricterFilter = YES;
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:self.nameGuest.text];
+    //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
 - (IBAction)searchContacts:(id)sender {
@@ -124,10 +146,6 @@
         default:
             break;
     }
-}
-
-- (IBAction)inviteGuests:(id)sender {
-    
 }
 
 -(void)requestAddressBookAccess
