@@ -300,14 +300,14 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
-/*
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     
-    NSDictionary * selectedMeeting = self.guests[indexPath.row];
-    [self performSegueWithIdentifier:@"guestDetail" sender: selectedMeeting];
+    //NSDictionary * selectedMeeting = self.guests[indexPath.row];
+    [self performSegueWithIdentifier:@"editGuestDetails" sender: @"hola"];
 }
-
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
     [guestDetailViewController setTitle:sender[@"name"]];
