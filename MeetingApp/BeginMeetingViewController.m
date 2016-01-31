@@ -11,6 +11,7 @@
 
 #import "BeginMeetingViewController.h"
 #import "SetMeetingViewController.h"
+#import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 
@@ -304,14 +305,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     
-    //NSDictionary * selectedMeeting = self.guests[indexPath.row];
-    [self performSegueWithIdentifier:@"editGuestDetails" sender: @"hola"];
+    NSDictionary * selectedGuest = self.viewModel[indexPath.row];
+    [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest];
 }
-/*
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
-    [guestDetailViewController setTitle:sender[@"name"]];
-    [guestDetailViewController setCurrentGuest: sender];
-}*/
+    EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
+    [editGuestDetailViewController setCurrentGuest: sender];
+}
 
 @end
