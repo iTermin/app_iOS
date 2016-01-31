@@ -306,7 +306,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     
     NSDictionary * selectedGuest = self.viewModel[indexPath.row];
-    [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest];
+    [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest[@"data"]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {

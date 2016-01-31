@@ -17,7 +17,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self.nameGuest setText: self.currentGuest[@"name"]];
+    [self.emailGuest setText: self.currentGuest[@"email"]];
+    
+    NSString *noPhoto = @"";
+    if (self.currentGuest[@"photo"] == noPhoto) {
+        NSString *userName = self.currentGuest[@"name"];
+        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
+    } else {
+        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
+        self.guestPhoto.clipsToBounds = YES;
+        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.currentGuest[@"photo"]];
+        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+    }
+    
+    self.viewModel =
+    @[
+      @{
+          @"nib" : @"LocationUserTableViewCell",
+          @"height" : @(80),
+          @"data": [self.currentGuest copy]
+          }
+      ];
+    
+    __weak UITableView * tableView = self.locationGuest;
+    NSMutableSet * registeredNibs = [NSMutableSet set];
+    
+    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
+        
+        NSString * nibFile = cellViewModel[@"nib"];
+        
+        if(![registeredNibs containsObject: nibFile]) {
+            [registeredNibs addObject: nibFile];
+            
+            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,41 +62,29 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
-    
-    NSDictionary * dataGuest = self.currentGuest[@"data"];
-    [self.nameGuest setText: dataGuest[@"name"]];
-    [self.emailGuest setText: dataGuest[@"email"]];
-    
-    NSString *noPhoto = @"";
-    if (dataGuest[@"photo"] == noPhoto) {
-        NSString *userName = dataGuest[@"name"];
-        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
-    } else {
-        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-        self.guestPhoto.clipsToBounds = YES;
-        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", dataGuest[@"photo"]];
-        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
-    }
-    
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.viewModel count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    return [cellViewModel[@"height"] floatValue];
 }
 
 @end

@@ -17,5 +17,7 @@
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 
+@property(strong) NSArray *viewModel;
+
 
 @end
