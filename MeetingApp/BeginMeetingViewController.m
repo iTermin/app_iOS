@@ -123,10 +123,6 @@
     self.nameGuest.delegate = self;
 }
 
--(void) detectCountryOfGuest:(NSDictionary *)guestInformation{
-
-}
-
 - (void) updateViewModel {
     NSMutableArray * viewModel = [NSMutableArray array];
     [self.dataModel enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
@@ -309,10 +305,13 @@
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
+
+    NSArray *phoneWithFormat = [self formatPhone:phoneGuest];
+    phoneWithFormat = @[];
     NSDictionary * guestInformation = @{
                                         @"photo" : photoContact ? photoContact : @"",
-                                        @"phone" : phoneGuest,
-                                        @"email" : emailGuest,
+                                        @"phone" : phoneWithFormat.count > 0 ? phoneWithFormat : @"",
+                                        @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
                                         @"name" : nameGuest
     };
     
@@ -324,6 +323,34 @@
     [self.guestsTableView endUpdates];
 }
 
+-(NSArray *) formatPhone:(NSArray *)phone{
+    NSInteger numberOfPhones = phone.count;
+    NSArray *phoneWithFormat = [[NSArray alloc]init];
+    
+    if (numberOfPhones != 0) {
+        while (numberOfPhones > 0) {
+            NSString *phoneNumber = phone[numberOfPhones-1];
+            NSMutableArray *numberPhoneArray = [NSMutableArray array];
+            for (int i=0; i<phoneNumber.length; i++) {
+                [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(i, 1)]];
+            }
+            NSString *formatPhone = @"";
+            for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
+                if (![numberPhoneArray[lengthNumberPhone] isEqual:@"+"] & ![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:@"-"]) {
+                    NSString *digit = numberPhoneArray[lengthNumberPhone];
+                    formatPhone = [formatPhone stringByAppendingString:digit];
+                }
+            }
+            phoneWithFormat = [phoneWithFormat arrayByAddingObject:formatPhone];
+            --numberOfPhones;
+        }
+    } else {
+        return phoneWithFormat;
+    }
+    
+    return phoneWithFormat;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -333,7 +360,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
     
