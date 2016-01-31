@@ -1,0 +1,10 @@
+PODS:
+  - UIImageView-Letters (1.1.4)
+
+DEPENDENCIES:
+  - UIImageView-Letters
+
+SPEC CHECKSUMS:
+  UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
+
+COCOAPODS: 0.39.0

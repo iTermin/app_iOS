@@ -9,12 +9,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BeginMeetingViewController : UIViewController
+@interface BeginMeetingViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
+
+@property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
+@property (strong, nonatomic) IBOutlet UITextField *nameGuest;
+@property (strong, nonatomic) IBOutlet UIButton *search;
+@property (strong, nonatomic) IBOutlet UITableView *guestsTableView;
+
+@property(strong) NSMutableArray *dataModel;
+@property(strong) NSArray *viewModel;
+
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)searchContacts:(id)sender;
 
 
 @end
