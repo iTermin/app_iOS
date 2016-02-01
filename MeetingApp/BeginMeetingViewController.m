@@ -306,11 +306,11 @@
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
 
-    NSArray *phoneWithFormat = [self formatPhone:phoneGuest];
-    phoneWithFormat = @[];
+    NSArray *codeContact = [self codePhone:phoneGuest];
     NSDictionary * guestInformation = @{
                                         @"photo" : photoContact ? photoContact : @"",
-                                        @"phone" : phoneWithFormat.count > 0 ? phoneWithFormat : @"",
+                                        @"phone" : phoneGuest.count > 0 ? phoneGuest : @"",
+                                        @"codePhone" : codeContact.count > 0 ? codeContact : @"",
                                         @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
                                         @"name" : nameGuest
     };
@@ -323,32 +323,39 @@
     [self.guestsTableView endUpdates];
 }
 
--(NSArray *) formatPhone:(NSArray *)phone{
+-(NSArray *) codePhone:(NSArray *)phone{
     NSInteger numberOfPhones = phone.count;
-    NSArray *phoneWithFormat = [[NSArray alloc]init];
+    NSArray *codeCountry = [[NSArray alloc]init];
     
     if (numberOfPhones != 0) {
         while (numberOfPhones > 0) {
             NSString *phoneNumber = phone[numberOfPhones-1];
             NSMutableArray *numberPhoneArray = [NSMutableArray array];
-            for (int i=0; i<phoneNumber.length; i++) {
-                [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(i, 1)]];
+            for (int lenghtOfNumberPhone=0; lenghtOfNumberPhone<phoneNumber.length; ++lenghtOfNumberPhone) {
+                [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(lenghtOfNumberPhone, 1)]];
             }
-            NSString *formatPhone = @"";
+            NSString *formatCode = @"";
+            NSString *space = @" ";
             for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
-                if (![numberPhoneArray[lengthNumberPhone] isEqual:@"+"] & ![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:@"-"]) {
-                    NSString *digit = numberPhoneArray[lengthNumberPhone];
-                    formatPhone = [formatPhone stringByAppendingString:digit];
+                if ([numberPhoneArray[0] isEqual:@"+"]) {
+                    if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
+                        NSString *digit = numberPhoneArray[lengthNumberPhone];
+                        formatCode = [formatCode stringByAppendingString:digit];
+                    } else {
+                        break;
+                    }
+                } else {
+                    return codeCountry;
                 }
             }
-            phoneWithFormat = [phoneWithFormat arrayByAddingObject:formatPhone];
+            codeCountry = [codeCountry arrayByAddingObject:formatCode];
             --numberOfPhones;
         }
     } else {
-        return phoneWithFormat;
+        return codeCountry;
     }
     
-    return phoneWithFormat;
+    return codeCountry;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
