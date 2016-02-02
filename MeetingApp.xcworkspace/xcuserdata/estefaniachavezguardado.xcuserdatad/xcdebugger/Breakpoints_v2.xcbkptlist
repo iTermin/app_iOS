@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476049791.17773"
+            timestampString = "476100359.216545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "538"
+            endingLineNumber = "538"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -40,12 +40,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476049791.17773"
+            timestampString = "476100359.216545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "-addName:phone:email:photoToViewModel:"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "-getFlagCodeWithCodePhoneGuest:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetingApp/BeginMeetingViewController.m"
+            timestampString = "476100480.91102"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

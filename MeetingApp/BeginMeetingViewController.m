@@ -43,47 +43,47 @@
                                 @"countries" : @[
                                         @{
                                             @"name": @"China",
-                                            @"dial_code": @"(86)",
+                                            @"dial_code": @"+86",
                                             @"code": @"CN"
                                             },
                                         @{
                                             @"name": @"France",
-                                            @"dial_code": @"(33)",
+                                            @"dial_code": @"+33",
                                             @"code": @"FR"
                                             },
                                         @{
                                             @"name": @"Germany",
-                                            @"dial_code": @"(49)",
+                                            @"dial_code": @"+49",
                                             @"code": @"DE"
                                             },
                                         @{
                                             @"name": @"India",
-                                            @"dial_code": @"(91)",
+                                            @"dial_code": @"+91",
                                             @"code": @"IN"
                                             },
                                         @{
                                             @"name": @"Italy",
-                                            @"dial_code": @"(39)",
+                                            @"dial_code": @"+39",
                                             @"code": @"IT"
                                             },
                                         @{
                                             @"name": @"Japan",
-                                            @"dial_code": @"(81)",
+                                            @"dial_code": @"+81",
                                             @"code": @"JP"
                                             },
                                         @{
                                             @"name": @"Mexico",
-                                            @"dial_code": @"(52)",
+                                            @"dial_code": @"+52",
                                             @"code": @"MX"
                                             },
                                         @{
                                             @"name": @"United Kingdom",
-                                            @"dial_code": @"(44)",
+                                            @"dial_code": @"+44",
                                             @"code": @"GB"
                                             },
                                         @{
                                             @"name": @"United States",
-                                            @"dial_code": @"(1)",
+                                            @"dial_code": @"+1",
                                             @"code": @"US"
                                             }
                                         ]};
@@ -91,13 +91,15 @@
     self.dataModel = [NSMutableArray arrayWithArray:@[
       @{
           @"name": @"Luis Alejandro Rangel",
-          @"phone": @"(86)",
+          @"phone": @"+52(449)1124987",
+          @"codePhone" : @"+52",
           @"email": @"email@correo.mx",
           @"photo": @"fondo"
           },
       @{
           @"name": @"Jesus Cagide",
-          @"phone": @"(86)",
+          @"phone": @"+1(55)1124987",
+          @"codePhone" : @"+1",
           @"email": @"email@correo.mx",
           @"photo": @""
           }
@@ -326,9 +328,10 @@
 -(NSArray *) codePhone:(NSArray *)phone{
     NSInteger numberOfPhones = phone.count;
     NSArray *codeCountry = [[NSArray alloc]init];
+    BOOL existOneCodeCountry = false;
     
     if (numberOfPhones != 0) {
-        while (numberOfPhones > 0) {
+        while (numberOfPhones > 0 && existOneCodeCountry == false) {
             NSString *phoneNumber = phone[numberOfPhones-1];
             NSMutableArray *numberPhoneArray = [NSMutableArray array];
             for (int lenghtOfNumberPhone=0; lenghtOfNumberPhone<phoneNumber.length; ++lenghtOfNumberPhone) {
@@ -338,6 +341,7 @@
             NSString *space = @" ";
             for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
                 if ([numberPhoneArray[0] isEqual:@"+"]) {
+                    existOneCodeCountry = true;
                     if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
                         NSString *digit = numberPhoneArray[lengthNumberPhone];
                         formatCode = [formatCode stringByAppendingString:digit];
@@ -370,6 +374,7 @@
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
     
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:cellViewModel[@"data"]];
     if([cell respondsToSelector:@selector(setData:)]) {
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }
@@ -386,6 +391,30 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
+- (NSString *) locationHost{
+    return @"US";
+}
+
+- (NSString *)getFlagCodeWithCodePhoneGuest:(NSDictionary *)dataGuest {
+    NSString *codeContact = dataGuest[@"codePhone"];
+    NSString * code = @"";
+    
+    if(codeContact == code){
+        return code = [self locationHost];
+    } else{
+        NSDictionary *countriesInformation = self.dataModelCountries[@"countries"];
+        NSDictionary * element;
+        
+        for (element in countriesInformation) {
+            NSString * dial_code = element[@"dial_code"];
+            if (dial_code == codeContact) {
+                return code = element[@"code"];
+            }
+        }
+        
+        return code;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
