@@ -308,11 +308,11 @@
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
 
-    NSArray *codeContact = [self codePhone:phoneGuest];
+    NSString *codeContact = [self codePhone:phoneGuest];
     NSDictionary * guestInformation = @{
                                         @"photo" : photoContact ? photoContact : @"",
                                         @"phone" : phoneGuest.count > 0 ? phoneGuest : @"",
-                                        @"codePhone" : codeContact.count > 0 ? codeContact : @"",
+                                        @"codePhone" : codeContact ? codeContact : @"",
                                         @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
                                         @"name" : nameGuest
     };
@@ -325,9 +325,9 @@
     [self.guestsTableView endUpdates];
 }
 
--(NSArray *) codePhone:(NSArray *)phone{
+-(NSString *) codePhone:(NSArray *)phone{
     NSInteger numberOfPhones = phone.count;
-    NSArray *codeCountry = [[NSArray alloc]init];
+    NSString *codeCountry = @"";
     BOOL existOneCodeCountry = false;
     
     if (numberOfPhones != 0) {
@@ -337,14 +337,13 @@
             for (int lenghtOfNumberPhone=0; lenghtOfNumberPhone<phoneNumber.length; ++lenghtOfNumberPhone) {
                 [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(lenghtOfNumberPhone, 1)]];
             }
-            NSString *formatCode = @"";
             NSString *space = @" ";
             for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
                 if ([numberPhoneArray[0] isEqual:@"+"]) {
                     existOneCodeCountry = true;
                     if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
                         NSString *digit = numberPhoneArray[lengthNumberPhone];
-                        formatCode = [formatCode stringByAppendingString:digit];
+                        codeCountry = [codeCountry stringByAppendingString:digit];
                     } else {
                         break;
                     }
@@ -352,7 +351,6 @@
                     return codeCountry;
                 }
             }
-            codeCountry = [codeCountry arrayByAddingObject:formatCode];
             --numberOfPhones;
         }
     } else {
@@ -374,11 +372,13 @@
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
     
-    NSString * code = [self getFlagCodeWithCodePhoneGuest:cellViewModel[@"data"]];
     if([cell respondsToSelector:@selector(setData:)]) {
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }
     
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:cellViewModel[@"data"]];
+    [cell performSelector:@selector(setFlag:) withObject:code];
+
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
     separatorLineView.backgroundColor = [UIColor lightGrayColor];
     [cell.contentView addSubview:separatorLineView];
@@ -399,7 +399,7 @@
     NSString *codeContact = dataGuest[@"codePhone"];
     NSString * code = @"";
     
-    if(codeContact == code){
+    if([codeContact isEqualToString:code]){
         return code = [self locationHost];
     } else{
         NSDictionary *countriesInformation = self.dataModelCountries[@"countries"];
@@ -407,11 +407,10 @@
         
         for (element in countriesInformation) {
             NSString * dial_code = element[@"dial_code"];
-            if (dial_code == codeContact) {
+            if ([dial_code isEqualToString: codeContact]) {
                 return code = element[@"code"];
             }
         }
-        
         return code;
     }
 }

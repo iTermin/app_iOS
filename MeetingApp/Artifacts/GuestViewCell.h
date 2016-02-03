@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *disclosureImage;
 
 @property(nonatomic, weak) NSDictionary * data;
+@property(nonatomic, weak) NSString * code;
 
 @end
