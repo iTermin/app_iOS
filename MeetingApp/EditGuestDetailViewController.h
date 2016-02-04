@@ -15,8 +15,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UITableView *locationGuest;
 
-@property(nonatomic, strong) NSDictionary * currentGuest;
+@property(nonatomic, strong) NSMutableDictionary * currentGuest;
 
+@property(strong) NSDictionary *dataModel;
 @property(strong) NSArray *viewModel;
 
 

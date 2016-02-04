@@ -32,6 +32,58 @@
         [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
     }
     
+    self.dataModel = @{
+                       @"countries" : @[
+                               @{
+                                   @"name": @"China",
+                                   @"dial_code": @"+86",
+                                   @"code": @"CN"
+                                   },
+                               @{
+                                   @"name": @"France",
+                                   @"dial_code": @"+33",
+                                   @"code": @"FR"
+                                   },
+                               @{
+                                   @"name": @"Germany",
+                                   @"dial_code": @"+49",
+                                   @"code": @"DE"
+                                   },
+                               @{
+                                   @"name": @"India",
+                                   @"dial_code": @"+91",
+                                   @"code": @"IN"
+                                   },
+                               @{
+                                   @"name": @"Italy",
+                                   @"dial_code": @"+39",
+                                   @"code": @"IT"
+                                   },
+                               @{
+                                   @"name": @"Japan",
+                                   @"dial_code": @"+81",
+                                   @"code": @"JP"
+                                   },
+                               @{
+                                   @"name": @"Mexico",
+                                   @"dial_code": @"+52",
+                                   @"code": @"MX"
+                                   },
+                               @{
+                                   @"name": @"United Kingdom",
+                                   @"dial_code": @"+44",
+                                   @"code": @"GB"
+                                   },
+                               @{
+                                   @"name": @"United States",
+                                   @"dial_code": @"+1",
+                                   @"code": @"US"
+                                   }
+                               ]};
+    
+    NSString * countryName = [self getNameCountry:self.currentGuest];
+    [self.currentGuest setObject:countryName forKey:@"nameCountry"];
+    
     self.viewModel =
     @[
       @{
@@ -57,6 +109,22 @@
     }];
 }
 
+- (NSString*) getNameCountry: (NSDictionary *)dataInformation{
+    NSString *codeCountry = dataInformation[@"codeCountry"];
+    NSString *nameCountry = @"";
+    
+    NSDictionary * ListCountriesInformation = self.dataModel[@"countries"];
+    NSDictionary * countryInformaton;
+    
+    for (countryInformaton in ListCountriesInformation) {
+        NSString * code = countryInformaton[@"code"];
+        if ([code isEqualToString: codeCountry]) {
+            return nameCountry = countryInformaton[@"name"];
+        }
+    }
+    return nameCountry;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -74,7 +142,7 @@
     
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
+
     if([cell respondsToSelector:@selector(setData:)]) {
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }

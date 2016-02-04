@@ -23,10 +23,10 @@
 - (void) setData:(NSDictionary *)data {
     _data = data;
 
-    [self.locationText setText: data[@"location"]];
-    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
+    [self.locationText setText: _data[@"nameCountry"]];
+
+    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"codeCountry"]];
     [self.locationPhoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
-    
 }
 
 @end
