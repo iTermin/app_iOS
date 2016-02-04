@@ -90,7 +90,7 @@
     
     self.dataModelUser = @{
                                @"name" : @"Estefania Guardado",
-                               @"code" : @"DE",
+                               @"code" : @"JP",
                                @"email": @"email@correo.mx",
                                @"photo": @"fondo"
                            };
@@ -98,17 +98,17 @@
     self.dataModel = [NSMutableArray arrayWithArray:@[
       @{
           @"name": @"Luis Alejandro Rangel",
-          @"phone": @"+52(449)1124987",
           @"codePhone" : @"+52",
           @"email": @"email@correo.mx",
-          @"photo": @"fondo"
+          @"photo": @"fondo",
+          @"codeCountry" : @"MX"
           },
       @{
           @"name": @"Jesus Cagide",
-          @"phone": @"+1(55)1124987",
           @"codePhone" : @"+1",
           @"email": @"email@correo.mx",
-          @"photo": @""
+          @"photo": @"",
+          @"codeCountry" : @"US"
           }
       ]];
     
@@ -316,14 +316,18 @@
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
 
     NSString *codeContact = [self codePhone:phoneGuest];
-    NSDictionary * guestInformation = @{
+
+    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
                                         @"photo" : photoContact ? photoContact : @"",
-                                        @"phone" : phoneGuest.count > 0 ? phoneGuest : @"",
                                         @"codePhone" : codeContact ? codeContact : @"",
                                         @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
                                         @"name" : nameGuest
-    };
+    }];
     
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
+    
+    [guestInformation setObject:code forKey:@"codeCountry"];
+
     [self.dataModel addObject: guestInformation];
     [self updateViewModel];
     
@@ -383,9 +387,6 @@
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }
     
-    NSString * code = [self getFlagCodeWithCodePhoneGuest:cellViewModel[@"data"]];
-    [cell performSelector:@selector(setFlag:) withObject:code];
-
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
     separatorLineView.backgroundColor = [UIColor lightGrayColor];
     [cell.contentView addSubview:separatorLineView];
@@ -403,8 +404,8 @@
     return code;
 }
 
-- (NSString *)getFlagCodeWithCodePhoneGuest:(NSDictionary *)dataGuest {
-    NSString *codeContact = dataGuest[@"codePhone"];
+- (NSString *)getFlagCodeWithCodePhoneGuest:(NSString *)codePhone {
+    NSString *codeContact = codePhone;
     NSString * code = @"";
     
     if([codeContact isEqualToString:code]){

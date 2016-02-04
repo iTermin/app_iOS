@@ -26,6 +26,12 @@
     
     [self.nameGuest setText: data[@"name"]];
     [self.emailGuest setText: data[@"email"]];
+    
+    self.guestImage.layer.cornerRadius = self.guestImage.frame.size.width/2.0f;
+    self.guestImage.clipsToBounds = YES;
+    NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"codeCountry"]];
+    [self.guestImage setImage:[UIImage imageNamed:identyPhoto]];
+    
     /*
     NSString *noPhoto = @"";
     if (data[@"photo"] == noPhoto) {
@@ -39,16 +45,6 @@
     }
      */
 
-}
-
-- (void) setFlag:(NSString *)code {
-    
-    self.guestImage.layer.cornerRadius = self.guestImage.frame.size.width/2.0f;
-    self.guestImage.clipsToBounds = YES;
-    NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", code];
-    [self.guestImage setImage:[UIImage imageNamed:identyPhoto]];
-    
-    
 }
 
 @end
