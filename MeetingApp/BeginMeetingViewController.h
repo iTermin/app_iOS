@@ -21,6 +21,8 @@
 
 @property(strong) NSMutableArray *dataModel;
 @property(strong) NSDictionary *dataModelCountries;
+@property(strong) NSDictionary *dataModelUser;
+
 
 @property(strong) NSArray *viewModel;
 

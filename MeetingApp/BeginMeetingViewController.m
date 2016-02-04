@@ -88,6 +88,13 @@
                                             }
                                         ]};
     
+    self.dataModelUser = @{
+                               @"name" : @"Estefania Guardado",
+                               @"code" : @"DE",
+                               @"email": @"email@correo.mx",
+                               @"photo": @"fondo"
+                           };
+    
     self.dataModel = [NSMutableArray arrayWithArray:@[
       @{
           @"name": @"Luis Alejandro Rangel",
@@ -392,7 +399,8 @@
 }
 
 - (NSString *) locationHost{
-    return @"US";
+    NSString * code = self.dataModelUser[@"code"];
+    return code;
 }
 
 - (NSString *)getFlagCodeWithCodePhoneGuest:(NSDictionary *)dataGuest {

@@ -35,6 +35,13 @@
                     @"name" : @"Meeting 2"
             }
     ];
+    
+    [self getCountry];
+}
+
+-(void) getCountry{
+    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
