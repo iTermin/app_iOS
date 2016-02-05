@@ -12,5 +12,9 @@
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 
+@property(strong) NSDictionary *dataModel;
+
+@property(strong) NSArray *viewModel;
+
 
 @end
