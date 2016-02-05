@@ -432,8 +432,13 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
-    EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
-    [editGuestDetailViewController setCurrentGuest: sender];
+    if ([segue.identifier isEqualToString:@"editGuestDetails"]){
+        EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
+        [editGuestDetailViewController setCurrentGuest: sender];
+    }
+    if ([segue.identifier isEqualToString:@"setMeeting"]){
+        
+    }
 }
 
 @end
