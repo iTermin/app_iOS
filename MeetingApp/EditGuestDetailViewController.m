@@ -88,7 +88,7 @@
     self.viewModel =
     @[
       @{
-          @"nib" : @"LocationUserTableViewCell",
+          @"nib" : @"LocationGuestTableViewCell",
           @"height" : @(80),
           @"data": [self.currentGuest copy]
           }
