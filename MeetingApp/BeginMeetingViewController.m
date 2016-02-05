@@ -130,6 +130,7 @@
     }];
     
     self.nameGuest.delegate = self;
+    self.nameMeeting.delegate = self;
 }
 
 - (void) updateViewModel {
@@ -183,6 +184,11 @@
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
         }
+    }
+    if (textField == self.nameMeeting) {
+        [textField resignFirstResponder];
+        NSString *nameMeeting = self.nameMeeting.text;
+        NSLog(@"%@", nameMeeting);
     }
     return validate;
 }
