@@ -431,7 +431,7 @@
     [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest[@"data"]];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
     EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
     [editGuestDetailViewController setCurrentGuest: sender];
 }

@@ -26,6 +26,7 @@
 		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
 		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
 		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
+		7CC544E51C649EE200D4DECD /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC544E41C649EE200D4DECD /* GuestListCountriesTableViewController.m */; };
 		7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD500921C354DF9000FA090 /* GuestDetailViewController.m */; };
 		7CEB6D911C5B71BC006E5D2C /* GuestViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB6D8F1C5B71BC006E5D2C /* GuestViewCell.m */; };
 		7CEB6D921C5B71BC006E5D2C /* GuestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEB6D901C5B71BC006E5D2C /* GuestViewCell.xib */; };
@@ -99,6 +100,8 @@
 		7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMeetingViewController.m; sourceTree = "<group>"; };
 		7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDateTableViewController.h; sourceTree = "<group>"; };
 		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
+		7CC544E31C649EE200D4DECD /* GuestListCountriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestListCountriesTableViewController.h; sourceTree = "<group>"; };
+		7CC544E41C649EE200D4DECD /* GuestListCountriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestListCountriesTableViewController.m; sourceTree = "<group>"; };
 		7CD500911C354DF9000FA090 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestDetailViewController.h; sourceTree = "<group>"; };
 		7CD500921C354DF9000FA090 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestDetailViewController.m; sourceTree = "<group>"; };
 		7CEB6D8E1C5B71BC006E5D2C /* GuestViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestViewCell.h; path = Artifacts/GuestViewCell.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */,
 				7C4BD5721C5E1125005526D3 /* EditGuestDetailViewController.h */,
 				7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */,
+				7CC544E31C649EE200D4DECD /* GuestListCountriesTableViewController.h */,
+				7CC544E41C649EE200D4DECD /* GuestListCountriesTableViewController.m */,
 				7C92B78B1C394B8A00DAA583 /* SetMeetingViewController.h */,
 				7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */,
 				7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */,
@@ -498,6 +503,7 @@
 				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
 				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
 				7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */,
+				7CC544E51C649EE200D4DECD /* GuestListCountriesTableViewController.m in Sources */,
 				7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */,
 				7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */,
 				7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */,

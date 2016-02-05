@@ -8,6 +8,7 @@
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
+#import "GuestListCountriesTableViewController.h"
 
 @interface EditGuestDetailViewController ()
 
@@ -153,6 +154,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     return [cellViewModel[@"height"] floatValue];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    
+    NSDictionary * selectedGuest = self.viewModel[indexPath.row];
+    [self performSegueWithIdentifier:@"guestListCountries" sender: selectedGuest[@"data"]];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
+    if ([segue.identifier isEqualToString:@"guestListCountries"]){
+        GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
+        [guestListCountries setCurrentGuest: sender];
+    }
 }
 
 @end
