@@ -160,12 +160,31 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    BOOL validate = NO;
     if (textField == self.nameGuest) {
         [textField resignFirstResponder];
-        BOOL validate = [self validateEmail:self.nameGuest.text];
-        return NO;
+        validate = [self validateEmail:self.nameGuest.text];
+        if(validate){
+            [self addNewGuestWith:self.nameGuest.text];
+            textField.text = nil;
+            return validate;
+        } else{
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wrong Email!"
+                                                                           message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                               //Do some thing here
+                                                               [alert dismissViewControllerAnimated:YES completion:nil];
+                                                           }];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
-    return YES;
+    return validate;
 }
 
 - (BOOL) validateEmail:(NSString*) emailAddress{
@@ -176,6 +195,27 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self.nameGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
+}
+
+-(void)addNewGuestWith:(NSString *)email{
+
+    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
+                                            @"photo" : @"",
+                                            @"codePhone" : @"",
+                                            @"email" : email,
+                                            @"name" : @""
+                                                                                              }];
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
+    
+    [guestInformation setObject:code forKey:@"codeCountry"];
+    
+    [self.dataModel addObject: guestInformation];
+    [self updateViewModel];
+    
+    [self.guestsTableView beginUpdates];
+    [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.guestsTableView endUpdates];
+
 }
 
 - (IBAction)searchContacts:(id)sender {
