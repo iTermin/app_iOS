@@ -1,14 +1,14 @@
 //
-//  LocationUserTableViewCell.m
+//  LocationGuestTableViewCell.m
 //  MeetingApp
 //
-//  Created by Estefania Chavez Guardado on 1/22/16.
+//  Created by Estefania Chavez Guardado on 2/5/16.
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "LocationUserTableViewCell.h"
+#import "LocationGuestTableViewCell.h"
 
-@implementation LocationUserTableViewCell
+@implementation LocationGuestTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -22,10 +22,10 @@
 
 - (void) setData:(NSDictionary *)data {
     _data = data;
-
-    [self.locationText setText: _data[@"location"]];
-
-    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
+    
+    [self.locationText setText: _data[@"nameCountry"]];
+    
+    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"codeCountry"]];
     [self.locationPhoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
 }
 

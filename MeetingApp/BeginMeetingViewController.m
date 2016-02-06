@@ -11,6 +11,7 @@
 
 #import "BeginMeetingViewController.h"
 #import "SetMeetingViewController.h"
+#import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 
@@ -38,19 +39,76 @@
     
     self.guestsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    self.dataModelCountries = @{
+                                @"countries" : @[
+                                        @{
+                                            @"name": @"China",
+                                            @"dial_code": @"+86",
+                                            @"code": @"CN"
+                                            },
+                                        @{
+                                            @"name": @"France",
+                                            @"dial_code": @"+33",
+                                            @"code": @"FR"
+                                            },
+                                        @{
+                                            @"name": @"Germany",
+                                            @"dial_code": @"+49",
+                                            @"code": @"DE"
+                                            },
+                                        @{
+                                            @"name": @"India",
+                                            @"dial_code": @"+91",
+                                            @"code": @"IN"
+                                            },
+                                        @{
+                                            @"name": @"Italy",
+                                            @"dial_code": @"+39",
+                                            @"code": @"IT"
+                                            },
+                                        @{
+                                            @"name": @"Japan",
+                                            @"dial_code": @"+81",
+                                            @"code": @"JP"
+                                            },
+                                        @{
+                                            @"name": @"Mexico",
+                                            @"dial_code": @"+52",
+                                            @"code": @"MX"
+                                            },
+                                        @{
+                                            @"name": @"United Kingdom",
+                                            @"dial_code": @"+44",
+                                            @"code": @"GB"
+                                            },
+                                        @{
+                                            @"name": @"United States",
+                                            @"dial_code": @"+1",
+                                            @"code": @"US"
+                                            }
+                                        ]};
+    
+    self.dataModelUser = @{
+                               @"name" : @"Estefania Guardado",
+                               @"code" : @"JP",
+                               @"email": @"email@correo.mx",
+                               @"photo": @"fondo"
+                           };
     
     self.dataModel = [NSMutableArray arrayWithArray:@[
       @{
           @"name": @"Luis Alejandro Rangel",
-          @"dial_code": @"(86)",
+          @"codePhone" : @"+52",
           @"email": @"email@correo.mx",
-          @"photo": @"fondo"
+          @"photo": @"fondo",
+          @"codeCountry" : @"MX"
           },
       @{
           @"name": @"Jesus Cagide",
-          @"dial_code": @"(86)",
+          @"codePhone" : @"+1",
           @"email": @"email@correo.mx",
-          @"photo": @""
+          @"photo": @"",
+          @"codeCountry" : @"US"
           }
       ]];
     
@@ -72,6 +130,7 @@
     }];
     
     self.nameGuest.delegate = self;
+    self.nameMeeting.delegate = self;
 }
 
 - (void) updateViewModel {
@@ -97,17 +156,47 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //hides keyboard when another part of layout was touched
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    BOOL validate = NO;
     if (textField == self.nameGuest) {
         [textField resignFirstResponder];
-        BOOL validate = [self validateEmail:self.nameGuest.text];
-        return NO;
+        validate = [self validateEmail:self.nameGuest.text];
+        if(validate){
+            [self addNewGuestWith:self.nameGuest.text];
+            textField.text = nil;
+            return validate;
+        } else{
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wrong Email!"
+                                                                           message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                               //Do some thing here
+                                                               [alert dismissViewControllerAnimated:YES completion:nil];
+                                                           }];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
-    return YES;
+    if (textField == self.nameMeeting) {
+        [textField resignFirstResponder];
+        NSString *nameMeeting = self.nameMeeting.text;
+        NSLog(@"%@", nameMeeting);
+    }
+    return validate;
 }
 
 - (BOOL) validateEmail:(NSString*) emailAddress{
@@ -118,6 +207,27 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self.nameGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
+}
+
+-(void)addNewGuestWith:(NSString *)email{
+
+    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
+                                            @"photo" : @"",
+                                            @"codePhone" : @"",
+                                            @"email" : email,
+                                            @"name" : @""
+                                                                                              }];
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
+    
+    [guestInformation setObject:code forKey:@"codeCountry"];
+    
+    [self.dataModel addObject: guestInformation];
+    [self updateViewModel];
+    
+    [self.guestsTableView beginUpdates];
+    [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.guestsTableView endUpdates];
+
 }
 
 - (IBAction)searchContacts:(id)sender {
@@ -256,19 +366,61 @@
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-    NSDictionary * guestInformation = @{
+
+    NSString *codeContact = [self codePhone:phoneGuest];
+
+    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
                                         @"photo" : photoContact ? photoContact : @"",
-                                        @"phone" : phoneGuest,
-                                        @"email" : emailGuest,
+                                        @"codePhone" : codeContact ? codeContact : @"",
+                                        @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
                                         @"name" : nameGuest
-    };
+    }];
     
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
+    
+    [guestInformation setObject:code forKey:@"codeCountry"];
+
     [self.dataModel addObject: guestInformation];
     [self updateViewModel];
     
     [self.guestsTableView beginUpdates];
     [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.guestsTableView endUpdates];
+}
+
+-(NSString *) codePhone:(NSArray *)phone{
+    NSInteger numberOfPhones = phone.count;
+    NSString *codeCountry = @"";
+    BOOL existOneCodeCountry = false;
+    
+    if (numberOfPhones != 0) {
+        while (numberOfPhones > 0 && existOneCodeCountry == false) {
+            NSString *phoneNumber = phone[numberOfPhones-1];
+            NSMutableArray *numberPhoneArray = [NSMutableArray array];
+            for (int lenghtOfNumberPhone=0; lenghtOfNumberPhone<phoneNumber.length; ++lenghtOfNumberPhone) {
+                [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(lenghtOfNumberPhone, 1)]];
+            }
+            NSString *space = @" ";
+            for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
+                if ([numberPhoneArray[0] isEqual:@"+"]) {
+                    existOneCodeCountry = true;
+                    if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
+                        NSString *digit = numberPhoneArray[lengthNumberPhone];
+                        codeCountry = [codeCountry stringByAppendingString:digit];
+                    } else {
+                        break;
+                    }
+                } else {
+                    return codeCountry;
+                }
+            }
+            --numberOfPhones;
+        }
+    } else {
+        return codeCountry;
+    }
+    
+    return codeCountry;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -280,7 +432,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     NSDictionary * cellViewModel = self.viewModel[indexPath.row];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
     
@@ -300,18 +451,46 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
+- (NSString *) locationHost{
+    NSString * code = self.dataModelUser[@"code"];
+    return code;
+}
+
+- (NSString *)getFlagCodeWithCodePhoneGuest:(NSString *)codePhone {
+    NSString *codeContact = codePhone;
+    NSString * code = @"";
+    
+    if([codeContact isEqualToString:code]){
+        return code = [self locationHost];
+    } else{
+        NSDictionary *countriesInformation = self.dataModelCountries[@"countries"];
+        NSDictionary * element;
+        
+        for (element in countriesInformation) {
+            NSString * dial_code = element[@"dial_code"];
+            if ([dial_code isEqualToString: codeContact]) {
+                return code = element[@"code"];
+            }
+        }
+        return code;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     
-    //NSDictionary * selectedMeeting = self.guests[indexPath.row];
-    [self performSegueWithIdentifier:@"editGuestDetails" sender: @"hola"];
+    NSDictionary * selectedGuest = self.viewModel[indexPath.row];
+    [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest[@"data"]];
 }
-/*
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
-    [guestDetailViewController setTitle:sender[@"name"]];
-    [guestDetailViewController setCurrentGuest: sender];
-}*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
+    if ([segue.identifier isEqualToString:@"editGuestDetails"]){
+        EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
+        [editGuestDetailViewController setCurrentGuest: sender];
+    }
+    if ([segue.identifier isEqualToString:@"setMeeting"]){
+        
+    }
+}
 
 @end

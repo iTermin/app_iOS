@@ -20,6 +20,10 @@
 @property (strong, nonatomic) IBOutlet UITableView *guestsTableView;
 
 @property(strong) NSMutableArray *dataModel;
+@property(strong) NSDictionary *dataModelCountries;
+@property(strong) NSDictionary *dataModelUser;
+
+
 @property(strong) NSArray *viewModel;
 
 - (IBAction)cancelButtonPressed:(id)sender;

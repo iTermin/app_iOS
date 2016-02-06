@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditGuestDetailViewController : UIViewController
+@interface EditGuestDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
+@property (strong, nonatomic) IBOutlet UITextField *nameGuest;
+@property (strong, nonatomic) IBOutlet UITextField *emailGuest;
+@property (strong, nonatomic) IBOutlet UITableView *locationGuest;
+
+@property(nonatomic, strong) NSMutableDictionary * currentGuest;
+
+@property(strong) NSDictionary *dataModel;
+@property(strong) NSArray *viewModel;
+
 
 @end
