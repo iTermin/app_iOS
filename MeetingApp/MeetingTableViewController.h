@@ -13,5 +13,7 @@
 
 @property(strong) NSArray *meetings;
 
+@property(strong, nonatomic) NSArray *viewModel;
+
 @end
 

@@ -7,7 +7,6 @@
 //
 
 #import "GuestViewCell.h"
-#import "UIImageView+Letters.h"
 
 @implementation GuestViewCell
 
