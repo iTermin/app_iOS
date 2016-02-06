@@ -89,7 +89,7 @@
     @[
       @{
           @"nib" : @"LocationGuestTableViewCell",
-          @"height" : @(80),
+          @"height" : @(60),
           @"data": [self.currentGuest copy]
           }
       ];
@@ -129,6 +129,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //hides keyboard when another part of layout was touched
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

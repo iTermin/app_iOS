@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/EditGuestDetailViewController.m"
-            timestampString = "476356674.364594"
+            timestampString = "476462810.205971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176">
+            startingLineNumber = "182"
+            endingLineNumber = "182">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476363529.229348"
+            timestampString = "476462781.26228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "710"
+            endingLineNumber = "710"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476363529.229348"
+            timestampString = "476462781.26228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "557"
-            endingLineNumber = "557"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476363529.229348"
+            timestampString = "476462781.26228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "574"
+            endingLineNumber = "574"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476363529.229348"
+            timestampString = "476462781.26228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "545"
-            endingLineNumber = "545"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476363529.229348"
+            timestampString = "476462781.26228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -109,6 +109,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
             endingLineNumber = "98">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetingApp/EditProfileUserViewController.m"
+            timestampString = "476462727.848774"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-touchesBegan:withEvent:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
