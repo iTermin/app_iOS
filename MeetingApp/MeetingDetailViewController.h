@@ -14,8 +14,10 @@
 
 @property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;
+@property (strong, nonatomic) IBOutlet UITableView *guestTableView;
 
 @property(strong) NSArray *guests;
+@property(strong, nonatomic) NSArray *viewModel;
 
 - (IBAction)buttonPressed:(id)sender;
 - (IBAction)deleteMeetingPressed:(id)sender;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C0FFE821C66791300F724FC /* GuestViewCellCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0FFE801C66791300F724FC /* GuestViewCellCountry.m */; };
+		7C0FFE831C66791300F724FC /* GuestViewCellCountry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0FFE811C66791300F724FC /* GuestViewCellCountry.xib */; };
 		7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1566551C5233C800B589A0 /* LocationUserTableViewCell.m */; };
 		7C1566581C5233C800B589A0 /* LocationUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1566561C5233C800B589A0 /* LocationUserTableViewCell.xib */; };
 		7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */; };
@@ -68,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C0FFE7F1C66791300F724FC /* GuestViewCellCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestViewCellCountry.h; path = Artifacts/GuestViewCellCountry.h; sourceTree = "<group>"; };
+		7C0FFE801C66791300F724FC /* GuestViewCellCountry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestViewCellCountry.m; path = Artifacts/GuestViewCellCountry.m; sourceTree = "<group>"; };
+		7C0FFE811C66791300F724FC /* GuestViewCellCountry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestViewCellCountry.xib; path = Artifacts/GuestViewCellCountry.xib; sourceTree = "<group>"; };
 		7C1566541C5233C800B589A0 /* LocationUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationUserTableViewCell.h; path = Artifacts/LocationUserTableViewCell.h; sourceTree = "<group>"; };
 		7C1566551C5233C800B589A0 /* LocationUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationUserTableViewCell.m; path = Artifacts/LocationUserTableViewCell.m; sourceTree = "<group>"; };
 		7C1566561C5233C800B589A0 /* LocationUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationUserTableViewCell.xib; path = Artifacts/LocationUserTableViewCell.xib; sourceTree = "<group>"; };
@@ -314,6 +319,9 @@
 				7CEB6D8E1C5B71BC006E5D2C /* GuestViewCell.h */,
 				7CEB6D8F1C5B71BC006E5D2C /* GuestViewCell.m */,
 				7CEB6D901C5B71BC006E5D2C /* GuestViewCell.xib */,
+				7C0FFE7F1C66791300F724FC /* GuestViewCellCountry.h */,
+				7C0FFE801C66791300F724FC /* GuestViewCellCountry.m */,
+				7C0FFE811C66791300F724FC /* GuestViewCellCountry.xib */,
 				7CC544E61C64A14100D4DECD /* LocationGuestTableViewCell.h */,
 				7CC544E71C64A14100D4DECD /* LocationGuestTableViewCell.m */,
 				7CC544E81C64A14100D4DECD /* LocationGuestTableViewCell.xib */,
@@ -437,6 +445,7 @@
 				7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */,
 				7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */,
 				7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */,
+				7C0FFE831C66791300F724FC /* GuestViewCellCountry.xib in Resources */,
 				7CFD97AC1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib in Resources */,
 				7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */,
 				7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */,
@@ -538,6 +547,7 @@
 				7CE03B6D1C66495300C7F016 /* MeetingTableViewCell.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 				7C3B80A11C55596B00678EF4 /* ListCountriesViewController.m in Sources */,
+				7C0FFE821C66791300F724FC /* GuestViewCellCountry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

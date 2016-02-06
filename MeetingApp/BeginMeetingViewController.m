@@ -143,7 +143,7 @@
         if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
         
         [viewModel addObject:@{
-                               @"nib" : @"GuestViewCell",
+                               @"nib" : @"GuestViewCellCountry",
                                @"height" : @(60),
                                @"data":cellModel }];
     }];

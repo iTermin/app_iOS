@@ -27,27 +27,58 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.guests = @[
-                      @{
-                          @"email" : @"fachinacg@gmail.com",
-                          @"name" : @"Estefania Guardado",
-                          @"photo" : @"14241341.png"
-                          },
-                      @{
-                          @"email" : @"xlarsx@gmail.com",
-                          @"name" : @"Luis Alejandro Rangel",
-                          @"photo" : @"14241323.png"
-                          },
-                      @{
-                          @"email" : @"set311@gmail.com",
-                          @"name" : @"Jesus Cagide",
-                          @"photo" : @"14298723.png"
-                          }
-                      ];
+                    @{
+                        @"name": @"Luis Alejandro Rangel",
+                        @"codePhone" : @"+52",
+                        @"email": @"email@correo.mx",
+                        @"photo": @"fondo",
+                        @"codeCountry" : @"MX"
+                        },
+                    @{
+                        @"name": @"Jesus Cagide",
+                        @"codePhone" : @"+1",
+                        @"email": @"email@correo.mx",
+                        @"photo": @"",
+                        @"codeCountry" : @"US"
+                        }
+                    ];
+    
+    [self updateViewModel];
+    
+    __weak UITableView * tableView = self.guestTableView;
+    NSMutableSet * registeredNibs = [NSMutableSet set];
+    
+    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
+        
+        NSString * nibFile = cellViewModel[@"nib"];
+        
+        if(![registeredNibs containsObject: nibFile]) {
+            [registeredNibs addObject: nibFile];
+            
+            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
+        }
+    }];
 
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+}
+
+- (void) updateViewModel {
+    NSMutableArray * viewModel = [NSMutableArray array];
+    [self.guests enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+        
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        
+        [viewModel addObject:@{
+                               @"nib" : @"GuestViewCell",
+                               @"height" : @(60),
+                               @"data":cellModel }];
+    }];
+    
+    self.viewModel = viewModel;
 }
 
 -(void)buttonTouchDown:(UIButton *)button{
@@ -146,23 +177,30 @@
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.guests count];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
-    cell.textLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:15];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Book" size:11];
-    [[cell textLabel] setText: self.guests[indexPath.row][@"name"]];
-    [[cell detailTextLabel] setText: self.guests[indexPath.row][@"email"] ];
-    [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.viewModel count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    return [cellViewModel[@"height"] floatValue];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
