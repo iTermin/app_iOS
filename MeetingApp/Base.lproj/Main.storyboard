@@ -769,7 +769,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="1" green="0.41191820058560336" blue="0.41154469338070793" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="0.090196078431372548" green="0.20392156862745098" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>

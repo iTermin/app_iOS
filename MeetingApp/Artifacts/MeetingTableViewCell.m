@@ -28,7 +28,7 @@
     [self.dateMeeting setText: _data[@"date"]];
     
     NSString *nameMeeting = data[@"name"];
-    [self.imageMeeting setImageWithString:nameMeeting color:nil circular:YES];
+    [self.imageMeeting setImageWithString:nameMeeting color:[UIColor colorWithRed:0.992 green:0.694 blue:.294 alpha:1] circular:YES];
     
 }
 
