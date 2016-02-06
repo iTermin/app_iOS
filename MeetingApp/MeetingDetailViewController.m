@@ -141,6 +141,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }

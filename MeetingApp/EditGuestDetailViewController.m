@@ -16,6 +16,10 @@
 
 @implementation EditGuestDetailViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 

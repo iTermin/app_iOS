@@ -109,9 +109,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"editProfile"]){
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
-        
+    if ([segue.identifier isEqualToString:@"editProfile"]){        
         EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;
         [informationViewController setDataModel: self.dataModel];
     }

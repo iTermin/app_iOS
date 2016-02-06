@@ -147,11 +147,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="APW-vi-Rj2">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="B4O-Vp-9dd">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="APW-vi-Rj2"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailGuest" destination="Y25-fZ-Uwa" id="fPN-CJ-e5U"/>
@@ -386,11 +382,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="EKi-Tc-kT1">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="osl-Z3-az1">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="EKi-Tc-kT1"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailText" destination="lln-Fv-iWO" id="Qhd-k9-HAc"/>

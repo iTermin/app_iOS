@@ -145,6 +145,7 @@
             }
         }
     }
+    [self.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"%@", country);
 }
