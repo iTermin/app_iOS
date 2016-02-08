@@ -140,6 +140,10 @@
     [super updateViewModel];
 }
 
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
+    [super configureCell:cell withModel:cellModel];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];

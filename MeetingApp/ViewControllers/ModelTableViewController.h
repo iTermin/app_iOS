@@ -13,6 +13,10 @@
 @property(strong) UITableView *guestsTableView;
 @property(strong) NSArray *viewModel;
 
+
 - (void) updateViewModel;
+
+- (void) configureCell: (UITableViewCell *) cell
+             withModel: (NSDictionary *) cellModel;
 
 @end

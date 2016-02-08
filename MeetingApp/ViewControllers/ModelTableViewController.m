@@ -37,11 +37,17 @@
         [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
     }
     
+    [self configureCell: cell withModel:cellViewModel];
+    
+    return cell;
+}
+
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
+    
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
     separatorLineView.backgroundColor = [UIColor lightGrayColor];
     [cell.contentView addSubview:separatorLineView];
     
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
