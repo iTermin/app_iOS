@@ -115,21 +115,6 @@
     
     [self updateViewModel];
     
-    __weak UITableView * tableView = self.guestsTableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
-    
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
-    
     self.nameGuest.delegate = self;
     self.nameMeeting.delegate = self;
 }
@@ -146,10 +131,13 @@
         [viewModel addObject:@{
                                @"nib" : @"GuestViewCellCountry",
                                @"height" : @(60),
+                               @"segue" : @"editGuestDetails",
                                @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
+    
+    [super updateViewModel];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -419,30 +407,6 @@
     return codeCountry;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
-    separatorLineView.backgroundColor = [UIColor lightGrayColor];
-    [cell.contentView addSubview:separatorLineView];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
-}
-
 - (NSString *) locationHost{
     NSString * code = self.dataModelUser[@"code"];
     return code;
@@ -466,13 +430,6 @@
         }
         return code;
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    
-    NSDictionary * selectedGuest = self.viewModel[indexPath.row];
-    [self performSegueWithIdentifier:@"editGuestDetails" sender: selectedGuest[@"data"]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {

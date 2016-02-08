@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476462781.26228"
+            timestampString = "476651238.823226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "710"
-            endingLineNumber = "710"
+            startingLineNumber = "659"
+            endingLineNumber = "659"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476462781.26228"
+            timestampString = "476651238.823226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "563"
-            endingLineNumber = "563"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476462781.26228"
+            timestampString = "476651238.823226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "574"
-            endingLineNumber = "574"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476462781.26228"
+            timestampString = "476651238.823226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "500"
+            endingLineNumber = "500"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeetingApp/BeginMeetingViewController.m"
-            timestampString = "476462781.26228"
+            timestampString = "476651238.823226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "@implementation BeginMeetingViewController"
             landmarkType = "3">
          </BreakpointContent>
