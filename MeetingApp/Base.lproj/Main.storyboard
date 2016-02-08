@@ -389,9 +389,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailText" destination="lln-Fv-iWO" id="Qhd-k9-HAc"/>
-                        <outlet property="locationTableView" destination="mrb-Ti-ijy" id="qaa-1e-7lf"/>
                         <outlet property="nameText" destination="og4-jk-LnB" id="o2p-bS-wQ4"/>
                         <outlet property="photoProfileEdit" destination="Exh-wY-agr" id="SLa-bX-G48"/>
+                        <outlet property="tableView" destination="mrb-Ti-ijy" id="ItF-7Q-zIJ"/>
                         <segue destination="Un2-Yb-nBu" kind="push" identifier="selectCountry" id="TTs-B9-Ial"/>
                     </connections>
                 </viewController>
