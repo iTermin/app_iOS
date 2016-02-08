@@ -19,4 +19,7 @@
 - (void) configureCell: (UITableViewCell *) cell
              withModel: (NSDictionary *) cellModel;
 
+- (void) performSegue: (NSIndexPath *)indexPath;
+
+
 @end

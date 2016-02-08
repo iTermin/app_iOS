@@ -13,6 +13,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
     self.dataModel = @{
@@ -22,90 +23,66 @@
         @"code":@"MX"
     };
     
-    self.viewModel =
-    @[
-        @{
-            @"nib" : @"ProfilePhotoTableViewCell",
-            @"height" : @(120),
-        },
-        @{
-            @"nib" : @"GeneralInformationUserTableViewCell",
-            @"height" : @(100),
-            @"data" : [self.dataModel copy]
-        },
-        @{
-            @"nib" : @"HeaderTableViewCell",
-            @"height" : @(50),
-            @"data" : @{
-                @"text" : @"Help"
-            }
-        },
-        @{
-            @"nib" : @"OptionsSettingsTableViewCell",
-            @"height" : @(45),
-            @"data" : @{
-                    @"option" : @"Report Bug"
-                    }
-            },
-        @{
-            @"nib" : @"OptionsSettingsTableViewCell",
-            @"height" : @(45),
-            @"data" : @{
-                    @"option" : @"Privacy"
-                    }
-            },
-        @{
-            @"nib" : @"OptionsSettingsTableViewCell",
-            @"height" : @(45),
-            @"data" : @{
-                    @"option" : @"Terms of Service"
-                    }
-            },
-        @{
-            @"nib" : @"HeaderTableViewCell",
-            @"height" : @(50),
-            @"data" : @{
-                @"text" : @"Notifications"
-            }
-        }
-    ];
+    [self updateViewModel];
     
-    __weak UITableView * tableView = self.tableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
+}
+
+- (void) updateViewModel {
     
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
+    NSArray * viewModel = @[
+                            @{
+                                @"nib" : @"ProfilePhotoTableViewCell",
+                                @"height" : @(120),
+                                },
+                            @{
+                                @"nib" : @"GeneralInformationUserTableViewCell",
+                                @"height" : @(100),
+                                @"data" : [self.dataModel copy]
+                                },
+                            @{
+                                @"nib" : @"HeaderTableViewCell",
+                                @"height" : @(50),
+                                @"data" : @{
+                                        @"text" : @"Help"
+                                        }
+                                },
+                            @{
+                                @"nib" : @"OptionsSettingsTableViewCell",
+                                @"height" : @(45),
+                                @"data" : @{
+                                        @"option" : @"Report Bug"
+                                        }
+                                },
+                            @{
+                                @"nib" : @"OptionsSettingsTableViewCell",
+                                @"height" : @(45),
+                                @"data" : @{
+                                        @"option" : @"Privacy"
+                                        }
+                                },
+                            @{
+                                @"nib" : @"OptionsSettingsTableViewCell",
+                                @"height" : @(45),
+                                @"data" : @{
+                                        @"option" : @"Terms of Service"
+                                        }
+                                },
+                            @{
+                                @"nib" : @"HeaderTableViewCell",
+                                @"height" : @(50),
+                                @"data" : @{
+                                        @"text" : @"Notifications"
+                                        }
+                                }
+                            ];
+    
+    self.viewModel = [NSMutableArray arrayWithArray: viewModel];
+    
+    [super updateViewModel];
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
@@ -115,8 +92,7 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+- (void) performSegue:(NSIndexPath *)indexPath{
 }
 
 @end

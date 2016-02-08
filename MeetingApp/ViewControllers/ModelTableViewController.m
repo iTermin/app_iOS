@@ -58,6 +58,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     
+    [self performSegue: indexPath];
+}
+
+- (void) performSegue: (NSIndexPath *)indexPath{
     NSDictionary * cellModel = self.viewModel[indexPath.row];
     NSString * segueToPerform = cellModel[@"segue"];
     if(segueToPerform) {
