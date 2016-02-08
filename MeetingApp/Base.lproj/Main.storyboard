@@ -566,9 +566,9 @@
                         <outlet property="calendarNotification" destination="sNw-V2-K7D" id="pkl-oS-Xdj"/>
                         <outlet property="dateOfMeeting" destination="Coh-EO-t8u" id="OTf-Zf-5z9"/>
                         <outlet property="emailNotification" destination="H6J-z7-O2m" id="5k1-fE-IjM"/>
-                        <outlet property="guestTableView" destination="Vm2-MH-6dN" id="fii-bg-6OJ"/>
                         <outlet property="pushNotification" destination="idz-WT-Tkb" id="T9K-NQ-OQf"/>
                         <outlet property="reminderNotification" destination="sJS-ZC-AEr" id="kFV-Nl-zMe"/>
+                        <outlet property="tableView" destination="Vm2-MH-6dN" id="QOE-Mj-gaV"/>
                         <outlet property="timeOfMeeting" destination="a0F-DZ-xP4" id="nRt-7E-weL"/>
                         <segue destination="vsP-VU-T7a" kind="push" identifier="guestDetail" id="quK-4A-wsB"/>
                     </connections>
