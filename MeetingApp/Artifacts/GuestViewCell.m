@@ -27,10 +27,15 @@
     [self.nameGuest setText: data[@"name"]];
     [self.emailGuest setText: data[@"email"]];
     
-    self.guestImage.layer.cornerRadius = self.guestImage.frame.size.width/2.0f;
-    self.guestImage.clipsToBounds = YES;
-    NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"codeCountry"]];
-    [self.guestImage setImage:[UIImage imageNamed:identyPhoto]];
+    if ([data[@"photo"] isEqualToString:@""]) {
+        NSString *nameGuest = data[@"name"];
+        [self.guestImage setImageWithString:nameGuest color:nil circular:YES];
+    } else{
+        self.guestImage.layer.cornerRadius = self.guestImage.frame.size.width/2.0f;
+        self.guestImage.clipsToBounds = YES;
+        NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"photo"]];
+        [self.guestImage setImage:[UIImage imageNamed:identyPhoto]];
+    }
     
     /*
     NSString *noPhoto = @"";

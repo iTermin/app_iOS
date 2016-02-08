@@ -37,6 +37,39 @@
     ];
     
     [self getCountry];
+    
+    [self updateViewModel];
+    
+    __weak UITableView * tableView = self.tableView;
+    NSMutableSet * registeredNibs = [NSMutableSet set];
+    
+    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
+        
+        NSString * nibFile = cellViewModel[@"nib"];
+        
+        if(![registeredNibs containsObject: nibFile]) {
+            [registeredNibs addObject: nibFile];
+            
+            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
+        }
+    }];
+    
+}
+
+- (void) updateViewModel {
+    NSMutableArray * viewModel = [NSMutableArray array];
+    [self.meetings enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+        
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        
+        [viewModel addObject:@{
+                               @"nib" : @"MeetingTableViewCell",
+                               @"height" : @(60),
+                               @"data":cellModel }];
+    }];
+    
+    self.viewModel = viewModel;
 }
 
 -(void) getCountry{
@@ -50,28 +83,29 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.meetings count];
+    return [self.viewModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDENTIFIER"];
-    cell.textLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:15];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Book" size:11];
-    [[cell textLabel] setText: self.meetings[indexPath.row][@"name"]];
-    [[cell detailTextLabel] setText: self.meetings[indexPath.row][@"date"] ];
-    [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+    
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    return [cellViewModel[@"height"] floatValue];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

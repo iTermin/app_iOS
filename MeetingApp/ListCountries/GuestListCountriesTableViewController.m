@@ -132,7 +132,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary * country = [self getCountryAtIndex:indexPath.row];
-    
+    /*
     if (country[@"name"] != self.currentGuest[@"nameCountry"]) {
         NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
         int indice=0;
@@ -144,7 +144,7 @@
                 break;
             }
         }
-    }
+    }*/
     [self.navigationController popViewControllerAnimated:YES];
     
     NSLog(@"%@", country);

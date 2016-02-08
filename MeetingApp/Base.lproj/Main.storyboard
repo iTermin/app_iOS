@@ -298,7 +298,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="7CF-hv-gxa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AKp-Ow-SIu">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
@@ -563,6 +563,7 @@
                         <outlet property="calendarNotification" destination="sNw-V2-K7D" id="pkl-oS-Xdj"/>
                         <outlet property="dateOfMeeting" destination="Coh-EO-t8u" id="OTf-Zf-5z9"/>
                         <outlet property="emailNotification" destination="H6J-z7-O2m" id="5k1-fE-IjM"/>
+                        <outlet property="guestTableView" destination="Vm2-MH-6dN" id="fii-bg-6OJ"/>
                         <outlet property="pushNotification" destination="idz-WT-Tkb" id="T9K-NQ-OQf"/>
                         <outlet property="reminderNotification" destination="sJS-ZC-AEr" id="kFV-Nl-zMe"/>
                         <outlet property="timeOfMeeting" destination="a0F-DZ-xP4" id="nRt-7E-weL"/>
@@ -767,6 +768,11 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ATb-Uu-CDu">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.090196078431372548" green="0.20392156862745098" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="DCw-ZF-P27" kind="relationship" relationship="viewControllers" id="XwG-WW-1BS"/>
@@ -777,11 +783,11 @@
             </objects>
             <point key="canvasLocation" x="-2119.5" y="676.5"/>
         </scene>
-        <!--Settings-->
+        <!--Profile-->
         <scene sceneID="uFe-ZU-YsE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ImN-FS-ccv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" selectedImage="SettingsIcon" id="XSI-sk-Or8"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="SettingsIcon" selectedImage="SettingsIcon" id="XSI-sk-Or8"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AZg-5g-D5k">
@@ -830,11 +836,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SettingsIcon" width="35" height="33"/>
+        <image name="SettingsIcon" width="26" height="30"/>
         <image name="calendar" width="22" height="22"/>
         <image name="email" width="22" height="22"/>
         <image name="fondo" width="150" height="200"/>
-        <image name="meetingTabBar" width="35" height="29"/>
+        <image name="meetingTabBar" width="30" height="30"/>
         <image name="plus" width="22" height="22"/>
         <image name="push" width="22" height="22"/>
         <image name="reminder" width="22" height="22"/>
