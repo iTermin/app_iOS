@@ -67,7 +67,7 @@
 }
 
 - (void) updateViewModel {
-    __weak UITableView * tableView = self.guestsTableView;
+    __weak UITableView * tableView = self.tableView;
     [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
         
         NSString * nibFile = cellViewModel[@"nib"];

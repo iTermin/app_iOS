@@ -38,7 +38,7 @@
     guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
     
-    self.guestsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.dataModelCountries = @{
                                 @"countries" : @[
@@ -212,9 +212,9 @@
     [self.dataModel addObject: guestInformation];
     [self updateViewModel];
     
-    [self.guestsTableView beginUpdates];
-    [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.guestsTableView endUpdates];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 
 }
 
@@ -371,9 +371,9 @@
     [self.dataModel addObject: guestInformation];
     [self updateViewModel];
     
-    [self.guestsTableView beginUpdates];
-    [self.guestsTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.guestsTableView endUpdates];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 }
 
 -(NSString *) codePhone:(NSArray *)phone{

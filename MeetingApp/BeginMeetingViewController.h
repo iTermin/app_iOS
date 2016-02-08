@@ -19,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
-@property (strong, nonatomic) IBOutlet UITableView *guestsTableView;
 
 @property(strong) NSMutableArray *dataModel;
 @property(strong) NSDictionary *dataModelCountries;

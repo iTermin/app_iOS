@@ -10,7 +10,7 @@
 
 @interface ModelTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property(strong) UITableView *guestsTableView;
+@property(strong) IBOutlet UITableView *tableView;
 @property(strong) NSArray *viewModel;
 
 
