@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 
     self.meetings = @[
             @{
@@ -75,10 +74,8 @@
 -(void) getCountry{
     NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
     NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    
+    // TODO: Add the country to the user data model
 }
 
 
@@ -103,11 +100,6 @@
     return [cellViewModel[@"height"] floatValue];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary * selectedMeeting = self.meetings[indexPath.row];
     [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
@@ -118,9 +110,8 @@
         MeetingDetailViewController * detailViewController = (MeetingDetailViewController *)segue.destinationViewController;
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
-    }
-    if ([segue.identifier isEqualToString:@"newMeeting"]){
-        
+    } else if ([segue.identifier isEqualToString:@"newMeeting"]){
+        // TODO: Send the data model from the user
     }
 }
 
