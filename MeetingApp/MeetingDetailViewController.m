@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
     self.guests = @[
                     @{
@@ -165,20 +164,11 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 
