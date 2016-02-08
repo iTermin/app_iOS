@@ -28,7 +28,8 @@
     [super viewDidLoad];
     
     CALayer *nameBorder = [CALayer layer];
-    nameBorder.frame = CGRectMake(0.0f, self.nameMeeting.frame.size.height - 1, self.nameMeeting.frame.size.width, 1.0f);
+    CGSize nameSize = self.nameMeeting.frame.size;
+    nameBorder.frame = CGRectMake(0.0f, nameSize.height - 1, nameSize.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameMeeting.layer addSublayer:nameBorder];
     
@@ -149,11 +150,6 @@
     }];
     
     self.viewModel = viewModel;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -421,10 +417,6 @@
     }
     
     return codeCountry;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
