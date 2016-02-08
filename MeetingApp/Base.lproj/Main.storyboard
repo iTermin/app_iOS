@@ -433,6 +433,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="tableView" destination="0lq-qO-89k" id="E4X-dX-oFa"/>
                         <segue destination="xny-kL-2zx" kind="push" identifier="meetingDetail" id="Ixy-j7-QDG"/>
                     </connections>
                 </tableViewController>

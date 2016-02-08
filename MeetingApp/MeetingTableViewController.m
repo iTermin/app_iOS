@@ -38,22 +38,6 @@
     [self getCountry];
     
     [self updateViewModel];
-    
-    __weak UITableView * tableView = self.tableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
-    
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
-    
 }
 
 - (void) updateViewModel {
@@ -65,10 +49,13 @@
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",
                                @"height" : @(60),
+                               @"segue" : @"meetingDetail",
                                @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
+    
+    [super updateViewModel];
 }
 
 -(void) getCountry{
@@ -78,31 +65,19 @@
     // TODO: Add the country to the user data model
 }
 
+-(void)configureCell:(UITableViewCell *)cell withModel:(NSDictionary *)cellModel{
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) performSegue: (NSIndexPath *)indexPath{
     NSDictionary * selectedMeeting = self.meetings[indexPath.row];
-    [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
+    NSDictionary * cellModel = self.viewModel[indexPath.row];
+    NSString * segueToPerform = cellModel[@"segue"];
+    if(segueToPerform) {
+        [self performSegueWithIdentifier: segueToPerform
+                                  sender: selectedMeeting];
+
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
