@@ -42,30 +42,34 @@
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailText.layer addSublayer:emailBorder];
     
-    self.viewModel =
-    @[
-      @{
-          @"nib" : @"LocationUserTableViewCell",
-          @"height" : @(80),
-          @"data": [self.dataModel copy]
-          }
-      ];
+    [self updateViewModel];
     
-    __weak UITableView * tableView = self.locationTableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
+}
+
+- (void) updateViewModel {
     
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
+    NSArray * viewModel = @[
+                            @{
+                                @"nib" : @"LocationUserTableViewCell",
+                                @"height" : @(80),
+                                @"segue" : @"selectCountry",
+                                @"data": [self.dataModel copy]
+                                }
+                            ];
     
+    self.viewModel = [NSMutableArray arrayWithArray: viewModel];
+    
+    [super updateViewModel];
+}
+
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
+}
+
+- (void) performSegue: (NSIndexPath *)indexPath{
+    NSString *country = self.dataModel[@"location"];
+    NSDictionary * cellModel = self.viewModel[indexPath.row];
+    NSString * segueToPerform = cellModel[@"segue"];
+    [self performSegueWithIdentifier:segueToPerform sender:country];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -74,52 +78,9 @@
     [super touchesBegan:touches withEvent:event];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-
-    NSString *country = self.dataModel[@"location"];
-    [self performSegueWithIdentifier:@"selectCountry" sender: country];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
     [locationViewController setCurrentLocation:sender];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

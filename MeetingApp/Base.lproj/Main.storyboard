@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s3e-Re-dav">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s3e-Re-dav">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Begin Meeting View Controller-->
@@ -81,11 +81,11 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
-                        <outlet property="guestsTableView" destination="2Gk-GQ-omd" id="BSd-Ni-qfK"/>
                         <outlet property="nameGuest" destination="NPD-tT-gwQ" id="eRt-Fa-mhF"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
                         <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                         <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
+                        <outlet property="tableView" destination="2Gk-GQ-omd" id="NfS-bg-fcK"/>
                         <segue destination="j4G-PE-T9P" kind="push" identifier="editGuestDetails" id="BOM-rJ-jqT"/>
                     </connections>
                 </viewController>
@@ -152,8 +152,8 @@
                     <connections>
                         <outlet property="emailGuest" destination="Y25-fZ-Uwa" id="fPN-CJ-e5U"/>
                         <outlet property="guestPhoto" destination="ecm-gY-F9O" id="6ds-uZ-o3R"/>
-                        <outlet property="locationGuest" destination="tLg-sY-SO2" id="70W-n2-oTe"/>
                         <outlet property="nameGuest" destination="VO1-SU-fo0" id="JKm-He-0G0"/>
+                        <outlet property="tableView" destination="tLg-sY-SO2" id="82N-qh-TNj"/>
                         <segue destination="Xsy-7b-UdF" kind="push" identifier="guestListCountries" id="HMm-vW-AR0"/>
                     </connections>
                 </viewController>
@@ -323,6 +323,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="7CF-hv-gxa" id="Vzv-Sk-2nD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IK-HR-PBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -386,9 +389,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailText" destination="lln-Fv-iWO" id="Qhd-k9-HAc"/>
-                        <outlet property="locationTableView" destination="mrb-Ti-ijy" id="qaa-1e-7lf"/>
                         <outlet property="nameText" destination="og4-jk-LnB" id="o2p-bS-wQ4"/>
                         <outlet property="photoProfileEdit" destination="Exh-wY-agr" id="SLa-bX-G48"/>
+                        <outlet property="tableView" destination="mrb-Ti-ijy" id="ItF-7Q-zIJ"/>
                         <segue destination="Un2-Yb-nBu" kind="push" identifier="selectCountry" id="TTs-B9-Ial"/>
                     </connections>
                 </viewController>
@@ -430,6 +433,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="tableView" destination="0lq-qO-89k" id="E4X-dX-oFa"/>
                         <segue destination="xny-kL-2zx" kind="push" identifier="meetingDetail" id="Ixy-j7-QDG"/>
                     </connections>
                 </tableViewController>
@@ -563,9 +567,9 @@
                         <outlet property="calendarNotification" destination="sNw-V2-K7D" id="pkl-oS-Xdj"/>
                         <outlet property="dateOfMeeting" destination="Coh-EO-t8u" id="OTf-Zf-5z9"/>
                         <outlet property="emailNotification" destination="H6J-z7-O2m" id="5k1-fE-IjM"/>
-                        <outlet property="guestTableView" destination="Vm2-MH-6dN" id="fii-bg-6OJ"/>
                         <outlet property="pushNotification" destination="idz-WT-Tkb" id="T9K-NQ-OQf"/>
                         <outlet property="reminderNotification" destination="sJS-ZC-AEr" id="kFV-Nl-zMe"/>
+                        <outlet property="tableView" destination="Vm2-MH-6dN" id="QOE-Mj-gaV"/>
                         <outlet property="timeOfMeeting" destination="a0F-DZ-xP4" id="nRt-7E-weL"/>
                         <segue destination="vsP-VU-T7a" kind="push" identifier="guestDetail" id="quK-4A-wsB"/>
                     </connections>

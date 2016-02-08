@@ -85,33 +85,26 @@
                                    @"code": @"US"
                                    }
                                ]};
+    [self updateViewModel];
     
+}
+
+- (void) updateViewModel {
     NSString * countryName = [self getNameCountry:self.currentGuest];
     [self.currentGuest setObject:countryName forKey:@"nameCountry"];
     
-    self.viewModel =
-    @[
-      @{
-          @"nib" : @"LocationGuestTableViewCell",
-          @"height" : @(60),
-          @"data": [self.currentGuest copy]
-          }
-      ];
+    NSArray * viewModel = @[
+                           @{
+                               @"nib" : @"LocationGuestTableViewCell",
+                               @"height" : @(60),
+                               @"segue" : @"guestListCountries",
+                               @"data": [self.currentGuest copy]
+                            }
+                           ];
     
-    __weak UITableView * tableView = self.locationGuest;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
+    self.viewModel = [NSMutableArray arrayWithArray: viewModel];
     
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
+    [super updateViewModel];
 }
 
 - (NSString*) getNameCountry: (NSDictionary *)dataInformation{
@@ -130,47 +123,13 @@
     return nameCountry;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    
-    NSDictionary * selectedGuest = self.viewModel[indexPath.row];
-    [self performSegueWithIdentifier:@"guestListCountries" sender: selectedGuest[@"data"]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {

@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
     self.guests = @[
                     @{
@@ -44,21 +43,6 @@
                     ];
     
     [self updateViewModel];
-    
-    __weak UITableView * tableView = self.guestTableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
-    
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
 
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -75,10 +59,13 @@
         [viewModel addObject:@{
                                @"nib" : @"GuestViewCell",
                                @"height" : @(60),
+                               @"segue" : @"guestDetail",
                                @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
+    
+    [super updateViewModel];
 }
 
 -(void)buttonTouchDown:(UIButton *)button{
@@ -165,11 +152,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
@@ -177,37 +159,17 @@
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    
+- (void) performSegue:(NSIndexPath *)indexPath{
     NSDictionary * selectedMeeting = self.guests[indexPath.row];
-    [self performSegueWithIdentifier:@"guestDetail" sender: selectedMeeting];
+    NSDictionary * cellModel = self.viewModel[indexPath.row];
+    NSString * segueToPerform = cellModel[@"segue"];
+    if(segueToPerform) {
+        [self performSegueWithIdentifier:segueToPerform
+                                  sender: selectedMeeting];
+    }
+}
+
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {

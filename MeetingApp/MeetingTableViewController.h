@@ -6,14 +6,12 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface MeetingTableViewController : UITableViewController
-
+@interface MeetingTableViewController : ModelTableViewController
 
 @property(strong) NSArray *meetings;
-
-@property(strong, nonatomic) NSArray *viewModel;
 
 @end
 

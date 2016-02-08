@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 
     self.meetings = @[
             @{
@@ -39,22 +38,6 @@
     [self getCountry];
     
     [self updateViewModel];
-    
-    __weak UITableView * tableView = self.tableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
-    
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
-    
 }
 
 - (void) updateViewModel {
@@ -66,51 +49,35 @@
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",
                                @"height" : @(60),
+                               @"segue" : @"meetingDetail",
                                @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
+    
+    [super updateViewModel];
 }
 
 -(void) getCountry{
     NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
     NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    
-    return cell;
+    // TODO: Add the country to the user data model
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
+-(void)configureCell:(UITableViewCell *)cell withModel:(NSDictionary *)cellModel{
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) performSegue: (NSIndexPath *)indexPath{
     NSDictionary * selectedMeeting = self.meetings[indexPath.row];
-    [self performSegueWithIdentifier:@"meetingDetail" sender: selectedMeeting];
+    NSDictionary * cellModel = self.viewModel[indexPath.row];
+    NSString * segueToPerform = cellModel[@"segue"];
+    if(segueToPerform) {
+        [self performSegueWithIdentifier: segueToPerform
+                                  sender: selectedMeeting];
+
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
@@ -118,9 +85,8 @@
         MeetingDetailViewController * detailViewController = (MeetingDetailViewController *)segue.destinationViewController;
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
-    }
-    if ([segue.identifier isEqualToString:@"newMeeting"]){
-        
+    } else if ([segue.identifier isEqualToString:@"newMeeting"]){
+        // TODO: Send the data model from the user
     }
 }
 
