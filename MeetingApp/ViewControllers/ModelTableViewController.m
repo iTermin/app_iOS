@@ -44,7 +44,7 @@
 
 - (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
     
-    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];/// change size as you need.
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 365, .5)];
     separatorLineView.backgroundColor = [UIColor lightGrayColor];
     [cell.contentView addSubview:separatorLineView];
     
