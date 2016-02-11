@@ -6,15 +6,13 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface GuestListCountriesTableViewController : UITableViewController
+@interface GuestListCountriesTableViewController : ModelTableViewController
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 
 @property(strong) NSDictionary *dataModel;
-
-@property(strong) NSArray *viewModel;
-
 
 @end

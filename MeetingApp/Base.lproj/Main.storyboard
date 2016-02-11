@@ -186,6 +186,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="7pr-XN-vds"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="iVK-mw-Uyn" id="9zw-lm-fLH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0M2-MX-ytI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
