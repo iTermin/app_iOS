@@ -27,15 +27,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CALayer *nameBorder = [CALayer layer];
     CGSize nameSize = self.nameMeeting.frame.size;
-    nameBorder.frame = CGRectMake(0.0f, nameSize.height - 1, nameSize.width, 1.0f);
-    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    CGFloat xPosition = 0.0f;
+    CGFloat yPosition = 1.0f;
+    UIColor *grayColorSeparator = [UIColor colorWithWhite: 0.70 alpha:1];
+    
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(xPosition, nameSize.height - 1, nameSize.width, yPosition);
+    nameBorder.backgroundColor = grayColorSeparator.CGColor;
     [self.nameMeeting.layer addSublayer:nameBorder];
     
     CALayer *guestBorder = [CALayer layer];
-    guestBorder.frame = CGRectMake(0.0f, self.nameGuest.frame.size.height - 1, self.nameGuest.frame.size.width, 1.0f);
-    guestBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    CGSize meetingSize = self.nameMeeting.frame.size;
+    guestBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
+    guestBorder.backgroundColor = grayColorSeparator.CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -125,7 +130,9 @@
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
         
-        UIImage * contactPhoto = [UIImage imageNamed: [NSString stringWithFormat:@"%@.png", guests[@"photo"]]];
+        UIImage * contactPhoto = [UIImage imageNamed:
+                                  [NSString stringWithFormat:@"%@.png",
+                                   guests[@"photo"]]];
         if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
         
         [viewModel addObject:@{
@@ -164,16 +171,18 @@
             textField.text = nil;
             return validate;
         } else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wrong Email!"
-                                                                           message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"Wrong Email!"
+                                        message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                        preferredStyle:UIAlertControllerStyleAlert];
             
-            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * action){
-                                                               //Do some thing here
-                                                               [alert dismissViewControllerAnimated:YES completion:nil];
-                                                           }];
+            UIAlertAction *ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action){
+                                     //Do some thing here
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
             
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
