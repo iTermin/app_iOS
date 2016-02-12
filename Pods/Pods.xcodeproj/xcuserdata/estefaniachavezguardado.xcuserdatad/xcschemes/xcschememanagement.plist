@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MeetingApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8CC493BD0D046A202A1C831972708CE4</key>
+		<key>566FE36C2D6839F41C1CC8E6D4E8A96E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B970D0A4BD9CC369033DF3F4446146F3</key>
+		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC3DBA14BB5E573EF55B87CC2E7A1F6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

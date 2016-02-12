@@ -8,8 +8,9 @@
 
 #import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface MeetingTableViewController : ModelTableViewController
+@interface MeetingTableViewController : ModelTableViewController <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property(strong) NSArray *meetings;
 

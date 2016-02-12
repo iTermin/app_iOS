@@ -5,6 +5,7 @@
 
 target 'MeetingApp' do
 pod "UIImageView-Letters"
+pod 'DZNEmptyDataSet'
 end
 
 target 'MeetingAppTests' do
