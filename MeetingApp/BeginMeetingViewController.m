@@ -43,7 +43,8 @@
     guestBorder.backgroundColor = grayColorSeparator.CGColor;
     [self.nameGuest.layer addSublayer:guestBorder];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     self.dataModelCountries = @{
                                 @"countries" : @[
@@ -145,10 +146,6 @@
     self.viewModel = viewModel;
     
     [super updateViewModel];
-}
-
-- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
-    [super configureCell:cell withModel:cellModel];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

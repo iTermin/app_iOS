@@ -34,7 +34,8 @@
                     @"name" : @"Meeting 2"
             }
     ];
-    
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+
     [self getCountry];
     
     [self updateViewModel];
@@ -63,10 +64,6 @@
     NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
     
     // TODO: Add the country to the user data model
-}
-
--(void)configureCell:(UITableViewCell *)cell withModel:(NSDictionary *)cellModel{
-
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
