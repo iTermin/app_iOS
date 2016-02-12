@@ -123,9 +123,6 @@
     return nameCountry;
 }
 
-- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];

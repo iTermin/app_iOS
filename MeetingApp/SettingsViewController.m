@@ -81,10 +81,6 @@
     [super updateViewModel];
 }
 
-
-- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editProfile"]){        
         EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;

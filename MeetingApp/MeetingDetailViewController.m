@@ -42,12 +42,14 @@
                         }
                     ];
     
-    [self updateViewModel];
-
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    
+    [self updateViewModel];
 }
 
 - (void) updateViewModel {
@@ -167,9 +169,6 @@
         [self performSegueWithIdentifier:segueToPerform
                                   sender: selectedMeeting];
     }
-}
-
-- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {

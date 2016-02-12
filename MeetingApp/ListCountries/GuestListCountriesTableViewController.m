@@ -66,6 +66,11 @@
                                    }
                                ]};
     
+    [self updateViewModel];
+    
+}
+
+-(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
     [self.dataModel[@"countries"] enumerateObjectsUsingBlock:^(NSDictionary * country, NSUInteger idx, BOOL * stop) {
         
@@ -82,52 +87,7 @@
     
     self.viewModel = viewModel;
     
-    __weak UITableView * tableView = self.tableView;
-    NSMutableSet * registeredNibs = [NSMutableSet set];
-    
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
-        
-        NSString * nibFile = cellViewModel[@"nib"];
-        
-        if(![registeredNibs containsObject: nibFile]) {
-            [registeredNibs addObject: nibFile];
-            
-            UINib * nib = [UINib nibWithNibName:nibFile bundle:nil];
-            [tableView registerNib:nib forCellReuseIdentifier:nibFile];
-        }
-    }];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.viewModel count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: cellViewModel[@"nib"]];
-    
-    if([cell respondsToSelector:@selector(setData:)]) {
-        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
-    }
-    [cell setAccessoryType: UITableViewCellAccessoryCheckmark];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
-    return [cellViewModel[@"height"] floatValue];
+    [super updateViewModel];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -150,6 +110,9 @@
     NSLog(@"%@", country);
 }
 
+- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
@@ -163,10 +126,6 @@
             break;
         }
     }
-    
-}
-
-- (void) deselectedCell:(NSString*)countrySelectedBefore{
     
 }
 

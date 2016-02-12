@@ -62,9 +62,6 @@
     [super updateViewModel];
 }
 
-- (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
-}
-
 - (void) performSegue: (NSIndexPath *)indexPath{
     NSString *country = self.dataModel[@"location"];
     NSDictionary * cellModel = self.viewModel[indexPath.row];
