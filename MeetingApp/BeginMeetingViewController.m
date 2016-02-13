@@ -478,6 +478,11 @@
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
             return false;
+            
+        } else if([self.nameMeeting.text isEqualToString:@""]){
+            self.nameMeeting.text = @"Meeting 1";
+            return true;
+            
         } else{
             return true;
         }
