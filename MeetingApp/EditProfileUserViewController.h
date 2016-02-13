@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
+@property (strong, nonatomic) IBOutlet UIButton *photoEditButton;
 
 @property(strong) NSDictionary *dataModel;
 

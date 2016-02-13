@@ -29,8 +29,11 @@
     
     self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
     self.photoProfileEdit.clipsToBounds = YES;
-    self.photoProfileEdit.layer.borderWidth = 4.0f;
-    self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
+    //self.photoProfileEdit.layer.borderWidth = 4.0f;
+    //self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    self.photoEditButton.layer.cornerRadius = self.photoEditButton.frame.size.width/5.0f;
+    self.photoEditButton.clipsToBounds = YES;
     
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
@@ -76,8 +79,12 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
-    [locationViewController setCurrentLocation:sender];
+    if ([segue.identifier isEqualToString:@"selectCountry"]){
+        ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
+        [locationViewController setCurrentLocation:sender];
+    } else if ([segue.identifier isEqualToString:@"editphotoUser"]){
+    
+    }
 }
 
 @end

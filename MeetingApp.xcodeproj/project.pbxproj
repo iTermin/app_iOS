@@ -11,6 +11,7 @@
 		7C0FFE831C66791300F724FC /* GuestViewCellCountry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0FFE811C66791300F724FC /* GuestViewCellCountry.xib */; };
 		7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1566551C5233C800B589A0 /* LocationUserTableViewCell.m */; };
 		7C1566581C5233C800B589A0 /* LocationUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1566561C5233C800B589A0 /* LocationUserTableViewCell.xib */; };
+		7C1687761C6FA35C00197DB1 /* PhotoEditUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1687751C6FA35C00197DB1 /* PhotoEditUserViewController.m */; };
 		7C2949271C4CEC1F007BF7C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
@@ -77,6 +78,8 @@
 		7C1566541C5233C800B589A0 /* LocationUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationUserTableViewCell.h; path = Artifacts/LocationUserTableViewCell.h; sourceTree = "<group>"; };
 		7C1566551C5233C800B589A0 /* LocationUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationUserTableViewCell.m; path = Artifacts/LocationUserTableViewCell.m; sourceTree = "<group>"; };
 		7C1566561C5233C800B589A0 /* LocationUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationUserTableViewCell.xib; path = Artifacts/LocationUserTableViewCell.xib; sourceTree = "<group>"; };
+		7C1687741C6FA35C00197DB1 /* PhotoEditUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditUserViewController.h; sourceTree = "<group>"; };
+		7C1687751C6FA35C00197DB1 /* PhotoEditUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditUserViewController.m; sourceTree = "<group>"; };
 		7C2949251C4CEC1F007BF7C7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +246,8 @@
 				7C2949261C4CEC1F007BF7C7 /* SettingsViewController.m */,
 				7CFD97B21C4FA00F00C1095F /* EditProfileUserViewController.h */,
 				7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */,
+				7C1687741C6FA35C00197DB1 /* PhotoEditUserViewController.h */,
+				7C1687751C6FA35C00197DB1 /* PhotoEditUserViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -553,6 +558,7 @@
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C4BD5741C5E1125005526D3 /* EditGuestDetailViewController.m in Sources */,
 				7C1566571C5233C800B589A0 /* LocationUserTableViewCell.m in Sources */,
+				7C1687761C6FA35C00197DB1 /* PhotoEditUserViewController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */,
 				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
