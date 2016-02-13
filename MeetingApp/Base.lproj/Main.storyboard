@@ -334,26 +334,6 @@
             </objects>
             <point key="canvasLocation" x="-922.5" y="-144.5"/>
         </scene>
-        <!--Photo Edit User View Controller-->
-        <scene sceneID="lC5-bS-Zcn">
-            <objects>
-                <viewController id="5Kk-Fr-P0m" customClass="PhotoEditUserViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Gzj-5f-0lf"/>
-                        <viewControllerLayoutGuide type="bottom" id="xSc-RO-LsB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2aw-VR-XJO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="zJR-3J-IbG"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c04-RO-C7i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-337.5" y="-895.5"/>
-        </scene>
         <!--Edit Profile User View Controller-->
         <scene sceneID="CpG-Tb-bbu">
             <objects>
@@ -388,7 +368,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fondo" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-wY-agr">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fondo" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-wY-agr">
                                 <rect key="frame" x="122" y="82" width="130" height="130"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mrb-Ti-ijy">
@@ -405,17 +385,6 @@
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWb-0H-pS1">
-                                <rect key="frame" x="162" y="182" width="50" height="25"/>
-                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="0.49620150862068968" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                <state key="normal" title="Edit" image="camera">
-                                    <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="5Kk-Fr-P0m" kind="push" identifier="editphotoUser" id="mvN-gw-182"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -424,7 +393,6 @@
                     <connections>
                         <outlet property="emailText" destination="lln-Fv-iWO" id="Qhd-k9-HAc"/>
                         <outlet property="nameText" destination="og4-jk-LnB" id="o2p-bS-wQ4"/>
-                        <outlet property="photoEditButton" destination="eWb-0H-pS1" id="VDU-8v-bba"/>
                         <outlet property="photoProfileEdit" destination="Exh-wY-agr" id="SLa-bX-G48"/>
                         <outlet property="tableView" destination="mrb-Ti-ijy" id="ItF-7Q-zIJ"/>
                         <segue destination="Un2-Yb-nBu" kind="push" identifier="selectCountry" id="TTs-B9-Ial"/>
@@ -880,7 +848,6 @@
     <resources>
         <image name="SettingsIcon" width="26" height="30"/>
         <image name="calendar" width="22" height="22"/>
-        <image name="camera" width="22" height="22"/>
         <image name="email" width="22" height="22"/>
         <image name="fondo" width="150" height="200"/>
         <image name="meetingTabBar" width="30" height="30"/>

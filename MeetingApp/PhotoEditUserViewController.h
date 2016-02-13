@@ -6,8 +6,9 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import <RSKImageCropper/RSKImageCropper.h>
 #import <UIKit/UIKit.h>
 
-@interface PhotoEditUserViewController : UIViewController
+@interface PhotoEditUserViewController : UIViewController <RSKImageCropViewControllerDelegate>
 
 @end
