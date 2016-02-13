@@ -9,9 +9,10 @@
 
 #import "ModelTableViewController.h"
 
+#import "UIScrollView+EmptyDataSet.h"
 #import <UIKit/UIKit.h>
 
-@interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate>
+@interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;

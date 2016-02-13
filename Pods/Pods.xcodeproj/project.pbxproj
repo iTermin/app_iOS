@@ -7,118 +7,178 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21D8A2C63258A8CE16F1A8180DE6D0ED /* Pods-MeetingApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */; };
-		32EB5C8A707E6CFF8B9D40046E4F45F3 /* UIImageView+Letters.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6056C6F131EC46C34714413A8300F684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		8C9BBB7944BDEBDD3F1C1D5B4D9AE2FA /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */; };
-		EF7C58413C92AE6F5350B1957CC751E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		F93553D0115E06D4127B0EEE353B9811 /* UIImageView-Letters-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */; };
+		03D652F245EC57406662001A771FC85F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
+		091F223EA0398A2AA80DDE6437783335 /* UIImageView+Letters.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31D310EAFEAE2031A6FD01DA61A1F22A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		3EE6106A64DA95E9D57D8549EA0A316C /* Pods-MeetingApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */; };
+		6DDC90FBCBB6762F5B90B8B4E90E6398 /* UIImageView-Letters-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */; };
+		7095E57035641A41A24A8C505431E097 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */; };
+		79937BF7081A392CA508E7FB6DE4237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		7F941B43E1B7FCF40736767DCE194D90 /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA7AB5D5BCA604EA48D82F71988394A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		D2914FEBF2C3D2F2E3F442C5506689E9 /* DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */; };
+		EF75BC735D336A3DF6DEB90F29DF5FAE /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3D55388A585263C3547AA1D01866A8AE /* PBXContainerItemProxy */ = {
+		6ADC4E792ADA93510E74FE9BFC5BCEF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B970D0A4BD9CC369033DF3F4446146F3;
+			remoteGlobalIDString = 566FE36C2D6839F41C1CC8E6D4E8A96E;
 			remoteInfo = "UIImageView-Letters";
+		};
+		C085ABC141E91D346A19F6C530B71533 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 736E57AD5AEFAAF68D47AE4E8FCB8F68;
+			remoteInfo = DZNEmptyDataSet;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Letters.h"; path = "UIImageView+Letters/UIImageView+Letters.h"; sourceTree = "<group>"; };
+		1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDZNEmptyDataSet.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView-Letters-dummy.m"; sourceTree = "<group>"; };
 		3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
-		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		466B27DEA03656B34FCD704CFDCDE2EF /* Pods-MeetingApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MeetingApp-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4B7384C28C9BA614B9E16D543E1C1141 /* UIImageView-Letters-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImageView-Letters-prefix.pch"; sourceTree = "<group>"; };
-		4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Letters.h"; path = "UIImageView+Letters/UIImageView+Letters.h"; sourceTree = "<group>"; };
+		4BF9B502EF1D2B34FB02FA292405104C /* DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
+		580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIImageView-Letters.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5899AAD00F87855E31A7EA4E34598FFA /* Pods-MeetingApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-frameworks.sh"; sourceTree = "<group>"; };
-		66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView-Letters-dummy.m"; sourceTree = "<group>"; };
+		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MeetingApp-dummy.m"; sourceTree = "<group>"; };
-		87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Letters.m"; path = "UIImageView+Letters/UIImageView+Letters.m"; sourceTree = "<group>"; };
-		9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C5BB531849C668E6AC620DAF80D3996 /* UIImageView-Letters-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImageView-Letters-prefix.pch"; sourceTree = "<group>"; };
+		90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImageView-Letters.xcconfig"; sourceTree = "<group>"; };
+		93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Letters.m"; path = "UIImageView+Letters/UIImageView+Letters.m"; sourceTree = "<group>"; };
+		9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
+		B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImageView-Letters.xcconfig"; sourceTree = "<group>"; };
+		C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.xcconfig; sourceTree = "<group>"; };
 		D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
-		E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIImageView-Letters.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9E38EE6C25346CC052AD3F45B215E6 /* Pods-MeetingApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-resources.sh"; sourceTree = "<group>"; };
 		FEF60D3B455310E5F0EB06477E839C53 /* Pods-MeetingApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MeetingApp-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		17450EED0313981D64B654918C8940F3 /* Frameworks */ = {
+		360EEE3FA0C21A0399944F45FF502501 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF7C58413C92AE6F5350B1957CC751E8 /* Foundation.framework in Frameworks */,
+				31D310EAFEAE2031A6FD01DA61A1F22A /* Foundation.framework in Frameworks */,
+				03D652F245EC57406662001A771FC85F /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F5CA76078BED1C05E76CC08801E12849 /* Frameworks */ = {
+		7F4706FCF440B47EEF77E4C6F2B55DEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6056C6F131EC46C34714413A8300F684 /* Foundation.framework in Frameworks */,
+				79937BF7081A392CA508E7FB6DE4237D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6D6EE40839811D872773374E3D31793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA7AB5D5BCA604EA48D82F71988394A0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		124EDA761DAFD87F0DD9A78B354FCF5C /* Products */ = {
+		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */,
-				E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */,
+				6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */,
+				C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		23AA080FF52C7902FE8F9B43230A9163 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */,
+				9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */,
+				4BF9B502EF1D2B34FB02FA292405104C /* DZNEmptyDataSet-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/DZNEmptyDataSet";
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18340F12838DEE43507667CC74401EB1 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4EBD35AC72B0316D302F95D677476C9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */,
+				74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */,
+				580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		38F637F8A2B1220B5416CEC26A228363 /* UIImageView-Letters */ = {
+		6FFFF097957D7AA7A23F9D8147E7F1AB /* UIImageView-Letters */ = {
 			isa = PBXGroup;
 			children = (
-				4F97F3AD255418C20C54721ACB74D438 /* UIImageView+Letters.h */,
-				87234D2C636176EE2265CA1BEE8B172A /* UIImageView+Letters.m */,
-				AE390BB5E34D6B9319F942D0A6FC7FFA /* Support Files */,
+				0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */,
+				93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */,
+				7651B38D81708E130C60BD2BB2E049EE /* Support Files */,
 			);
 			path = "UIImageView-Letters";
+			sourceTree = "<group>";
+		};
+		7651B38D81708E130C60BD2BB2E049EE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */,
+				32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */,
+				7C5BB531849C668E6AC620DAF80D3996 /* UIImageView-Letters-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/UIImageView-Letters";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				DAA5006E2B65B19F6E241CE9A1F42BAC /* Pods */,
-				124EDA761DAFD87F0DD9A78B354FCF5C /* Products */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				C5A572853520959C957BC6D201A8BD4C /* Pods */,
+				4EBD35AC72B0316D302F95D677476C9A /* Products */,
 				EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		AE390BB5E34D6B9319F942D0A6FC7FFA /* Support Files */ = {
+		B2283D169D8B111163463CCEF9325F3F /* DZNEmptyDataSet */ = {
 			isa = PBXGroup;
 			children = (
-				D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */,
-				66B73B32AE85F5B0C9F59A943E5E3AA4 /* UIImageView-Letters-dummy.m */,
-				4B7384C28C9BA614B9E16D543E1C1141 /* UIImageView-Letters-prefix.pch */,
+				B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */,
+				9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */,
+				23AA080FF52C7902FE8F9B43230A9163 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/UIImageView-Letters";
+			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		C5A572853520959C957BC6D201A8BD4C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+				B2283D169D8B111163463CCEF9325F3F /* DZNEmptyDataSet */,
+				6FFFF097957D7AA7A23F9D8147E7F1AB /* UIImageView-Letters */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
-			);
-			name = iOS;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D0EAD331F7C399929392C26DC979EAE2 /* Pods-MeetingApp */ = {
@@ -136,14 +196,6 @@
 			path = "Target Support Files/Pods-MeetingApp";
 			sourceTree = "<group>";
 		};
-		DAA5006E2B65B19F6E241CE9A1F42BAC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				38F637F8A2B1220B5416CEC26A228363 /* UIImageView-Letters */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,41 +207,32 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		AD574CA1187F4D0CF83C5071C9FB38A9 /* Headers */ = {
+		48B2BA5F3935DE22852A7EFF05B89EE6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EB5C8A707E6CFF8B9D40046E4F45F3 /* UIImageView+Letters.h in Headers */,
+				7F941B43E1B7FCF40736767DCE194D90 /* UIScrollView+EmptyDataSet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E39F18A393A94F4093FE1C384C9B8553 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				091F223EA0398A2AA80DDE6437783335 /* UIImageView+Letters.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8CC493BD0D046A202A1C831972708CE4 /* Pods-MeetingApp */ = {
+		566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD7D2B6269C9D8F83CEB608673695E05 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */;
+			buildConfigurationList = EEE42ACFCEB0C9F8D15B195ED514F4F4 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */;
 			buildPhases = (
-				AF51EB04C70894C3546E4B4C3CAC8607 /* Sources */,
-				F5CA76078BED1C05E76CC08801E12849 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B096812C9812870EAC44196E55AAED77 /* PBXTargetDependency */,
-			);
-			name = "Pods-MeetingApp";
-			productName = "Pods-MeetingApp";
-			productReference = 9CD5F8EDD3168173512B2097F8621348 /* libPods-MeetingApp.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5C7B281FE97A234B2DDFF0EED50FBB11 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */;
-			buildPhases = (
-				3AB4C42B4EF749683AEE88C98CDD255E /* Sources */,
-				17450EED0313981D64B654918C8940F3 /* Frameworks */,
-				AD574CA1187F4D0CF83C5071C9FB38A9 /* Headers */,
+				6014B25E8CBE4D7C929565002697E199 /* Sources */,
+				B6D6EE40839811D872773374E3D31793 /* Frameworks */,
+				E39F18A393A94F4093FE1C384C9B8553 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -197,7 +240,42 @@
 			);
 			name = "UIImageView-Letters";
 			productName = "UIImageView-Letters";
-			productReference = E0ECF1361A2C5C5AF4A0D2A72DDDAAF6 /* libUIImageView-Letters.a */;
+			productReference = 580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1C847BA639995C48B89DF3C96C3A6FB /* Build configuration list for PBXNativeTarget "DZNEmptyDataSet" */;
+			buildPhases = (
+				B6C2166CDEB842A61247B874390A5673 /* Sources */,
+				360EEE3FA0C21A0399944F45FF502501 /* Frameworks */,
+				48B2BA5F3935DE22852A7EFF05B89EE6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DZNEmptyDataSet;
+			productName = DZNEmptyDataSet;
+			productReference = 1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DC3DBA14BB5E573EF55B87CC2E7A1F6D /* Pods-MeetingApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B0EF462BF77F96598B7BD28026DB9A2 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */;
+			buildPhases = (
+				8F1667A49276BE9663FFBCB1141074B8 /* Sources */,
+				7F4706FCF440B47EEF77E4C6F2B55DEA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				148E64750E08892D4230428FD07F72A7 /* PBXTargetDependency */,
+				55BF16A9862C7657D41472628A1F0734 /* PBXTargetDependency */,
+			);
+			name = "Pods-MeetingApp";
+			productName = "Pods-MeetingApp";
+			productReference = 74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -217,47 +295,99 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 124EDA761DAFD87F0DD9A78B354FCF5C /* Products */;
+			productRefGroup = 4EBD35AC72B0316D302F95D677476C9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8CC493BD0D046A202A1C831972708CE4 /* Pods-MeetingApp */,
-				B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */,
+				736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */,
+				DC3DBA14BB5E573EF55B87CC2E7A1F6D /* Pods-MeetingApp */,
+				566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3AB4C42B4EF749683AEE88C98CDD255E /* Sources */ = {
+		6014B25E8CBE4D7C929565002697E199 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C9BBB7944BDEBDD3F1C1D5B4D9AE2FA /* UIImageView+Letters.m in Sources */,
-				F93553D0115E06D4127B0EEE353B9811 /* UIImageView-Letters-dummy.m in Sources */,
+				7095E57035641A41A24A8C505431E097 /* UIImageView+Letters.m in Sources */,
+				6DDC90FBCBB6762F5B90B8B4E90E6398 /* UIImageView-Letters-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF51EB04C70894C3546E4B4C3CAC8607 /* Sources */ = {
+		8F1667A49276BE9663FFBCB1141074B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21D8A2C63258A8CE16F1A8180DE6D0ED /* Pods-MeetingApp-dummy.m in Sources */,
+				3EE6106A64DA95E9D57D8549EA0A316C /* Pods-MeetingApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6C2166CDEB842A61247B874390A5673 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2914FEBF2C3D2F2E3F442C5506689E9 /* DZNEmptyDataSet-dummy.m in Sources */,
+				EF75BC735D336A3DF6DEB90F29DF5FAE /* UIScrollView+EmptyDataSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B096812C9812870EAC44196E55AAED77 /* PBXTargetDependency */ = {
+		148E64750E08892D4230428FD07F72A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DZNEmptyDataSet;
+			target = 736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */;
+			targetProxy = C085ABC141E91D346A19F6C530B71533 /* PBXContainerItemProxy */;
+		};
+		55BF16A9862C7657D41472628A1F0734 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "UIImageView-Letters";
-			target = B970D0A4BD9CC369033DF3F4446146F3 /* UIImageView-Letters */;
-			targetProxy = 3D55388A585263C3547AA1D01866A8AE /* PBXContainerItemProxy */;
+			target = 566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */;
+			targetProxy = 6ADC4E792ADA93510E74FE9BFC5BCEF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		09A3175246A4E0C2B17E8D2DFFB851FF /* Debug */ = {
+		1AA954AF286F6B92CAE54C3656FDBA0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DZNEmptyDataSet/DZNEmptyDataSet-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6E7FCC59380450B6905AE2BF3956C046 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DZNEmptyDataSet/DZNEmptyDataSet-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		71CA99DDD8090D967CCB5647AED2C0AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */;
 			buildSettings = {
@@ -274,19 +404,18 @@
 			};
 			name = Debug;
 		};
-		2B7E18A948B9D4625851514D26C10DEA /* Release */ = {
+		793B060AFDA6DB6F63CEFD7352D9DCC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */;
+			baseConfigurationReference = D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -331,26 +460,27 @@
 			};
 			name = Debug;
 		};
-		98B431910CFAD6B46EE8640FDE3C39B8 /* Release */ = {
+		B53E8F6A5C53D80A557F6272ADB0F12D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */;
+			baseConfigurationReference = 90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		AA31F1B6483448AB1A624072F5A2279A /* Debug */ = {
+		C49F518D289261D8405DE58291CA07AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D57885D466537077DC9275E3E2ACD61A /* UIImageView-Letters.xcconfig */;
+			baseConfigurationReference = 90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
@@ -412,20 +542,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C7B281FE97A234B2DDFF0EED50FBB11 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */ = {
+		6B0EF462BF77F96598B7BD28026DB9A2 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA31F1B6483448AB1A624072F5A2279A /* Debug */,
-				2B7E18A948B9D4625851514D26C10DEA /* Release */,
+				71CA99DDD8090D967CCB5647AED2C0AD /* Debug */,
+				793B060AFDA6DB6F63CEFD7352D9DCC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD7D2B6269C9D8F83CEB608673695E05 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */ = {
+		C1C847BA639995C48B89DF3C96C3A6FB /* Build configuration list for PBXNativeTarget "DZNEmptyDataSet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09A3175246A4E0C2B17E8D2DFFB851FF /* Debug */,
-				98B431910CFAD6B46EE8640FDE3C39B8 /* Release */,
+				1AA954AF286F6B92CAE54C3656FDBA0E /* Debug */,
+				6E7FCC59380450B6905AE2BF3956C046 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEE42ACFCEB0C9F8D15B195ED514F4F4 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C49F518D289261D8405DE58291CA07AB /* Debug */,
+				B53E8F6A5C53D80A557F6272ADB0F12D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

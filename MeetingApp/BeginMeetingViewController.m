@@ -102,7 +102,7 @@
                                @"photo": @"fondo"
                            };
     
-    self.dataModel = [NSMutableArray arrayWithArray:@[
+    self.dataModel = [NSMutableArray arrayWithArray:@[/*
       @{
           @"name": @"Luis Alejandro Rangel",
           @"codePhone" : @"+52",
@@ -117,12 +117,19 @@
           @"photo": @"",
           @"codeCountry" : @"US"
           }
-      ]];
+      */]];
     
     [self updateViewModel];
     
     self.nameGuest.delegate = self;
     self.nameMeeting.delegate = self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"guest"];
 }
 
 - (void) updateViewModel {
