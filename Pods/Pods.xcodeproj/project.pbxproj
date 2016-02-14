@@ -7,55 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0398BEC63A7906B1EFFF22D09FF5A83F /* UIApplication+RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D6FC9E8A68E86CB417459F8254C8286 /* UIApplication+RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		03D652F245EC57406662001A771FC85F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DE615671731BF3AEFB3CB1F984FA8F /* UIKit.framework */; };
-		0F8D87E54F60342DFE00C78375B306B3 /* CGGeometry+RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFB132E41CA6699EC1904681D26D9EA /* CGGeometry+RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		156479E209B6B78788CFB8C143ADA810 /* RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F9A81132BAC24CF116809E66865EB99 /* RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		31D310EAFEAE2031A6FD01DA61A1F22A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91413329813FA6FE5A78842159E69621 /* Foundation.framework */; };
-		3FE61E9D998F33D75C0F82686DFE981C /* RSKImageCropViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4431C5132965D1A8A74E5E39F54A3C66 /* RSKImageCropViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A4F763071BC14755970B8D6F264BB90 /* UIImageView+Letters.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A2F9B6CB4A8A9B8A8EBDCCB17B0215 /* UIImageView+Letters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57B8099AD900291737C1C47F95FFCE48 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91413329813FA6FE5A78842159E69621 /* Foundation.framework */; };
-		5D701206528B2971AF04084C56535CC3 /* RSKTouchView.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A10675EC5EE3BA8BEE2AC6E2CC5928 /* RSKTouchView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6CDFE77F0A1ED08808AB53CDEEDF5C5D /* RSKImageCropViewController+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 44E8E5E80A0C2DD98480C74A5FFC1BC4 /* RSKImageCropViewController+Protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6D00443CC60E3012F5FF889F83E90B11 /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD230653141DA47E49D8F7622307A73 /* RSKImageScrollView.m */; };
-		77B7052DF18C67EE9E918660D0ED5401 /* UIApplication+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF5CADFA8D122150B10D5ADD0B3FC3A /* UIApplication+RSKImageCropper.m */; };
-		78E74E655854D595150E851FC8D11B20 /* UIImage+RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = 74CA3E8B0E92749FAA098473B905EEFD /* UIImage+RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7BD4A508D865156A98A3781DD34C4B12 /* Pods-MeetingApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */; };
-		7F941B43E1B7FCF40736767DCE194D90 /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = AC034444C0DED2B80AE3BA00028A34EB /* UIScrollView+EmptyDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		850A60CBD6C60B5167EF875B3B85C05A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E642B1A057ADA2ABEF90BE2417F349C1 /* QuartzCore.framework */; };
-		9D7A0A75ED086AD202C076C1C923F62D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91413329813FA6FE5A78842159E69621 /* Foundation.framework */; };
-		B009242E70DBC858F6599CC03CAECA34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91413329813FA6FE5A78842159E69621 /* Foundation.framework */; };
-		B8A8F409CE9414E6EB49A4A6D349296A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DE615671731BF3AEFB3CB1F984FA8F /* UIKit.framework */; };
-		C762CFA9B788314DF2ED61C888F4C2C0 /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B9D61BA3BA3436BC0FF658382DFBEC /* RSKImageCropViewController.m */; };
-		C9B4BC2E2E0D68F1086955757D817057 /* RSKInternalUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F3A341478A5007ADD002612C43B693 /* RSKInternalUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CF425601D068338D9D2CF480EB72D867 /* RSKImageCropper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DACDE1F373CE81ED6E28003E327D96 /* RSKImageCropper-dummy.m */; };
-		D2914FEBF2C3D2F2E3F442C5506689E9 /* DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA17879D6B9A107E06C1BE1DFDAD1E4 /* DZNEmptyDataSet-dummy.m */; };
-		D5F16D2200F237BC34E4DB8762ED4084 /* UIImageView-Letters-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EE5D091D588A41642710143D960DDF /* UIImageView-Letters-dummy.m */; };
-		D843D0D6C14F1FB5E1C2286EF814C62B /* RSKImageScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 01798248B7358533ED75B94CD25EE1D3 /* RSKImageScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E5A81F1A3E81F5689ABAC7C3B300E0E8 /* RSKInternalUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FD84B7D38DBB1926C62537E502AB19E1 /* RSKInternalUtility.m */; };
-		EF75BC735D336A3DF6DEB90F29DF5FAE /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95ABB3930E58DCAE363DA4F8F2DAA881 /* UIScrollView+EmptyDataSet.m */; };
-		F3D5C81DF4ABCE845B87F3D53B5F9954 /* UIImage+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 190DE35D93D6205DFDA72734A5DEEFD7 /* UIImage+RSKImageCropper.m */; };
-		F4E7BA48946F1961975A41C112B2AF58 /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = DED36D71D30D5E323179381F4D70A540 /* RSKTouchView.m */; };
-		F7AADAD7FF7117102B818478A4CCB72D /* CGGeometry+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 159436E8900E97154B988E99CC6492D7 /* CGGeometry+RSKImageCropper.m */; };
-		FB2C4B8A1946CA583A12B126EE039F38 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E885955CF747A273E20116D280ACB8 /* UIImageView+Letters.m */; };
+		03D652F245EC57406662001A771FC85F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
+		091F223EA0398A2AA80DDE6437783335 /* UIImageView+Letters.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31D310EAFEAE2031A6FD01DA61A1F22A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		3EE6106A64DA95E9D57D8549EA0A316C /* Pods-MeetingApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */; };
+		6DDC90FBCBB6762F5B90B8B4E90E6398 /* UIImageView-Letters-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */; };
+		7095E57035641A41A24A8C505431E097 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */; };
+		79937BF7081A392CA508E7FB6DE4237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		7F941B43E1B7FCF40736767DCE194D90 /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA7AB5D5BCA604EA48D82F71988394A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		D2914FEBF2C3D2F2E3F442C5506689E9 /* DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */; };
+		EF75BC735D336A3DF6DEB90F29DF5FAE /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2D3E8F66E12E0D643F77B3D589DAC5C1 /* PBXContainerItemProxy */ = {
+		6ADC4E792ADA93510E74FE9BFC5BCEF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7B836FD3040B2BF38EAC59FB716401DB;
-			remoteInfo = RSKImageCropper;
-		};
-		64AF86C7C611451C764C8532EB2B77B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2C8A5F63AC04DEFEBA4D460501DB99D;
+			remoteGlobalIDString = 566FE36C2D6839F41C1CC8E6D4E8A96E;
 			remoteInfo = "UIImageView-Letters";
 		};
-		6AFBAF07E57BEF22402DD7157DC09A24 /* PBXContainerItemProxy */ = {
+		C085ABC141E91D346A19F6C530B71533 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -65,50 +38,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01798248B7358533ED75B94CD25EE1D3 /* RSKImageScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RSKImageScrollView.h; path = RSKImageCropper/RSKImageScrollView.h; sourceTree = "<group>"; };
-		07A2F9B6CB4A8A9B8A8EBDCCB17B0215 /* UIImageView+Letters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Letters.h"; path = "UIImageView+Letters/UIImageView+Letters.h"; sourceTree = "<group>"; };
-		0989996346F214BCE5451176A7A79CE9 /* UIImageView-Letters-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImageView-Letters-prefix.pch"; sourceTree = "<group>"; };
-		159436E8900E97154B988E99CC6492D7 /* CGGeometry+RSKImageCropper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CGGeometry+RSKImageCropper.m"; path = "RSKImageCropper/CGGeometry+RSKImageCropper.m"; sourceTree = "<group>"; };
-		16055A3F63DDDEA8FC6900278FB6FDFC /* UIImageView-Letters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImageView-Letters.xcconfig"; sourceTree = "<group>"; };
-		190DE35D93D6205DFDA72734A5DEEFD7 /* UIImage+RSKImageCropper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RSKImageCropper.m"; path = "RSKImageCropper/UIImage+RSKImageCropper.m"; sourceTree = "<group>"; };
-		2C2F246B1B229AFD4748F6CC8D5380F7 /* DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.xcconfig; sourceTree = "<group>"; };
+		0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Letters.h"; path = "UIImageView+Letters/UIImageView+Letters.h"; sourceTree = "<group>"; };
+		1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDZNEmptyDataSet.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView-Letters-dummy.m"; sourceTree = "<group>"; };
 		3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4431C5132965D1A8A74E5E39F54A3C66 /* RSKImageCropViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RSKImageCropViewController.h; path = RSKImageCropper/RSKImageCropViewController.h; sourceTree = "<group>"; };
-		44E8E5E80A0C2DD98480C74A5FFC1BC4 /* RSKImageCropViewController+Protected.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "RSKImageCropViewController+Protected.h"; path = "RSKImageCropper/RSKImageCropViewController+Protected.h"; sourceTree = "<group>"; };
 		466B27DEA03656B34FCD704CFDCDE2EF /* Pods-MeetingApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MeetingApp-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4DC0DA7450CB0DC5F3EEB9A32799FC36 /* RSKImageCropper-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RSKImageCropper-prefix.pch"; sourceTree = "<group>"; };
-		4F9A81132BAC24CF116809E66865EB99 /* RSKImageCropper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RSKImageCropper.h; path = RSKImageCropper/RSKImageCropper.h; sourceTree = "<group>"; };
+		4BF9B502EF1D2B34FB02FA292405104C /* DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
+		580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIImageView-Letters.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5899AAD00F87855E31A7EA4E34598FFA /* Pods-MeetingApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-frameworks.sh"; sourceTree = "<group>"; };
-		5D6FC9E8A68E86CB417459F8254C8286 /* UIApplication+RSKImageCropper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIApplication+RSKImageCropper.h"; path = "RSKImageCropper/UIApplication+RSKImageCropper.h"; sourceTree = "<group>"; };
-		5EA17879D6B9A107E06C1BE1DFDAD1E4 /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
-		62E8CDBBAD97E65A5765A24C054813B1 /* libRSKImageCropper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRSKImageCropper.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		62F3A341478A5007ADD002612C43B693 /* RSKInternalUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RSKInternalUtility.h; path = RSKImageCropper/RSKInternalUtility.h; sourceTree = "<group>"; };
-		67DACDE1F373CE81ED6E28003E327D96 /* RSKImageCropper-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RSKImageCropper-dummy.m"; sourceTree = "<group>"; };
-		6BF5CADFA8D122150B10D5ADD0B3FC3A /* UIApplication+RSKImageCropper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+RSKImageCropper.m"; path = "RSKImageCropper/UIApplication+RSKImageCropper.m"; sourceTree = "<group>"; };
-		74CA3E8B0E92749FAA098473B905EEFD /* UIImage+RSKImageCropper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+RSKImageCropper.h"; path = "RSKImageCropper/UIImage+RSKImageCropper.h"; sourceTree = "<group>"; };
+		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78750B8CB197E0DC12A3F08798E7E04C /* Pods-MeetingApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MeetingApp-dummy.m"; sourceTree = "<group>"; };
-		91413329813FA6FE5A78842159E69621 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		92EE5D091D588A41642710143D960DDF /* UIImageView-Letters-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImageView-Letters-dummy.m"; sourceTree = "<group>"; };
-		95ABB3930E58DCAE363DA4F8F2DAA881 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
-		A5617DC30B997B436A35036F41636A8A /* DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
-		AC034444C0DED2B80AE3BA00028A34EB /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
-		AFD230653141DA47E49D8F7622307A73 /* RSKImageScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RSKImageScrollView.m; path = RSKImageCropper/RSKImageScrollView.m; sourceTree = "<group>"; };
-		B5A10675EC5EE3BA8BEE2AC6E2CC5928 /* RSKTouchView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RSKTouchView.h; path = RSKImageCropper/RSKTouchView.h; sourceTree = "<group>"; };
-		B9E885955CF747A273E20116D280ACB8 /* UIImageView+Letters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Letters.m"; path = "UIImageView+Letters/UIImageView+Letters.m"; sourceTree = "<group>"; };
+		7C5BB531849C668E6AC620DAF80D3996 /* UIImageView-Letters-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImageView-Letters-prefix.pch"; sourceTree = "<group>"; };
+		90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIImageView-Letters.xcconfig"; sourceTree = "<group>"; };
+		93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Letters.m"; path = "UIImageView+Letters/UIImageView+Letters.m"; sourceTree = "<group>"; };
+		9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
+		B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C0D46BD94DC187D51E6A607A6DE149C1 /* libDZNEmptyDataSet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDZNEmptyDataSet.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C21C7D1BF1290892C0B0E3FF38F08911 /* RSKImageCropperStrings.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = RSKImageCropperStrings.bundle; path = RSKImageCropper/RSKImageCropperStrings.bundle; sourceTree = "<group>"; };
+		C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.xcconfig; sourceTree = "<group>"; };
 		D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
-		D9DE615671731BF3AEFB3CB1F984FA8F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		DED36D71D30D5E323179381F4D70A540 /* RSKTouchView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RSKTouchView.m; path = RSKImageCropper/RSKTouchView.m; sourceTree = "<group>"; };
-		E1B9D61BA3BA3436BC0FF658382DFBEC /* RSKImageCropViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RSKImageCropViewController.m; path = RSKImageCropper/RSKImageCropViewController.m; sourceTree = "<group>"; };
-		E642B1A057ADA2ABEF90BE2417F349C1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		EA9E38EE6C25346CC052AD3F45B215E6 /* Pods-MeetingApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MeetingApp-resources.sh"; sourceTree = "<group>"; };
-		EBDE8C394E9C798A27BDE0D0313FD41E /* RSKImageCropper.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RSKImageCropper.xcconfig; sourceTree = "<group>"; };
-		EDD179BA0F928A8A31DC2AFF8D23ECDD /* libUIImageView-Letters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIImageView-Letters.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F62D9FCCF474CA0CA8BC7D42AE9EAF08 /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD84B7D38DBB1926C62537E502AB19E1 /* RSKInternalUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RSKInternalUtility.m; path = RSKImageCropper/RSKInternalUtility.m; sourceTree = "<group>"; };
-		FDFB132E41CA6699EC1904681D26D9EA /* CGGeometry+RSKImageCropper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CGGeometry+RSKImageCropper.h"; path = "RSKImageCropper/CGGeometry+RSKImageCropper.h"; sourceTree = "<group>"; };
 		FEF60D3B455310E5F0EB06477E839C53 /* Pods-MeetingApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MeetingApp-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,149 +73,112 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39AE86193CF487C25A9163D0C6958DF4 /* Frameworks */ = {
+		7F4706FCF440B47EEF77E4C6F2B55DEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57B8099AD900291737C1C47F95FFCE48 /* Foundation.framework in Frameworks */,
+				79937BF7081A392CA508E7FB6DE4237D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4EAE6FBB6C1F1D27092FD7FA6F471CAB /* Frameworks */ = {
+		B6D6EE40839811D872773374E3D31793 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B009242E70DBC858F6599CC03CAECA34 /* Foundation.framework in Frameworks */,
-				850A60CBD6C60B5167EF875B3B85C05A /* QuartzCore.framework in Frameworks */,
-				B8A8F409CE9414E6EB49A4A6D349296A /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DCCE4936EC0D8F2DA6312E770BD7F297 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D7A0A75ED086AD202C076C1C923F62D /* Foundation.framework in Frameworks */,
+				BA7AB5D5BCA604EA48D82F71988394A0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				DA23025FEDA7F7FE2AACB2532BD80D14 /* iOS */,
+				6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */,
+				C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */,
 			);
-			name = Frameworks;
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		12B38AF609767366A23B979D043FC483 /* Support Files */ = {
+		23AA080FF52C7902FE8F9B43230A9163 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2C2F246B1B229AFD4748F6CC8D5380F7 /* DZNEmptyDataSet.xcconfig */,
-				5EA17879D6B9A107E06C1BE1DFDAD1E4 /* DZNEmptyDataSet-dummy.m */,
-				A5617DC30B997B436A35036F41636A8A /* DZNEmptyDataSet-prefix.pch */,
+				CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */,
+				9E2D0C6D83BA64828AE67F530FC44EFD /* DZNEmptyDataSet-dummy.m */,
+				4BF9B502EF1D2B34FB02FA292405104C /* DZNEmptyDataSet-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/DZNEmptyDataSet";
 			sourceTree = "<group>";
 		};
-		16619562371AC8B5B078EC47856DDAA0 /* UIImageView-Letters */ = {
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07A2F9B6CB4A8A9B8A8EBDCCB17B0215 /* UIImageView+Letters.h */,
-				B9E885955CF747A273E20116D280ACB8 /* UIImageView+Letters.m */,
-				3C168B779DF04620429C339EEE973876 /* Support Files */,
+				18340F12838DEE43507667CC74401EB1 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4EBD35AC72B0316D302F95D677476C9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */,
+				74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */,
+				580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6FFFF097957D7AA7A23F9D8147E7F1AB /* UIImageView-Letters */ = {
+			isa = PBXGroup;
+			children = (
+				0F1508B20718832673EFD7CEDC2AF024 /* UIImageView+Letters.h */,
+				93621F29BA21E38753D6E5E39D3645C3 /* UIImageView+Letters.m */,
+				7651B38D81708E130C60BD2BB2E049EE /* Support Files */,
 			);
 			path = "UIImageView-Letters";
 			sourceTree = "<group>";
 		};
-		3C168B779DF04620429C339EEE973876 /* Support Files */ = {
+		7651B38D81708E130C60BD2BB2E049EE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				16055A3F63DDDEA8FC6900278FB6FDFC /* UIImageView-Letters.xcconfig */,
-				92EE5D091D588A41642710143D960DDF /* UIImageView-Letters-dummy.m */,
-				0989996346F214BCE5451176A7A79CE9 /* UIImageView-Letters-prefix.pch */,
+				90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */,
+				32B4723D166D3A6676703EC037F8E2AE /* UIImageView-Letters-dummy.m */,
+				7C5BB531849C668E6AC620DAF80D3996 /* UIImageView-Letters-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/UIImageView-Letters";
-			sourceTree = "<group>";
-		};
-		470F0147EFFD7EAACA664E3FC5F604A7 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C21C7D1BF1290892C0B0E3FF38F08911 /* RSKImageCropperStrings.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		6C8D3A9C4A73ED28952371CC4F34CEC5 /* RSKImageCropper */ = {
-			isa = PBXGroup;
-			children = (
-				FDFB132E41CA6699EC1904681D26D9EA /* CGGeometry+RSKImageCropper.h */,
-				159436E8900E97154B988E99CC6492D7 /* CGGeometry+RSKImageCropper.m */,
-				4F9A81132BAC24CF116809E66865EB99 /* RSKImageCropper.h */,
-				4431C5132965D1A8A74E5E39F54A3C66 /* RSKImageCropViewController.h */,
-				E1B9D61BA3BA3436BC0FF658382DFBEC /* RSKImageCropViewController.m */,
-				44E8E5E80A0C2DD98480C74A5FFC1BC4 /* RSKImageCropViewController+Protected.h */,
-				01798248B7358533ED75B94CD25EE1D3 /* RSKImageScrollView.h */,
-				AFD230653141DA47E49D8F7622307A73 /* RSKImageScrollView.m */,
-				62F3A341478A5007ADD002612C43B693 /* RSKInternalUtility.h */,
-				FD84B7D38DBB1926C62537E502AB19E1 /* RSKInternalUtility.m */,
-				B5A10675EC5EE3BA8BEE2AC6E2CC5928 /* RSKTouchView.h */,
-				DED36D71D30D5E323179381F4D70A540 /* RSKTouchView.m */,
-				5D6FC9E8A68E86CB417459F8254C8286 /* UIApplication+RSKImageCropper.h */,
-				6BF5CADFA8D122150B10D5ADD0B3FC3A /* UIApplication+RSKImageCropper.m */,
-				74CA3E8B0E92749FAA098473B905EEFD /* UIImage+RSKImageCropper.h */,
-				190DE35D93D6205DFDA72734A5DEEFD7 /* UIImage+RSKImageCropper.m */,
-				470F0147EFFD7EAACA664E3FC5F604A7 /* Resources */,
-				70F220D342E7AF4238E3857607E800FE /* Support Files */,
-			);
-			path = RSKImageCropper;
-			sourceTree = "<group>";
-		};
-		70F220D342E7AF4238E3857607E800FE /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				EBDE8C394E9C798A27BDE0D0313FD41E /* RSKImageCropper.xcconfig */,
-				67DACDE1F373CE81ED6E28003E327D96 /* RSKImageCropper-dummy.m */,
-				4DC0DA7450CB0DC5F3EEB9A32799FC36 /* RSKImageCropper-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/RSKImageCropper";
-			sourceTree = "<group>";
-		};
-		7836768B1E5AA6FAB1524F4D035913CF /* DZNEmptyDataSet */ = {
-			isa = PBXGroup;
-			children = (
-				AC034444C0DED2B80AE3BA00028A34EB /* UIScrollView+EmptyDataSet.h */,
-				95ABB3930E58DCAE363DA4F8F2DAA881 /* UIScrollView+EmptyDataSet.m */,
-				12B38AF609767366A23B979D043FC483 /* Support Files */,
-			);
-			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				D3F51D10ED3F35FADF2EE53E60F5B63F /* Pods */,
-				BC433D47698290DB18FBAF7B38E5B198 /* Products */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				C5A572853520959C957BC6D201A8BD4C /* Pods */,
+				4EBD35AC72B0316D302F95D677476C9A /* Products */,
 				EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		BC433D47698290DB18FBAF7B38E5B198 /* Products */ = {
+		B2283D169D8B111163463CCEF9325F3F /* DZNEmptyDataSet */ = {
 			isa = PBXGroup;
 			children = (
-				C0D46BD94DC187D51E6A607A6DE149C1 /* libDZNEmptyDataSet.a */,
-				F62D9FCCF474CA0CA8BC7D42AE9EAF08 /* libPods-MeetingApp.a */,
-				62E8CDBBAD97E65A5765A24C054813B1 /* libRSKImageCropper.a */,
-				EDD179BA0F928A8A31DC2AFF8D23ECDD /* libUIImageView-Letters.a */,
+				B840B7A8DB6B83EBD64803856B624A82 /* UIScrollView+EmptyDataSet.h */,
+				9B436601A036394BA526CD2EC87EF295 /* UIScrollView+EmptyDataSet.m */,
+				23AA080FF52C7902FE8F9B43230A9163 /* Support Files */,
 			);
-			name = Products;
+			path = DZNEmptyDataSet;
+			sourceTree = "<group>";
+		};
+		C5A572853520959C957BC6D201A8BD4C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2283D169D8B111163463CCEF9325F3F /* DZNEmptyDataSet */,
+				6FFFF097957D7AA7A23F9D8147E7F1AB /* UIImageView-Letters */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D0EAD331F7C399929392C26DC979EAE2 /* Pods-MeetingApp */ = {
@@ -280,26 +194,6 @@
 			);
 			name = "Pods-MeetingApp";
 			path = "Target Support Files/Pods-MeetingApp";
-			sourceTree = "<group>";
-		};
-		D3F51D10ED3F35FADF2EE53E60F5B63F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7836768B1E5AA6FAB1524F4D035913CF /* DZNEmptyDataSet */,
-				6C8D3A9C4A73ED28952371CC4F34CEC5 /* RSKImageCropper */,
-				16619562371AC8B5B078EC47856DDAA0 /* UIImageView-Letters */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		DA23025FEDA7F7FE2AACB2532BD80D14 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				91413329813FA6FE5A78842159E69621 /* Foundation.framework */,
-				E642B1A057ADA2ABEF90BE2417F349C1 /* QuartzCore.framework */,
-				D9DE615671731BF3AEFB3CB1F984FA8F /* UIKit.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		EE5DF18C8A0F0C1D15C4363141EF6B67 /* Targets Support Files */ = {
@@ -321,50 +215,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC41138E97E2BFEB506789B338137A5A /* Headers */ = {
+		E39F18A393A94F4093FE1C384C9B8553 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F8D87E54F60342DFE00C78375B306B3 /* CGGeometry+RSKImageCropper.h in Headers */,
-				156479E209B6B78788CFB8C143ADA810 /* RSKImageCropper.h in Headers */,
-				6CDFE77F0A1ED08808AB53CDEEDF5C5D /* RSKImageCropViewController+Protected.h in Headers */,
-				3FE61E9D998F33D75C0F82686DFE981C /* RSKImageCropViewController.h in Headers */,
-				D843D0D6C14F1FB5E1C2286EF814C62B /* RSKImageScrollView.h in Headers */,
-				C9B4BC2E2E0D68F1086955757D817057 /* RSKInternalUtility.h in Headers */,
-				5D701206528B2971AF04084C56535CC3 /* RSKTouchView.h in Headers */,
-				0398BEC63A7906B1EFFF22D09FF5A83F /* UIApplication+RSKImageCropper.h in Headers */,
-				78E74E655854D595150E851FC8D11B20 /* UIImage+RSKImageCropper.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EBAD5670CD7DEF8707D177E3869EA4F7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4A4F763071BC14755970B8D6F264BB90 /* UIImageView+Letters.h in Headers */,
+				091F223EA0398A2AA80DDE6437783335 /* UIImageView+Letters.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		35B24E21688A5C22CD3CFCFB4DB88902 /* Pods-MeetingApp */ = {
+		566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 311E8A80977237928C9068991EEE319E /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */;
+			buildConfigurationList = EEE42ACFCEB0C9F8D15B195ED514F4F4 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */;
 			buildPhases = (
-				CC12FA77B156B1B972CA4BDE9A043EED /* Sources */,
-				DCCE4936EC0D8F2DA6312E770BD7F297 /* Frameworks */,
+				6014B25E8CBE4D7C929565002697E199 /* Sources */,
+				B6D6EE40839811D872773374E3D31793 /* Frameworks */,
+				E39F18A393A94F4093FE1C384C9B8553 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				92593A305A46C88678A4CA48F823D634 /* PBXTargetDependency */,
-				29D8C8DA72D4ED00350BD0FF964566A9 /* PBXTargetDependency */,
-				B55DC2FB8E68D4B6A3C8F75AAF39DAD9 /* PBXTargetDependency */,
 			);
-			name = "Pods-MeetingApp";
-			productName = "Pods-MeetingApp";
-			productReference = F62D9FCCF474CA0CA8BC7D42AE9EAF08 /* libPods-MeetingApp.a */;
+			name = "UIImageView-Letters";
+			productName = "UIImageView-Letters";
+			productReference = 580A32D51F7A4BB54567CD163B86402D /* libUIImageView-Letters.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */ = {
@@ -381,41 +257,25 @@
 			);
 			name = DZNEmptyDataSet;
 			productName = DZNEmptyDataSet;
-			productReference = C0D46BD94DC187D51E6A607A6DE149C1 /* libDZNEmptyDataSet.a */;
+			productReference = 1CF0F375759106B3E25168E9BA6EAD9B /* libDZNEmptyDataSet.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7B836FD3040B2BF38EAC59FB716401DB /* RSKImageCropper */ = {
+		DC3DBA14BB5E573EF55B87CC2E7A1F6D /* Pods-MeetingApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1ED10ED7EBF3F6359C40452A599115DE /* Build configuration list for PBXNativeTarget "RSKImageCropper" */;
+			buildConfigurationList = 6B0EF462BF77F96598B7BD28026DB9A2 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */;
 			buildPhases = (
-				F66DC55349D088EBF5B107176FCCD7F5 /* Sources */,
-				4EAE6FBB6C1F1D27092FD7FA6F471CAB /* Frameworks */,
-				BC41138E97E2BFEB506789B338137A5A /* Headers */,
+				8F1667A49276BE9663FFBCB1141074B8 /* Sources */,
+				7F4706FCF440B47EEF77E4C6F2B55DEA /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				148E64750E08892D4230428FD07F72A7 /* PBXTargetDependency */,
+				55BF16A9862C7657D41472628A1F0734 /* PBXTargetDependency */,
 			);
-			name = RSKImageCropper;
-			productName = RSKImageCropper;
-			productReference = 62E8CDBBAD97E65A5765A24C054813B1 /* libRSKImageCropper.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		D2C8A5F63AC04DEFEBA4D460501DB99D /* UIImageView-Letters */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E18DED65C4F8DF04D7308503AFA7AE0D /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */;
-			buildPhases = (
-				2F81FC97546C90F1265240173A23ED24 /* Sources */,
-				39AE86193CF487C25A9163D0C6958DF4 /* Frameworks */,
-				EBAD5670CD7DEF8707D177E3869EA4F7 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "UIImageView-Letters";
-			productName = "UIImageView-Letters";
-			productReference = EDD179BA0F928A8A31DC2AFF8D23ECDD /* libUIImageView-Letters.a */;
+			name = "Pods-MeetingApp";
+			productName = "Pods-MeetingApp";
+			productReference = 74BD7D3E108C5C344B6D21EFCAA1DCED /* libPods-MeetingApp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -435,25 +295,32 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = BC433D47698290DB18FBAF7B38E5B198 /* Products */;
+			productRefGroup = 4EBD35AC72B0316D302F95D677476C9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */,
-				35B24E21688A5C22CD3CFCFB4DB88902 /* Pods-MeetingApp */,
-				7B836FD3040B2BF38EAC59FB716401DB /* RSKImageCropper */,
-				D2C8A5F63AC04DEFEBA4D460501DB99D /* UIImageView-Letters */,
+				DC3DBA14BB5E573EF55B87CC2E7A1F6D /* Pods-MeetingApp */,
+				566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2F81FC97546C90F1265240173A23ED24 /* Sources */ = {
+		6014B25E8CBE4D7C929565002697E199 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB2C4B8A1946CA583A12B126EE039F38 /* UIImageView+Letters.m in Sources */,
-				D5F16D2200F237BC34E4DB8762ED4084 /* UIImageView-Letters-dummy.m in Sources */,
+				7095E57035641A41A24A8C505431E097 /* UIImageView+Letters.m in Sources */,
+				6DDC90FBCBB6762F5B90B8B4E90E6398 /* UIImageView-Letters-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F1667A49276BE9663FFBCB1141074B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE6106A64DA95E9D57D8549EA0A316C /* Pods-MeetingApp-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,56 +333,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CC12FA77B156B1B972CA4BDE9A043EED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BD4A508D865156A98A3781DD34C4B12 /* Pods-MeetingApp-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F66DC55349D088EBF5B107176FCCD7F5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F7AADAD7FF7117102B818478A4CCB72D /* CGGeometry+RSKImageCropper.m in Sources */,
-				CF425601D068338D9D2CF480EB72D867 /* RSKImageCropper-dummy.m in Sources */,
-				C762CFA9B788314DF2ED61C888F4C2C0 /* RSKImageCropViewController.m in Sources */,
-				6D00443CC60E3012F5FF889F83E90B11 /* RSKImageScrollView.m in Sources */,
-				E5A81F1A3E81F5689ABAC7C3B300E0E8 /* RSKInternalUtility.m in Sources */,
-				F4E7BA48946F1961975A41C112B2AF58 /* RSKTouchView.m in Sources */,
-				77B7052DF18C67EE9E918660D0ED5401 /* UIApplication+RSKImageCropper.m in Sources */,
-				F3D5C81DF4ABCE845B87F3D53B5F9954 /* UIImage+RSKImageCropper.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		29D8C8DA72D4ED00350BD0FF964566A9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RSKImageCropper;
-			target = 7B836FD3040B2BF38EAC59FB716401DB /* RSKImageCropper */;
-			targetProxy = 2D3E8F66E12E0D643F77B3D589DAC5C1 /* PBXContainerItemProxy */;
-		};
-		92593A305A46C88678A4CA48F823D634 /* PBXTargetDependency */ = {
+		148E64750E08892D4230428FD07F72A7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DZNEmptyDataSet;
 			target = 736E57AD5AEFAAF68D47AE4E8FCB8F68 /* DZNEmptyDataSet */;
-			targetProxy = 6AFBAF07E57BEF22402DD7157DC09A24 /* PBXContainerItemProxy */;
+			targetProxy = C085ABC141E91D346A19F6C530B71533 /* PBXContainerItemProxy */;
 		};
-		B55DC2FB8E68D4B6A3C8F75AAF39DAD9 /* PBXTargetDependency */ = {
+		55BF16A9862C7657D41472628A1F0734 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "UIImageView-Letters";
-			target = D2C8A5F63AC04DEFEBA4D460501DB99D /* UIImageView-Letters */;
-			targetProxy = 64AF86C7C611451C764C8532EB2B77B5 /* PBXContainerItemProxy */;
+			target = 566FE36C2D6839F41C1CC8E6D4E8A96E /* UIImageView-Letters */;
+			targetProxy = 6ADC4E792ADA93510E74FE9BFC5BCEF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1AA954AF286F6B92CAE54C3656FDBA0E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C2F246B1B229AFD4748F6CC8D5380F7 /* DZNEmptyDataSet.xcconfig */;
+			baseConfigurationReference = CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/DZNEmptyDataSet/DZNEmptyDataSet-prefix.pch";
@@ -531,7 +369,25 @@
 			};
 			name = Debug;
 		};
-		4FA514F4B81D48FC018EA5D50545E1B5 /* Debug */ = {
+		6E7FCC59380450B6905AE2BF3956C046 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBDF6D1F28EE7D462167F5E549BCB48B /* DZNEmptyDataSet.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DZNEmptyDataSet/DZNEmptyDataSet-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		71CA99DDD8090D967CCB5647AED2C0AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B434C8A628220D8C90000D7A0A3F73E /* Pods-MeetingApp.debug.xcconfig */;
 			buildSettings = {
@@ -548,41 +404,22 @@
 			};
 			name = Debug;
 		};
-		6E7FCC59380450B6905AE2BF3956C046 /* Release */ = {
+		793B060AFDA6DB6F63CEFD7352D9DCC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C2F246B1B229AFD4748F6CC8D5380F7 /* DZNEmptyDataSet.xcconfig */;
+			baseConfigurationReference = D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/DZNEmptyDataSet/DZNEmptyDataSet-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		81DB951284B0E65186FB4E4207A1A77F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16055A3F63DDDEA8FC6900278FB6FDFC /* UIImageView-Letters.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
 		};
 		8D1534490D941DCA47C62AC4314182AF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -623,62 +460,9 @@
 			};
 			name = Debug;
 		};
-		ACA34E472CA454872EEE8A5AE3EC649F /* Release */ = {
+		B53E8F6A5C53D80A557F6272ADB0F12D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBDE8C394E9C798A27BDE0D0313FD41E /* RSKImageCropper.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RSKImageCropper/RSKImageCropper-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		AEDDA3EB5A93CC647F2B14D2E1533620 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBDE8C394E9C798A27BDE0D0313FD41E /* RSKImageCropper.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RSKImageCropper/RSKImageCropper-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		B2FED1210D5505DE86C245828A36CCE3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6F1923F955B39F7830D9E4ED330A428 /* Pods-MeetingApp.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		BD341E5B6471B2ABE592A242BB20A72F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16055A3F63DDDEA8FC6900278FB6FDFC /* UIImageView-Letters.xcconfig */;
+			baseConfigurationReference = 90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
@@ -693,6 +477,24 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
+		};
+		C49F518D289261D8405DE58291CA07AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90B26D10C544F9AD3C29913AFF998644 /* UIImageView-Letters.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIImageView-Letters/UIImageView-Letters-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
 		};
 		C5A18280E9321A9268D1C80B7DA43967 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -731,15 +533,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1ED10ED7EBF3F6359C40452A599115DE /* Build configuration list for PBXNativeTarget "RSKImageCropper" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AEDDA3EB5A93CC647F2B14D2E1533620 /* Debug */,
-				ACA34E472CA454872EEE8A5AE3EC649F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -749,11 +542,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		311E8A80977237928C9068991EEE319E /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */ = {
+		6B0EF462BF77F96598B7BD28026DB9A2 /* Build configuration list for PBXNativeTarget "Pods-MeetingApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FA514F4B81D48FC018EA5D50545E1B5 /* Debug */,
-				B2FED1210D5505DE86C245828A36CCE3 /* Release */,
+				71CA99DDD8090D967CCB5647AED2C0AD /* Debug */,
+				793B060AFDA6DB6F63CEFD7352D9DCC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -767,11 +560,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E18DED65C4F8DF04D7308503AFA7AE0D /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */ = {
+		EEE42ACFCEB0C9F8D15B195ED514F4F4 /* Build configuration list for PBXNativeTarget "UIImageView-Letters" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				81DB951284B0E65186FB4E4207A1A77F /* Debug */,
-				BD341E5B6471B2ABE592A242BB20A72F /* Release */,
+				C49F518D289261D8405DE58291CA07AB /* Debug */,
+				B53E8F6A5C53D80A557F6272ADB0F12D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
