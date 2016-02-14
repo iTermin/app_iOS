@@ -8,7 +8,7 @@
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
-#import "../ListCountries/GuestListCountriesTableViewController.h"
+#import "GuestListCountriesTableViewController.h"
 
 @interface EditGuestDetailViewController ()
 
