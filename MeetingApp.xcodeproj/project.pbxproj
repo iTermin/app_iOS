@@ -12,7 +12,6 @@
 		7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16877F1C707EB900197DB1 /* RSKImageCropper.framework */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
-		7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */; };
 		7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA881C2ED3C70059EAE3 /* Main.storyboard */; };
 		7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */; };
 		7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */; };
@@ -33,12 +32,13 @@
 		7C3E2B9D1C70ABEE00B49E90 /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B901C70ABEE00B49E90 /* HeaderTableViewCell.m */; };
 		7C3E2B9E1C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B931C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m */; };
 		7C3E2B9F1C70ABEE00B49E90 /* ProfilePhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B951C70ABEE00B49E90 /* ProfilePhotoTableViewCell.m */; };
+		7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BA01C70AD7400B49E90 /* BeginMeetingViewController.m */; };
+		7C3E2BAB1C70AD7400B49E90 /* MeetingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BA31C70AD7400B49E90 /* MeetingTableViewController.m */; };
+		7C3E2BAC1C70AD7400B49E90 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BA41C70AD7400B49E90 /* MeetingDetailViewController.m */; };
+		7C3E2BAD1C70AD7400B49E90 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BA71C70AD7400B49E90 /* MeetingDateTableViewController.m */; };
+		7C3E2BAE1C70AD7400B49E90 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BA91C70AD7400B49E90 /* SetMeetingViewController.m */; };
 		7C4BD5741C5E1125005526D3 /* EditGuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
-		7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */; };
-		7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */; };
-		7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */; };
-		7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */; };
 		7CC544E91C64A14100D4DECD /* LocationGuestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC544E71C64A14100D4DECD /* LocationGuestTableViewCell.m */; };
 		7CC544EA1C64A14100D4DECD /* LocationGuestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC544E81C64A14100D4DECD /* LocationGuestTableViewCell.xib */; };
 		7CC544ED1C64A48C00D4DECD /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC544EC1C64A48C00D4DECD /* GuestListCountriesTableViewController.m */; };
@@ -87,8 +87,6 @@
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7C30FA851C2ED3C70059EAE3 /* MeetingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingTableViewController.h; sourceTree = "<group>"; };
-		7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingTableViewController.m; sourceTree = "<group>"; };
 		7C30FA891C2ED3C70059EAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C30FA8E1C2ED3C70059EAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -123,18 +121,20 @@
 		7C3E2B931C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionsSettingsTableViewCell.m; path = User/Artifacts/OptionsSettingsTableViewCell.m; sourceTree = "<group>"; };
 		7C3E2B941C70ABEE00B49E90 /* ProfilePhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePhotoTableViewCell.h; path = User/Artifacts/ProfilePhotoTableViewCell.h; sourceTree = "<group>"; };
 		7C3E2B951C70ABEE00B49E90 /* ProfilePhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePhotoTableViewCell.m; path = User/Artifacts/ProfilePhotoTableViewCell.m; sourceTree = "<group>"; };
+		7C3E2BA01C70AD7400B49E90 /* BeginMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BeginMeetingViewController.m; path = Meeting/BeginMeetingViewController.m; sourceTree = "<group>"; };
+		7C3E2BA11C70AD7400B49E90 /* BeginMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BeginMeetingViewController.h; path = Meeting/BeginMeetingViewController.h; sourceTree = "<group>"; };
+		7C3E2BA21C70AD7400B49E90 /* MeetingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingTableViewController.h; path = Meeting/MeetingTableViewController.h; sourceTree = "<group>"; };
+		7C3E2BA31C70AD7400B49E90 /* MeetingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingTableViewController.m; path = Meeting/MeetingTableViewController.m; sourceTree = "<group>"; };
+		7C3E2BA41C70AD7400B49E90 /* MeetingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingDetailViewController.m; path = Meeting/MeetingDetailViewController.m; sourceTree = "<group>"; };
+		7C3E2BA51C70AD7400B49E90 /* MeetingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingDetailViewController.h; path = Meeting/MeetingDetailViewController.h; sourceTree = "<group>"; };
+		7C3E2BA61C70AD7400B49E90 /* MeetingDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingDateTableViewController.h; path = Meeting/MeetingDateTableViewController.h; sourceTree = "<group>"; };
+		7C3E2BA71C70AD7400B49E90 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingDateTableViewController.m; path = Meeting/MeetingDateTableViewController.m; sourceTree = "<group>"; };
+		7C3E2BA81C70AD7400B49E90 /* SetMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetMeetingViewController.h; path = Meeting/SetMeetingViewController.h; sourceTree = "<group>"; };
+		7C3E2BA91C70AD7400B49E90 /* SetMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetMeetingViewController.m; path = Meeting/SetMeetingViewController.m; sourceTree = "<group>"; };
 		7C4BD5721C5E1125005526D3 /* EditGuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGuestDetailViewController.h; sourceTree = "<group>"; };
 		7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGuestDetailViewController.m; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
 		7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelTableViewController.m; path = ViewControllers/ModelTableViewController.m; sourceTree = "<group>"; };
-		7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeginMeetingViewController.m; sourceTree = "<group>"; };
-		7C6F4F0D1C31281600608696 /* BeginMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeginMeetingViewController.h; sourceTree = "<group>"; };
-		7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDetailViewController.h; sourceTree = "<group>"; };
-		7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDetailViewController.m; sourceTree = "<group>"; };
-		7C92B78B1C394B8A00DAA583 /* SetMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMeetingViewController.h; sourceTree = "<group>"; };
-		7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMeetingViewController.m; sourceTree = "<group>"; };
-		7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDateTableViewController.h; sourceTree = "<group>"; };
-		7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDateTableViewController.m; sourceTree = "<group>"; };
 		7CC544E61C64A14100D4DECD /* LocationGuestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationGuestTableViewCell.h; path = Artifacts/LocationGuestTableViewCell.h; sourceTree = "<group>"; };
 		7CC544E71C64A14100D4DECD /* LocationGuestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationGuestTableViewCell.m; path = Artifacts/LocationGuestTableViewCell.m; sourceTree = "<group>"; };
 		7CC544E81C64A14100D4DECD /* LocationGuestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationGuestTableViewCell.xib; path = Artifacts/LocationGuestTableViewCell.xib; sourceTree = "<group>"; };
@@ -256,20 +256,10 @@
 				7CFD97971C4EDB4D00C1095F /* Artifacts */,
 				7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */,
 				7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */,
-				7C30FA851C2ED3C70059EAE3 /* MeetingTableViewController.h */,
-				7C30FA861C2ED3C70059EAE3 /* MeetingTableViewController.m */,
-				7C6F4F0E1C312B7200608696 /* MeetingDetailViewController.h */,
-				7C6F4F0F1C312B7200608696 /* MeetingDetailViewController.m */,
 				7CD500911C354DF9000FA090 /* GuestDetailViewController.h */,
 				7CD500921C354DF9000FA090 /* GuestDetailViewController.m */,
-				7C6F4F0D1C31281600608696 /* BeginMeetingViewController.h */,
-				7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */,
 				7C4BD5721C5E1125005526D3 /* EditGuestDetailViewController.h */,
 				7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */,
-				7C92B78B1C394B8A00DAA583 /* SetMeetingViewController.h */,
-				7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */,
-				7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */,
-				7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -344,6 +334,16 @@
 		7C3E2B7D1C70A82900B49E90 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				7C3E2BA01C70AD7400B49E90 /* BeginMeetingViewController.m */,
+				7C3E2BA11C70AD7400B49E90 /* BeginMeetingViewController.h */,
+				7C3E2BA21C70AD7400B49E90 /* MeetingTableViewController.h */,
+				7C3E2BA31C70AD7400B49E90 /* MeetingTableViewController.m */,
+				7C3E2BA41C70AD7400B49E90 /* MeetingDetailViewController.m */,
+				7C3E2BA51C70AD7400B49E90 /* MeetingDetailViewController.h */,
+				7C3E2BA61C70AD7400B49E90 /* MeetingDateTableViewController.h */,
+				7C3E2BA71C70AD7400B49E90 /* MeetingDateTableViewController.m */,
+				7C3E2BA81C70AD7400B49E90 /* SetMeetingViewController.h */,
+				7C3E2BA91C70AD7400B49E90 /* SetMeetingViewController.m */,
 			);
 			name = Meeting;
 			sourceTree = "<group>";
@@ -621,24 +621,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C3E2BAC1C70AD7400B49E90 /* MeetingDetailViewController.m in Sources */,
 				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
-				7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */,
-				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
-				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
+				7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */,
 				7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */,
 				7CC544E91C64A14100D4DECD /* LocationGuestTableViewCell.m in Sources */,
 				7C3E2B9E1C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m in Sources */,
 				7C3E2B9B1C70ABEE00B49E90 /* LocationUserTableViewCell.m in Sources */,
+				7C3E2BAD1C70AD7400B49E90 /* MeetingDateTableViewController.m in Sources */,
 				7CC544ED1C64A48C00D4DECD /* GuestListCountriesTableViewController.m in Sources */,
 				7CEB6D911C5B71BC006E5D2C /* GuestViewCell.m in Sources */,
+				7C3E2BAB1C70AD7400B49E90 /* MeetingTableViewController.m in Sources */,
 				7CD500931C354DF9000FA090 /* GuestDetailViewController.m in Sources */,
 				7C3E2B9F1C70ABEE00B49E90 /* ProfilePhotoTableViewCell.m in Sources */,
 				7C3E2B9D1C70ABEE00B49E90 /* HeaderTableViewCell.m in Sources */,
 				7C4BD5741C5E1125005526D3 /* EditGuestDetailViewController.m in Sources */,
 				7C3E2B9C1C70ABEE00B49E90 /* GeneralInformationUserTableViewCell.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
-				7C6F4F101C312B7200608696 /* MeetingDetailViewController.m in Sources */,
-				7C92B78D1C394B8A00DAA583 /* SetMeetingViewController.m in Sources */,
+				7C3E2BAE1C70AD7400B49E90 /* SetMeetingViewController.m in Sources */,
 				7CE03B6D1C66495300C7F016 /* MeetingTableViewCell.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 				7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */,
