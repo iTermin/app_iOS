@@ -24,6 +24,7 @@
 		7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B80A41C555A6300678EF4 /* CountryViewCell.m */; };
 		7C3B80A71C555A6300678EF4 /* CountryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */; };
 		7C3E2B821C70A8C300B49E90 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */; };
+		7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B841C70A96E00B49E90 /* EditProfileUserViewController.m */; };
 		7C4BD5741C5E1125005526D3 /* EditGuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
 		7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F4F0B1C3127FE00608696 /* BeginMeetingViewController.m */; };
@@ -50,7 +51,6 @@
 		7CFD97AC1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97AA1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.xib */; };
 		7CFD97B01C4F94D300C1095F /* OptionsSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */; };
 		7CFD97B11C4F94D300C1095F /* OptionsSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */; };
-		7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */; };
 		F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 837704A4712A97F96CAF554C /* libPods-MeetingApp.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +109,8 @@
 		7C3B80A51C555A6300678EF4 /* CountryViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryViewCell.xib; path = ListCountries/Artifacts/CountryViewCell.xib; sourceTree = "<group>"; };
 		7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = User/SettingsViewController.m; sourceTree = "<group>"; };
 		7C3E2B811C70A8C300B49E90 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = User/SettingsViewController.h; sourceTree = "<group>"; };
+		7C3E2B831C70A96E00B49E90 /* EditProfileUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileUserViewController.h; path = User/EditProfileUserViewController.h; sourceTree = "<group>"; };
+		7C3E2B841C70A96E00B49E90 /* EditProfileUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileUserViewController.m; path = User/EditProfileUserViewController.m; sourceTree = "<group>"; };
 		7C4BD5721C5E1125005526D3 /* EditGuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGuestDetailViewController.h; sourceTree = "<group>"; };
 		7C4BD5731C5E1125005526D3 /* EditGuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGuestDetailViewController.m; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
@@ -150,8 +152,6 @@
 		7CFD97AD1C4F94D300C1095F /* OptionsSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionsSettingsTableViewCell.h; path = Artifacts/OptionsSettingsTableViewCell.h; sourceTree = "<group>"; };
 		7CFD97AE1C4F94D300C1095F /* OptionsSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionsSettingsTableViewCell.m; path = Artifacts/OptionsSettingsTableViewCell.m; sourceTree = "<group>"; };
 		7CFD97AF1C4F94D300C1095F /* OptionsSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OptionsSettingsTableViewCell.xib; path = Artifacts/OptionsSettingsTableViewCell.xib; sourceTree = "<group>"; };
-		7CFD97B21C4FA00F00C1095F /* EditProfileUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileUserViewController.h; sourceTree = "<group>"; };
-		7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileUserViewController.m; sourceTree = "<group>"; };
 		837704A4712A97F96CAF554C /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -270,8 +270,6 @@
 				7C92B78C1C394B8A00DAA583 /* SetMeetingViewController.m */,
 				7C92B7911C3FD73E00DAA583 /* MeetingDateTableViewController.h */,
 				7C92B7921C3FD73E00DAA583 /* MeetingDateTableViewController.m */,
-				7CFD97B21C4FA00F00C1095F /* EditProfileUserViewController.h */,
-				7CFD97B31C4FA00F00C1095F /* EditProfileUserViewController.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
 				7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */,
 				7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */,
@@ -334,6 +332,8 @@
 		7C3E2B7B1C70A81D00B49E90 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				7C3E2B831C70A96E00B49E90 /* EditProfileUserViewController.h */,
+				7C3E2B841C70A96E00B49E90 /* EditProfileUserViewController.m */,
 				7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */,
 				7C3E2B811C70A8C300B49E90 /* SettingsViewController.h */,
 			);
@@ -613,13 +613,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
 				7CFD97A01C4EDCB600C1095F /* ProfilePhotoTableViewCell.m in Sources */,
 				7C6F4F0C1C3127FE00608696 /* BeginMeetingViewController.m in Sources */,
 				7C30FA871C2ED3C70059EAE3 /* MeetingTableViewController.m in Sources */,
 				7C92B7931C3FD73E00DAA583 /* MeetingDateTableViewController.m in Sources */,
 				7C3B80A61C555A6300678EF4 /* CountryViewCell.m in Sources */,
 				7CFD97A51C4EE01C00C1095F /* HeaderTableViewCell.m in Sources */,
-				7CFD97B41C4FA00F00C1095F /* EditProfileUserViewController.m in Sources */,
 				7CC544E91C64A14100D4DECD /* LocationGuestTableViewCell.m in Sources */,
 				7CFD97AB1C4F8E4E00C1095F /* GeneralInformationUserTableViewCell.m in Sources */,
 				7CC544ED1C64A48C00D4DECD /* GuestListCountriesTableViewController.m in Sources */,
