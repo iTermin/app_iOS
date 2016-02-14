@@ -1,0 +1,3 @@
+[submodule "libs/RSKImageCropper"]
+	path = libs/RSKImageCropper
+	url = https://github.com/EstefaniaGuardado/RSKImageCropper.git

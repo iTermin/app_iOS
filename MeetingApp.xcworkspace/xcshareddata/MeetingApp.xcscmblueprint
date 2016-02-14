@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8481E87C93313B409B524A69859FE209B6890CA9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8481E87C93313B409B524A69859FE209B6890CA9" : 0,
+    "8573732F49CC1DA86995D53E03F2653BD8F193C0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "80FB6694-5A6B-4C33-8FA6-CBE01A8947F3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8481E87C93313B409B524A69859FE209B6890CA9" : "MeetingApp\/",
+    "8573732F49CC1DA86995D53E03F2653BD8F193C0" : "MeetingApp\/libs\/RSKImageCropper\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MeetingApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MeetingApp.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:fachinota\/meetingapp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8481E87C93313B409B524A69859FE209B6890CA9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/EstefaniaGuardado\/RSKImageCropper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8573732F49CC1DA86995D53E03F2653BD8F193C0"
+    }
+  ]
+}

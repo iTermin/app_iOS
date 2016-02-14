@@ -6,7 +6,6 @@
 target 'MeetingApp' do
 pod "UIImageView-Letters"
 pod 'DZNEmptyDataSet'
-pod 'RSKImageCropper'
 end
 
 target 'MeetingAppTests' do
@@ -16,4 +15,3 @@ end
 target 'MeetingAppUITests' do
 
 end
-
