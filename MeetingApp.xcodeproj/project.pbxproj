@@ -253,7 +253,6 @@
 				7C3E2B7B1C70A81D00B49E90 /* User */,
 				7C65DA6C1C691AE5001F6F32 /* ViewControllers */,
 				7C3B809E1C5558E400678EF4 /* ListCountries */,
-				7CFD97971C4EDB4D00C1095F /* Artifacts */,
 				7C30FA821C2ED3C70059EAE3 /* AppDelegate.h */,
 				7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */,
 				7C30FA881C2ED3C70059EAE3 /* Main.storyboard */,
@@ -419,13 +418,6 @@
 				7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7CFD97971C4EDB4D00C1095F /* Artifacts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Artifacts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
