@@ -459,4 +459,35 @@
     }
 }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if ([identifier isEqualToString:@"setMeeting"]){
+        if([self.viewModel isEqualToArray:@[]]){
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"Invite Guest!"
+                                        message:@"You need add guest to the meeting."
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action){
+                                     //Do some thing here
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
+            return false;
+            
+        } else if([self.nameMeeting.text isEqualToString:@""]){
+            self.nameMeeting.text = @"Meeting 1";
+            return true;
+            
+        } else{
+            return true;
+        }
+    }
+    return true;
+}
+
 @end
