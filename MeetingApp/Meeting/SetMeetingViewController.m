@@ -22,14 +22,6 @@
     [self.endMeeting setInputView:datePicker];
 }
 
-- (void)didReceiveMemoryWarning {
-
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-
-}
-
 -(void)updateTextField:(id)sender
 {
     UIDatePicker *picker = (UIDatePicker*)self.startMeeting.inputView;

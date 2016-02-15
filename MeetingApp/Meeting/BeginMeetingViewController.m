@@ -449,13 +449,21 @@
     }
 }
 
+- (IBAction)nextButtonPressed:(id)sender {
+    if(![self.viewModel isEqualToArray:@[]]){
+        NSMutableArray *guestList = self.dataModel;
+        [self performSegueWithIdentifier:@"setMeeting" sender:guestList];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editGuestDetails"]){
         EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
         [editGuestDetailViewController setCurrentGuest: sender];
     }
     if ([segue.identifier isEqualToString:@"setMeeting"]){
-        
+        SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
+        [guestDateMeetingViewController setGuestMeeting: sender];
     }
 }
 
