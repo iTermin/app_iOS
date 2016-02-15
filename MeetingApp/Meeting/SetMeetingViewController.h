@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *endMeeting;
 
-@property(nonatomic, strong) NSMutableDictionary * guestMeeting;
+@property(nonatomic, strong) NSMutableArray * guestMeeting;
 
 
 @end

@@ -73,7 +73,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="nextButtonPressed:" destination="2QN-cd-kZ6" eventType="touchUpInside" id="qnb-Dk-F17"/>
                                     <segue destination="zmI-nF-ehI" kind="push" identifier="setMeeting" id="YXN-2s-2mK"/>
                                 </connections>
                             </button>

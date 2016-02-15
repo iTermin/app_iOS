@@ -27,7 +27,6 @@
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;
-- (IBAction)nextButtonPressed:(id)sender;
 
 
 @end
