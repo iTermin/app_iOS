@@ -242,6 +242,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NCR-2v-tC2">
                                 <rect key="frame" x="0.0" y="224" width="375" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zmI-nF-ehI" id="P2w-qY-pTh"/>
+                                    <outlet property="delegate" destination="zmI-nF-ehI" id="EqO-HU-SCK"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfc-2p-k5G">
                                 <rect key="frame" x="158" y="195" width="59" height="21"/>
@@ -267,6 +271,7 @@
                     <connections>
                         <outlet property="endMeeting" destination="Jwa-Zz-QRN" id="don-yy-099"/>
                         <outlet property="startMeeting" destination="fXV-Wt-hJh" id="95I-mF-FuA"/>
+                        <outlet property="tableView" destination="NCR-2v-tC2" id="bEg-8e-c5Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SG9-UB-e9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
