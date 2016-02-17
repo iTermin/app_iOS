@@ -262,7 +262,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="uBC-FY-F7c">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="PqS-hf-wCs" kind="push" id="OfM-rv-PQ1"/>
+                                <segue destination="Ot9-mV-rbQ" kind="push" id="dfk-ty-SAQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -644,6 +644,36 @@
             </objects>
             <point key="canvasLocation" x="383.5" y="677.5"/>
         </scene>
+        <!--Meeting Date Selector View Controller-->
+        <scene sceneID="kO4-ZU-Tde">
+            <objects>
+                <tableViewController id="Ot9-mV-rbQ" customClass="MeetingDateSelectorViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tm2-6r-6QQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="uDJ-NR-i3E">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uDJ-NR-i3E" id="EzF-aY-jrw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ot9-mV-rbQ" id="KaJ-sE-gsh"/>
+                            <outlet property="delegate" destination="Ot9-mV-rbQ" id="obZ-eg-bCv"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NVb-BN-2W4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3GP-51-mYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="914.5" y="676.5"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="U1c-qm-2em">
             <objects>
@@ -669,7 +699,7 @@
             <objects>
                 <tableViewController id="PqS-hf-wCs" customClass="MeetingDateTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hcJ-KG-Qkd">
-                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
