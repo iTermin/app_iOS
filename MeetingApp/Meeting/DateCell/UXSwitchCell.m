@@ -72,6 +72,7 @@
     
     // Add switch to content view
     [self.contentView addSubview:onSwitch];
+    [self updateConstraints];
     
     
 }

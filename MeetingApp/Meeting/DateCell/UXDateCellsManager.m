@@ -80,7 +80,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
                                                                         options:0
                                                                          locale:[NSLocale currentLocale]];
         self.allDayDateFormatter = [[NSDateFormatter alloc] init];
-        self.allDayDateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"EEE dd MMM yyyy"
+        self.allDayDateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd MMM yyyy"
                                                                               options:0
                                                                                locale:[NSLocale currentLocale]];
         
