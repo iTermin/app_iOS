@@ -47,6 +47,13 @@
 		7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */; };
 		7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
+		7C79CE9B1C74806E0011C917 /* MeetingDateSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */; };
+		7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC31C7484AD0011C917 /* UXDateCellsManager.m */; };
+		7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */; };
+		7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */; };
+		7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */; };
+		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
+		7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB029F71C722360003D4204 /* GuestDateViewCell.xib */; };
 		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
 		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
@@ -148,6 +155,19 @@
 		7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCountriesViewController.m; path = User/ListCountriesViewController.m; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
 		7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelTableViewController.m; path = ViewControllers/ModelTableViewController.m; sourceTree = "<group>"; };
+		7C79CE991C74806E0011C917 /* MeetingDateSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingDateSelectorViewController.h; path = Meeting/MeetingDateSelectorViewController.h; sourceTree = "<group>"; };
+		7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingDateSelectorViewController.m; path = Meeting/MeetingDateSelectorViewController.m; sourceTree = "<group>"; };
+		7C79CEC21C7484AD0011C917 /* UXDateCellsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXDateCellsManager.h; path = Meeting/DateCell/UXDateCellsManager.h; sourceTree = "<group>"; };
+		7C79CEC31C7484AD0011C917 /* UXDateCellsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UXDateCellsManager.m; path = Meeting/DateCell/UXDateCellsManager.m; sourceTree = "<group>"; };
+		7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UXDatePickerCell.m; path = Meeting/DateCell/UXDatePickerCell.m; sourceTree = "<group>"; };
+		7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UXSwitchCell.m; path = Meeting/DateCell/UXSwitchCell.m; sourceTree = "<group>"; };
+		7C79CEC61C7484AD0011C917 /* NSCalendar+UX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCalendar+UX.h"; path = "Meeting/DateCell/NSCalendar+UX.h"; sourceTree = "<group>"; };
+		7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCalendar+UX.m"; path = "Meeting/DateCell/NSCalendar+UX.m"; sourceTree = "<group>"; };
+		7C79CEC81C7484AD0011C917 /* UXDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXDatePickerCell.h; path = Meeting/DateCell/UXDatePickerCell.h; sourceTree = "<group>"; };
+		7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXSwitchCell.h; path = Meeting/DateCell/UXSwitchCell.h; sourceTree = "<group>"; };
+		7CB029F51C722360003D4204 /* GuestDateViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestDateViewCell.h; path = Meeting/Artifacts/GuestDateViewCell.h; sourceTree = "<group>"; };
+		7CB029F61C722360003D4204 /* GuestDateViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestDateViewCell.m; path = Meeting/Artifacts/GuestDateViewCell.m; sourceTree = "<group>"; };
+		7CB029F71C722360003D4204 /* GuestDateViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestDateViewCell.xib; path = Meeting/Artifacts/GuestDateViewCell.xib; sourceTree = "<group>"; };
 		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
@@ -319,6 +339,7 @@
 		7C3E2B7D1C70A82900B49E90 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				7C79CE9D1C7480940011C917 /* DateCell */,
 				7C3E2BAF1C70ADF700B49E90 /* Artifacts */,
 				7C3E2BA11C70AD7400B49E90 /* BeginMeetingViewController.h */,
 				7C3E2BA01C70AD7400B49E90 /* BeginMeetingViewController.m */,
@@ -330,6 +351,8 @@
 				7C3E2BA71C70AD7400B49E90 /* MeetingDateTableViewController.m */,
 				7C3E2BA81C70AD7400B49E90 /* SetMeetingViewController.h */,
 				7C3E2BA91C70AD7400B49E90 /* SetMeetingViewController.m */,
+				7C79CE991C74806E0011C917 /* MeetingDateSelectorViewController.h */,
+				7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */,
 			);
 			name = Meeting;
 			sourceTree = "<group>";
@@ -389,6 +412,9 @@
 				7C3E2BB41C70AF9000B49E90 /* MeetingTableViewCell.h */,
 				7C3E2BB51C70AF9000B49E90 /* MeetingTableViewCell.m */,
 				7C3E2BB61C70AF9000B49E90 /* MeetingTableViewCell.xib */,
+				7CB029F51C722360003D4204 /* GuestDateViewCell.h */,
+				7CB029F61C722360003D4204 /* GuestDateViewCell.m */,
+				7CB029F71C722360003D4204 /* GuestDateViewCell.xib */,
 			);
 			name = Artifacts;
 			sourceTree = "<group>";
@@ -418,6 +444,21 @@
 				7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7C79CE9D1C7480940011C917 /* DateCell */ = {
+			isa = PBXGroup;
+			children = (
+				7C79CEC21C7484AD0011C917 /* UXDateCellsManager.h */,
+				7C79CEC31C7484AD0011C917 /* UXDateCellsManager.m */,
+				7C79CEC81C7484AD0011C917 /* UXDatePickerCell.h */,
+				7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */,
+				7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */,
+				7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */,
+				7C79CEC61C7484AD0011C917 /* NSCalendar+UX.h */,
+				7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */,
+			);
+			name = DateCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,6 +590,7 @@
 				7C3E2B981C70ABEE00B49E90 /* GeneralInformationUserTableViewCell.xib in Resources */,
 				7C3E2B991C70ABEE00B49E90 /* HeaderTableViewCell.xib in Resources */,
 				7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */,
+				7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */,
 				7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */,
 				7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */,
 				7C3E2BBD1C70AF9000B49E90 /* MeetingTableViewCell.xib in Resources */,
@@ -637,11 +679,15 @@
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,
 				7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */,
 				7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */,
+				7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */,
 				7C3E2B9E1C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m in Sources */,
 				7C3E2B9B1C70ABEE00B49E90 /* LocationUserTableViewCell.m in Sources */,
+				7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */,
+				7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */,
 				7C3E2BAD1C70AD7400B49E90 /* MeetingDateTableViewController.m in Sources */,
 				7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */,
 				7C3E2BAB1C70AD7400B49E90 /* MeetingTableViewController.m in Sources */,
+				7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */,
 				7C3E2B9F1C70ABEE00B49E90 /* ProfilePhotoTableViewCell.m in Sources */,
 				7C3E2B9D1C70ABEE00B49E90 /* HeaderTableViewCell.m in Sources */,
 				7C3E2BCB1C70E95B00B49E90 /* EditGuestDetailViewController.m in Sources */,
@@ -649,10 +695,12 @@
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7C3E2BAE1C70AD7400B49E90 /* SetMeetingViewController.m in Sources */,
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
+				7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 				7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */,
 				7C3E2BBB1C70AF9000B49E90 /* GuestViewCellCountry.m in Sources */,
 				7C3E2B821C70A8C300B49E90 /* SettingsViewController.m in Sources */,
+				7C79CE9B1C74806E0011C917 /* MeetingDateSelectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

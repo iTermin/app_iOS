@@ -20,14 +20,8 @@
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.startMeeting setInputView:datePicker];
     [self.endMeeting setInputView:datePicker];
-}
-
-- (void)didReceiveMemoryWarning {
-
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-
+    
+    [self updateViewModel];
 }
 
 -(void)updateTextField:(id)sender
@@ -58,6 +52,24 @@
      NSInteger minute = [components minute];*/
     
 }
+
+-(void) updateViewModel{
+    NSMutableArray * viewModel = [NSMutableArray array];
+    [self.guestMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+        
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
+        
+        [viewModel addObject:@{
+                               @"nib" : @"GuestDateViewCell",
+                               @"height" : @(60),
+                               @"data":cellModel }];
+    }];
+    
+    self.viewModel = viewModel;
+    
+    [super updateViewModel];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
 
 }
