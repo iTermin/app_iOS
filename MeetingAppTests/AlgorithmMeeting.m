@@ -10,9 +10,30 @@
 #import "AlgorithmMain.h"
 
 SPEC_BEGIN(AlgorithmMeeting)
-describe(@"The hours", ^{
+describe(@"AlgorithmMeeting", ^{
     
     __block NSMutableArray *guestTimes = [[NSMutableArray alloc] init];
+    
+    context(@"when get date of the Guest", ^{
+        
+        context(@"when exist time zone of guest", ^{
+        
+            context(@"when time zone guest is equal to user", ^{
+            
+                
+            });
+            
+        });
+        
+        context(@"when doesn´t have time zone the guest", ^{
+            
+            it(@"used the time zone of the user", ^{
+            
+            });
+        
+        });
+        
+    });
     
     context(@"when will be created Meeting", ^{
         
