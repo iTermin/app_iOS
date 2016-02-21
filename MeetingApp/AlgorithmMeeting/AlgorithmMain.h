@@ -10,6 +10,6 @@
 
 @interface AlgorithmMain : NSObject
 
-- (NSNumber *) getHourProposal;
+- (NSNumber *) getHourProposal: (NSArray *) hours;
 
 @end

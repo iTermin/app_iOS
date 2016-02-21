@@ -10,12 +10,15 @@
 #import "AlgorithmMain.h"
 
 SPEC_BEGIN(AlgorithmMeeting)
+
 describe(@"AlgorithmMeeting", ^{
-    context(@"when there are not guests", ^{
-        it(@"should not return any hour", ^{
+    context(@"when there are less than two guests", ^{
+        it(@"should notify that it's required at least one guest more", ^{
             AlgorithmMain * sut = [AlgorithmMain new];
-            NSNumber * proposedHour = [sut getHourProposal];
-            [[proposedHour should] beNil];
+            
+            [[theBlock(^{
+                [sut getHourProposal: @[@10]];
+            }) should] raiseWithName:@"InvalidParameters" reason:@"Required at least two guests"];
         });
     });
 });

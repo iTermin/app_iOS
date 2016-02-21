@@ -10,7 +10,16 @@
 
 @implementation AlgorithmMain
 
-- (NSNumber *) getHourProposal {
+- (NSNumber *) getHourProposal: (NSArray *) hours
+{
+    if([hours count] < 2) {
+        NSException* myException = [NSException
+                                    exceptionWithName:@"InvalidParameters"
+                                    reason:@"Required at least two guests"
+                                    userInfo:nil];
+        [myException raise];
+    }
+    
     return  nil;
 }
 
