@@ -10,7 +10,7 @@
 
 @implementation AlgorithmMain
 
-- (NSNumber *) getHourProposal: (NSArray *) hours
+- (NSArray * ) getHourProposal: (NSArray *) hours
 {
     if([hours count] < 2) {
         NSException* myException = [NSException
@@ -20,7 +20,7 @@
         [myException raise];
     }
     
-    return  nil;
+    return  hours;
 }
 
 @end

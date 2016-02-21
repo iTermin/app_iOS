@@ -21,6 +21,16 @@ describe(@"AlgorithmMeeting", ^{
             }) should] raiseWithName:@"InvalidParameters" reason:@"Required at least two guests"];
         });
     });
+    
+    context(@"when there are more than one guests", ^{
+        context(@"when the hours are between 7 a.m. and 9 p.m.", ^{
+            it(@"should return the same hours", ^{
+                AlgorithmMain * sut = [AlgorithmMain new];
+                NSArray * proposedHours = [sut getHourProposal: @[@10, @20]];
+                [[proposedHours should] equal: @[@10, @20]];
+            });
+        });
+    });
 });
 
 SPEC_END
