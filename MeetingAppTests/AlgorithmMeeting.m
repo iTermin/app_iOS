@@ -29,9 +29,14 @@ describe(@"AlgorithmMeeting", ^{
                 [[proposedHours should] equal: @[@10, @20]];
             });
         });
+        
+        context(@"when at least one hour is outside the range between 7 a.m. and 9 p.m.", ^{
+            it(@"should not return the same hours", ^{
+                NSArray * proposedHours = [sut getHourProposal: @[@6, @20]];
+                [[proposedHours shouldNot] equal: @[@6, @20]];
+            });
+        });
     });
-    
-    
 });
 
 SPEC_END

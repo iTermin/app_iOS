@@ -12,6 +12,8 @@
 
 - (NSArray * ) getHourProposal: (NSArray *) hours
 {
+    __block BOOL requiredAlgoritm = NO;
+    
     if([hours count] < 2) {
         NSException* myException = [NSException
                                     exceptionWithName:@"InvalidParameters"
@@ -20,7 +22,23 @@
         [myException raise];
     }
     
-    return  hours;
+    
+    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+        requiredAlgoritm = requiredAlgoritm || [self invalidHour: hour];
+        if(requiredAlgoritm) *stop = YES;
+    }];
+    
+    return  requiredAlgoritm ? [self processHours: hours] : hours;
+}
+
+- (BOOL) invalidHour: (NSNumber *) hour
+{
+    return [hour floatValue] < 7 || [hour floatValue] > 21;
+}
+
+- (NSArray *) processHours: (NSArray *) hours
+{
+    return @[];
 }
 
 @end
