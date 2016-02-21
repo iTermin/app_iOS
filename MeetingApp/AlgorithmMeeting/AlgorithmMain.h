@@ -10,8 +10,6 @@
 
 @interface AlgorithmMain : NSObject
 
-@property(strong, nonatomic) NSMutableArray *dataGuestTimes;
-
-
+- (NSNumber *) getHourProposal;
 
 @end

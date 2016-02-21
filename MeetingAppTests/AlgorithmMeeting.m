@@ -11,37 +11,13 @@
 
 SPEC_BEGIN(AlgorithmMeeting)
 describe(@"AlgorithmMeeting", ^{
-    
-    __block NSMutableArray *guestTimes = [[NSMutableArray alloc] init];
-    
-    context(@"when get date of the Guest", ^{
-        
-        context(@"when exist time zone of guest", ^{
-        
-            context(@"when time zone guest is equal to user", ^{
-            
-                
-            });
-            
+    context(@"when there are not guests", ^{
+        it(@"should not return any hour", ^{
+            AlgorithmMain * sut = [AlgorithmMain new];
+            NSNumber * proposedHour = [sut getHourProposal];
+            [[proposedHour should] beNil];
         });
-        
-        context(@"when doesn´t have time zone the guest", ^{
-            
-            it(@"used the time zone of the user", ^{
-                [[guestTimes should] beEmpty];
-            });
-        
-        });
-        
     });
-    
-    context(@"when will be created Meeting", ^{
-        
-    });
-    
-});
-describe(@"The user", ^{
-
 });
 
 SPEC_END

@@ -10,6 +10,8 @@
 
 @implementation AlgorithmMain
 
-
+- (NSNumber *) getHourProposal {
+    return  nil;
+}
 
 @end
