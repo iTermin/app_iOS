@@ -28,7 +28,7 @@ describe(@"AlgorithmMeeting", ^{
         context(@"when doesn´t have time zone the guest", ^{
             
             it(@"used the time zone of the user", ^{
-            
+                [[guestTimes should] beEmpty];
             });
         
         });
@@ -37,9 +37,6 @@ describe(@"AlgorithmMeeting", ^{
     
     context(@"when will be created Meeting", ^{
         
-        it(@"is not empty", ^{
-            [[guestTimes shouldNot] beEmpty];
-        });
     });
     
 });
