@@ -47,7 +47,9 @@
     
     NSArray *hourProcess = [self addHours:numberOfHours ToEachHour:hours];
     
-    return @[];
+    NSArray *bestHours = YES == [self validateIfIsBetterOption: hourProcess Of: hours] ? hoursToProcess : hours;
+    
+    return bestHours;
 }
 
 - (NSArray *) eliminateHoursOutsideMaxEarlyAndLater: (NSArray *) hours{
@@ -91,13 +93,39 @@
     NSMutableArray * hoursProcess = [[NSMutableArray alloc]init];
     
     [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
-//        NSInteger sumHours = [hour intValue] + numberOfHours;
-//        NSNumber *newHour = [NSNumber numberWithInt:sumHours];
-//        [hoursProcess addObject:newHour];
+        NSInteger sumHours = [hour intValue] + numberOfHours;
+        NSNumber *newHour = [NSNumber numberWithDouble:sumHours];
+        [hoursProcess addObject:newHour];
     }];
     
-    
     return hoursProcess;
+}
+
+- (BOOL) validateIfIsBetterOption: (NSArray *) newProposalHours Of: (NSArray*) oldHours{
+
+    double numberOfWorseHoursInOldHours = [self numberOfWorseHours:oldHours];
+    double numberOfWorseHoursInNewProposalHours = [self numberOfWorseHours:newProposalHours];
+
+    double probabilityOldHours = numberOfWorseHoursInOldHours / [oldHours count];
+
+    double probabilityNewProposalHours = numberOfWorseHoursInNewProposalHours / [newProposalHours count];
+    
+    BOOL isBetterOptionNewProposal = probabilityNewProposalHours > probabilityOldHours ? YES : NO;
+    
+    return isBetterOptionNewProposal;
+}
+
+-(double) numberOfWorseHours: (NSArray *) hours{
+    NSNumber *maxEarlyHour = [NSNumber numberWithInt:7];
+    NSNumber *maxLaterHour = [NSNumber numberWithInt:21];
+    
+    __block double numberOfWorseHours = 0;
+    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+        numberOfWorseHours = hour <= maxEarlyHour ? numberOfWorseHours + 1 : numberOfWorseHours;
+        numberOfWorseHours = hour >= maxLaterHour ? numberOfWorseHours + 1 : numberOfWorseHours;
+    }];
+    
+    return numberOfWorseHours;
 }
 
 @end
