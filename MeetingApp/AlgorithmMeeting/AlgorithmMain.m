@@ -91,12 +91,17 @@
     NSInteger numberOfHours = [diferenceHours[@"number"] integerValue];
     NSString *symbol = diferenceHours[@"symbol"];
     
-    NSMutableArray * hoursProcess = [[NSMutableArray alloc]init];
+    NSMutableArray * hoursProcessed = [[NSMutableArray alloc]init];
     
     if ([symbol isEqualToString:@"+"]) {
         [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
-            NSNumber *newHour = [NSNumber numberWithDouble:[hour intValue] + numberOfHours];
-            [hoursProcess addObject:newHour];
+            double calculateHour = [hour intValue] + numberOfHours;
+            NSNumber *newHour = [NSNumber numberWithDouble:calculateHour];
+            if(calculateHour > 24){
+                calculateHour = calculateHour - 24;
+                newHour = [NSNumber numberWithDouble:calculateHour];
+            }
+            [hoursProcessed addObject:newHour];
         }];
     } else {
         [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
@@ -106,12 +111,12 @@
                 calculateHour = 24 + calculateHour;
                 newHour = [NSNumber numberWithDouble:calculateHour];
             }
-            [hoursProcess addObject:newHour];
+            [hoursProcessed addObject:newHour];
         }];
     }
     
     
-    return hoursProcess;
+    return hoursProcessed;
 }
 
 - (BOOL) validateIfIsBetterOption: (NSArray *) newProposalHours Of: (NSArray*) oldHours{

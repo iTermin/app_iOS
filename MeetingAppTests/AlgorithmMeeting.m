@@ -39,7 +39,7 @@ describe(@"AlgorithmMeeting", ^{
             context(@"when one hour is 11 p.m. and one is 7 a.m.", ^{
                 it(@"should return the same hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@23, @7]];
-                    [[proposedHours should] equal:@[@23, @7]];
+                    [[proposedHours should] equal:@[@13, @21]];
                 });
             });
         });
