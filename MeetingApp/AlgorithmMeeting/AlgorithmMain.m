@@ -45,9 +45,9 @@
     
     NSDictionary *numberOfHours = [self determinateDiferenceInHours: sortedHours];
     
-    NSArray *hourProcess = [self addHours:numberOfHours ToEachHour:hours];
+    NSArray *hoursProcessed = [self addHours:numberOfHours ToEachHour:hours];
     
-    NSArray *bestHours = YES == [self validateIfIsBetterOption: hourProcess Of: hours] ? hoursToProcess : hours;
+    NSArray *bestHours = YES == [self validateIfIsBetterOption: hoursProcessed Of: hours] ? hoursProcessed : hours;
     
     return bestHours;
 }
@@ -89,14 +89,27 @@
 - (NSArray *) addHours: (NSDictionary *) diferenceHours ToEachHour: (NSArray *) hours
 {
     NSInteger numberOfHours = [diferenceHours[@"number"] integerValue];
+    NSString *symbol = diferenceHours[@"symbol"];
     
     NSMutableArray * hoursProcess = [[NSMutableArray alloc]init];
     
-    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
-        NSInteger sumHours = [hour intValue] + numberOfHours;
-        NSNumber *newHour = [NSNumber numberWithDouble:sumHours];
-        [hoursProcess addObject:newHour];
-    }];
+    if ([symbol isEqualToString:@"+"]) {
+        [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+            NSNumber *newHour = [NSNumber numberWithDouble:[hour intValue] + numberOfHours];
+            [hoursProcess addObject:newHour];
+        }];
+    } else {
+        [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+            double calculateHour = [hour intValue] - numberOfHours;
+            NSNumber *newHour = [NSNumber numberWithDouble:calculateHour];
+            if(calculateHour < 0){
+                calculateHour = 24 + calculateHour;
+                newHour = [NSNumber numberWithDouble:calculateHour];
+            }
+            [hoursProcess addObject:newHour];
+        }];
+    }
+    
     
     return hoursProcess;
 }
@@ -110,7 +123,7 @@
 
     double probabilityNewProposalHours = numberOfWorseHoursInNewProposalHours / [newProposalHours count];
     
-    BOOL isBetterOptionNewProposal = probabilityNewProposalHours > probabilityOldHours ? YES : NO;
+    BOOL isBetterOptionNewProposal = probabilityNewProposalHours < probabilityOldHours ? YES : NO;
     
     return isBetterOptionNewProposal;
 }
