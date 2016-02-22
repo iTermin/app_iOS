@@ -134,13 +134,14 @@
 }
 
 -(double) numberOfWorseHours: (NSArray *) hours{
-    NSNumber *maxEarlyHour = [NSNumber numberWithInt:7];
-    NSNumber *maxLaterHour = [NSNumber numberWithInt:21];
+    int maxEarlyHour = 7;
+    int maxLaterHour = 21;
     
     __block double numberOfWorseHours = 0;
     [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
-        numberOfWorseHours = hour <= maxEarlyHour ? numberOfWorseHours + 1 : numberOfWorseHours;
-        numberOfWorseHours = hour >= maxLaterHour ? numberOfWorseHours + 1 : numberOfWorseHours;
+        int hourInt = [hour intValue];
+        numberOfWorseHours = hourInt < maxEarlyHour ? numberOfWorseHours + 1 : numberOfWorseHours;
+        numberOfWorseHours = hourInt > maxLaterHour ? numberOfWorseHours + 1 : numberOfWorseHours;
     }];
     
     return numberOfWorseHours;

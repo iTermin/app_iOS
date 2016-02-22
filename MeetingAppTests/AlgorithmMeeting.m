@@ -36,10 +36,24 @@ describe(@"AlgorithmMeeting", ^{
                 [[proposedHours shouldNot] equal: @[@6, @20]];
             });
             
-            context(@"when one hour is 11 p.m. and one is 7 a.m.", ^{
-                it(@"should return the same hours", ^{
+            context(@"when the hours are: 11 p.m., 7 a.m.", ^{
+                it(@"should return diferents hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@23, @7]];
                     [[proposedHours should] equal:@[@13, @21]];
+                });
+            });
+            
+            context(@"when the hours are: 2 p.m., 4 p.m., 11 p.m., 7 a.m., 9 a.m.", ^{
+                it(@"should return the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@14, @16, @23, @7, @9]];
+                    [[proposedHours should] equal: @[@14, @16, @23, @7, @9]];
+                });
+            });
+            
+            context(@"when the hours are: 11 a.m., 13 a.m., 20 p.m., 1 a.m.", ^{
+                it(@"should return the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@11, @13, @20, @1]];
+                    [[proposedHours should] equal: @[@7, @9, @16, @21]];
                 });
             });
         });
