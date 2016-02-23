@@ -38,18 +38,61 @@
 
 - (NSArray *) processHours: (NSArray *) hours
 {
-    
-    NSArray *hoursToProcess = [self eliminateHoursOutsideMaxEarlyAndLater: hours];
-    
-    NSArray *sortedHours = [self sortHours: hoursToProcess];
-    
-    NSDictionary *numberOfHours = [self determinateDiferenceInHours: sortedHours];
-    
-    NSArray *hoursProcessed = [self addHours:numberOfHours ToEachHour:hours];
+    NSArray *hoursProcessed = [[NSArray alloc] init];
+
+    if([self validateAllHoursAreOutsideTheRange:hours]){
+
+        hoursProcessed = [self addNineHoursToAllOutsideHours:hours];
+        
+    } else {
+        NSArray *hoursToProcess = [self eliminateHoursOutsideMaxEarlyAndLater: hours];
+        
+        NSArray *sortedHours = [self sortHours: hoursToProcess];
+        
+        NSDictionary *numberOfHours = [self determinateDiferenceInHours: sortedHours];
+        
+        hoursProcessed = [self addHours:numberOfHours ToEachHour:hours];
+    }
     
     NSArray *bestHours = YES == [self validateIfIsBetterOption: hoursProcessed Of: hours] ? hoursProcessed : hours;
     
     return bestHours;
+}
+
+- (BOOL) validateAllHoursAreOutsideTheRange: (NSArray *) hours{
+    __block BOOL validateHoursOutside = NO;
+    __block int allHoursAreOutside = 0;
+    
+    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+        validateHoursOutside =  YES == [self invalidHour: hour] ? YES : NO;
+        if(validateHoursOutside)
+            allHoursAreOutside = allHoursAreOutside + 1;
+    }];
+    
+    BOOL allHoursAreOutsideTheRange = NO;
+
+    if (allHoursAreOutside == [hours count])
+        allHoursAreOutsideTheRange = YES;
+    
+    return allHoursAreOutsideTheRange;
+}
+
+- (NSArray *) addNineHoursToAllOutsideHours: (NSArray *) hours {
+    NSMutableArray *hoursPreprocessed = [[NSMutableArray alloc] init];
+    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
+        int calculateHour = [hour intValue] + 9;
+        NSNumber *calculteNumberHour = [NSNumber numberWithInt:calculateHour];
+        if(calculateHour > 24){
+            calculateHour = calculateHour - 24;
+            calculteNumberHour = [NSNumber numberWithInt:calculateHour];
+        } else if(calculateHour < 0){
+            calculateHour = 24 + calculateHour;
+            calculteNumberHour = [NSNumber numberWithInt:calculateHour];
+        }
+        [hoursPreprocessed addObject:calculteNumberHour];
+    }];
+
+    return hoursPreprocessed;
 }
 
 - (NSArray *) eliminateHoursOutsideMaxEarlyAndLater: (NSArray *) hours{

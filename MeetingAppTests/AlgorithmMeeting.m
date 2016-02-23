@@ -28,6 +28,34 @@ describe(@"AlgorithmMeeting", ^{
                 NSArray * proposedHours = [sut getHourProposal: @[@10, @20]];
                 [[proposedHours should] equal: @[@10, @20]];
             });
+            
+            context(@"when the hours are: 9 a.m., 6 p.m.", ^{
+                it(@"should return the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@9, @18]];
+                    [[proposedHours should] equal:@[@9, @18]];
+                });
+            });
+            
+            context(@"when the hours are: 5 a.m., 24 p.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@5, @24]];
+                    [[proposedHours shouldNot] equal:@[@5, @24]];
+                });
+            });
+            
+            context(@"when the hours are: 14 a.m., 16 p.m., 7 a.m., 9 a.m.", ^{
+                it(@"should return the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@14, @16, @7, @9]];
+                    [[proposedHours should] equal:@[@14, @16, @7, @9]];
+                });
+            });
+            
+            context(@"when the hours are: 14 a.m., 16 p.m., 6 a.m., 9 a.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@14, @16, @6, @9]];
+                    [[proposedHours shouldNot] equal:@[@14, @16, @6, @9]];
+                });
+            });
         });
         
         context(@"when at least one hour is outside the range between 7 a.m. and 9 p.m.", ^{
@@ -54,6 +82,16 @@ describe(@"AlgorithmMeeting", ^{
                 it(@"should return the same hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@11, @13, @20, @1]];
                     [[proposedHours should] equal: @[@7, @9, @16, @21]];
+                });
+            });
+            
+        });
+        
+        context(@"when all the hours are outside the range between 7 a.m. and 9 p.m", ^{
+            context(@"when the hours are: 5 a.m., 24 p.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@5, @24]];
+                    [[proposedHours should] equal:@[@14, @9]];
                 });
             });
         });
