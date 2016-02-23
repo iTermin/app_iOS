@@ -9,7 +9,7 @@ pod 'DZNEmptyDataSet'
 end
 
 target 'MeetingAppTests' do
-
+pod "Kiwi"
 end
 
 target 'MeetingAppUITests' do

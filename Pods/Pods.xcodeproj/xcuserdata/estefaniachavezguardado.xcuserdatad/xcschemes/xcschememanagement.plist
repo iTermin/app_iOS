@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Kiwi.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MeetingApp.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MeetingAppTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,7 +32,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>35B24E21688A5C22CD3CFCFB4DB88902</key>
+		<key>2D8673B2709650AF2C7DA4ACAB135991</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -33,16 +48,6 @@
 			<true/>
 		</dict>
 		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7B836FD3040B2BF38EAC59FB716401DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D2C8A5F63AC04DEFEBA4D460501DB99D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

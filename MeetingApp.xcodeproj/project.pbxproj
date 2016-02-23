@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64A94DC7CC349216B871EFF8 /* libPods-MeetingAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B60F10FA63121E49191030F2 /* libPods-MeetingAppTests.a */; };
 		7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16877F1C707EB900197DB1 /* RSKImageCropper.framework */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
 		7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA881C2ED3C70059EAE3 /* Main.storyboard */; };
 		7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */; };
 		7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */; };
-		7C30FA9A1C2ED3C70059EAE3 /* MeetingAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA991C2ED3C70059EAE3 /* MeetingAppTests.m */; };
 		7C30FAA51C2ED3C70059EAE3 /* MeetingAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */; };
 		7C3E2B821C70A8C300B49E90 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */; };
 		7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B841C70A96E00B49E90 /* EditProfileUserViewController.m */; };
@@ -52,6 +52,8 @@
 		7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */; };
 		7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */; };
 		7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */; };
+		7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */; };
+		7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */; };
 		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
 		7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB029F71C722360003D4204 /* GuestDateViewCell.xib */; };
 		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
@@ -59,6 +61,7 @@
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
 		7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */; };
 		F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 837704A4712A97F96CAF554C /* libPods-MeetingApp.a */; };
+		F13394EF1C79E3AC003AB567 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16877F1C707EB900197DB1 /* RSKImageCropper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		506D59153DCC4AE9A8C9FB65 /* Pods-MeetingAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7BDCF46231478EF35DE062F8 /* Pods-MeetingAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C16877A1C707EB900197DB1 /* RSKImageCropper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSKImageCropper.xcodeproj; path = libs/RSKImageCropper/RSKImageCropper.xcodeproj; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,7 +101,6 @@
 		7C30FA8E1C2ED3C70059EAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C30FA901C2ED3C70059EAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C30FA951C2ED3C70059EAE3 /* MeetingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C30FA991C2ED3C70059EAE3 /* MeetingAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingAppTests.m; sourceTree = "<group>"; };
 		7C30FA9B1C2ED3C70059EAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C30FAA01C2ED3C70059EAE3 /* MeetingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingAppUITests.m; sourceTree = "<group>"; };
@@ -165,6 +169,9 @@
 		7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCalendar+UX.m"; path = "Meeting/DateCell/NSCalendar+UX.m"; sourceTree = "<group>"; };
 		7C79CEC81C7484AD0011C917 /* UXDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXDatePickerCell.h; path = Meeting/DateCell/UXDatePickerCell.h; sourceTree = "<group>"; };
 		7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXSwitchCell.h; path = Meeting/DateCell/UXSwitchCell.h; sourceTree = "<group>"; };
+		7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmMeeting.m; sourceTree = "<group>"; };
+		7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmMain.h; path = AlgorithmMeeting/AlgorithmMain.h; sourceTree = "<group>"; };
+		7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmMain.m; path = AlgorithmMeeting/AlgorithmMain.m; sourceTree = "<group>"; };
 		7CB029F51C722360003D4204 /* GuestDateViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestDateViewCell.h; path = Meeting/Artifacts/GuestDateViewCell.h; sourceTree = "<group>"; };
 		7CB029F61C722360003D4204 /* GuestDateViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestDateViewCell.m; path = Meeting/Artifacts/GuestDateViewCell.m; sourceTree = "<group>"; };
 		7CB029F71C722360003D4204 /* GuestDateViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestDateViewCell.xib; path = Meeting/Artifacts/GuestDateViewCell.xib; sourceTree = "<group>"; };
@@ -173,6 +180,7 @@
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
 		7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "QuickContacts-Info.plist"; path = "Resources/QuickContacts-Info.plist"; sourceTree = SOURCE_ROOT; };
 		837704A4712A97F96CAF554C /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B60F10FA63121E49191030F2 /* libPods-MeetingAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64A94DC7CC349216B871EFF8 /* libPods-MeetingAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F13394EF1C79E3AC003AB567 /* RSKImageCropper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				837704A4712A97F96CAF554C /* libPods-MeetingApp.a */,
+				B60F10FA63121E49191030F2 /* libPods-MeetingAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,6 +230,8 @@
 			children = (
 				C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */,
 				D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */,
+				506D59153DCC4AE9A8C9FB65 /* Pods-MeetingAppTests.debug.xcconfig */,
+				7BDCF46231478EF35DE062F8 /* Pods-MeetingAppTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -267,6 +280,7 @@
 		7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */ = {
 			isa = PBXGroup;
 			children = (
+				7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */,
 				7C3E2BDA1C70F68B00B49E90 /* Common */,
 				7C3E2B7F1C70A84400B49E90 /* Country */,
 				7C3E2B7E1C70A83800B49E90 /* Guest */,
@@ -297,8 +311,8 @@
 		7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				7C30FA991C2ED3C70059EAE3 /* MeetingAppTests.m */,
 				7C30FA9B1C2ED3C70059EAE3 /* Info.plist */,
+				7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */,
 			);
 			path = MeetingAppTests;
 			sourceTree = "<group>";
@@ -461,6 +475,15 @@
 			name = DateCell;
 			sourceTree = "<group>";
 		};
+		7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */ = {
+			isa = PBXGroup;
+			children = (
+				7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */,
+				7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */,
+			);
+			name = AlgorithmMeeting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -488,9 +511,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C30FAAC1C2ED3C70059EAE3 /* Build configuration list for PBXNativeTarget "MeetingAppTests" */;
 			buildPhases = (
+				69437C9E91C3141C4D9B5E9E /* Check Pods Manifest.lock */,
 				7C30FA911C2ED3C70059EAE3 /* Sources */,
 				7C30FA921C2ED3C70059EAE3 /* Frameworks */,
 				7C30FA931C2ED3C70059EAE3 /* Resources */,
+				9DA773544E19BE848AE5B590 /* Embed Pods Frameworks */,
+				FCB1F5BB7F899D954A50B8C7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -649,6 +675,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		69437C9E91C3141C4D9B5E9E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		9A7E66E9057DC8D611D5AC9E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -662,6 +703,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingApp/Pods-MeetingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DA773544E19BE848AE5B590 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCB1F5BB7F899D954A50B8C7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -680,6 +751,7 @@
 				7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */,
 				7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */,
 				7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */,
+				7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */,
 				7C3E2B9E1C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m in Sources */,
 				7C3E2B9B1C70ABEE00B49E90 /* LocationUserTableViewCell.m in Sources */,
 				7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */,
@@ -708,7 +780,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C30FA9A1C2ED3C70059EAE3 /* MeetingAppTests.m in Sources */,
+				7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +935,7 @@
 		};
 		7C30FAAD1C2ED3C70059EAE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506D59153DCC4AE9A8C9FB65 /* Pods-MeetingAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MeetingAppTests/Info.plist;
@@ -875,6 +948,7 @@
 		};
 		7C30FAAE1C2ED3C70059EAE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BDCF46231478EF35DE062F8 /* Pods-MeetingAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = MeetingAppTests/Info.plist;
