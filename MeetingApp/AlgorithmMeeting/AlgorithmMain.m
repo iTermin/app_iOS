@@ -112,13 +112,13 @@
 }
 
 - (NSDictionary *) determinateDiferenceInHours: (NSArray *) hours{
-    NSInteger earlyHour = [hours.firstObject integerValue];
-    NSInteger laterHour = [hours.lastObject integerValue];
+    int earlyHour = [hours.firstObject intValue];
+    int laterHour = [hours.lastObject intValue];
     
-    NSInteger respectMaxLaterHour = 21 - laterHour;
-    NSInteger respectMaxEarlyHour = earlyHour - 7;
+    int respectMaxLaterHour = 21 - laterHour;
+    int respectMaxEarlyHour = earlyHour - 7;
     
-    NSInteger diferenceHours = respectMaxLaterHour > respectMaxEarlyHour ? respectMaxLaterHour : respectMaxEarlyHour;
+    int diferenceHours = respectMaxLaterHour > respectMaxEarlyHour ? respectMaxLaterHour : respectMaxEarlyHour;
     
     NSString *symbol = diferenceHours == respectMaxLaterHour ? @"+" : @"-";
 
