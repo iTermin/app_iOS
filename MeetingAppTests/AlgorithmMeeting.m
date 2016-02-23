@@ -71,6 +71,13 @@ describe(@"AlgorithmMeeting", ^{
                 });
             });
             
+            context(@"when the hours are: 5 a.m., 24 p.m., 9 a.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@5, @24, @9]];
+                    [[proposedHours should] equal:@[@17, @12, @21]];
+                });
+            });
+            
             context(@"when the hours are: 2 p.m., 4 p.m., 11 p.m., 7 a.m., 9 a.m.", ^{
                 it(@"should return the same hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@14, @16, @23, @7, @9]];
@@ -92,6 +99,20 @@ describe(@"AlgorithmMeeting", ^{
                 it(@"should return diferents hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@5, @24]];
                     [[proposedHours should] equal:@[@14, @9]];
+                });
+            });
+            
+            context(@"when the hours are: 5 a.m., 24 p.m., 9 a.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@5, @24, @9]];
+                    [[proposedHours shouldNot] equal:@[@14, @9, @18]];
+                });
+            });
+            
+            context(@"when the hours are: 6 a.m., 9 p.m.", ^{
+                it(@"should return diferents hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@6, @18]];
+                    [[proposedHours shouldNot] equal:@[@15, @3]];
                 });
             });
         });
