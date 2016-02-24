@@ -56,6 +56,8 @@
 		7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */; };
 		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
 		7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB029F71C722360003D4204 /* GuestDateViewCell.xib */; };
+		7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */; };
+		7CBD957F1C7DB3A3000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */; };
 		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
 		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
@@ -175,6 +177,9 @@
 		7CB029F51C722360003D4204 /* GuestDateViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestDateViewCell.h; path = Meeting/Artifacts/GuestDateViewCell.h; sourceTree = "<group>"; };
 		7CB029F61C722360003D4204 /* GuestDateViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestDateViewCell.m; path = Meeting/Artifacts/GuestDateViewCell.m; sourceTree = "<group>"; };
 		7CB029F71C722360003D4204 /* GuestDateViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestDateViewCell.xib; path = Meeting/Artifacts/GuestDateViewCell.xib; sourceTree = "<group>"; };
+		7CBD957A1C7DB352000A8DE4 /* InputsAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputsAlgorithm.h; path = AlgorithmMeeting/InputsAlgorithm.h; sourceTree = "<group>"; };
+		7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputsAlgorithm.m; path = AlgorithmMeeting/InputsAlgorithm.m; sourceTree = "<group>"; };
+		7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputsAlgorithm.m; sourceTree = "<group>"; };
 		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
@@ -311,6 +316,7 @@
 		7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */,
 				7C30FA9B1C2ED3C70059EAE3 /* Info.plist */,
 				7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */,
 			);
@@ -480,6 +486,8 @@
 			children = (
 				7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */,
 				7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */,
+				7CBD957A1C7DB352000A8DE4 /* InputsAlgorithm.h */,
+				7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */,
 			);
 			name = AlgorithmMeeting;
 			sourceTree = "<group>";
@@ -764,6 +772,7 @@
 				7C3E2B9D1C70ABEE00B49E90 /* HeaderTableViewCell.m in Sources */,
 				7C3E2BCB1C70E95B00B49E90 /* EditGuestDetailViewController.m in Sources */,
 				7C3E2B9C1C70ABEE00B49E90 /* GeneralInformationUserTableViewCell.m in Sources */,
+				7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7C3E2BAE1C70AD7400B49E90 /* SetMeetingViewController.m in Sources */,
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
@@ -780,6 +789,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CBD957F1C7DB3A3000A8DE4 /* InputsAlgorithm.m in Sources */,
 				7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
