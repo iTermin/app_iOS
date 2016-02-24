@@ -10,9 +10,8 @@
 
 @implementation InputsAlgorithm
 
-- (void) getHoursGuest: (NSArray *) guests {
-//    __block BOOL requiredAlgoritm = NO;
-//
+- (NSArray *) getHoursAllGuests: (NSArray *) guests {
+
     if([guests count] == 0 ){
         NSException* myException = [NSException
                                     exceptionWithName:@"InvalidParameters"
@@ -26,14 +25,39 @@
                                     userInfo:nil];
         [myException raise];
     }
-//    
-//    
-//    [hours enumerateObjectsUsingBlock:^(NSNumber * hour, NSUInteger index, BOOL * stop) {
-//        requiredAlgoritm = requiredAlgoritm || [self invalidHour: hour];
-//        if(requiredAlgoritm) *stop = YES;
-//    }];
-//    
-//    return requiredAlgoritm ? [self processHours: hours] : hours;
+    
+    return [self processInformationOfGuests:guests];
+}
+
+- (NSArray *) processInformationOfGuests: (NSArray *) guests{
+    
+    NSDictionary *host = [guests objectAtIndex:0];
+    NSMutableArray * hoursOfGuests = [[NSMutableArray alloc] init];
+    
+    __block int hourUser;
+    [guests enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger index, BOOL * stop){
+        if (index == 0){
+            hourUser = [self getHour:host[@"codeCountry"]];
+        }
+        
+        NSString * codeCountryGuest = guest[@"codeCountry"];
+        int hourGuest = [self getHour:codeCountryGuest];
+        
+        if ([self validateTheSameUbicationUser: codeCountryGuest]) {
+            
+        }
+    }];
+    
+    return @[];
+}
+
+- (BOOL) validateTheSameUbicationUser: (NSString *) guest{
+    return YES;
+}
+
+- (int) getHour: (NSString *) hour{
+
+    return 1;
 }
 
 @end

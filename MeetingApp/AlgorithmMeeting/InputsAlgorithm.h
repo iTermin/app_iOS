@@ -10,6 +10,6 @@
 
 @interface InputsAlgorithm : NSObject
 
-- (void) getHoursGuest: (NSArray *) guests;
+- (NSArray *) getHoursAllGuests: (NSArray *) guests;
 
 @end
