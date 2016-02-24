@@ -115,6 +115,20 @@ describe(@"AlgorithmMeeting", ^{
                 });
             });
             
+            context(@"when the hours are: 7 a.m., 7 a.m., 7 a.m.", ^{
+                it(@"should the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@7, @7, @7]];
+                    [[proposedHours should] equal: @[@7, @7, @7]];
+                });
+            });
+            
+            context(@"when the hours are: 9 p.m., 9 p.m., 9 p.m.", ^{
+                it(@"should the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@21, @21, @21]];
+                    [[proposedHours should] equal: @[@21, @21, @21]];
+                });
+            });
+            
         });
         
         context(@"when all the hours are outside the range between 7 a.m. and 9 p.m", ^{
@@ -122,6 +136,13 @@ describe(@"AlgorithmMeeting", ^{
                 it(@"should return the same hours", ^{
                     NSArray * proposedHours = [sut getHourProposal: @[@7, @21]];
                     [[proposedHours should] equal:@[@7, @21]];
+                });
+            });
+            
+            context(@"when the hours are: 12 a.m., 12 a.m., 12 a.m.", ^{
+                it(@"should the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@24, @24, @24]];
+                    [[proposedHours should] equal: @[@9, @9, @9]];
                 });
             });
             
