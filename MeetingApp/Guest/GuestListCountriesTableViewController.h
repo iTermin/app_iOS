@@ -6,13 +6,21 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface GuestListCountriesTableViewController : ModelTableViewController
+#import "ModelTableViewController.h"
+
+#import "ICountrySelector.h"
+#import "ICountrySelectorDelegate.h"
+
+
+
+@interface GuestListCountriesTableViewController : ModelTableViewController <ICountrySelector>
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 
 @property(strong) NSDictionary *dataModel;
+
+@property(weak) id<ICountrySelectorDelegate> countrySelectorDelegate;
 
 @end

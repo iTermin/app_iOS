@@ -133,7 +133,16 @@
     if ([segue.identifier isEqualToString:@"guestListCountries"]){
         GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
         [guestListCountries setCurrentGuest: sender];
+        [guestListCountries setCountrySelectorDelegate:self];
     }
+}
+
+- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+        didSelectCountry: (NSDictionary *) country
+{
+    NSLog(@"Tengo el country!!!!: %@", country);
+    // Validaciones adicionales... si todo correcto
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
