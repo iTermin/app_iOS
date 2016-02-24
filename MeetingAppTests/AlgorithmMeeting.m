@@ -129,6 +129,13 @@ describe(@"AlgorithmMeeting", ^{
                 });
             });
             
+            context(@"when the hours are: 7 a.m., 9 p.m., 12 a.m.", ^{
+                it(@"should the same hours", ^{
+                    NSArray * proposedHours = [sut getHourProposal: @[@7, @21, @24]];
+                    [[proposedHours should] equal: @[@7, @21, @24]];
+                });
+            });
+            
         });
         
         context(@"when all the hours are outside the range between 7 a.m. and 9 p.m", ^{
