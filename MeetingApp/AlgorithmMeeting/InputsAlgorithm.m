@@ -26,7 +26,17 @@
         [myException raise];
     }
     
+    [self getCountryUser];
+    //NSLog(@"%@", [NSTimeZone knownTimeZoneNames]);
+    
     return [self processInformationOfGuests:guests];
+}
+
+- (void) getCountryUser{
+    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+    
+    // TODO: Add the country to the user data model
 }
 
 - (NSArray *) processInformationOfGuests: (NSArray *) guests{
