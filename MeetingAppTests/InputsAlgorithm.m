@@ -14,6 +14,14 @@ SPEC_BEGIN(PrepareInputsOfAlgorithm)
 describe(@"PrepareInputsOfAlgorithm", ^{
     InputsAlgorithm * sut = [InputsAlgorithm new];
     
+    context(@"when there are not guests and user information", ^{
+        it(@"should notify that it's required guests and user information", ^{
+            [[theBlock(^{
+                [sut getHoursGuest:@[]];
+            }) should] raiseWithName:@"InvalidParameters" reason:@"Required guests and user information"];
+        });
+    });
+    
     context(@"when there are less than two guests", ^{
         it(@"should notify that it's required at least one guest more", ^{
             [[theBlock(^{

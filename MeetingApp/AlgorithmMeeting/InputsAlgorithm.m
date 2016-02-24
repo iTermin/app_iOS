@@ -12,8 +12,14 @@
 
 - (void) getHoursGuest: (NSArray *) guests {
 //    __block BOOL requiredAlgoritm = NO;
-//    
-    if([guests count] < 2) {
+//
+    if([guests count] == 0 ){
+        NSException* myException = [NSException
+                                    exceptionWithName:@"InvalidParameters"
+                                    reason:@"Required guests and user information"
+                                    userInfo:nil];
+        [myException raise];
+    } else if([guests count] < 2) {
         NSException* myException = [NSException
                                     exceptionWithName:@"InvalidParameters"
                                     reason:@"Required at least two guests"
