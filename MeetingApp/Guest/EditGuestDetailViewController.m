@@ -115,7 +115,9 @@ BOOL changedInformation = NO;
     
     [self customCell];
     
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
     
     [super updateViewModel];
 }
