@@ -14,6 +14,9 @@
 
 @end
 
+NSMutableDictionary *guestInformation;
+BOOL changedInformation = NO;
+
 @implementation EditGuestDetailViewController
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -22,20 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.nameGuest setText: self.currentGuest[@"name"]];
-    [self.emailGuest setText: self.currentGuest[@"email"]];
-    
-    NSString *noPhoto = @"";
-    if (self.currentGuest[@"photo"] == noPhoto) {
-        NSString *userName = self.currentGuest[@"name"];
-        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
-    } else {
-        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-        self.guestPhoto.clipsToBounds = YES;
-        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.currentGuest[@"photo"]];
-        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
-    }
     
     self.dataModel = @{
                        @"countries" : @[
@@ -89,20 +78,44 @@
     
 }
 
-- (void) updateViewModel {
-    NSString * countryName = [self getNameCountry:self.currentGuest];
-    [self.currentGuest setObject:countryName forKey:@"nameCountry"];
+-(void) customCell {
+    [self.nameGuest setText: guestInformation[@"name"]];
+    [self.emailGuest setText: guestInformation[@"email"]];
     
-    NSArray * viewModel = @[
-                           @{
-                               @"nib" : @"LocationGuestTableViewCell",
-                               @"height" : @(60),
-                               @"segue" : @"guestListCountries",
-                               @"data": [self.currentGuest copy]
-                            }
-                           ];
+    NSString *noPhoto = @"";
+    if (guestInformation[@"photo"] == noPhoto) {
+        NSString *userName = guestInformation[@"name"];
+        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
+    } else {
+        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
+        self.guestPhoto.clipsToBounds = YES;
+        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", guestInformation[@"photo"]];
+        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+    }
+}
+
+- (void) updateViewModel {
+    if (changedInformation == NO) {
+        guestInformation = self.currentGuest;
+    }
+    
+    NSString *countryName = [self getNameCountry:guestInformation];
+    [guestInformation setObject:countryName forKey:@"nameCountry"];
+    
+    NSArray *viewModel = @[
+                  @{
+                      @"nib" : @"LocationGuestTableViewCell",
+                      @"height" : @(60),
+                      @"segue" : @"guestListCountries",
+                      @"data": [guestInformation copy]
+                      }
+                  ];
     
     self.viewModel = [NSMutableArray arrayWithArray: viewModel];
+    
+    [self customCell];
+    
+    [self.tableView reloadData];
     
     [super updateViewModel];
 }
@@ -140,9 +153,23 @@
 - (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
         didSelectCountry: (NSDictionary *) country
 {
-    NSLog(@"Tengo el country!!!!: %@", country);
-    // Validaciones adicionales... si todo correcto
+    [self changedCountryUpdateGuestInformation: country];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
+    NSDictionary *currentGuestInformation = self.currentGuest;
+
+    changedInformation = YES;
+    
+    guestInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        currentGuestInformation[@"name"], @"name",
+                        currentGuestInformation[@"codePhone"], @"codePhone",
+                        currentGuestInformation[@"email"], @"email",
+                        currentGuestInformation[@"photo"], @"photo",
+                        newCountry[@"code"], @"codeCountry", nil];
+    
+    [self updateViewModel];
 }
 
 @end

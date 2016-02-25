@@ -91,9 +91,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * country = [self getCountryAtIndex:indexPath.row];
-    NSLog(@"%@", country);
-    
+    NSDictionary * country = [self getCountryAtIndex:indexPath.row];    
     [self.countrySelectorDelegate countrySelector:self didSelectCountry:country];
 }
 
