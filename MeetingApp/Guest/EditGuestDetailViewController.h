@@ -11,8 +11,10 @@
 #import "ModelTableViewController.h"
 #import "ICountrySelectorDelegate.h"
 
+#import "IGuestInformation.h"
+#import "IGuestInformationDelegate.h"
 
-@interface EditGuestDetailViewController : ModelTableViewController <ICountrySelectorDelegate>
+@interface EditGuestDetailViewController : ModelTableViewController <ICountrySelectorDelegate, IGuestInformation>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
@@ -21,5 +23,7 @@
 @property(nonatomic, strong) NSMutableDictionary * currentGuest;
 
 @property(strong) NSDictionary *dataModel;
+
+@property(weak) id<IGuestInformationDelegate> guestInformationDelegate;
 
 @end

@@ -11,11 +11,12 @@
 #import "GuestListCountriesTableViewController.h"
 
 @interface EditGuestDetailViewController ()
+{
+    NSMutableDictionary *guestInformation;
+    BOOL changedInformation;
+}
 
 @end
-
-NSMutableDictionary *guestInformation;
-BOOL changedInformation = NO;
 
 @implementation EditGuestDetailViewController
 
@@ -102,6 +103,8 @@ BOOL changedInformation = NO;
     NSString *countryName = [self getNameCountry:guestInformation];
     [guestInformation setObject:countryName forKey:@"nameCountry"];
     
+    if (changedInformation) [self.guestInformationDelegate guestInformation:self didChangedInformation:guestInformation];
+
     NSArray *viewModel = @[
                   @{
                       @"nib" : @"LocationGuestTableViewCell",

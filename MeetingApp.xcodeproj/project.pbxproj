@@ -173,6 +173,8 @@
 		7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCalendar+UX.m"; path = "Meeting/DateCell/NSCalendar+UX.m"; sourceTree = "<group>"; };
 		7C79CEC81C7484AD0011C917 /* UXDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXDatePickerCell.h; path = Meeting/DateCell/UXDatePickerCell.h; sourceTree = "<group>"; };
 		7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXSwitchCell.h; path = Meeting/DateCell/UXSwitchCell.h; sourceTree = "<group>"; };
+		7C80CA1D1C7F9AFC00216CF9 /* IGuestInformationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformationDelegate.h; path = Guest/Protocols/IGuestInformationDelegate.h; sourceTree = "<group>"; };
+		7C80CA1F1C7F9E3600216CF9 /* IGuestInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformation.h; path = Guest/Protocols/IGuestInformation.h; sourceTree = "<group>"; };
 		7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmMeeting.m; sourceTree = "<group>"; };
 		7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmMain.h; path = AlgorithmMeeting/AlgorithmMain.h; sourceTree = "<group>"; };
 		7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmMain.m; path = AlgorithmMeeting/AlgorithmMain.m; sourceTree = "<group>"; };
@@ -248,6 +250,8 @@
 			children = (
 				7C012D8E1C7E4C9A00DC84CC /* ICountrySelectorDelegate.h */,
 				7C012D8D1C7E4C6D00DC84CC /* ICountrySelector.h */,
+				7C80CA1D1C7F9AFC00216CF9 /* IGuestInformationDelegate.h */,
+				7C80CA1F1C7F9E3600216CF9 /* IGuestInformation.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

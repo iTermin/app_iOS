@@ -449,10 +449,18 @@
     }
 }
 
+- (void) guestInformation: (id<IGuestInformation>) guestDetail
+    didChangedInformation: (NSDictionary *) guest{
+
+    NSLog(@"%@", guest);
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editGuestDetails"]){
         EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
         [editGuestDetailViewController setCurrentGuest: sender];
+        [editGuestDetailViewController setGuestInformationDelegate:self];
+        
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
         NSMutableArray *guestList = self.dataModel;

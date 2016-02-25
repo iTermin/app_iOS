@@ -13,8 +13,6 @@
 #import "ICountrySelector.h"
 #import "ICountrySelectorDelegate.h"
 
-
-
 @interface GuestListCountriesTableViewController : ModelTableViewController <ICountrySelector>
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
