@@ -7,18 +7,21 @@
 //
 /* MeetingBeginViewController_h */
 
-#import "ModelTableViewController.h"
-
-#import "UIScrollView+EmptyDataSet.h"
 #import <UIKit/UIKit.h>
 
-@interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+#import "ModelTableViewController.h"
+#import "UIScrollView+EmptyDataSet.h"
+
+#import "IGuestInformationDelegate.h"
+
+@interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
+DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
-@property (strong, nonatomic) IBOutlet UITextField *nameGuest;
+@property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
 
 @property(strong) NSMutableArray *dataModel;
@@ -27,6 +30,5 @@
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;
-
 
 @end

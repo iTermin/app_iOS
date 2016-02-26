@@ -11,6 +11,10 @@
 #import "GuestListCountriesTableViewController.h"
 
 @interface EditGuestDetailViewController ()
+{
+    NSMutableDictionary *guestInformation;
+    BOOL changedInformation;
+}
 
 @end
 
@@ -22,20 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.nameGuest setText: self.currentGuest[@"name"]];
-    [self.emailGuest setText: self.currentGuest[@"email"]];
-    
-    NSString *noPhoto = @"";
-    if (self.currentGuest[@"photo"] == noPhoto) {
-        NSString *userName = self.currentGuest[@"name"];
-        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
-    } else {
-        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-        self.guestPhoto.clipsToBounds = YES;
-        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.currentGuest[@"photo"]];
-        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
-    }
     
     self.dataModel = @{
                        @"countries" : @[
@@ -87,22 +77,52 @@
                                ]};
     [self updateViewModel];
     
+    self.nameGuest.delegate = self;
+    self.emailGuest.delegate = self;
+}
+
+-(void) customCell {
+    [self.nameGuest setText: guestInformation[@"name"]];
+    [self.emailGuest setText: guestInformation[@"email"]];
+    
+    NSString *noPhoto = @"";
+    if (guestInformation[@"photo"] == noPhoto) {
+        NSString *userName = guestInformation[@"name"];
+        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
+    } else {
+        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
+        self.guestPhoto.clipsToBounds = YES;
+        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", guestInformation[@"photo"]];
+        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+    }
 }
 
 - (void) updateViewModel {
-    NSString * countryName = [self getNameCountry:self.currentGuest];
-    [self.currentGuest setObject:countryName forKey:@"nameCountry"];
+    if (changedInformation == NO) {
+        guestInformation = self.currentGuest;
+    }
     
-    NSArray * viewModel = @[
-                           @{
-                               @"nib" : @"LocationGuestTableViewCell",
-                               @"height" : @(60),
-                               @"segue" : @"guestListCountries",
-                               @"data": [self.currentGuest copy]
-                            }
-                           ];
+    NSString *countryName = [self getNameCountry:guestInformation];
+    [guestInformation setObject:countryName forKey:@"nameCountry"];
+    
+    if (changedInformation) [self.guestInformationDelegate guestInformation:self didChangedInformation:guestInformation];
+
+    NSArray *viewModel = @[
+                  @{
+                      @"nib" : @"LocationGuestTableViewCell",
+                      @"height" : @(60),
+                      @"segue" : @"guestListCountries",
+                      @"data": [guestInformation copy]
+                      }
+                  ];
     
     self.viewModel = [NSMutableArray arrayWithArray: viewModel];
+    
+    [self customCell];
+    
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
     
     [super updateViewModel];
 }
@@ -123,17 +143,69 @@
     return nameCountry;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.nameGuest)
+        [self changedTextName];
+    if (textField == self.emailGuest)
+        [self changedTextEmail];
+    
+    [textField resignFirstResponder];
+
+    return YES;
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+    
+    [self changedTextName];
+    [self changedTextEmail];
+}
+
+- (void) changedTextName{
+    NSString *nameGuest = self.nameGuest.text;
+    if (![self.nameGuest.text isEqualToString:guestInformation[@"name"]]){
+        changedInformation = YES;
+        [guestInformation removeObjectForKey:@"name"];
+        [guestInformation setObject:nameGuest forKey:@"name"];
+        [self updateViewModel];
+    }
+}
+
+- (void) changedTextEmail {
+    NSString *emailGuest = self.emailGuest.text;
+    if (![self.emailGuest.text isEqualToString:guestInformation[@"email"]])
+        guestInformation[@"email"] = emailGuest;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     if ([segue.identifier isEqualToString:@"guestListCountries"]){
         GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
         [guestListCountries setCurrentGuest: sender];
+        [guestListCountries setCountrySelectorDelegate:self];
     }
+}
+
+- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+        didSelectCountry: (NSDictionary *) country
+{
+    [self changedCountryUpdateGuestInformation: country];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
+    NSDictionary *currentGuestInformation = self.currentGuest;
+
+    changedInformation = YES;
+    
+    guestInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        currentGuestInformation[@"name"], @"name",
+                        currentGuestInformation[@"codePhone"], @"codePhone",
+                        currentGuestInformation[@"email"], @"email",
+                        currentGuestInformation[@"photo"], @"photo",
+                        newCountry[@"code"], @"codeCountry", nil];
+    
+    [self updateViewModel];
 }
 
 @end

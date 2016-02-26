@@ -6,10 +6,15 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface EditGuestDetailViewController : ModelTableViewController
+#import "ModelTableViewController.h"
+#import "ICountrySelectorDelegate.h"
+
+#import "IGuestInformation.h"
+#import "IGuestInformationDelegate.h"
+
+@interface EditGuestDetailViewController : ModelTableViewController <UITextFieldDelegate, ICountrySelectorDelegate, IGuestInformation>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
@@ -18,5 +23,7 @@
 @property(nonatomic, strong) NSMutableDictionary * currentGuest;
 
 @property(strong) NSDictionary *dataModel;
+
+@property(weak) id<IGuestInformationDelegate> guestInformationDelegate;
 
 @end

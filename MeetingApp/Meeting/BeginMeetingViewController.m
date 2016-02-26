@@ -14,6 +14,11 @@
 #import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
+{
+    NSIndexPath *indexPathGuestSelected;
+    BOOL changedInformation;
+    NSMutableArray *guestInformation;
+}
 
 @property (nonatomic, assign) ABAddressBookRef addressBook;
 @property (nonatomic, strong) NSMutableArray *menuArray;
@@ -41,7 +46,7 @@
     CGSize meetingSize = self.nameMeeting.frame.size;
     guestBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
     guestBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.nameGuest.layer addSublayer:guestBorder];
+    [self.emailGuest.layer addSublayer:guestBorder];
     
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -121,7 +126,7 @@
     
     [self updateViewModel];
     
-    self.nameGuest.delegate = self;
+    self.emailGuest.delegate = self;
     self.nameMeeting.delegate = self;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -133,8 +138,11 @@
 }
 
 - (void) updateViewModel {
+    if(changedInformation == NO)
+        guestInformation = self.dataModel;
+    
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.dataModel enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+    [guestInformation enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
         
@@ -152,6 +160,12 @@
     
     self.viewModel = viewModel;
     
+    if (changedInformation) {
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPathGuestSelected.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
+
     [super updateViewModel];
 }
 
@@ -167,11 +181,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL validate = NO;
-    if (textField == self.nameGuest) {
+    if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        validate = [self validateEmail:self.nameGuest.text];
+        validate = [self validateEmail:self.emailGuest.text];
         if(validate){
-            [self addNewGuestWith:self.nameGuest.text];
+            [self addNewGuestWith:self.emailGuest.text];
             textField.text = nil;
             return validate;
         } else{
@@ -206,7 +220,7 @@
     NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:self.nameGuest.text];
+    return [emailTest evaluateWithObject:self.emailGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
@@ -449,10 +463,25 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    [self performSegue: indexPath];
+    indexPathGuestSelected = indexPath;
+}
+
+- (void) guestInformation: (id<IGuestInformation>) guestDetail
+    didChangedInformation: (NSDictionary *) guest{
+    changedInformation = YES;
+    [guestInformation replaceObjectAtIndex:indexPathGuestSelected.row withObject:guest];
+    [self updateViewModel];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editGuestDetails"]){
         EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
         [editGuestDetailViewController setCurrentGuest: sender];
+        [editGuestDetailViewController setGuestInformationDelegate:self];
+        
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
         NSMutableArray *guestList = self.dataModel;

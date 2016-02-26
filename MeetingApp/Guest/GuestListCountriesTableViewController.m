@@ -91,23 +91,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * country = [self getCountryAtIndex:indexPath.row];
-    /*
-    if (country[@"name"] != self.currentGuest[@"nameCountry"]) {
-        NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
-        int indice=0;
-        for ( ; indice < countries.count; ++indice) {
-            if (countries[indice] == self.currentGuest[@"nameCountry"]) {
-                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:indice inSection:0];
-                [self.tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-                
-                break;
-            }
-        }
-    }*/
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    NSLog(@"%@", country);
+    NSDictionary * country = [self getCountryAtIndex:indexPath.row];    
+    [self.countrySelectorDelegate countrySelector:self didSelectCountry:country];
 }
 
 - (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {
