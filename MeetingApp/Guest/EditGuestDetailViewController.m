@@ -144,30 +144,38 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.nameGuest) {
-        [textField resignFirstResponder];
-        NSString *nameGuest = self.nameGuest.text;
-        if (![self.nameGuest.text isEqualToString:guestInformation[@"name"]]){
-            changedInformation = YES;
-            [guestInformation removeObjectForKey:@"name"];
-            [guestInformation setObject:nameGuest forKey:@"name"];
-            [self updateViewModel];
-        }
-    }
-    if (textField == self.emailGuest) {
-        [textField resignFirstResponder];
-        NSString *emailGuest = self.emailGuest.text;
-        if (![self.emailGuest.text isEqualToString:guestInformation[@"email"]])
-            guestInformation[@"email"] = emailGuest;
-    }
+    if (textField == self.nameGuest)
+        [self validateTextName];
+    if (textField == self.emailGuest)
+        [self validateTextEmail];
     
+    [textField resignFirstResponder];
+
     return YES;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+    
+    [self validateTextName];
+    [self validateTextEmail];
+}
+
+- (void) validateTextName{
+    NSString *nameGuest = self.nameGuest.text;
+    if (![self.nameGuest.text isEqualToString:guestInformation[@"name"]]){
+        changedInformation = YES;
+        [guestInformation removeObjectForKey:@"name"];
+        [guestInformation setObject:nameGuest forKey:@"name"];
+        [self updateViewModel];
+    }
+}
+
+- (void) validateTextEmail {
+    NSString *emailGuest = self.emailGuest.text;
+    if (![self.emailGuest.text isEqualToString:guestInformation[@"email"]])
+        guestInformation[@"email"] = emailGuest;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
