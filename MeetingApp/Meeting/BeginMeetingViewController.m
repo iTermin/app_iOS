@@ -14,6 +14,11 @@
 #import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
+{
+    NSIndexPath *indexPathGuestSelected;
+    BOOL changedInformation;
+    NSMutableArray *guestInformation;
+}
 
 @property (nonatomic, assign) ABAddressBookRef addressBook;
 @property (nonatomic, strong) NSMutableArray *menuArray;
@@ -133,8 +138,11 @@
 }
 
 - (void) updateViewModel {
+    if(changedInformation == NO)
+        guestInformation = self.dataModel;
+    
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.dataModel enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+    [guestInformation enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
         
@@ -152,6 +160,12 @@
     
     self.viewModel = viewModel;
     
+    if (changedInformation) {
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPathGuestSelected.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
+
     [super updateViewModel];
 }
 
@@ -449,10 +463,17 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+    [self performSegue: indexPath];
+    indexPathGuestSelected = indexPath;
+}
+
 - (void) guestInformation: (id<IGuestInformation>) guestDetail
     didChangedInformation: (NSDictionary *) guest{
-
-    NSLog(@"%@", guest);
+    changedInformation = YES;
+    [guestInformation replaceObjectAtIndex:indexPathGuestSelected.row withObject:guest];
+    [self updateViewModel];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
