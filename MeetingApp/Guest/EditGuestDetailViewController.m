@@ -145,9 +145,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.nameGuest)
-        [self validateTextName];
+        [self changedTextName];
     if (textField == self.emailGuest)
-        [self validateTextEmail];
+        [self changedTextEmail];
     
     [textField resignFirstResponder];
 
@@ -158,11 +158,11 @@
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
     
-    [self validateTextName];
-    [self validateTextEmail];
+    [self changedTextName];
+    [self changedTextEmail];
 }
 
-- (void) validateTextName{
+- (void) changedTextName{
     NSString *nameGuest = self.nameGuest.text;
     if (![self.nameGuest.text isEqualToString:guestInformation[@"name"]]){
         changedInformation = YES;
@@ -172,7 +172,7 @@
     }
 }
 
-- (void) validateTextEmail {
+- (void) changedTextEmail {
     NSString *emailGuest = self.emailGuest.text;
     if (![self.emailGuest.text isEqualToString:guestInformation[@"email"]])
         guestInformation[@"email"] = emailGuest;
