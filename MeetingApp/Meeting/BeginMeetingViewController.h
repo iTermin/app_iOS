@@ -21,7 +21,7 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
-@property (strong, nonatomic) IBOutlet UITextField *nameGuest;
+@property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
 
 @property(strong) NSMutableArray *dataModel;

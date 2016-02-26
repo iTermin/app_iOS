@@ -77,6 +77,8 @@
                                ]};
     [self updateViewModel];
     
+    self.nameGuest.delegate = self;
+    self.emailGuest.delegate = self;
 }
 
 -(void) customCell {
@@ -139,6 +141,27 @@
         }
     }
     return nameCountry;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.nameGuest) {
+        [textField resignFirstResponder];
+        NSString *nameGuest = self.nameGuest.text;
+        if (![self.nameGuest.text isEqualToString:guestInformation[@"name"]]){
+            changedInformation = YES;
+            [guestInformation removeObjectForKey:@"name"];
+            [guestInformation setObject:nameGuest forKey:@"name"];
+            [self updateViewModel];
+        }
+    }
+    if (textField == self.emailGuest) {
+        [textField resignFirstResponder];
+        NSString *emailGuest = self.emailGuest.text;
+        if (![self.emailGuest.text isEqualToString:guestInformation[@"email"]])
+            guestInformation[@"email"] = emailGuest;
+    }
+    
+    return YES;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

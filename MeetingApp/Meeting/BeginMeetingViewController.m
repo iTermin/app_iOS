@@ -46,7 +46,7 @@
     CGSize meetingSize = self.nameMeeting.frame.size;
     guestBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
     guestBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.nameGuest.layer addSublayer:guestBorder];
+    [self.emailGuest.layer addSublayer:guestBorder];
     
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
@@ -126,7 +126,7 @@
     
     [self updateViewModel];
     
-    self.nameGuest.delegate = self;
+    self.emailGuest.delegate = self;
     self.nameMeeting.delegate = self;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -181,11 +181,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL validate = NO;
-    if (textField == self.nameGuest) {
+    if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        validate = [self validateEmail:self.nameGuest.text];
+        validate = [self validateEmail:self.emailGuest.text];
         if(validate){
-            [self addNewGuestWith:self.nameGuest.text];
+            [self addNewGuestWith:self.emailGuest.text];
             textField.text = nil;
             return validate;
         } else{
@@ -220,7 +220,7 @@
     NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:self.nameGuest.text];
+    return [emailTest evaluateWithObject:self.emailGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 

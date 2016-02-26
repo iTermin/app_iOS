@@ -14,7 +14,7 @@
 #import "IGuestInformation.h"
 #import "IGuestInformationDelegate.h"
 
-@interface EditGuestDetailViewController : ModelTableViewController <ICountrySelectorDelegate, IGuestInformation>
+@interface EditGuestDetailViewController : ModelTableViewController <UITextFieldDelegate, ICountrySelectorDelegate, IGuestInformation>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;

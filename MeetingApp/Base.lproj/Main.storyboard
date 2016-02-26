@@ -81,7 +81,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
-                        <outlet property="nameGuest" destination="NPD-tT-gwQ" id="eRt-Fa-mhF"/>
+                        <outlet property="emailGuest" destination="NPD-tT-gwQ" id="hrR-Cs-8ky"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
                         <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                         <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
