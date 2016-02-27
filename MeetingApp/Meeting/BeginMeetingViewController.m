@@ -29,6 +29,10 @@
 
 @implementation BeginMeetingViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSMutableArray *guests = self.currentMeeting[@"guests"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

@@ -8,6 +8,7 @@
 
 #import "MeetingTableViewController.h"
 #import "MeetingDetailViewController.h"
+#import "BeginMeetingViewController.h"
 
 #import "MainAssembly.h"
 
@@ -79,13 +80,12 @@
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
-    NSDictionary * selectedMeeting = self.meetings[indexPath.row];
     NSDictionary * cellModel = self.viewModel[indexPath.row];
     NSString * segueToPerform = cellModel[@"segue"];
-    if(segueToPerform) {
+    if([segueToPerform isEqualToString:@"meetingDetail"]) {
+        NSDictionary * selectedMeeting = self.meetings[indexPath.row];
         [self performSegueWithIdentifier: segueToPerform
                                   sender: selectedMeeting];
-
     }
 }
 
@@ -95,7 +95,10 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        // TODO: Send the data model from the user
+        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
+        UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
+        BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
+        [beginMeetingViewController setCurrentMeeting: newMeeting];
     }
 }
 

@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Meeting.h"
 #import "ModelTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 
@@ -27,6 +28,8 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property(strong) NSMutableArray *dataModel;
 @property(strong) NSDictionary *dataModelCountries;
 @property(strong) NSDictionary *dataModelUser;
+
+@property(nonatomic, strong) MutableMeeting * currentMeeting;
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;

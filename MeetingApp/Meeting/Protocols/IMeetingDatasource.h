@@ -14,10 +14,10 @@
 
 - (NSArray<Meeting *> *) getAllMeetings;
 - (Meeting *) getMeetingDetail: (Meeting *) meeting;
+- (MutableMeeting *) getTemporalMeeting;
 
 @optional
 
-- (MutableMeeting *) getTemporalMeeting;
 - (MutableMeeting *) getMutableMeeting: (Meeting *) meeting;
 
 @end

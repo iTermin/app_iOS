@@ -94,4 +94,14 @@
     return self.detailMeetings[meeting[@"id"]];
 }
 
+- (MutableMeeting *) getTemporalMeeting
+{
+    id temporalMeeting = @{
+              @"detail" : @{},
+              @"guests" : @[],
+    };
+    
+    return [NSMutableDictionary dictionaryWithDictionary: temporalMeeting];
+}
+
 @end
