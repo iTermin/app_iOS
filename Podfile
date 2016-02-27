@@ -4,13 +4,20 @@
 # use_frameworks!
 
 target 'MeetingApp' do
-pod "UIImageView-Letters"
-pod 'DZNEmptyDataSet'
+
+    pod "UIImageView-Letters"
+    pod 'DZNEmptyDataSet'
+    pod 'Typhoon'
+
 end
 
+
 target 'MeetingAppTests' do
-pod "Kiwi"
+
+    pod "Kiwi"
+
 end
+
 
 target 'MeetingAppUITests' do
 

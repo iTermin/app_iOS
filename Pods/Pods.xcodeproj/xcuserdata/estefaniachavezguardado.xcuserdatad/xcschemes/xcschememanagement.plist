@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Typhoon.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIImageView-Letters.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
+		<key>3F58669C93782C6C6EC049CB707CDE59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>566FE36C2D6839F41C1CC8E6D4E8A96E</key>
+		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC3DBA14BB5E573EF55B87CC2E7A1F6D</key>
+		<key>F723EEC3F6DC8A1AE5B36FA7F5CCE489</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC739B67DBABF08E27AB14FE264DBB80</key>
 		<dict>
 			<key>primary</key>
 			<true/>

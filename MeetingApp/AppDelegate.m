@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainAssembly.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    MainAssembly *mainAssembly = [[MainAssembly new] activate];
+    [mainAssembly makeDefault];
+    
     return YES;
 }
 

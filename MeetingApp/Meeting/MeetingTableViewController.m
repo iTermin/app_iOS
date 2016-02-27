@@ -9,6 +9,8 @@
 #import "MeetingTableViewController.h"
 #import "MeetingDetailViewController.h"
 
+#import "MainAssembly.h"
+
 @interface MeetingTableViewController ()
 
 @end
@@ -19,20 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.meetings = @[
-            @{
-                    @"active" : @(true),
-                    @"date" : @"2015-12-11",
-                    @"meetingId" : @"m1",
-                    @"name" : @"Meeting 1"
-            },
-            @{
-                    @"active" : @(true),
-                    @"date" : @"2015-11-15",
-                    @"meetingId" : @"m2",
-                    @"name" : @"Meeting 2"
-            }
-    ];
+    self.meetings = [[[MainAssembly defaultAssembly] meetingBusinessController] getAllMeetings];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
