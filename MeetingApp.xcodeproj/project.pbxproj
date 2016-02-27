@@ -104,6 +104,7 @@
 		7C0393E01C81C70000BDA9AC /* Meeting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Meeting.h; path = Meeting/Models/Meeting.h; sourceTree = "<group>"; };
 		7C0393E61C81D0E800BDA9AC /* MainAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainAssembly.h; path = Assembly/MainAssembly.h; sourceTree = "<group>"; };
 		7C0393E71C81D0E800BDA9AC /* MainAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainAssembly.m; path = Assembly/MainAssembly.m; sourceTree = "<group>"; };
+		7C0393E91C81D85500BDA9AC /* Guest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Guest.h; path = Meeting/Models/Guest.h; sourceTree = "<group>"; };
 		7C16877A1C707EB900197DB1 /* RSKImageCropper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSKImageCropper.xcodeproj; path = libs/RSKImageCropper/RSKImageCropper.xcodeproj; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -278,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				7C0393E01C81C70000BDA9AC /* Meeting.h */,
+				7C0393E91C81D85500BDA9AC /* Guest.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";

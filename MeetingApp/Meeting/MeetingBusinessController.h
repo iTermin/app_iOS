@@ -14,4 +14,6 @@
 
 @interface MeetingBusinessController : NSObject <IMeetingDatasource, IMeetingDelegate>
 
+@property (nonatomic, retain) NSMutableDictionary <NSString *, Meeting *> * detailMeetings;
+
 @end

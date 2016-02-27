@@ -26,8 +26,6 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-
-    [self getCountry];
     
     [self updateViewModel];
 }
@@ -78,13 +76,6 @@
     self.viewModel = viewModel;
     
     [super updateViewModel];
-}
-
--(void) getCountry{
-    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
-    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-    
-    // TODO: Add the country to the user data model
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{

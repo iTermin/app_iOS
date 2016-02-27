@@ -13,6 +13,7 @@
 @protocol IMeetingDatasource <NSObject>
 
 - (NSArray<Meeting *> *) getAllMeetings;
+- (Meeting *) getMeetingDetail: (Meeting *) meeting;
 
 @optional
 
