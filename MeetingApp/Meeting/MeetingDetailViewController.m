@@ -8,6 +8,7 @@
 
 #import "MeetingDetailViewController.h"
 #import "GuestDetailViewController.h"
+#import "MainAssembly.h"
 
 @interface MeetingDetailViewController ()
 
@@ -25,22 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.guests = @[
-                    @{
-                        @"name": @"Luis Alejandro Rangel",
-                        @"codePhone" : @"+52",
-                        @"email": @"email@correo.mx",
-                        @"photo": @"fondo",
-                        @"codeCountry" : @"MX"
-                        },
-                    @{
-                        @"name": @"Jesus Cagide",
-                        @"codePhone" : @"+1",
-                        @"email": @"email@correo.mx",
-                        @"photo": @"",
-                        @"codeCountry" : @"US"
-                        }
-                    ];
+    self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController] getMeetingDetail: self.currentMeeting][@"guests"];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     

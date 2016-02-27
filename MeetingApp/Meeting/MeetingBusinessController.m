@@ -23,15 +23,15 @@
             @"guests" : @[ @{
                 @"email" : @"fachinacg@gmail.com",
                 @"name" : @"Estefania Guardado",
-                @"photo" : @"14241341.png"
+                @"photo" : @""
             }, @{
                 @"email" : @"xlarsx@gmail.com",
                 @"name" : @"Luis Alejandro Rangel",
-                @"photo" : @"14241323.png"
+                @"photo" : @""
             }, @{
                 @"email" : @"set311@gmail.com",
                 @"name" : @"Jesus Cagide",
-                @"photo" : @"14298723.png"
+                @"photo" : @""
             } ],
             @"notifications" : @{
                 @"apn" : @[ @1 ],
