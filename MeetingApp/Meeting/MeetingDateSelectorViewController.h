@@ -10,4 +10,7 @@
 
 @interface MeetingDateSelectorViewController : UITableViewController
 
+@property(nonatomic, strong) NSMutableArray * guestMeeting;
+@property(strong) NSArray *viewModel;
+
 @end

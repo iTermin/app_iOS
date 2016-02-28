@@ -10,7 +10,8 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 #import "BeginMeetingViewController.h"
-#import "SetMeetingViewController.h"
+#import "MeetingDateSelectorViewController.h"
+//#import "SetMeetingViewController.h"
 #import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
@@ -456,9 +457,10 @@
         [editGuestDetailViewController setGuestInformationDelegate:self];
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
-        SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
+        MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
+        //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
         NSMutableArray *guestList = self.listOfGuests;
-        [guestDateMeetingViewController setGuestMeeting: guestList];
+        [meetingDateSelectorViewController setGuestMeeting: guestList];
     }
 }
 
