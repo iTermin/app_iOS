@@ -96,9 +96,12 @@
 
 - (MutableMeeting *) getTemporalMeeting
 {
+    NSMutableArray *guests = [NSMutableArray array];
+    NSMutableDictionary *detail = [NSMutableDictionary dictionary];
+    
     id temporalMeeting = @{
-              @"detail" : @{},
-              @"guests" : @[],
+              @"detail" : detail,
+              @"guests" : guests,
     };
     
     return [NSMutableDictionary dictionaryWithDictionary: temporalMeeting];

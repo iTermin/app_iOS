@@ -9,6 +9,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "Meeting.h"
 #import "ModelTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
@@ -18,18 +21,22 @@
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
 DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 
+@property (nonatomic, assign) ABAddressBookRef addressBook;
+@property (nonatomic, strong) NSMutableArray *menuArray;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, weak) IBOutlet UIButton * nextButton;
-
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
 
-@property(strong) NSMutableArray *dataModel;
-@property(strong) NSDictionary *dataModelCountries;
-@property(strong) NSDictionary *dataModelUser;
-
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
+
+@property (strong) NSDictionary *dataModelCountries;
+@property (strong) NSMutableArray *listOfGuests;
+@property (strong) NSIndexPath *indexPathGuestSelected;
+
+- (BOOL)validateEmail:(NSString*) emailAddress ;
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;

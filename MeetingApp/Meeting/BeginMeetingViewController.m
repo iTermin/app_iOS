@@ -15,26 +15,26 @@
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 {
-    NSIndexPath *indexPathGuestSelected;
     BOOL changedInformation;
-    NSMutableArray *guestInformation;
 }
-
-@property (nonatomic, assign) ABAddressBookRef addressBook;
-@property (nonatomic, strong) NSMutableArray *menuArray;
-
-- (BOOL)validateEmail:(NSString*) emailAddress ;
 
 @end
 
 @implementation BeginMeetingViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    NSMutableArray *guests = self.currentMeeting[@"guests"];
+    [super viewWillAppear:YES];
+    
+    [self updateViewModel];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.listOfGuests = [NSMutableArray array];
+    self.listOfGuests = self.currentMeeting[@"guests"];
+
+    self.indexPathGuestSelected = [NSIndexPath new];
     
     CGSize nameSize = self.nameMeeting.frame.size;
     CGFloat xPosition = 0.0f;
@@ -52,7 +52,6 @@
     guestBorder.backgroundColor = grayColorSeparator.CGColor;
     [self.emailGuest.layer addSublayer:guestBorder];
     
-    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     self.dataModelCountries = @{
@@ -104,32 +103,6 @@
                                             }
                                         ]};
     
-    self.dataModelUser = @{
-                               @"name" : @"Estefania Guardado",
-                               @"code" : @"JP",
-                               @"email": @"email@correo.mx",
-                               @"photo": @"fondo"
-                           };
-    
-    self.dataModel = [NSMutableArray arrayWithArray:@[
-      @{
-          @"name": @"Luis Alejandro Rangel",
-          @"codePhone" : @"+52",
-          @"email": @"email@correo.mx",
-          @"photo": @"fondo",
-          @"codeCountry" : @"MX"
-          },
-      @{
-          @"name": @"Jesus Cagide",
-          @"codePhone" : @"+1",
-          @"email": @"email@correo.mx",
-          @"photo": @"",
-          @"codeCountry" : @"US"
-          }
-      ]];
-    
-    [self updateViewModel];
-    
     self.emailGuest.delegate = self;
     self.nameMeeting.delegate = self;
     self.tableView.emptyDataSetSource = self;
@@ -142,11 +115,9 @@
 }
 
 - (void) updateViewModel {
-    if(changedInformation == NO)
-        guestInformation = self.dataModel;
     
     NSMutableArray * viewModel = [NSMutableArray array];
-    [guestInformation enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
         
@@ -164,17 +135,16 @@
     
     self.viewModel = viewModel;
     
-    if (changedInformation) {
+    if (changedInformation){
         [self.tableView beginUpdates];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPathGuestSelected.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.indexPathGuestSelected.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView endUpdates];
     }
-
+    
     [super updateViewModel];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
@@ -240,11 +210,11 @@
     
     [guestInformation setObject:code forKey:@"codeCountry"];
     
-    [self.dataModel addObject: guestInformation];
+    [self.listOfGuests addObject: guestInformation];
     [self updateViewModel];
     
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
 
 }
@@ -387,23 +357,21 @@
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
 
     NSString *codeContact = [self codePhone:phoneGuest];
+    NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
 
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
                                         @"photo" : photoContact ? photoContact : @"",
                                         @"codePhone" : codeContact ? codeContact : @"",
                                         @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
-                                        @"name" : nameGuest
+                                        @"name" : nameGuest,
+                                        @"codeCountry" : code
     }];
     
-    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
-    
-    [guestInformation setObject:code forKey:@"codeCountry"];
-
-    [self.dataModel addObject: guestInformation];
+    [self.listOfGuests addObject:guestInformation];
     [self updateViewModel];
     
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataModel count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
 }
 
@@ -442,9 +410,10 @@
     return codeCountry;
 }
 
-- (NSString *) locationHost{
-    NSString * code = self.dataModelUser[@"code"];
-    return code;
+-(NSString *) getCountryUser {
+    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+    return countryCode;
 }
 
 - (NSString *)getFlagCodeWithCodePhoneGuest:(NSString *)codePhone {
@@ -452,7 +421,7 @@
     NSString * code = @"";
     
     if([codeContact isEqualToString:code]){
-        return code = [self locationHost];
+        return code = [self getCountryUser];
     } else{
         NSDictionary *countriesInformation = self.dataModelCountries[@"countries"];
         NSDictionary * element;
@@ -470,13 +439,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     [self performSegue: indexPath];
-    indexPathGuestSelected = indexPath;
+    self.indexPathGuestSelected = indexPath;
 }
 
 - (void) guestInformation: (id<IGuestInformation>) guestDetail
     didChangedInformation: (NSDictionary *) guest{
     changedInformation = YES;
-    [guestInformation replaceObjectAtIndex:indexPathGuestSelected.row withObject:guest];
+    [self.listOfGuests replaceObjectAtIndex:self.indexPathGuestSelected.row withObject:guest];
     [self updateViewModel];
 }
 
@@ -488,7 +457,7 @@
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSMutableArray *guestList = self.dataModel;
+        NSMutableArray *guestList = self.listOfGuests;
         [guestDateMeetingViewController setGuestMeeting: guestList];
     }
 }
