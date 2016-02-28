@@ -11,7 +11,6 @@
 
 #import "BeginMeetingViewController.h"
 #import "MeetingDateSelectorViewController.h"
-//#import "SetMeetingViewController.h"
 #import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
