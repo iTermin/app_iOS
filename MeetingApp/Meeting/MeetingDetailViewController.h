@@ -6,12 +6,14 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
+
+#import "ModelTableViewController.h"
+#import "Meeting.h"
 
 @interface MeetingDetailViewController : ModelTableViewController
 
-@property(nonatomic, strong) NSDictionary * currentMeeting;
+@property(nonatomic, strong) Meeting * currentMeeting;
 
 @property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;

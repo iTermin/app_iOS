@@ -8,6 +8,9 @@
 
 #import "MeetingTableViewController.h"
 #import "MeetingDetailViewController.h"
+#import "BeginMeetingViewController.h"
+
+#import "MainAssembly.h"
 
 @interface MeetingTableViewController ()
 
@@ -19,26 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.meetings = @[
-            @{
-                    @"active" : @(true),
-                    @"date" : @"2015-12-11",
-                    @"meetingId" : @"m1",
-                    @"name" : @"Meeting 1"
-            },
-            @{
-                    @"active" : @(true),
-                    @"date" : @"2015-11-15",
-                    @"meetingId" : @"m2",
-                    @"name" : @"Meeting 2"
-            }
-    ];
+    self.meetings = [[[MainAssembly defaultAssembly] meetingBusinessController] getAllMeetings];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-
-    [self getCountry];
     
     [self updateViewModel];
 }
@@ -91,21 +79,13 @@
     [super updateViewModel];
 }
 
--(void) getCountry{
-    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
-    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-    
-    // TODO: Add the country to the user data model
-}
-
 - (void) performSegue: (NSIndexPath *)indexPath{
-    NSDictionary * selectedMeeting = self.meetings[indexPath.row];
     NSDictionary * cellModel = self.viewModel[indexPath.row];
     NSString * segueToPerform = cellModel[@"segue"];
-    if(segueToPerform) {
+    if([segueToPerform isEqualToString:@"meetingDetail"]) {
+        NSDictionary * selectedMeeting = self.meetings[indexPath.row];
         [self performSegueWithIdentifier: segueToPerform
                                   sender: selectedMeeting];
-
     }
 }
 
@@ -115,7 +95,10 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        // TODO: Send the data model from the user
+        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
+        UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
+        BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
+        [beginMeetingViewController setCurrentMeeting: newMeeting];
     }
 }
 
