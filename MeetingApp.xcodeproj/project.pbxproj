@@ -17,6 +17,7 @@
 		7C30FA8C1C2ED3C70059EAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8B1C2ED3C70059EAE3 /* Assets.xcassets */; };
 		7C30FA8F1C2ED3C70059EAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA8D1C2ED3C70059EAE3 /* LaunchScreen.storyboard */; };
 		7C30FAA51C2ED3C70059EAE3 /* MeetingAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */; };
+		7C36ADC51C83898300813935 /* ArrayOfCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C36ADC41C83898300813935 /* ArrayOfCountries.m */; };
 		7C3E2B821C70A8C300B49E90 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */; };
 		7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2B841C70A96E00B49E90 /* EditProfileUserViewController.m */; };
 		7C3E2B961C70ABEE00B49E90 /* ProfilePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2B871C70ABEE00B49E90 /* ProfilePhotoTableViewCell.xib */; };
@@ -117,6 +118,8 @@
 		7C30FAA01C2ED3C70059EAE3 /* MeetingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FAA41C2ED3C70059EAE3 /* MeetingAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetingAppUITests.m; sourceTree = "<group>"; };
 		7C30FAA61C2ED3C70059EAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C36ADC31C83898300813935 /* ArrayOfCountries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayOfCountries.h; path = Meeting/ArrayOfCountries.h; sourceTree = "<group>"; };
+		7C36ADC41C83898300813935 /* ArrayOfCountries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArrayOfCountries.m; path = Meeting/ArrayOfCountries.m; sourceTree = "<group>"; };
 		7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = User/SettingsViewController.m; sourceTree = "<group>"; };
 		7C3E2B811C70A8C300B49E90 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = User/SettingsViewController.h; sourceTree = "<group>"; };
 		7C3E2B831C70A96E00B49E90 /* EditProfileUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileUserViewController.h; path = User/EditProfileUserViewController.h; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 				7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */,
 				7C0393D71C81C20B00BDA9AC /* MeetingBusinessController.h */,
 				7C0393D81C81C20B00BDA9AC /* MeetingBusinessController.m */,
+				7C36ADC31C83898300813935 /* ArrayOfCountries.h */,
+				7C36ADC41C83898300813935 /* ArrayOfCountries.m */,
 			);
 			name = Meeting;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 				7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */,
 				7C0393D91C81C20B00BDA9AC /* MeetingBusinessController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
+				7C36ADC51C83898300813935 /* ArrayOfCountries.m in Sources */,
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
 				7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */,
 				7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */,
