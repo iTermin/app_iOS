@@ -112,6 +112,20 @@
         NSDictionary *dataGuest = guest[@"data"];
         [self gethourGuest: dataGuest[@"codeCountry"] respectUser:userDate];
     }];
+    
+    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArray];
+    [self.hoursArray removeAllObjects];
+    [self prepareHoursForAlgorithm: prepareHours];
+}
+
+- (void) prepareHoursForAlgorithm : (NSArray *) hours{
+    NSMutableSet *existingHours = [NSMutableSet set];
+    [hours enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop){
+        if (![existingHours containsObject:hour]) {
+            [existingHours addObject:hour];
+            [self.hoursArray addObject:hour];
+        }
+    }];
 }
 
 - (void) gethourGuest: (NSString *) guestCountry respectUser: (NSDictionary *) userDate{
