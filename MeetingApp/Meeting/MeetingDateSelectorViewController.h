@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ArrayOfCountries.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController
+
+@property(nonatomic, strong) NSMutableArray * guestMeeting;
+@property(strong) NSArray *viewModel;
+
+@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
+@property (strong) NSArray * modelCountries;
+
+@property (strong) NSDate * dateCurrent;
+@property (strong) NSMutableArray * hoursArray;
 
 @end

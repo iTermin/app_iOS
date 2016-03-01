@@ -10,7 +10,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 #import "BeginMeetingViewController.h"
-#import "SetMeetingViewController.h"
+#import "MeetingDateSelectorViewController.h"
 #import "EditGuestDetailViewController.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
@@ -24,7 +24,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+
     [self updateViewModel];
 }
 
@@ -139,6 +140,7 @@
         [self.tableView beginUpdates];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.indexPathGuestSelected.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView endUpdates];
+        changedInformation = NO;
     }
     
     [super updateViewModel];
@@ -456,9 +458,10 @@
         [editGuestDetailViewController setGuestInformationDelegate:self];
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
-        SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
+        MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
+        //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
         NSMutableArray *guestList = self.listOfGuests;
-        [guestDateMeetingViewController setGuestMeeting: guestList];
+        [meetingDateSelectorViewController setGuestMeeting: guestList];
     }
 }
 

@@ -181,7 +181,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
 - (NSString *)localizedEndDateStringFromEndDate:(NSDate *)date withStartDate:(NSDate *)startDate
 {
     // Only show time bit if date bit is the same
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     if ([calendar date:date isInSameDayAsDate:startDate]) {
         return [self.timeFormatter stringFromDate:date];
     }
