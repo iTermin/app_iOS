@@ -1,6 +1,7 @@
 PODS:
   - DZNEmptyDataSet (1.7.3)
   - Kiwi (2.4.0)
+  - SWTableViewCell (0.3.7)
   - Typhoon (3.4.5):
     - Typhoon/no-arc (= 3.4.5)
   - Typhoon/no-arc (3.4.5)
@@ -9,12 +10,14 @@ PODS:
 DEPENDENCIES:
   - DZNEmptyDataSet
   - Kiwi
+  - SWTableViewCell (~> 0.3.7)
   - Typhoon
   - UIImageView-Letters
 
 SPEC CHECKSUMS:
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
   UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
 

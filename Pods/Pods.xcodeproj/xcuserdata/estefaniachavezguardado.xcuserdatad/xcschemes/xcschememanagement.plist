@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SWTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Typhoon.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3F58669C93782C6C6EC049CB707CDE59</key>
+		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
+		<key>5693172177555AB2D1D03F5848ABC21E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F723EEC3F6DC8A1AE5B36FA7F5CCE489</key>
+		<key>89E96104598D83EA8844901E882E224E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC739B67DBABF08E27AB14FE264DBB80</key>
+		<key>9EACC1708E8A2B4A462992826EEE1397</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A1C922A2147FA690772CC47FFF3808AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

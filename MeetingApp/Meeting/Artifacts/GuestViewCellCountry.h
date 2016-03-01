@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 
-@interface GuestViewCellCountry : UITableViewCell
+@interface GuestViewCellCountry : SWTableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *nameGuest;
 @property (strong, nonatomic) IBOutlet UILabel *emailGuest;

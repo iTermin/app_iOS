@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C4CC6911933482B44535EC0F'
-               BlueprintName = 'UIImageView-Letters'
+               BlueprintIdentifier = '113E275671086473DE7E9482'
+               BlueprintName = 'SWTableViewCell'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libUIImageView-Letters.a'>
+               BuildableName = 'libSWTableViewCell.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
