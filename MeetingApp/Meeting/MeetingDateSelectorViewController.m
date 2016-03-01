@@ -23,6 +23,8 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    
     // Set up the initial values for the date cells manager
     NSDate *startDate = [NSDate date]; //now
     NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:7200]; //one week from now

@@ -79,7 +79,6 @@
     
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
-    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 -(void) customCell {
