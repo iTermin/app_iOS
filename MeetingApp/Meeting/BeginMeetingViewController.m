@@ -24,7 +24,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+
     [self updateViewModel];
 }
 
