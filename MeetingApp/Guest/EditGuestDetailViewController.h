@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 
 @property(nonatomic, strong) NSMutableDictionary * currentGuest;
+@property(nonatomic, strong) NSMutableDictionary *guestInformation;
+
 
 @property(strong) NSDictionary *dataModel;
 
