@@ -158,14 +158,21 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL validate = NO;
+    BOOL guestIsValid = NO;
     if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        validate = [self validateEmail:self.emailGuest.text];
-        if(validate){
-            [self addNewGuestWith:self.emailGuest.text];
-            textField.text = nil;
-            return validate;
+        guestIsValid = [self validateEmail:self.emailGuest.text];
+        if(guestIsValid){
+            BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
+            if (isDiferentGuest) {
+                [self addNewGuestWith:self.emailGuest.text];
+                textField.text = nil;
+                return guestIsValid;
+            }
+            else{
+                [self alertGuestRegistered];
+                return guestIsValid = NO;
+            }
         } else{
             UIAlertController *alert = [UIAlertController
                                         alertControllerWithTitle:@"Wrong Email!"
@@ -176,7 +183,6 @@
                                  actionWithTitle:@"OK"
                                  style:UIAlertActionStyleDefault
                                  handler:^(UIAlertAction * action){
-                                     //Do some thing here
                                      [alert dismissViewControllerAnimated:YES completion:nil];
                                  }];
             
@@ -184,12 +190,27 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
-    if (textField == self.nameMeeting) {
+    if (textField == self.nameMeeting)
         [textField resignFirstResponder];
-        NSString *nameMeeting = self.nameMeeting.text;
-        NSLog(@"%@", nameMeeting);
-    }
-    return validate;
+    
+    return guestIsValid;
+}
+
+- (void) alertGuestRegistered{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Registered Guest."
+                                message:@"You had registered a guest with the same information."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (BOOL) validateEmail:(NSString*) emailAddress{
@@ -200,6 +221,19 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self.emailGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
+}
+
+- (BOOL) isDiferentGuest: (NSDictionary *) information{
+    __block BOOL isDiferentGuest = YES;
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
+        if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
+            isDiferentGuest = NO;
+        if (isDiferentGuest)
+            if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
+                isDiferentGuest =  NO;
+    }];
+    return isDiferentGuest;
 }
 
 -(void)addNewGuestWith:(NSString *)email{
@@ -353,9 +387,15 @@
         retrievedName = [[NSString alloc] initWithFormat:@"%@", lastName];
     }
     
-    [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+    if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
+        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+        [self dismissViewControllerAnimated:NO completion:^(){}];
+    }
+    else{
+        [self dismissViewControllerAnimated:NO completion:^(){}];
+        [self alertGuestRegistered];
+    }
     
-    [self dismissViewControllerAnimated:NO completion:^(){}];
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
