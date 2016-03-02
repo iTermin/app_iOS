@@ -7,68 +7,23 @@
 //
 
 #import "ListCountriesViewController.h"
+#import "ArrayOfCountries.h"
 
 @implementation ListCountriesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataModel = @{
-                       @"countries" : @[
-                               @{
-                                   @"name": @"China",
-                                   @"dial_code": @"+86",
-                                   @"code": @"CN"
-                                   },
-                               @{
-                                   @"name": @"France",
-                                   @"dial_code": @"+33",
-                                   @"code": @"FR"
-                                   },
-                               @{
-                                   @"name": @"Germany",
-                                   @"dial_code": @"+49",
-                                   @"code": @"DE"
-                                   },
-                               @{
-                                   @"name": @"India",
-                                   @"dial_code": @"+91",
-                                   @"code": @"IN"
-                                   },
-                               @{
-                                   @"name": @"Italy",
-                                   @"dial_code": @"+39",
-                                   @"code": @"IT"
-                                   },
-                               @{
-                                   @"name": @"Japan",
-                                   @"dial_code": @"+81",
-                                   @"code": @"JP"
-                                   },
-                               @{
-                                   @"name": @"Mexico",
-                                   @"dial_code": @"+52",
-                                   @"code": @"MX"
-                                   },
-                               @{
-                                   @"name": @"United Kingdom",
-                                   @"dial_code": @"+44",
-                                   @"code": @"GB"
-                                   },
-                               @{
-                                   @"name": @"United States",
-                                   @"dial_code": @"+1",
-                                   @"code": @"US"
-                                   }
-                               ]};
-
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
+    
     [self updateViewModel];
     
 }
 
 - (void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.dataModel[@"countries"] enumerateObjectsUsingBlock:^(NSDictionary * country, NSUInteger idx, BOOL * stop) {
+    [self.modelCountries enumerateObjectsUsingBlock:^(NSDictionary * country, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:country];
         //UIImage *flagIcon = [UIImage imageNamed:@"CN"];
@@ -112,7 +67,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
+    NSArray *countries = [self.modelCountries valueForKeyPath:@"name"];
     int indice=0;
     for ( ; indice < countries.count; ++indice) {
         if (countries[indice] == self.currentLocation) {
@@ -126,7 +81,7 @@
 }
 
 - (NSDictionary *) getCountryAtIndex:(NSUInteger)index{
-    return self.dataModel[@"countries"][index];
+    return self.modelCountries[index];
 }
 
 @end

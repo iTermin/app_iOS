@@ -10,6 +10,7 @@
 
 #import "ModelTableViewController.h"
 #import "ICountrySelectorDelegate.h"
+#import "ArrayOfCountries.h"
 
 #import "IGuestInformation.h"
 #import "IGuestInformationDelegate.h"
@@ -23,8 +24,9 @@
 @property(nonatomic, strong) NSMutableDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;
 
+@property (strong) NSArray * modelCountries;
+@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
-@property(strong) NSDictionary *dataModel;
 
 @property(weak) id<IGuestInformationDelegate> guestInformationDelegate;
 

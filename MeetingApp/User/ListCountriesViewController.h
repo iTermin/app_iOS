@@ -6,12 +6,14 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
+#import "ModelTableViewController.h"
+#import "ArrayOfCountries.h"
 
 @interface ListCountriesViewController : ModelTableViewController
 
-@property(strong) NSDictionary *dataModel;
+@property (strong) NSArray * modelCountries;
+@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 @property(nonatomic, strong) NSDictionary * currentLocation;
 

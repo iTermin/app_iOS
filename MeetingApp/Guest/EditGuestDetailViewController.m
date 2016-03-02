@@ -9,6 +9,8 @@
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
 #import "GuestListCountriesTableViewController.h"
+#import "ArrayOfCountries.h"
+
 
 @interface EditGuestDetailViewController ()
 {
@@ -26,54 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataModel = @{
-                       @"countries" : @[
-                               @{
-                                   @"name": @"China",
-                                   @"dial_code": @"+86",
-                                   @"code": @"CN"
-                                   },
-                               @{
-                                   @"name": @"France",
-                                   @"dial_code": @"+33",
-                                   @"code": @"FR"
-                                   },
-                               @{
-                                   @"name": @"Germany",
-                                   @"dial_code": @"+49",
-                                   @"code": @"DE"
-                                   },
-                               @{
-                                   @"name": @"India",
-                                   @"dial_code": @"+91",
-                                   @"code": @"IN"
-                                   },
-                               @{
-                                   @"name": @"Italy",
-                                   @"dial_code": @"+39",
-                                   @"code": @"IT"
-                                   },
-                               @{
-                                   @"name": @"Japan",
-                                   @"dial_code": @"+81",
-                                   @"code": @"JP"
-                                   },
-                               @{
-                                   @"name": @"Mexico",
-                                   @"dial_code": @"+52",
-                                   @"code": @"MX"
-                                   },
-                               @{
-                                   @"name": @"United Kingdom",
-                                   @"dial_code": @"+44",
-                                   @"code": @"GB"
-                                   },
-                               @{
-                                   @"name": @"United States",
-                                   @"dial_code": @"+1",
-                                   @"code": @"US"
-                                   }
-                               ]};
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
+    
     self.guestInformation = [NSMutableDictionary dictionary];
 
     [self updateViewModel];
@@ -132,7 +89,7 @@
     NSString *codeCountry = dataInformation[@"codeCountry"];
     NSString *nameCountry = @"";
     
-    NSDictionary * ListCountriesInformation = self.dataModel[@"countries"];
+    NSArray * ListCountriesInformation = self.modelCountries;
     NSDictionary * countryInformaton;
     
     for (countryInformaton in ListCountriesInformation) {
