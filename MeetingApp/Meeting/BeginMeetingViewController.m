@@ -8,10 +8,12 @@
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <SWTableViewCell.h>
 
 #import "BeginMeetingViewController.h"
 #import "MeetingDateSelectorViewController.h"
 #import "EditGuestDetailViewController.h"
+#import "ArrayOfCountries.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 {
@@ -24,7 +26,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.navigationController setToolbarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
 
     [self updateViewModel];
 }
@@ -55,54 +57,8 @@
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    self.dataModelCountries = @{
-                                @"countries" : @[
-                                        @{
-                                            @"name": @"China",
-                                            @"dial_code": @"+86",
-                                            @"code": @"CN"
-                                            },
-                                        @{
-                                            @"name": @"France",
-                                            @"dial_code": @"+33",
-                                            @"code": @"FR"
-                                            },
-                                        @{
-                                            @"name": @"Germany",
-                                            @"dial_code": @"+49",
-                                            @"code": @"DE"
-                                            },
-                                        @{
-                                            @"name": @"India",
-                                            @"dial_code": @"+91",
-                                            @"code": @"IN"
-                                            },
-                                        @{
-                                            @"name": @"Italy",
-                                            @"dial_code": @"+39",
-                                            @"code": @"IT"
-                                            },
-                                        @{
-                                            @"name": @"Japan",
-                                            @"dial_code": @"+81",
-                                            @"code": @"JP"
-                                            },
-                                        @{
-                                            @"name": @"Mexico",
-                                            @"dial_code": @"+52",
-                                            @"code": @"MX"
-                                            },
-                                        @{
-                                            @"name": @"United Kingdom",
-                                            @"dial_code": @"+44",
-                                            @"code": @"GB"
-                                            },
-                                        @{
-                                            @"name": @"United States",
-                                            @"dial_code": @"+1",
-                                            @"code": @"US"
-                                            }
-                                        ]};
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
     
     self.emailGuest.delegate = self;
     self.nameMeeting.delegate = self;
@@ -156,14 +112,21 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL validate = NO;
+    BOOL guestIsValid = NO;
     if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        validate = [self validateEmail:self.emailGuest.text];
-        if(validate){
-            [self addNewGuestWith:self.emailGuest.text];
-            textField.text = nil;
-            return validate;
+        guestIsValid = [self validateEmail:self.emailGuest.text];
+        if(guestIsValid){
+            BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
+            if (isDiferentGuest) {
+                [self addNewGuestWith:self.emailGuest.text];
+                textField.text = nil;
+                return guestIsValid;
+            }
+            else{
+                [self alertGuestRegistered];
+                return guestIsValid = NO;
+            }
         } else{
             UIAlertController *alert = [UIAlertController
                                         alertControllerWithTitle:@"Wrong Email!"
@@ -174,7 +137,6 @@
                                  actionWithTitle:@"OK"
                                  style:UIAlertActionStyleDefault
                                  handler:^(UIAlertAction * action){
-                                     //Do some thing here
                                      [alert dismissViewControllerAnimated:YES completion:nil];
                                  }];
             
@@ -182,12 +144,27 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
-    if (textField == self.nameMeeting) {
+    if (textField == self.nameMeeting)
         [textField resignFirstResponder];
-        NSString *nameMeeting = self.nameMeeting.text;
-        NSLog(@"%@", nameMeeting);
-    }
-    return validate;
+    
+    return guestIsValid;
+}
+
+- (void) alertGuestRegistered{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Registered Guest."
+                                message:@"You had registered a guest with the same information."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (BOOL) validateEmail:(NSString*) emailAddress{
@@ -198,6 +175,19 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self.emailGuest.text];
     //ref:http://stackoverflow.com/a/22344769/5757715
+}
+
+- (BOOL) isDiferentGuest: (NSDictionary *) information{
+    __block BOOL isDiferentGuest = YES;
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
+        if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
+            isDiferentGuest = NO;
+        if (isDiferentGuest)
+            if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
+                isDiferentGuest =  NO;
+    }];
+    return isDiferentGuest;
 }
 
 -(void)addNewGuestWith:(NSString *)email{
@@ -351,9 +341,15 @@
         retrievedName = [[NSString alloc] initWithFormat:@"%@", lastName];
     }
     
-    [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+    if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
+        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+        [self dismissViewControllerAnimated:NO completion:^(){}];
+    }
+    else{
+        [self dismissViewControllerAnimated:NO completion:^(){}];
+        [self alertGuestRegistered];
+    }
     
-    [self dismissViewControllerAnimated:NO completion:^(){}];
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
@@ -425,7 +421,7 @@
     if([codeContact isEqualToString:code]){
         return code = [self getCountryUser];
     } else{
-        NSDictionary *countriesInformation = self.dataModelCountries[@"countries"];
+        NSArray *countriesInformation = self.modelCountries;
         NSDictionary * element;
         
         for (element in countriesInformation) {
@@ -449,6 +445,59 @@
     changedInformation = YES;
     [self.listOfGuests replaceObjectAtIndex:self.indexPathGuestSelected.row withObject:guest];
     [self updateViewModel];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    NSString * cellIdentifier = cellViewModel[@"nib"];
+    
+    SWTableViewCell * cell = (SWTableViewCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
+    //[cell setCellHeight:cell.frame.size.height];
+    
+    return cell;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            // Delete button was pressed
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            
+            [self.listOfGuests removeObjectAtIndex:cellIndexPath.row];
+            [self removeIndexPathFromViewModel: cellIndexPath];
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void) removeIndexPathFromViewModel: (NSIndexPath *) indexPath{
+    NSMutableArray *temporalViewModel = [NSMutableArray arrayWithArray:self.viewModel];
+    [temporalViewModel removeObjectAtIndex:indexPath.row];
+    self.viewModel = temporalViewModel;
+}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {

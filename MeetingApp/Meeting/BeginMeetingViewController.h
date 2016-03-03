@@ -12,11 +12,12 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import "UIScrollView+EmptyDataSet.h"
 #import "Meeting.h"
 #import "ModelTableViewController.h"
-#import "UIScrollView+EmptyDataSet.h"
-
 #import "IGuestInformationDelegate.h"
+#import "ArrayOfCountries.h"
+
 
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
 DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
@@ -32,9 +33,11 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
 
-@property (strong) NSDictionary *dataModelCountries;
 @property (strong) NSMutableArray *listOfGuests;
 @property (strong) NSIndexPath *indexPathGuestSelected;
+
+@property (strong) NSArray * modelCountries;
+@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 - (BOOL)validateEmail:(NSString*) emailAddress ;
 

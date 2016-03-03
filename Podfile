@@ -8,6 +8,7 @@ target 'MeetingApp' do
     pod "UIImageView-Letters"
     pod 'DZNEmptyDataSet'
     pod 'Typhoon'
+    pod 'SWTableViewCell', '~> 0.3.7'
 
 end
 
