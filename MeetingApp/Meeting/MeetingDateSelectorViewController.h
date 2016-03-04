@@ -20,4 +20,6 @@
 @property (strong) NSDate * dateCurrent;
 @property (strong) NSMutableArray * hoursArray;
 
+- (IBAction)sharePressed:(id)sender;
+
 @end

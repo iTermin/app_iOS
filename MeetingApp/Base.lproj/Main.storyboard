@@ -590,7 +590,11 @@
                     <toolbarItems>
                         <barButtonItem systemItem="trash" id="bwD-sF-PFK"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Eaj-fP-LZB"/>
-                        <barButtonItem systemItem="action" id="VFc-61-Ydg"/>
+                        <barButtonItem systemItem="action" id="VFc-61-Ydg">
+                            <connections>
+                                <action selector="sharePressed:" destination="Ot9-mV-rbQ" id="cUP-2C-90H"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="NVb-BN-2W4">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="jxi-P0-XUZ">

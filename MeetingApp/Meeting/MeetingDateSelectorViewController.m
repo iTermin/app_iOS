@@ -280,4 +280,14 @@
     return 25;
 }
 
+- (IBAction)sharePressed:(id)sender {
+        
+    NSString *texttoshare = @"hola"; //this is your text string to share
+    UIImage *imagetoshare = [UIImage imageNamed:@"inicio"]; //this is your image to share
+    NSArray *activityItems = @[texttoshare, imagetoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
+    
+}
 @end
