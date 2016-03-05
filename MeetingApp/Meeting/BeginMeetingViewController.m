@@ -183,6 +183,8 @@
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
         if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
             isDiferentGuest = NO;
+        if([registerdGuests[@"email"] isEqualToString:@""])
+            isDiferentGuest = YES;
         if (isDiferentGuest)
             if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
                 isDiferentGuest =  NO;
@@ -342,28 +344,31 @@
     }
     
     if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
-        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
-        [self dismissViewControllerAnimated:NO completion:^(){}];
+        if (![self allGuestHadEmail]) {
+            [self needRegisterEmailGuest];
+        } else {
+            [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
+            [self dismissViewControllerAnimated:NO completion:^(){}];
+        }
     }
     else{
         [self dismissViewControllerAnimated:NO completion:^(){}];
         [self alertGuestRegistered];
     }
-    
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-
+    
     NSString *codeContact = [self codePhone:phoneGuest];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
-
+    
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                        @"photo" : photoContact ? photoContact : @"",
-                                        @"codePhone" : codeContact ? codeContact : @"",
-                                        @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
-                                        @"name" : nameGuest,
-                                        @"codeCountry" : code
-    }];
+                                                                                              @"photo" : photoContact ? photoContact : @"",
+                                                                                              @"codePhone" : codeContact ? codeContact : @"",
+                                                                                              @"email" : emailGuest ? emailGuest : @"",
+                                                                                              @"name" : nameGuest,
+                                                                                              @"codeCountry" : code
+                                                                                              }];
     
     [self.listOfGuests addObject:guestInformation];
     [self updateViewModel];
@@ -371,6 +376,36 @@
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+}
+
+-(BOOL) allGuestHadEmail {
+    __block int manyGuestHaveEmail = 0;
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
+        manyGuestHaveEmail = [registerdGuests[@"email"] isEqualToString: @""] ? manyGuestHaveEmail + 1 : manyGuestHaveEmail;
+    }];
+    BOOL allOfGuestHaveEmail = YES;
+    
+    return allOfGuestHaveEmail = manyGuestHaveEmail > 0 ? NO : YES;
+}
+
+- (void) needRegisterEmailGuest{
+    [self dismissViewControllerAnimated:NO completion:^(){}];
+    
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Require email of all guests."
+                                message:@"You need add the email to guest that have registered to continue adding."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(NSString *) codePhone:(NSArray *)phone{
