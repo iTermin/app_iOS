@@ -344,12 +344,8 @@
     }
     
     if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
-        if (![self allGuestHadEmail]) {
-            [self needRegisterEmailGuest];
-        } else {
-            [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
-            [self dismissViewControllerAnimated:NO completion:^(){}];
-        }
+        [self dismissViewControllerAnimated:NO completion:^(){}];
+        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
     }
     else{
         [self dismissViewControllerAnimated:NO completion:^(){}];
@@ -369,6 +365,8 @@
                                                                                               @"name" : nameGuest,
                                                                                               @"codeCountry" : code
                                                                                               }];
+    if ([guestInformation[@"email"] isEqualToString:@""])
+        [self warningRegisterEmailGuest:guestInformation[@"name"]];
     
     [self.listOfGuests addObject:guestInformation];
     [self updateViewModel];
@@ -376,6 +374,23 @@
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+}
+
+- (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Incomplete information."
+                                message: [nameGuest stringByAppendingString:@" hasn´t registered email."]
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(BOOL) allGuestHadEmail {
@@ -390,11 +405,9 @@
 }
 
 - (void) needRegisterEmailGuest{
-    [self dismissViewControllerAnimated:NO completion:^(){}];
-    
     UIAlertController *alert = [UIAlertController
-                                alertControllerWithTitle:@"Require email of all guests."
-                                message:@"You need add the email to guest that have registered to continue adding."
+                                alertControllerWithTitle:@"Require Information."
+                                message:@"It´s necesary add the email for all the guests."
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction
@@ -586,6 +599,10 @@
             
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
+            return false;
+            
+        } else if (![self allGuestHadEmail]) {
+            [self needRegisterEmailGuest];
             return false;
             
         } else if([self.nameMeeting.text isEqualToString:@""]){
