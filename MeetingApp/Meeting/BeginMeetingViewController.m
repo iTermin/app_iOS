@@ -359,7 +359,7 @@
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
     
-    NSString *codeContact = [self codePhone:phoneGuest];
+    NSArray *codeContact = [self codesCountriesWith:phoneGuest];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
@@ -408,10 +408,11 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(NSString *) codePhone:(NSArray *)phone{
+-(NSArray *) codesCountriesWith:(NSArray *)phone{
     NSInteger numberOfPhones = phone.count;
     NSString *codeCountry = @"";
     BOOL existOneCodeCountry = false;
+    NSMutableArray * codesCountries = [NSMutableArray arrayWithArray:@[]];
     
     if (numberOfPhones != 0) {
         while (numberOfPhones > 0 && existOneCodeCountry == false) {
@@ -421,26 +422,43 @@
                 [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(lenghtOfNumberPhone, 1)]];
             }
             NSString *space = @" ";
+            BOOL allCodePhones = NO;
             for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
                 if ([numberPhoneArray[0] isEqual:@"+"]) {
                     existOneCodeCountry = true;
                     if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
                         NSString *digit = numberPhoneArray[lengthNumberPhone];
                         codeCountry = [codeCountry stringByAppendingString:digit];
+                        switch (codeCountry.length) {
+                            case 2:
+                                [codesCountries addObject:codeCountry];
+                                break;
+                            case 3:
+                                [codesCountries addObject:codeCountry];
+                                break;
+                            case 4:
+                                [codesCountries addObject:codeCountry];
+                                allCodePhones = YES;
+                                break;
+                            default:
+                                break;
+                        }
                     } else {
                         break;
                     }
                 } else {
-                    return codeCountry;
+                    return codesCountries;
                 }
+                if (allCodePhones == YES)
+                    break;
             }
             --numberOfPhones;
         }
     } else {
-        return codeCountry;
+        return codesCountries;
     }
     
-    return codeCountry;
+    return codesCountries;
 }
 
 -(NSString *) getCountryUser {
@@ -449,24 +467,25 @@
     return countryCode;
 }
 
-- (NSString *)getFlagCodeWithCodePhoneGuest:(NSString *)codePhone {
-    NSString *codeContact = codePhone;
-    NSString * code = @"";
-    
-    if([codeContact isEqualToString:code]){
-        return code = [self getCountryUser];
+- (NSString *)getFlagCodeWithCodePhoneGuest:(NSArray *)codePhone {
+    __block NSString * code = [NSString new];
+
+    if (codePhone.count == 0) {
+        code = [self getCountryUser];
     } else{
-        NSArray *countriesInformation = self.modelCountries;
-        NSDictionary * element;
-        
-        for (element in countriesInformation) {
-            NSString * dial_code = element[@"dial_code"];
-            if ([dial_code isEqualToString: codeContact]) {
-                return code = element[@"code"];
+        [codePhone enumerateObjectsUsingBlock:^(id codePhone, NSUInteger idx, BOOL * stop){
+            NSArray *countriesInformation = self.modelCountries;
+            NSDictionary * element;
+            
+            for (element in countriesInformation) {
+                NSString * dial_code = element[@"dial_code"];
+                if ([dial_code isEqualToString: codePhone])
+                    code = element[@"code"];
             }
-        }
-        return code;
+        }];
     }
+
+    return code;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
