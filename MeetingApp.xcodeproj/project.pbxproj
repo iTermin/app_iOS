@@ -618,6 +618,7 @@
 				TargetAttributes = {
 					7C30FA7B1C2ED3C70059EAE3 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = GKWH4NNFFF;
 					};
 					7C30FA941C2ED3C70059EAE3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -978,10 +979,13 @@
 			baseConfigurationReference = C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = MeetingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
 			};
 			name = Debug;
 		};
@@ -990,10 +994,13 @@
 			baseConfigurationReference = D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = MeetingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
 			};
 			name = Release;
 		};
