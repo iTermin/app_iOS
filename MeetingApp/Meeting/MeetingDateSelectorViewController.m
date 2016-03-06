@@ -77,7 +77,8 @@
 
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.guestMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+    NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
+    [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
         

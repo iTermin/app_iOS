@@ -26,7 +26,6 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property (nonatomic, strong) NSMutableArray *menuArray;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, weak) IBOutlet UIButton * nextButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UIButton *search;
@@ -39,9 +38,8 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property (strong) NSArray * modelCountries;
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
-- (BOOL)validateEmail:(NSString*) emailAddress ;
-
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)searchContacts:(id)sender;
+- (IBAction)nextPressed:(id)sender;
 
 @end

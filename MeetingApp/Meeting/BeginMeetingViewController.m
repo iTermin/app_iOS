@@ -152,7 +152,7 @@
 
 - (void) alertGuestRegistered{
     UIAlertController *alert = [UIAlertController
-                                alertControllerWithTitle:@"Registered Guest."
+                                alertControllerWithTitle:@"The guest has already been added."
                                 message:@"You had registered a guest with the same information."
                                 preferredStyle:UIAlertControllerStyleAlert];
     
@@ -182,9 +182,9 @@
     
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
         if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
-            isDiferentGuest = NO;
-        if([registerdGuests[@"email"] isEqualToString:@""])
-            isDiferentGuest = YES;
+            if ([information[@"email"] length])
+                isDiferentGuest = NO;
+            
         if (isDiferentGuest)
             if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
                 isDiferentGuest =  NO;
@@ -284,11 +284,11 @@
 
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
     
-    NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+    NSString *first_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
     
-    NSString *middleName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
+    NSString *middle_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
     
-    NSString *lastName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
+    NSString *last_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
     
     ABMutableMultiValueRef multiEmail = ABRecordCopyValue(person, kABPersonEmailProperty);
     NSString *email = (__bridge NSString *) ABMultiValueCopyValueAtIndex(multiEmail, 0);
@@ -298,51 +298,15 @@
     
     UIImage *retrievedImage;
     if (person != nil && ABPersonHasImageData(person))
-    {
         retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
-    }
-    else
-    {
-        retrievedImage = nil;
-    }
+    else retrievedImage = nil;
     
     NSString *retrievedName;
     
-    if (firstName != NULL && middleName != NULL && lastName != NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
-    }
-    
-    if (firstName != NULL && middleName != NULL & lastName == NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",firstName, middleName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName != NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",firstName,lastName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName == NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@",firstName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName != NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@ %@",middleName, lastName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName == NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@",middleName];
-    }
-    
-    if (firstName == NULL && middleName == NULL && lastName != NULL)
-    {
-        retrievedName = [[NSString alloc] initWithFormat:@"%@", lastName];
-    }
-    
+    if (![self existName:first_Name Middle:middle_Name Last:last_Name])
+        retrievedName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonOrganizationProperty));
+    else retrievedName = [self extractCompleteName:first_Name Middle:middle_Name Last:last_Name];
+
     if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
         [self dismissViewControllerAnimated:NO completion:^(){}];
         [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
@@ -352,6 +316,56 @@
         [self alertGuestRegistered];
     }
 }
+
+- (BOOL) existName: (NSString *) name Middle: (NSString *) middle Last: (NSString *) last{
+    if (![name length])
+        if (![middle length])
+            if (![last length]) return NO;
+    
+    return YES;
+}
+
+- (NSString *) extractCompleteName: (NSString *) firstName Middle: (NSString *) middleName Last: (NSString *) lastName{
+    NSString * completeName = [NSString new];
+    
+    if (firstName != NULL && middleName != NULL && lastName != NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
+    }
+    
+    if (firstName != NULL && middleName != NULL & lastName == NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName, middleName];
+    }
+    
+    if (firstName != NULL && middleName == NULL && lastName != NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName,lastName];
+    }
+    
+    if (firstName != NULL && middleName == NULL && lastName == NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@",firstName];
+    }
+    
+    if (firstName == NULL && middleName != NULL && lastName != NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@ %@",middleName, lastName];
+    }
+    
+    if (firstName == NULL && middleName != NULL && lastName == NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@",middleName];
+    }
+    
+    if (firstName == NULL && middleName == NULL && lastName != NULL)
+    {
+        completeName = [[NSString alloc] initWithFormat:@"%@", lastName];
+    }
+    
+    return completeName;
+}
+
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
     
@@ -380,34 +394,6 @@
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"Incomplete information."
                                 message: [nameGuest stringByAppendingString:@" hasn´t registered email."]
-                                preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *ok = [UIAlertAction
-                         actionWithTitle:@"OK"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action){
-                             [alert dismissViewControllerAnimated:YES completion:nil];
-                         }];
-    
-    [alert addAction:ok];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
--(BOOL) allGuestHadEmail {
-    __block int manyGuestHaveEmail = 0;
-    
-    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
-        manyGuestHaveEmail = [registerdGuests[@"email"] isEqualToString: @""] ? manyGuestHaveEmail + 1 : manyGuestHaveEmail;
-    }];
-    BOOL allOfGuestHaveEmail = YES;
-    
-    return allOfGuestHaveEmail = manyGuestHaveEmail > 0 ? NO : YES;
-}
-
-- (void) needRegisterEmailGuest{
-    UIAlertController *alert = [UIAlertController
-                                alertControllerWithTitle:@"Require Information."
-                                message:@"It´s necesary add the email for all the guests."
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction
@@ -567,6 +553,11 @@
     return rightUtilityButtons;
 }
 
+- (IBAction)nextPressed:(id)sender {
+    if(![self.viewModel isEqualToArray:@[]] && [self allGuestHadEmail])
+        if ([self.nameMeeting.text isEqualToString:@""]) self.nameMeeting.text = @"Meeting 1";
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSMutableDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editGuestDetails"]){
         EditGuestDetailViewController * editGuestDetailViewController = (EditGuestDetailViewController *)segue.destinationViewController;
@@ -576,8 +567,8 @@
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
         //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSMutableArray *guestList = self.listOfGuests;
-        [meetingDateSelectorViewController setGuestMeeting: guestList];
+        NSDictionary *detailInformation = @{ @"guests" : self.listOfGuests };
+        [meetingDateSelectorViewController setDetailMeeting:detailInformation];
     }
 }
 
@@ -601,19 +592,42 @@
             [self presentViewController:alert animated:YES completion:nil];
             return false;
             
-        } else if (![self allGuestHadEmail]) {
+        } else if (![self allGuestHadEmail]){
             [self needRegisterEmailGuest];
             return false;
             
-        } else if([self.nameMeeting.text isEqualToString:@""]){
-            self.nameMeeting.text = @"Meeting 1";
-            return true;
-            
-        } else{
-            return true;
-        }
+        } else return true;
+        
     }
     return true;
+}
+
+- (BOOL) allGuestHadEmail {
+    __block int manyGuestHaveEmail = 0;
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
+        manyGuestHaveEmail = [registerdGuests[@"email"] isEqualToString: @""] ? manyGuestHaveEmail + 1 : manyGuestHaveEmail;
+    }];
+    BOOL allOfGuestHaveEmail = YES;
+    
+    return allOfGuestHaveEmail = manyGuestHaveEmail > 0 ? NO : YES;
+}
+
+- (void) needRegisterEmailGuest{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Require Information."
+                                message:@"It´s necesary add the email for all the guests."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

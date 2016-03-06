@@ -77,6 +77,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="nextPressed:" destination="2QN-cd-kZ6" eventType="touchUpInside" id="Q0e-Bs-mB6"/>
                                     <segue destination="Ot9-mV-rbQ" kind="push" identifier="setMeeting" id="xu1-1Y-aYs"/>
                                 </connections>
                             </button>
@@ -87,7 +88,6 @@
                         <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
                         <outlet property="emailGuest" destination="NPD-tT-gwQ" id="hrR-Cs-8ky"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
-                        <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                         <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
                         <outlet property="tableView" destination="2Gk-GQ-omd" id="NfS-bg-fcK"/>
                         <segue destination="j4G-PE-T9P" kind="push" identifier="editGuestDetails" id="BOM-rJ-jqT"/>

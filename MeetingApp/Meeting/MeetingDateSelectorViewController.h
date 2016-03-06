@@ -11,7 +11,7 @@
 
 @interface MeetingDateSelectorViewController : UITableViewController
 
-@property(nonatomic, strong) NSMutableArray * guestMeeting;
+@property(nonatomic, strong) NSDictionary * detailMeeting;
 @property(strong) NSArray *viewModel;
 
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
