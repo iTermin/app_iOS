@@ -22,6 +22,8 @@
     MainAssembly *mainAssembly = [[MainAssembly new] activate];
     [mainAssembly makeDefault];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     return YES;
 }
 

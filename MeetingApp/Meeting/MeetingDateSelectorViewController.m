@@ -24,6 +24,8 @@
     [super viewDidLoad];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     // Set up the initial values for the date cells manager
     NSDate *startDate = [NSDate date]; //now

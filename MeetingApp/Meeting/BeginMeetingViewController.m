@@ -569,6 +569,7 @@
         //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
         NSDictionary *detailInformation = @{ @"name" : self.nameMeeting.text,
                                              @"guests" : self.listOfGuests };
+        [meetingDateSelectorViewController setTitle:detailInformation[@"name"]];
         [meetingDateSelectorViewController setDetailMeeting:detailInformation];
     }
 }
