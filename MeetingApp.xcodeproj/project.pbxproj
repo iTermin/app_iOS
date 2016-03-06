@@ -10,7 +10,6 @@
 		64A94DC7CC349216B871EFF8 /* libPods-MeetingAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B60F10FA63121E49191030F2 /* libPods-MeetingAppTests.a */; };
 		7C0393D91C81C20B00BDA9AC /* MeetingBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0393D81C81C20B00BDA9AC /* MeetingBusinessController.m */; };
 		7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0393E71C81D0E800BDA9AC /* MainAssembly.m */; };
-		7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16877F1C707EB900197DB1 /* RSKImageCropper.framework */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
 		7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA881C2ED3C70059EAE3 /* Main.storyboard */; };
@@ -206,7 +205,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */,
 				7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */,
 				7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */,
 				F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */,
@@ -618,6 +616,7 @@
 				TargetAttributes = {
 					7C30FA7B1C2ED3C70059EAE3 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = GKWH4NNFFF;
 					};
 					7C30FA941C2ED3C70059EAE3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -978,10 +977,13 @@
 			baseConfigurationReference = C79C1FB8CC687F8CF192B9DB /* Pods-MeetingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = MeetingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
 			};
 			name = Debug;
 		};
@@ -990,10 +992,13 @@
 			baseConfigurationReference = D440CC2ADF0124BEBFF42B96 /* Pods-MeetingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = MeetingApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
 			};
 			name = Release;
 		};

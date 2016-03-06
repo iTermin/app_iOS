@@ -91,22 +91,10 @@
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     UIImage *image = [UIImage imageNamed:@"inicio"];
-    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
-    imageCropVC.delegate = self;
-    [self.navigationController pushViewController:imageCropVC animated:YES];
 }
 
 - (IBAction)editPhotoUser:(id)sender {
 
     
-}
-
-- (void)imageCropViewController:(RSKImageCropViewController *)controller
-                   didCropImage:(UIImage *)croppedImage
-                  usingCropRect:(CGRect)cropRect
-                  rotationAngle:(CGFloat)rotationAngle
-{
-    self.photoProfileEdit.image = croppedImage;
-    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
