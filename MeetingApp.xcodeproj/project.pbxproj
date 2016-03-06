@@ -10,7 +10,6 @@
 		64A94DC7CC349216B871EFF8 /* libPods-MeetingAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B60F10FA63121E49191030F2 /* libPods-MeetingAppTests.a */; };
 		7C0393D91C81C20B00BDA9AC /* MeetingBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0393D81C81C20B00BDA9AC /* MeetingBusinessController.m */; };
 		7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0393E71C81D0E800BDA9AC /* MainAssembly.m */; };
-		7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C16877F1C707EB900197DB1 /* RSKImageCropper.framework */; };
 		7C30FA811C2ED3C70059EAE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA801C2ED3C70059EAE3 /* main.m */; };
 		7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C30FA831C2ED3C70059EAE3 /* AppDelegate.m */; };
 		7C30FA8A1C2ED3C70059EAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C30FA881C2ED3C70059EAE3 /* Main.storyboard */; };
@@ -206,7 +205,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C1687801C707ECF00197DB1 /* RSKImageCropper.framework in Frameworks */,
 				7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */,
 				7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */,
 				F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */,

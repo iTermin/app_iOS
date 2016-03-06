@@ -6,11 +6,10 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "../../libs/RSKImageCropper/RSKImageCropper/RSKImageCropper.h"
 #import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface EditProfileUserViewController : ModelTableViewController <RSKImageCropViewControllerDelegate>
+@interface EditProfileUserViewController : ModelTableViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
