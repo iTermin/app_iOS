@@ -293,4 +293,8 @@
     [self presentViewController:activityVC animated:TRUE completion:nil];
     
 }
+
+- (IBAction)trashPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

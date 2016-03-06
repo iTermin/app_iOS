@@ -21,5 +21,6 @@
 @property (strong) NSMutableArray * hoursArray;
 
 - (IBAction)sharePressed:(id)sender;
+- (IBAction)trashPressed:(id)sender;
 
 @end
