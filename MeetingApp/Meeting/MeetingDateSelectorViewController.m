@@ -24,6 +24,8 @@
     [super viewDidLoad];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     // Set up the initial values for the date cells manager
     NSDate *startDate = [NSDate date]; //now
@@ -77,7 +79,8 @@
 
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.guestMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+    NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
+    [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
         
@@ -282,12 +285,23 @@
 
 - (IBAction)sharePressed:(id)sender {
         
-    NSString *texttoshare = @"hola"; //this is your text string to share
-    UIImage *imagetoshare = [UIImage imageNamed:@"inicio"]; //this is your image to share
-    NSArray *activityItems = @[texttoshare, imagetoshare];
+    NSMutableString *texttoshare = [NSMutableString stringWithFormat:@"You are invited to "];
+    [texttoshare appendString:self.detailMeeting[@"name"]];
+    //TODO : extract date and send url
+    
+    NSArray *activityItems = @[texttoshare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
     [self presentViewController:activityVC animated:TRUE completion:nil];
     
+}
+
+- (IBAction)trashPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)doneMeetingPressed:(id)sender {
+    //TODO : get the meeting and upload the meeting to server
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

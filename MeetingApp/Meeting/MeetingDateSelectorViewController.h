@@ -11,7 +11,7 @@
 
 @interface MeetingDateSelectorViewController : UITableViewController
 
-@property(nonatomic, strong) NSMutableArray * guestMeeting;
+@property(nonatomic, strong) NSDictionary * detailMeeting;
 @property(strong) NSArray *viewModel;
 
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
@@ -21,5 +21,7 @@
 @property (strong) NSMutableArray * hoursArray;
 
 - (IBAction)sharePressed:(id)sender;
+- (IBAction)trashPressed:(id)sender;
+- (IBAction)doneMeetingPressed:(id)sender;
 
 @end

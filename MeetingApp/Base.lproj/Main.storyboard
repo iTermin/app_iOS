@@ -20,7 +20,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name Meeting" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-Tv-K5s">
                                 <rect key="frame" x="20" y="118" width="335" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invite:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRP-tE-BSi">
                                 <rect key="frame" x="20" y="156" width="46" height="21"/>
@@ -57,10 +57,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Skp-UH-q9p"/>
-                        <barButtonItem systemItem="edit" id="xs0-Pm-Y7n"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="liG-JS-3mS">
                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="cew-ja-Z15">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,6 +74,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="nextPressed:" destination="2QN-cd-kZ6" eventType="touchUpInside" id="Q0e-Bs-mB6"/>
                                     <segue destination="Ot9-mV-rbQ" kind="push" identifier="setMeeting" id="xu1-1Y-aYs"/>
                                 </connections>
                             </button>
@@ -87,7 +85,6 @@
                         <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
                         <outlet property="emailGuest" destination="NPD-tT-gwQ" id="hrR-Cs-8ky"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
-                        <outlet property="nextButton" destination="Nft-7K-gBD" id="Pp1-qK-a2h"/>
                         <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
                         <outlet property="tableView" destination="2Gk-GQ-omd" id="NfS-bg-fcK"/>
                         <segue destination="j4G-PE-T9P" kind="push" identifier="editGuestDetails" id="BOM-rJ-jqT"/>
@@ -588,7 +585,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="trash" id="bwD-sF-PFK"/>
+                        <barButtonItem systemItem="trash" id="bwD-sF-PFK">
+                            <connections>
+                                <action selector="trashPressed:" destination="Ot9-mV-rbQ" id="p3r-XI-LU5"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Eaj-fP-LZB"/>
                         <barButtonItem systemItem="action" id="VFc-61-Ydg">
                             <connections>
@@ -599,6 +600,9 @@
                     <navigationItem key="navigationItem" id="NVb-BN-2W4">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="jxi-P0-XUZ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="doneMeetingPressed:" destination="Ot9-mV-rbQ" id="R0d-5b-mGd"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

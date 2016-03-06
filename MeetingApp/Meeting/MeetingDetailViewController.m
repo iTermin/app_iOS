@@ -28,6 +28,9 @@
     
     self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController] getMeetingDetail: self.currentMeeting][@"guests"];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
