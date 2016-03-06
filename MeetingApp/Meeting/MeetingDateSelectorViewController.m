@@ -283,9 +283,11 @@
 
 - (IBAction)sharePressed:(id)sender {
         
-    NSString *texttoshare = @"hola"; //this is your text string to share
-    UIImage *imagetoshare = [UIImage imageNamed:@"inicio"]; //this is your image to share
-    NSArray *activityItems = @[texttoshare, imagetoshare];
+    NSMutableString *texttoshare = [NSMutableString stringWithFormat:@"You are invited to "];
+    [texttoshare appendString:self.detailMeeting[@"name"]];
+    //TODO : extract date and send url
+    
+    NSArray *activityItems = @[texttoshare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
     [self presentViewController:activityVC animated:TRUE completion:nil];

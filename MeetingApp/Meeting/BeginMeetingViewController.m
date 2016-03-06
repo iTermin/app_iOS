@@ -567,7 +567,8 @@
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
         //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSDictionary *detailInformation = @{ @"guests" : self.listOfGuests };
+        NSDictionary *detailInformation = @{ @"name" : self.nameMeeting.text,
+                                             @"guests" : self.listOfGuests };
         [meetingDateSelectorViewController setDetailMeeting:detailInformation];
     }
 }
