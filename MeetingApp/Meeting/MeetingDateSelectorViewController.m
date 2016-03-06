@@ -299,4 +299,9 @@
 - (IBAction)trashPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)doneMeetingPressed:(id)sender {
+    //TODO : get the meeting and upload the meeting to server
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
