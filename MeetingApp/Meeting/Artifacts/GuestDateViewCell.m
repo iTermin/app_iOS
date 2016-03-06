@@ -27,15 +27,22 @@
     [self.nameGuest setText: _data[@"name"]];
     [self.emailGuest setText: _data[@"email"]];
     
-    if ([data[@"photo"] isEqualToString:@""]) {
-        NSString *nameGuest = data[@"name"];
-        [self.photoGuest setImageWithString:nameGuest color:nil circular:YES];
-    } else{
+    if ([data[@"photo"] isKindOfClass:[NSString class]]){
+        if ([data[@"photo"] isEqualToString:@""]) {
+            NSString *nameGuest = data[@"name"];
+            [self.photoGuest setImageWithString:nameGuest color:nil circular:YES];
+        } else{
+            self.photoGuest.layer.cornerRadius = self.photoGuest.frame.size.width/2.0f;
+            self.photoGuest.clipsToBounds = YES;
+            NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"photo"]];
+            [self.photoGuest setImage:[UIImage imageNamed:identyPhoto]];
+        }
+    } else {
         self.photoGuest.layer.cornerRadius = self.photoGuest.frame.size.width/2.0f;
         self.photoGuest.clipsToBounds = YES;
-        NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"photo"]];
-        [self.photoGuest setImage:[UIImage imageNamed:identyPhoto]];
+        [self.photoGuest setImage:data[@"photo"]];
     }
+    
     
     NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", @"moon"];
     [self.dateIndicatorGuest setImage:[UIImage imageNamed:identyPhoto]];

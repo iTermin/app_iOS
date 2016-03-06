@@ -183,6 +183,8 @@
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
         if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
             isDiferentGuest = NO;
+        if([registerdGuests[@"email"] isEqualToString:@""])
+            isDiferentGuest = YES;
         if (isDiferentGuest)
             if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
                 isDiferentGuest =  NO;
@@ -342,28 +344,29 @@
     }
     
     if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
-        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
         [self dismissViewControllerAnimated:NO completion:^(){}];
+        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
     }
     else{
         [self dismissViewControllerAnimated:NO completion:^(){}];
         [self alertGuestRegistered];
     }
-    
 }
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-
-    NSString *codeContact = [self codePhone:phoneGuest];
+    
+    NSArray *codeContact = [self codesCountriesWith:phoneGuest];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
-
+    
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                        @"photo" : photoContact ? photoContact : @"",
-                                        @"codePhone" : codeContact ? codeContact : @"",
-                                        @"email" : emailGuest ? emailGuest : @"", //TODO: Alerta que no tiene correo electronico
-                                        @"name" : nameGuest,
-                                        @"codeCountry" : code
-    }];
+                                                                                              @"photo" : photoContact ? photoContact : @"",
+                                                                                              @"codePhone" : codeContact ? codeContact : @"",
+                                                                                              @"email" : emailGuest ? emailGuest : @"",
+                                                                                              @"name" : nameGuest,
+                                                                                              @"codeCountry" : code
+                                                                                              }];
+    if ([guestInformation[@"email"] isEqualToString:@""])
+        [self warningRegisterEmailGuest:guestInformation[@"name"]];
     
     [self.listOfGuests addObject:guestInformation];
     [self updateViewModel];
@@ -373,10 +376,56 @@
     [self.tableView endUpdates];
 }
 
--(NSString *) codePhone:(NSArray *)phone{
+- (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Incomplete information."
+                                message: [nameGuest stringByAppendingString:@" hasn´t registered email."]
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(BOOL) allGuestHadEmail {
+    __block int manyGuestHaveEmail = 0;
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * registerdGuests, NSUInteger idx, BOOL * stop){
+        manyGuestHaveEmail = [registerdGuests[@"email"] isEqualToString: @""] ? manyGuestHaveEmail + 1 : manyGuestHaveEmail;
+    }];
+    BOOL allOfGuestHaveEmail = YES;
+    
+    return allOfGuestHaveEmail = manyGuestHaveEmail > 0 ? NO : YES;
+}
+
+- (void) needRegisterEmailGuest{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Require Information."
+                                message:@"It´s necesary add the email for all the guests."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(NSArray *) codesCountriesWith:(NSArray *)phone{
     NSInteger numberOfPhones = phone.count;
     NSString *codeCountry = @"";
     BOOL existOneCodeCountry = false;
+    NSMutableArray * codesCountries = [NSMutableArray arrayWithArray:@[]];
     
     if (numberOfPhones != 0) {
         while (numberOfPhones > 0 && existOneCodeCountry == false) {
@@ -386,26 +435,43 @@
                 [numberPhoneArray addObject:[phoneNumber substringWithRange:NSMakeRange(lenghtOfNumberPhone, 1)]];
             }
             NSString *space = @" ";
+            BOOL allCodePhones = NO;
             for (int lengthNumberPhone = 0; lengthNumberPhone < numberPhoneArray.count; ++lengthNumberPhone) {
                 if ([numberPhoneArray[0] isEqual:@"+"]) {
                     existOneCodeCountry = true;
                     if (![numberPhoneArray[lengthNumberPhone] isEqual:@"("] & ![numberPhoneArray[lengthNumberPhone] isEqual:@")"] & ![numberPhoneArray[lengthNumberPhone] isEqual:space]){
                         NSString *digit = numberPhoneArray[lengthNumberPhone];
                         codeCountry = [codeCountry stringByAppendingString:digit];
+                        switch (codeCountry.length) {
+                            case 2:
+                                [codesCountries addObject:codeCountry];
+                                break;
+                            case 3:
+                                [codesCountries addObject:codeCountry];
+                                break;
+                            case 4:
+                                [codesCountries addObject:codeCountry];
+                                allCodePhones = YES;
+                                break;
+                            default:
+                                break;
+                        }
                     } else {
                         break;
                     }
                 } else {
-                    return codeCountry;
+                    return codesCountries;
                 }
+                if (allCodePhones == YES)
+                    break;
             }
             --numberOfPhones;
         }
     } else {
-        return codeCountry;
+        return codesCountries;
     }
     
-    return codeCountry;
+    return codesCountries;
 }
 
 -(NSString *) getCountryUser {
@@ -414,24 +480,25 @@
     return countryCode;
 }
 
-- (NSString *)getFlagCodeWithCodePhoneGuest:(NSString *)codePhone {
-    NSString *codeContact = codePhone;
-    NSString * code = @"";
-    
-    if([codeContact isEqualToString:code]){
-        return code = [self getCountryUser];
+- (NSString *)getFlagCodeWithCodePhoneGuest:(NSArray *)codePhone {
+    __block NSString * code = [NSString new];
+
+    if (codePhone.count == 0) {
+        code = [self getCountryUser];
     } else{
-        NSArray *countriesInformation = self.modelCountries;
-        NSDictionary * element;
-        
-        for (element in countriesInformation) {
-            NSString * dial_code = element[@"dial_code"];
-            if ([dial_code isEqualToString: codeContact]) {
-                return code = element[@"code"];
+        [codePhone enumerateObjectsUsingBlock:^(id codePhone, NSUInteger idx, BOOL * stop){
+            NSArray *countriesInformation = self.modelCountries;
+            NSDictionary * element;
+            
+            for (element in countriesInformation) {
+                NSString * dial_code = element[@"dial_code"];
+                if ([dial_code isEqualToString: codePhone])
+                    code = element[@"code"];
             }
-        }
-        return code;
+        }];
     }
+
+    return code;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -532,6 +599,10 @@
             
             [alert addAction:ok];
             [self presentViewController:alert animated:YES completion:nil];
+            return false;
+            
+        } else if (![self allGuestHadEmail]) {
+            [self needRegisterEmailGuest];
             return false;
             
         } else if([self.nameMeeting.text isEqualToString:@""]){

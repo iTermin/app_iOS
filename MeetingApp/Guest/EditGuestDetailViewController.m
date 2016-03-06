@@ -35,6 +35,9 @@
 
     [self updateViewModel];
     
+    self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
+    self.guestPhoto.clipsToBounds = YES;
+    
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
 }
@@ -43,15 +46,18 @@
     [self.nameGuest setText: self.guestInformation[@"name"]];
     [self.emailGuest setText: self.guestInformation[@"email"]];
     
-    NSString *noPhoto = @"";
-    if (self.guestInformation[@"photo"] == noPhoto) {
-        NSString *userName = self.guestInformation[@"name"];
-        [self.guestPhoto setImageWithString:userName color:nil circular:YES];
+    if ([self.guestInformation[@"photo"] isKindOfClass:[NSString class]]){
+        if ([self.guestInformation[@"photo"] isEqualToString:@""]) {
+            NSString *userName = self.guestInformation[@"name"];
+            [self.guestPhoto setImageWithString:userName color:nil circular:YES];
+        } else {
+            self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
+            self.guestPhoto.clipsToBounds = YES;
+            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.guestInformation[@"photo"]];
+            [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+        }
     } else {
-        self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-        self.guestPhoto.clipsToBounds = YES;
-        NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.guestInformation[@"photo"]];
-        [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+        [self.guestPhoto setImage:self.guestInformation[@"photo"]];
     }
 }
 
