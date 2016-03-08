@@ -153,11 +153,21 @@
     
     changedInformation = YES;
     
-    [self.photoProfileEdit setImage:image];
+    [self.photoProfileEdit setImage:[self imageWithImage:image scaledToSize:CGSizeMake(200, 200)]];
     //[self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
+{
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 
