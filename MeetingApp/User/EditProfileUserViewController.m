@@ -84,7 +84,15 @@
     if ([segue.identifier isEqualToString:@"selectCountry"]){
         ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
         [locationViewController setCurrentLocation:sender];
+        [locationViewController setCountrySelectorDelegate:self];
     }
+}
+
+- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+        didSelectCountry: (NSDictionary *) country{
+    NSLog(@"%@", country);
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap

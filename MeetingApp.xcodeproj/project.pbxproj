@@ -93,8 +93,6 @@
 /* Begin PBXFileReference section */
 		506D59153DCC4AE9A8C9FB65 /* Pods-MeetingAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7BDCF46231478EF35DE062F8 /* Pods-MeetingAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetingAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetingAppTests/Pods-MeetingAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		7C012D8D1C7E4C6D00DC84CC /* ICountrySelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICountrySelector.h; path = Guest/Protocols/ICountrySelector.h; sourceTree = "<group>"; };
-		7C012D8E1C7E4C9A00DC84CC /* ICountrySelectorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ICountrySelectorDelegate.h; path = Guest/Protocols/ICountrySelectorDelegate.h; sourceTree = "<group>"; };
 		7C0393D71C81C20B00BDA9AC /* MeetingBusinessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingBusinessController.h; path = Meeting/MeetingBusinessController.h; sourceTree = "<group>"; };
 		7C0393D81C81C20B00BDA9AC /* MeetingBusinessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingBusinessController.m; path = Meeting/MeetingBusinessController.m; sourceTree = "<group>"; };
 		7C0393DC1C81C65000BDA9AC /* IMeetingDatasource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IMeetingDatasource.h; path = Meeting/Protocols/IMeetingDatasource.h; sourceTree = "<group>"; };
@@ -103,6 +101,8 @@
 		7C0393E61C81D0E800BDA9AC /* MainAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainAssembly.h; path = Assembly/MainAssembly.h; sourceTree = "<group>"; };
 		7C0393E71C81D0E800BDA9AC /* MainAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainAssembly.m; path = Assembly/MainAssembly.m; sourceTree = "<group>"; };
 		7C0393E91C81D85500BDA9AC /* Guest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Guest.h; path = Meeting/Models/Guest.h; sourceTree = "<group>"; };
+		7C0F7A341C8F273F003FC9C7 /* ICountrySelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICountrySelector.h; path = Common/Protocols/ICountrySelector.h; sourceTree = "<group>"; };
+		7C0F7A351C8F273F003FC9C7 /* ICountrySelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICountrySelectorDelegate.h; path = Common/Protocols/ICountrySelectorDelegate.h; sourceTree = "<group>"; };
 		7C16877A1C707EB900197DB1 /* RSKImageCropper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSKImageCropper.xcodeproj; path = libs/RSKImageCropper/RSKImageCropper.xcodeproj; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -253,8 +253,6 @@
 		7C012D8B1C7E4C1C00DC84CC /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7C012D8E1C7E4C9A00DC84CC /* ICountrySelectorDelegate.h */,
-				7C012D8D1C7E4C6D00DC84CC /* ICountrySelector.h */,
 				7C80CA1D1C7F9AFC00216CF9 /* IGuestInformationDelegate.h */,
 				7C80CA1F1C7F9E3600216CF9 /* IGuestInformation.h */,
 			);
@@ -286,6 +284,15 @@
 				7C0393E71C81D0E800BDA9AC /* MainAssembly.m */,
 			);
 			name = Assembly;
+			sourceTree = "<group>";
+		};
+		7C0F7A331C8F26F2003FC9C7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7C0F7A341C8F273F003FC9C7 /* ICountrySelector.h */,
+				7C0F7A351C8F273F003FC9C7 /* ICountrySelectorDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		7C1687771C707E3E00197DB1 /* libs */ = {
@@ -503,6 +510,7 @@
 		7C3E2BDA1C70F68B00B49E90 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7C0F7A331C8F26F2003FC9C7 /* Protocols */,
 				7C3B80A21C5559E200678EF4 /* Artifacts */,
 			);
 			name = Common;

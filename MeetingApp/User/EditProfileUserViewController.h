@@ -6,10 +6,13 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface EditProfileUserViewController : ModelTableViewController <UIImagePickerControllerDelegate>
+#import "ICountrySelectorDelegate.h"
+#import "ModelTableViewController.h"
+
+@interface EditProfileUserViewController : ModelTableViewController
+<ICountrySelectorDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;

@@ -44,6 +44,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary * country = [self getCountryAtIndex:indexPath.row];
+    [self.countrySelectorDelegate countrySelector:self didSelectCountry:country];
     /*
      if (country[@"name"] != self.currentLocation) {
      NSArray *countries = [self.dataModel[@"countries"] valueForKeyPath:@"name"];
@@ -57,9 +58,6 @@
      }
      }
      }*/
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    NSLog(@"%@", country);
 }
 
 - (void) configureCell: (UITableViewCell *) cell withModel: (NSDictionary *) cellModel {}
