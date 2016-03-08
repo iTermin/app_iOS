@@ -21,18 +21,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    [self.nameText setText: self.dataModel[@"name"]];
-    [self.emailText setText: self.dataModel[@"email"]];
+    [self.nameText setText: self.hostInformation[@"name"]];
+    [self.emailText setText: self.hostInformation[@"email"]];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
     
     self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
     self.photoProfileEdit.clipsToBounds = YES;
-    //self.photoProfileEdit.layer.borderWidth = 4.0f;
-    //self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
     
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
@@ -52,23 +52,50 @@
 }
 
 - (void) updateViewModel {
+    if (changedInformation == NO){
+        self.hostInformation = [NSMutableDictionary dictionaryWithDictionary:self.currentHost];
+        NSString *countryName = [self getNameCountry:self.hostInformation];
+        [self.hostInformation setObject:countryName forKey:@"country"];
+    }
+    
+    if (changedInformation) [self.userInformationDelegate userInformation:self didChangedInformation:self.hostInformation];
     
     NSArray * viewModel = @[
                             @{
                                 @"nib" : @"LocationUserTableViewCell",
                                 @"height" : @(80),
                                 @"segue" : @"selectCountry",
-                                @"data": [self.dataModel copy]
+                                @"data": [self.hostInformation copy]
                                 }
                             ];
     
     self.viewModel = [NSMutableArray arrayWithArray: viewModel];
     
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+    
     [super updateViewModel];
 }
 
+- (NSString*) getNameCountry: (NSDictionary *)dataInformation{
+    NSString *codeCountry = dataInformation[@"code"];
+    NSString *nameCountry = [NSString new];
+    
+    NSArray * ListCountriesInformation = self.modelCountries;
+    NSDictionary * countryInformaton = [NSDictionary dictionary];
+    
+    for (countryInformaton in ListCountriesInformation) {
+        NSString * code = countryInformaton[@"code"];
+        if ([code isEqualToString: codeCountry]) {
+            return nameCountry = countryInformaton[@"name"];
+        }
+    }
+    return nameCountry;
+}
+
 - (void) performSegue: (NSIndexPath *)indexPath{
-    NSString *country = self.dataModel[@"location"];
+    NSString *country = self.hostInformation[@"country"];
     NSDictionary * cellModel = self.viewModel[indexPath.row];
     NSString * segueToPerform = cellModel[@"segue"];
     [self performSegueWithIdentifier:segueToPerform sender:country];
@@ -90,9 +117,24 @@
 
 - (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
         didSelectCountry: (NSDictionary *) country{
-    NSLog(@"%@", country);
+    [self changedCountryUpdateUserInformation: country];
     [self.navigationController popViewControllerAnimated:YES];
+}
 
+- (void) changedCountryUpdateUserInformation: (NSDictionary *) newCountry{
+    NSDictionary *currentUserInformation = [NSDictionary dictionaryWithDictionary:self.hostInformation];
+    
+    changedInformation = YES;
+    
+    [self.hostInformation removeAllObjects];
+    self.hostInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                             currentUserInformation[@"name"], @"name",
+                             currentUserInformation[@"email"], @"email",
+                             currentUserInformation[@"photo"], @"photo",
+                             newCountry[@"name"], @"country",
+                             newCountry[@"code"], @"code", nil];
+    
+    [self updateViewModel];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
@@ -111,7 +153,7 @@
     
     changedInformation = YES;
     
-    self.photoProfileEdit = image;
+    [self.photoProfileEdit setImage:image];
     //[self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];

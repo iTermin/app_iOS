@@ -16,12 +16,13 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    self.dataModel = @{
-        @"name" : @"Estefania Chavez Guardado",
-        @"email" : @"correo@gmail.com.mx",
-        @"location": @"Mexico",
-        @"code":@"MX"
-    };
+    self.dataModel = [NSMutableDictionary
+                      dictionaryWithDictionary: @{
+                                                  @"name" : @"Estefania Chavez Guardado",
+                                                  @"email" : @"correo@gmail.com.mx",
+                                                  @"code": @"MX",
+                                                  @"photo" : @"",
+    }];
     
     [self updateViewModel];
     
@@ -84,7 +85,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editProfile"]){        
         EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;
-        [informationViewController setDataModel: self.dataModel];
+        [informationViewController setCurrentHost: self.dataModel];
     }
 }
 

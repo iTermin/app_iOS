@@ -71,7 +71,7 @@
 
 - (void) updateViewModel {
     if (changedInformation == NO) {
-        self.guestInformation = self.currentGuest;
+        self.guestInformation = [NSMutableDictionary dictionaryWithDictionary:self.currentGuest];
     }
     
     NSString *countryName = [self getNameCountry:self.guestInformation];
@@ -101,10 +101,10 @@
 
 - (NSString*) getNameCountry: (NSDictionary *)dataInformation{
     NSString *codeCountry = dataInformation[@"codeCountry"];
-    NSString *nameCountry = @"";
+    NSString *nameCountry = [NSString new];
     
     NSArray * ListCountriesInformation = self.modelCountries;
-    NSDictionary * countryInformaton;
+    NSDictionary * countryInformaton = [NSDictionary dictionary];
     
     for (countryInformaton in ListCountriesInformation) {
         NSString * code = countryInformaton[@"code"];

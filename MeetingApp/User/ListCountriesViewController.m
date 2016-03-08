@@ -17,6 +17,8 @@
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
     
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
     [self updateViewModel];
     
 }

@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 
-@property(nonatomic, strong) NSMutableDictionary * currentGuest;
+@property(nonatomic, strong) NSDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;
 
 @property (strong) NSArray * modelCountries;

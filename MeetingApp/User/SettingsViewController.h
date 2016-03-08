@@ -11,6 +11,6 @@
 
 @interface SettingsViewController : ModelTableViewController
 
-@property(strong) NSDictionary *dataModel;
+@property(strong) NSMutableDictionary *dataModel;
 
 @end
