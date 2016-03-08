@@ -10,7 +10,9 @@
 #import "ListCountriesViewController.h"
 
 @interface EditProfileUserViewController ()
-
+{
+    BOOL changedInformation;
+}
 
 @end
 
@@ -31,9 +33,6 @@
     self.photoProfileEdit.clipsToBounds = YES;
     //self.photoProfileEdit.layer.borderWidth = 4.0f;
     //self.photoProfileEdit.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    self.photoEditButton.layer.cornerRadius = self.photoEditButton.frame.size.width/5.0f;
-    self.photoEditButton.clipsToBounds = YES;
     
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
@@ -90,11 +89,26 @@
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
-    UIImage *image = [UIImage imageNamed:@"inicio"];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
-- (IBAction)editPhotoUser:(id)sender {
-
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    //Or you can get the image url from AssetsLibrary
+    //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    changedInformation = YES;
+    
+    self.photoProfileEdit = image;
+    //[self updateViewModel];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+
 @end

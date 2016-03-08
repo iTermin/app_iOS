@@ -41,10 +41,7 @@
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
     
-    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    tapImage.cancelsTouchesInView = YES;
-    tapImage.numberOfTapsRequired = 1;
-    
+    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
     [self.guestPhoto addGestureRecognizer:tapImage];
     
 }
