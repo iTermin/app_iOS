@@ -16,7 +16,8 @@
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<ICountrySelectorDelegate, IUserInformation, IUserInformationDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+<ICountrySelectorDelegate, IUserInformation,
+UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;

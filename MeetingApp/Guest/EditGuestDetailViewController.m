@@ -216,7 +216,6 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    //Or you can get the image url from AssetsLibrary
     //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     changedInformation = YES;
