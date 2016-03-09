@@ -6,11 +6,17 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : ModelTableViewController
+#import "IUserInformationDelegate.h"
+#import "ModelTableViewController.h"
+#import "ArrayOfCountries.h"
 
-@property(strong) NSDictionary *dataModel;
+@interface SettingsViewController : ModelTableViewController <IUserInformationDelegate>
+
+@property(strong) NSMutableDictionary *currentUser;
+
+@property (strong) NSArray * modelCountries;
+@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 @end

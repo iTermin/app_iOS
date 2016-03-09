@@ -6,19 +6,29 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import "ModelTableViewController.h"
 #import <UIKit/UIKit.h>
 
+#import "ICountrySelectorDelegate.h"
+#import "ModelTableViewController.h"
+
+#import "IUserInformation.h"
+#import "IUserInformationDelegate.h"
+#import "ArrayOfCountries.h"
+
 @interface EditProfileUserViewController : ModelTableViewController
+<ICountrySelectorDelegate, IUserInformation,
+UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
-@property (strong, nonatomic) IBOutlet UIButton *photoEditButton;
 
-@property(strong) NSDictionary *dataModel;
+@property(nonatomic, strong) NSDictionary * currentHost;
+@property(nonatomic, strong) NSMutableDictionary * hostInformation;
 
 @property(nonatomic, strong) NSDictionary * currentLocation;
-- (IBAction)editPhotoUser:(id)sender;
+
+@property(weak) id<IUserInformationDelegate> userInformationDelegate;
+
 
 @end

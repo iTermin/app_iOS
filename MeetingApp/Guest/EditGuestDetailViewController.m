@@ -40,12 +40,20 @@
     
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
+    
+    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
+    [self.guestPhoto addGestureRecognizer:tapImage];
+    
 }
 
 -(void) customCell {
     [self.nameGuest setText: self.guestInformation[@"name"]];
     [self.emailGuest setText: self.guestInformation[@"email"]];
     
+    [self setImage];
+}
+
+- (void) setImage{
     if ([self.guestInformation[@"photo"] isKindOfClass:[NSString class]]){
         if ([self.guestInformation[@"photo"] isEqualToString:@""]) {
             NSString *userName = self.guestInformation[@"name"];
@@ -63,7 +71,7 @@
 
 - (void) updateViewModel {
     if (changedInformation == NO) {
-        self.guestInformation = self.currentGuest;
+        self.guestInformation = [NSMutableDictionary dictionaryWithDictionary:self.currentGuest];
     }
     
     NSString *countryName = [self getNameCountry:self.guestInformation];
@@ -93,10 +101,10 @@
 
 - (NSString*) getNameCountry: (NSDictionary *)dataInformation{
     NSString *codeCountry = dataInformation[@"codeCountry"];
-    NSString *nameCountry = @"";
+    NSString *nameCountry = [NSString new];
     
     NSArray * ListCountriesInformation = self.modelCountries;
-    NSDictionary * countryInformaton;
+    NSDictionary * countryInformaton = [NSDictionary dictionary];
     
     for (countryInformaton in ListCountriesInformation) {
         NSString * code = countryInformaton[@"code"];
@@ -195,6 +203,38 @@
                         newCountry[@"code"], @"codeCountry", nil];
     
     [self updateViewModel];
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap
+{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    changedInformation = YES;
+    
+    self.guestInformation[@"photo"] = [self imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
+    [self updateViewModel];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
+{
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

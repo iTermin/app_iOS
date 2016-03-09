@@ -12,6 +12,9 @@
 
 @property(nonatomic, weak) NSDictionary * data;
 
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (strong, nonatomic) IBOutlet UIImageView *countryphoto;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UILabel *emailText;
 @property (weak, nonatomic) IBOutlet UILabel *locationText;

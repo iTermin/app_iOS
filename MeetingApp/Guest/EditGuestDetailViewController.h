@@ -15,18 +15,19 @@
 #import "IGuestInformation.h"
 #import "IGuestInformationDelegate.h"
 
-@interface EditGuestDetailViewController : ModelTableViewController <UITextFieldDelegate, ICountrySelectorDelegate, IGuestInformation>
+@interface EditGuestDetailViewController : ModelTableViewController
+<UITextFieldDelegate, ICountrySelectorDelegate, IGuestInformation,
+UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 
-@property(nonatomic, strong) NSMutableDictionary * currentGuest;
+@property(nonatomic, strong) NSDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;
 
 @property (strong) NSArray * modelCountries;
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
-
 
 @property(weak) id<IGuestInformationDelegate> guestInformationDelegate;
 

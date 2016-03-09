@@ -34,8 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.listOfGuests = [NSMutableArray array];
-    self.listOfGuests = self.currentMeeting[@"guests"];
+    self.listOfGuests = [NSMutableArray arrayWithArray:self.currentMeeting[@"guests"]];
 
     self.indexPathGuestSelected = [NSIndexPath new];
     
