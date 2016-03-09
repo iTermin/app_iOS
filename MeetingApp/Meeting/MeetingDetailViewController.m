@@ -7,7 +7,6 @@
 //
 
 #import "MeetingDetailViewController.h"
-#import "GuestDetailViewController.h"
 #import "MainAssembly.h"
 
 @interface MeetingDetailViewController ()
@@ -32,6 +31,7 @@
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.tableView.allowsSelection = NO;
     
     [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -49,7 +49,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"GuestViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"segue" : @"guestDetail",
                                @"data":cellModel }];
     }];
@@ -150,20 +150,8 @@
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }
 
-- (void) performSegue:(NSIndexPath *)indexPath{
-    NSDictionary * selectedMeeting = self.guests[indexPath.row];
-    NSDictionary * cellModel = self.viewModel[indexPath.row];
-    NSString * segueToPerform = cellModel[@"segue"];
-    if(segueToPerform) {
-        [self performSegueWithIdentifier:segueToPerform
-                                  sender: selectedMeeting];
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    GuestDetailViewController * guestDetailViewController = (GuestDetailViewController *)segue.destinationViewController;
-    [guestDetailViewController setTitle:sender[@"name"]];
-    [guestDetailViewController setCurrentGuest: sender];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
 
 @end
