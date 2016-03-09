@@ -16,14 +16,11 @@
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<ICountrySelectorDelegate, IUserInformation, UIImagePickerControllerDelegate>
+<ICountrySelectorDelegate, IUserInformation, IUserInformationDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
-
-@property (strong) NSArray * modelCountries;
-@property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 @property(nonatomic, strong) NSDictionary * currentHost;
 @property(nonatomic, strong) NSMutableDictionary * hostInformation;

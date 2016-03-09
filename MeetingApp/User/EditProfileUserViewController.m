@@ -8,6 +8,8 @@
 
 #import "EditProfileUserViewController.h"
 #import "ListCountriesViewController.h"
+#import "UIImageView+Letters.h"
+
 
 @interface EditProfileUserViewController ()
 {
@@ -20,16 +22,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
-    [self.nameText setText: self.hostInformation[@"name"]];
-    [self.emailText setText: self.hostInformation[@"email"]];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.arrayCountries = [ArrayOfCountries new];
-    self.modelCountries = [self.arrayCountries getModelCountries];
     
     self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
     self.photoProfileEdit.clipsToBounds = YES;
@@ -38,11 +35,13 @@
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameText.layer addSublayer:nameBorder];
+    self.nameText.delegate = self;
     
     CALayer *emailBorder = [CALayer layer];
     emailBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailText.layer addSublayer:emailBorder];
+    self.emailText.delegate = self;
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
@@ -52,13 +51,11 @@
 }
 
 - (void) updateViewModel {
-    if (changedInformation == NO){
+    if (changedInformation == NO)
         self.hostInformation = [NSMutableDictionary dictionaryWithDictionary:self.currentHost];
-        NSString *countryName = [self getNameCountry:self.hostInformation];
-        [self.hostInformation setObject:countryName forKey:@"country"];
-    }
     
-    if (changedInformation) [self.userInformationDelegate userInformation:self didChangedInformation:self.hostInformation];
+    if (changedInformation)
+        [self.userInformationDelegate userInformation:self didChangedInformation:self.hostInformation];
     
     NSArray * viewModel = @[
                             @{
@@ -71,6 +68,8 @@
     
     self.viewModel = [NSMutableArray arrayWithArray: viewModel];
     
+    [self customCell];
+    
     [self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
@@ -78,20 +77,27 @@
     [super updateViewModel];
 }
 
-- (NSString*) getNameCountry: (NSDictionary *)dataInformation{
-    NSString *codeCountry = dataInformation[@"code"];
-    NSString *nameCountry = [NSString new];
+-(void) customCell {
+    [self.nameText setText: self.hostInformation[@"name"]];
+    [self.emailText setText: self.hostInformation[@"email"]];
     
-    NSArray * ListCountriesInformation = self.modelCountries;
-    NSDictionary * countryInformaton = [NSDictionary dictionary];
-    
-    for (countryInformaton in ListCountriesInformation) {
-        NSString * code = countryInformaton[@"code"];
-        if ([code isEqualToString: codeCountry]) {
-            return nameCountry = countryInformaton[@"name"];
+    [self setImage];
+}
+
+- (void) setImage{
+    if ([self.hostInformation[@"photo"] isKindOfClass:[NSString class]]){
+        if ([self.hostInformation[@"photo"] isEqualToString:@""]) {
+            NSString *userName = self.hostInformation[@"name"];
+            [self.photoProfileEdit setImageWithString:userName color:[UIColor colorWithRed:1 green:0.411 blue:0.411 alpha:1] circular:YES];
+        } else {
+            self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
+            self.photoProfileEdit.clipsToBounds = YES;
+            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.hostInformation[@"photo"]];
+            [self.photoProfileEdit setImage:[UIImage imageNamed:getPhoto]];
         }
+    } else {
+        [self.photoProfileEdit setImage:self.hostInformation[@"photo"]];
     }
-    return nameCountry;
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
@@ -102,7 +108,6 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
@@ -153,8 +158,8 @@
     
     changedInformation = YES;
     
-    [self.photoProfileEdit setImage:[self imageWithImage:image scaledToSize:CGSizeMake(200, 200)]];
-    //[self updateViewModel];
+    self.hostInformation[@"photo"] = [self imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
+    [self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
@@ -168,6 +173,66 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.nameText)
+        [self changedTextName];
+    if (textField == self.emailText)
+        [self changedTextEmail];
+    
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (void) changedTextName{
+    NSString *nameGuest = self.nameText.text;
+    if (![self.nameText.text isEqualToString:self.hostInformation[@"name"]]){
+        changedInformation = YES;
+        [self.hostInformation removeObjectForKey:@"name"];
+        [self.hostInformation setObject:nameGuest forKey:@"name"];
+        [self updateViewModel];
+    }
+}
+
+- (void) changedTextEmail {
+    NSString *emailGuest = self.emailText.text;
+    if (![self.emailText.text isEqualToString:self.hostInformation[@"email"]]){
+        BOOL emailIsValid = [self validateEmail:self.emailText.text];
+        if (emailIsValid){
+            changedInformation = YES;
+            [self.hostInformation removeObjectForKey:@"email"];
+            [self.hostInformation setObject:emailGuest forKey:@"email"];
+            [self updateViewModel];
+        }
+        else{
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"Wrong Email!"
+                                        message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action){
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }
+}
+
+- (BOOL) validateEmail:(NSString*) emailAddress{
+    BOOL stricterFilter = YES;
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:self.emailText.text];
+    //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
 

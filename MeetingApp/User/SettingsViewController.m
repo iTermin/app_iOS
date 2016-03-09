@@ -9,20 +9,29 @@
 #import "SettingsViewController.h"
 #import "EditProfileUserViewController.h"
 
+@interface SettingsViewController ()
+{
+    BOOL changedInformation;
+}
+
+@end
+
 @implementation SettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
+    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    self.dataModel = [NSMutableDictionary
-                      dictionaryWithDictionary: @{
-                                                  @"name" : @"Estefania Chavez Guardado",
-                                                  @"email" : @"correo@gmail.com.mx",
-                                                  @"code": @"MX",
-                                                  @"photo" : @"",
-    }];
+    self.currentUser = [NSMutableDictionary dictionaryWithDictionary: @{
+                         @"name" : @"Estefania Chavez Guardado",
+                         @"email" : @"correo@gmail.com.mx",
+                         @"code": @"MX",
+                         @"photo" : @"",
+                         }];
     
     [self updateViewModel];
     
@@ -30,15 +39,14 @@
 
 - (void) updateViewModel {
     
+    NSString *countryName = [self getNameCountry:self.currentUser];
+    [self.currentUser setObject:countryName forKey:@"country"];
+    
     NSArray * viewModel = @[
                             @{
-                                @"nib" : @"ProfilePhotoTableViewCell",
-                                @"height" : @(120),
-                                },
-                            @{
                                 @"nib" : @"GeneralInformationUserTableViewCell",
-                                @"height" : @(100),
-                                @"data" : [self.dataModel copy]
+                                @"height" : @(255),
+                                @"data" : [self.currentUser copy]
                                 },
                             @{
                                 @"nib" : @"HeaderTableViewCell",
@@ -67,25 +75,49 @@
                                 @"data" : @{
                                         @"option" : @"Terms of Service"
                                         }
-                                },
-                            @{
-                                @"nib" : @"HeaderTableViewCell",
-                                @"height" : @(50),
-                                @"data" : @{
-                                        @"text" : @"Notifications"
-                                        }
                                 }
                             ];
     
     self.viewModel = [NSMutableArray arrayWithArray: viewModel];
     
+    if (changedInformation){
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        changedInformation = NO;
+    }
     [super updateViewModel];
+}
+
+- (NSString*) getNameCountry: (NSDictionary *)dataInformation{
+    NSString *codeCountry = dataInformation[@"code"];
+    NSString *nameCountry = [NSString new];
+    
+    NSArray * ListCountriesInformation = self.modelCountries;
+    NSDictionary * countryInformaton = [NSDictionary dictionary];
+    
+    for (countryInformaton in ListCountriesInformation) {
+        NSString * code = countryInformaton[@"code"];
+        if ([code isEqualToString: codeCountry]) {
+            return nameCountry = countryInformaton[@"name"];
+        }
+    }
+    return nameCountry;
+}
+
+- (void)userInformation:(id<IUserInformation>)userDetail didChangedInformation:(NSDictionary *)user{
+    changedInformation = YES;
+    [self.currentUser removeAllObjects];
+    self.currentUser =  [NSMutableDictionary dictionaryWithDictionary:user];
+    
+    [self updateViewModel];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
     if ([segue.identifier isEqualToString:@"editProfile"]){        
         EditProfileUserViewController * informationViewController = (EditProfileUserViewController *)segue.destinationViewController;
-        [informationViewController setCurrentHost: self.dataModel];
+        [informationViewController setCurrentHost: self.currentUser];
+        [informationViewController setUserInformationDelegate:self];
     }
 }
 

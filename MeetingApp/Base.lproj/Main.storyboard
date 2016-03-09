@@ -303,7 +303,7 @@
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fondo" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-wY-agr">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-wY-agr">
                                 <rect key="frame" x="122" y="82" width="130" height="130"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mrb-Ti-ijy">
@@ -321,7 +321,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dom-Sf-BKn">
-                                <rect key="frame" x="234" y="190" width="25" height="22"/>
+                                <rect key="frame" x="175" y="190" width="25" height="22"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
@@ -745,7 +745,6 @@
         <image name="calendar" width="22" height="22"/>
         <image name="camera" width="274" height="233"/>
         <image name="email" width="22" height="22"/>
-        <image name="fondo" width="150" height="200"/>
         <image name="meetingTabBar" width="30" height="30"/>
         <image name="plus" width="22" height="22"/>
         <image name="push" width="22" height="22"/>
