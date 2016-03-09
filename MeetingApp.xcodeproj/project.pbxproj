@@ -37,7 +37,6 @@
 		7C3E2BBD1C70AF9000B49E90 /* MeetingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2BB61C70AF9000B49E90 /* MeetingTableViewCell.xib */; };
 		7C3E2BBE1C70AF9000B49E90 /* GuestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2BB71C70AF9000B49E90 /* GuestViewCell.xib */; };
 		7C3E2BCB1C70E95B00B49E90 /* EditGuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BC81C70E95B00B49E90 /* EditGuestDetailViewController.m */; };
-		7C3E2BCC1C70E95B00B49E90 /* GuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BCA1C70E95B00B49E90 /* GuestDetailViewController.m */; };
 		7C3E2BD11C70EA7000B49E90 /* LocationGuestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2BCE1C70EA7000B49E90 /* LocationGuestTableViewCell.xib */; };
 		7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BD01C70EA7000B49E90 /* LocationGuestTableViewCell.m */; };
 		7C3E2BDF1C70F71500B49E90 /* CountryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2BDD1C70F71500B49E90 /* CountryViewCell.xib */; };
@@ -152,8 +151,6 @@
 		7C3E2BB81C70AF9000B49E90 /* GuestViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestViewCell.h; path = Meeting/Artifacts/GuestViewCell.h; sourceTree = "<group>"; };
 		7C3E2BC71C70E95B00B49E90 /* EditGuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditGuestDetailViewController.h; path = Guest/EditGuestDetailViewController.h; sourceTree = "<group>"; };
 		7C3E2BC81C70E95B00B49E90 /* EditGuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditGuestDetailViewController.m; path = Guest/EditGuestDetailViewController.m; sourceTree = "<group>"; };
-		7C3E2BC91C70E95B00B49E90 /* GuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestDetailViewController.h; path = Guest/GuestDetailViewController.h; sourceTree = "<group>"; };
-		7C3E2BCA1C70E95B00B49E90 /* GuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestDetailViewController.m; path = Guest/GuestDetailViewController.m; sourceTree = "<group>"; };
 		7C3E2BCE1C70EA7000B49E90 /* LocationGuestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationGuestTableViewCell.xib; path = Guest/Artifacts/LocationGuestTableViewCell.xib; sourceTree = "<group>"; };
 		7C3E2BCF1C70EA7000B49E90 /* LocationGuestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationGuestTableViewCell.h; path = Guest/Artifacts/LocationGuestTableViewCell.h; sourceTree = "<group>"; };
 		7C3E2BD01C70EA7000B49E90 /* LocationGuestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationGuestTableViewCell.m; path = Guest/Artifacts/LocationGuestTableViewCell.m; sourceTree = "<group>"; };
@@ -448,8 +445,6 @@
 				7C3E2BCD1C70EA3000B49E90 /* Artifacts */,
 				7C3E2BC71C70E95B00B49E90 /* EditGuestDetailViewController.h */,
 				7C3E2BC81C70E95B00B49E90 /* EditGuestDetailViewController.m */,
-				7C3E2BC91C70E95B00B49E90 /* GuestDetailViewController.h */,
-				7C3E2BCA1C70E95B00B49E90 /* GuestDetailViewController.m */,
 				7C3E2BE11C70F73D00B49E90 /* GuestListCountriesTableViewController.h */,
 				7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */,
 			);
@@ -815,7 +810,6 @@
 			files = (
 				7C3E2BAC1C70AD7400B49E90 /* MeetingDetailViewController.m in Sources */,
 				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
-				7C3E2BCC1C70E95B00B49E90 /* GuestDetailViewController.m in Sources */,
 				7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */,
 				7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */,
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,
