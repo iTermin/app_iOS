@@ -46,6 +46,8 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     [self updateViewModel];
     
 }
