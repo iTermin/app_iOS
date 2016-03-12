@@ -987,7 +987,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
+				PROVISIONING_PROFILE = "12d418de-42bd-42e4-9bb4-1ac2d4608c97";
 			};
 			name = Debug;
 		};
@@ -1002,7 +1002,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = estefania.guardado.MeetingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "56ac31ed-1d18-490f-b890-42662aa50f68";
+				PROVISIONING_PROFILE = "12d418de-42bd-42e4-9bb4-1ac2d4608c97";
 			};
 			name = Release;
 		};
