@@ -48,8 +48,20 @@
     
     self.registeredNibs = [NSMutableSet set];
 
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
+    self.arrayCountries = [ArrayOfCountries new];
+    self.modelCountries = [self.arrayCountries getModelCountries];
+    self.dateCurrent = [NSDate new];
+    self.dateCurrent = startDate;
+    self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:startDate]];
+    
+    self.hoursArray = [NSMutableArray array];
+    
+    [self inputAlgoritm:startDate];
+    
     [self updateViewModel];
-
+    
     __weak UITableView * tableView = self.tableView;
     [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * cellViewModel, NSUInteger idx, BOOL * stop) {
         
@@ -63,17 +75,12 @@
         }
     }];
     
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    
-    self.arrayCountries = [ArrayOfCountries new];
-    self.modelCountries = [self.arrayCountries getModelCountries];
-    self.dateCurrent = [NSDate new];
-    self.dateCurrent = startDate;
-    
-    self.hoursArray = [NSMutableArray array];
-    
-    // TODO :[self inputAlgoritm:startDate];
-
+    NSDictionary * indicatorDateIcon = @{
+                                         @1 : @"sun",
+                                         @2 : @"sunsetMoon",
+                                         @3 : @"sunsetSun",
+                                         @4 : @"moon"
+                                         };
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -84,9 +91,19 @@
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
     NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
+    //TODO: change this section when implement algorithm
+    int hourImplement;
+    if([self.hoursArray count]){
+        NSArray *testHoursOutput = @[@20, @2, @3, @4, @5];
+        hourImplement = [self outputAlgoritm : testHoursOutput];
+    }
+    //
+    NSString * iconSelector = [self detectIconDependTheHour: hourImplement];
+
     [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
+        [cellModel setObject:iconSelector forKey:@"selector"];
         
         [viewModel addObject:@{
                                @"nib" : @"GuestDateViewCell",
@@ -98,13 +115,42 @@
     
 }
 
+
+- (int) outputAlgoritm : (NSArray *) arrayHours {
+    //TODO: input of self.hoursArray before removeAllObjects, implement with algoritm
+    int subtract = 21 - [[@[@20, @2, @3, @4, @5] objectAtIndex:0] intValue];
+    
+    return [[NSNumber numberWithInt:subtract] intValue];
+}
+
+- (NSString *) detectIconDependTheHour: (int) sumHour {
+    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+        [self modifyTheGuestHour: guest[@"codeCountry"] withIdentify:sumHour];
+    }];
+    
+    return @"";
+}
+
+- (void) modifyTheGuestHour: (NSString *) guestCountry withIdentify: (int) hours{
+    NSArray * UTCGuest  = [self getUTCGuest: guestCountry];
+    NSArray * UTCUser = [self getUTCGuest:self.userInformation[@"countryCode"]];
+//    if(![UTCUser isEqualToArray:UTCGuest]){
+//        
+//        [UTCUser enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop) {
+//            [self addDiferencial:[hour doubleValue] ToGuest:UTCGuest withCurrentHours:[userDate[@"hour"] doubleValue]];
+//        }];
+//        
+//    } else {
+//        [self.hoursArray addObject:userDate[@"hour"]];
+//    }
+}
+
 #pragma mark - Table view delegate
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
         self.dateCurrent = self.dateCellsManager.startDate;
-        [self inputAlgoritm:self.dateCurrent];
         return [self.dateCellsManager tableView:tableView willSelectRowAtIndexPath:indexPath];
     }
     
@@ -114,20 +160,19 @@
 
 -(void) inputAlgoritm: (NSDate *) startDate {
     
-    NSDictionary * userDate = [self getHourOfDate:startDate];
+    NSDictionary * userDate = self.userInformation;
     [self.hoursArray addObject:userDate[@"hour"]];
     
-    [self.viewModel enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        NSDictionary *dataGuest = guest[@"data"];
-        [self gethourGuest: dataGuest[@"codeCountry"] respectUser:userDate];
+    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+        [self gethourGuest: guest[@"codeCountry"] respectUser:userDate];
     }];
     
     NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArray];
-    [self.hoursArray removeAllObjects];
     [self prepareHoursForAlgorithm: prepareHours];
 }
 
 - (void) prepareHoursForAlgorithm : (NSArray *) hours{
+    [self.hoursArray removeAllObjects];
     NSMutableSet *existingHours = [NSMutableSet set];
     [hours enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop){
         if (![existingHours containsObject:hour]) {

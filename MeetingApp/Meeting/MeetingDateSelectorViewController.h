@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 @property (strong) NSArray * modelCountries;
+@property (strong) NSDictionary * userInformation;
 
 @property (strong) NSDate * dateCurrent;
 @property (strong) NSMutableArray * hoursArray;
