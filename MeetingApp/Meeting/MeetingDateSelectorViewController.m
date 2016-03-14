@@ -10,6 +10,9 @@
 #import "MeetingDateSelectorViewController.h"
 #import "ArrayOfCountries.h"
 
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+
 @interface MeetingDateSelectorViewController ()
 
 @property (strong, nonatomic) UXDateCellsManager *dateCellsManager;
@@ -74,6 +77,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
     //[self updateViewModel];
 }
 
@@ -183,9 +187,9 @@
 }
 
 -(NSString *) getCountryUser {
-    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
-    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-    return countryCode;
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *mobileNetworkInfo = [networkInfo subscriberCellularProvider];
+    return [[mobileNetworkInfo isoCountryCode] uppercaseString];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
