@@ -52,9 +52,8 @@
     
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
-    self.dateCurrent = [NSDate new];
-    self.dateCurrent = startDate;
-    self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:startDate]];
+    self.dateCurrent = [NSDate dateWithTimeInterval:0 sinceDate:startDate];
+    self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
     
     self.hoursArray = [NSMutableArray array];
     
@@ -79,12 +78,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    //[self updateViewModel];
 }
 
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
     NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
+    
     //TODO: change this section when implement algorithm
     int diferencialHour;
     if([self.hoursArray count]){
@@ -92,7 +91,6 @@
         diferencialHour = [self outputAlgoritm : testHoursOutput];
     }
     //
-    //NSString * iconSelector = [self detectIconDependTheHour: hourImplement];
 
     [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
@@ -109,6 +107,8 @@
     }];
     
     self.viewModel = viewModel;
+    
+    [self.tableView reloadData];
     
 }
 
@@ -129,7 +129,7 @@
         
         else if (hourForDay == 10) seccion = @"sun";
         else if (hourForDay == 16) seccion = @"sunsetSun";
-        else if (hourForDay > 21) seccion = @"moon";
+        else if (hourForDay > 20) seccion = @"moon";
 
         
         if (hourForDay == [hour intValue]){
@@ -159,20 +159,7 @@
         return [NSNumber numberWithInt:differenceHourGuest];
     }
     
-    return self.userInformation[@"hour"];
-}
-
-#pragma mark - Table view delegate
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Date Cells
-    if ([self.dateCellsManager isManagedDateCell:indexPath]) {
-        self.dateCurrent = self.dateCellsManager.startDate;
-        return [self.dateCellsManager tableView:tableView willSelectRowAtIndexPath:indexPath];
-    }
-    
-    // Other cells
-    return indexPath;
+    return @0;
 }
 
 -(void) inputAlgoritm: (NSDate *) startDate {
@@ -254,10 +241,27 @@
     return [[mobileNetworkInfo isoCountryCode] uppercaseString];
 }
 
+#pragma mark - Table view delegate
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Date Cells
+    if ([self.dateCellsManager isManagedDateCell:indexPath]) {
+        return [self.dateCellsManager tableView:tableView willSelectRowAtIndexPath:indexPath];
+    }
+    
+    // Other cells
+    return indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
+        if (![self.dateCurrent isEqualToDate:self.dateCellsManager.startDate]) {
+            self.dateCurrent = self.dateCellsManager.startDate;
+            self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
+            [self updateViewModel];
+        }
         return [self.dateCellsManager tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     
