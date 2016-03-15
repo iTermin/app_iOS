@@ -92,15 +92,18 @@
     NSMutableArray * viewModel = [NSMutableArray array];
     NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
     //TODO: change this section when implement algorithm
-    int hourImplement;
+    int diferencialHour;
     if([self.hoursArray count]){
         NSArray *testHoursOutput = @[@20, @2, @3, @4, @5];
-        hourImplement = [self outputAlgoritm : testHoursOutput];
+        diferencialHour = [self outputAlgoritm : testHoursOutput];
     }
     //
-    NSString * iconSelector = [self detectIconDependTheHour: hourImplement];
+    //NSString * iconSelector = [self detectIconDependTheHour: hourImplement];
 
     [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+        NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
+        NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
+        NSString * iconSelector = [self detectIconDepend:actualGuestHour];
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
         [cellModel setObject:iconSelector forKey:@"selector"];
@@ -123,26 +126,49 @@
     return [[NSNumber numberWithInt:subtract] intValue];
 }
 
-- (NSString *) detectIconDependTheHour: (int) sumHour {
-    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        [self modifyTheGuestHour: guest[@"codeCountry"] withIdentify:sumHour];
-    }];
+- (NSString *) detectIconDepend: (NSNumber *) hour {
+    NSString * seccion = @"moon";
+    
+    for (int hourForDay = 1; hourForDay <= 24; ++hourForDay) {
+        
+        if (hourForDay == 6) seccion = @"sunsetMoon";
+        
+        else if (hourForDay == 10) seccion = @"sun";
+        else if (hourForDay == 16) seccion = @"sunsetSun";
+        else if (hourForDay > 21) seccion = @"moon";
+
+        
+        if (hourForDay == [hour intValue]){
+            return seccion;
+            break;
+        }
+    }
+
+//    NSMutableArray * sumHoursToGuest = [NSMutableArray array];
+//    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+//        [sumHoursToGuest addObject:[self modifyTheGuestHour: guest[@"codeCountry"] withIdentify:sumHour]];
+//    }];
     
     return @"";
 }
 
-- (void) modifyTheGuestHour: (NSString *) guestCountry withIdentify: (int) hours{
+- (NSNumber *) getTotalHoursToAddTo: (NSString *) guestCountry withIdentify: (int) hours{
     NSArray * UTCGuest  = [self getUTCGuest: guestCountry];
     NSArray * UTCUser = [self getUTCGuest:self.userInformation[@"countryCode"]];
-//    if(![UTCUser isEqualToArray:UTCGuest]){
-//        
-//        [UTCUser enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop) {
-//            [self addDiferencial:[hour doubleValue] ToGuest:UTCGuest withCurrentHours:[userDate[@"hour"] doubleValue]];
-//        }];
-//        
-//    } else {
-//        [self.hoursArray addObject:userDate[@"hour"]];
-//    }
+    
+    if(![UTCUser isEqualToArray:UTCGuest]){
+        NSNumber * middleUTCUser = [UTCUser count]/2 == 0 ?
+        [UTCUser objectAtIndex:[UTCUser count]/2] : [UTCUser objectAtIndex:[UTCUser count]/2 - 1];
+        
+        NSNumber * middleUTCGuest = [UTCGuest count]/2 == 0 ?
+        [UTCGuest objectAtIndex:[UTCGuest count]/2] : [UTCGuest objectAtIndex:[UTCGuest count]/2 - 1];
+        
+        int differenceHourGuest = abs([middleUTCUser intValue] - 0) + abs([middleUTCGuest intValue] - 0);
+        
+        return [NSNumber numberWithInt:differenceHourGuest];
+    }
+    
+    return self.userInformation[@"hour"];
 }
 
 #pragma mark - Table view delegate
