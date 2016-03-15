@@ -34,7 +34,7 @@
         } else{
             self.photoGuest.layer.cornerRadius = self.photoGuest.frame.size.width/2.0f;
             self.photoGuest.clipsToBounds = YES;
-            NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", data[@"photo"]];
+            NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", _data[@"photo"]];
             [self.photoGuest setImage:[UIImage imageNamed:identyPhoto]];
         }
     } else {
@@ -44,7 +44,7 @@
     }
     
     
-    NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", @"moon"];
+    NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", _data[@"selector"]];
     [self.dateIndicatorGuest setImage:[UIImage imageNamed:identyPhoto]];
 
     

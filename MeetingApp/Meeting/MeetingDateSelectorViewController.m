@@ -74,13 +74,7 @@
             [tableView registerNib:nib forCellReuseIdentifier:nibFile];
         }
     }];
-    
-    NSDictionary * indicatorDateIcon = @{
-                                         @1 : @"sun",
-                                         @2 : @"sunsetMoon",
-                                         @3 : @"sunsetSun",
-                                         @4 : @"moon"
-                                         };
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,11 +137,6 @@
             break;
         }
     }
-
-//    NSMutableArray * sumHoursToGuest = [NSMutableArray array];
-//    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-//        [sumHoursToGuest addObject:[self modifyTheGuestHour: guest[@"codeCountry"] withIdentify:sumHour]];
-//    }];
     
     return @"";
 }
@@ -163,7 +152,9 @@
         NSNumber * middleUTCGuest = [UTCGuest count]/2 == 0 ?
         [UTCGuest objectAtIndex:[UTCGuest count]/2] : [UTCGuest objectAtIndex:[UTCGuest count]/2 - 1];
         
-        int differenceHourGuest = abs([middleUTCUser intValue] - 0) + abs([middleUTCGuest intValue] - 0);
+        
+        int differenceHourGuest = [middleUTCUser intValue] > 0 ?
+        ([middleUTCGuest intValue] - [middleUTCUser intValue]) : ([middleUTCUser intValue] + [middleUTCGuest intValue]);
         
         return [NSNumber numberWithInt:differenceHourGuest];
     }
