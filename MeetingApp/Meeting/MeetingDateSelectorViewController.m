@@ -78,6 +78,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
+    //BOOL bien = YES == self.dateCellsManager.allDay ? YES : NO;
 }
 
 -(void) updateViewModel{
@@ -267,6 +269,12 @@
     // ...
 }
 
+- (void) meetingAllDay: (BOOL) selected{
+    NSString * value = selected == YES ? @"YES" : @"NO";
+    
+    NSLog(@"value: %@", value);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -309,6 +317,7 @@
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
+        [self.dateCellsManager setSwitchCellData:self];
         return [self.dateCellsManager tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     

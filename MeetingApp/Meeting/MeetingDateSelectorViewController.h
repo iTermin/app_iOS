@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ArrayOfCountries.h"
+#import "IMeetingAllDayDelegate.h"
 
-@interface MeetingDateSelectorViewController : UITableViewController
+@interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
 @property(nonatomic, strong) NSDictionary * detailMeeting;
 @property(strong) NSArray *viewModel;
