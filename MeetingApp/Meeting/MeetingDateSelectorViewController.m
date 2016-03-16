@@ -330,25 +330,14 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    CGRect labelFrame = CGRectMake(40, 80, 280, 150);
-    UILabel * sectionHeader = [[UILabel alloc]initWithFrame:labelFrame];
+    UILabel * sectionHeader = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 280, 150)];
     sectionHeader.backgroundColor = [UIColor clearColor];
-    sectionHeader.textAlignment = NSTextAlignmentCenter;
-    [sectionHeader sizeToFit];
-    [sectionHeader setNumberOfLines: 0];
-    sectionHeader.font = [UIFont fontWithName:@"BodoniSvtyTwoITCTT-Bold" size:18];
-    sectionHeader.textColor = [UIColor colorWithRed:.290 green:.564 blue:.886 alpha:1];
-
-    switch (section) {
-        case 0: sectionHeader.text = @"Date Proposal"; break;
-        case 1: sectionHeader.text = @"Guest State"; break;
-        default: break;
-    }
     
     return sectionHeader;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 25;
+    return 10;
 }
 
 - (IBAction)sharePressed:(id)sender {
