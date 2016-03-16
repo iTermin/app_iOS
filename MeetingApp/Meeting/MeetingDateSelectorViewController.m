@@ -123,6 +123,12 @@
 }
 
 - (NSString *) detectIconDepend: (NSNumber *) hour {
+    int dayHour = [hour intValue];
+    
+    if ([hour intValue] > 24) dayHour = [hour intValue] - 24;
+    
+    else if ([hour intValue] < 1) dayHour = [hour intValue] + 24;
+    
     NSString * seccion = @"moon";
     
     for (int hourForDay = 1; hourForDay <= 24; ++hourForDay) {
@@ -132,7 +138,7 @@
         else if (hourForDay == 18) seccion = @"sunsetSun";
         else if (hourForDay == 21) seccion = @"moon";
 
-        if (hourForDay == [hour intValue]){
+        if (hourForDay == dayHour){
             return seccion;
             break;
         }
