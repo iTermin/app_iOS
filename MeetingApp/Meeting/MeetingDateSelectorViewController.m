@@ -15,6 +15,10 @@
 
 @interface MeetingDateSelectorViewController ()
 
+{
+    BOOL selectedAllDay;
+}
+
 @property (strong, nonatomic) UXDateCellsManager *dateCellsManager;
 @property(nonatomic, strong) NSMutableSet * registeredNibs;
 
@@ -54,6 +58,7 @@
     self.modelCountries = [self.arrayCountries getModelCountries];
     self.dateCurrent = [NSDate dateWithTimeInterval:0 sinceDate:startDate];
     self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
+    selectedAllDay = NO;
     
     self.hoursArray = [NSMutableArray array];
     
@@ -95,9 +100,14 @@
     //
 
     [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
-        NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
-        NSString * iconSelector = [self detectIconDepend:actualGuestHour];
+        NSString * iconSelector = [NSString new];
+        if (selectedAllDay == YES)
+            iconSelector = @"allDay";
+        else if (selectedAllDay == NO){
+            NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
+            NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
+            iconSelector = [self detectIconDepend:actualGuestHour];
+        }
         
         NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
         [cellModel setObject:iconSelector forKey:@"selector"];
@@ -120,6 +130,11 @@
     int subtract = 21 - [[@[@20, @2, @3, @4, @5] objectAtIndex:0] intValue];
     
     return [[NSNumber numberWithInt:subtract] intValue];
+}
+
+- (void) meetingAllDay: (BOOL) selected{
+    selectedAllDay = selected;
+    [self updateViewModel];
 }
 
 - (NSString *) detectIconDepend: (NSNumber *) hour {
@@ -283,12 +298,6 @@
     
     // Other cells
     // ...
-}
-
-- (void) meetingAllDay: (BOOL) selected{
-    NSString * value = selected == YES ? @"YES" : @"NO";
-    
-    NSLog(@"value: %@", value);
 }
 
 #pragma mark - Table view data source
