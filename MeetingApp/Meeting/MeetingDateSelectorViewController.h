@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ArrayOfCountries.h"
+#import "IMeetingAllDayDelegate.h"
 
-@interface MeetingDateSelectorViewController : UITableViewController
+@interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
 @property(nonatomic, strong) NSDictionary * detailMeeting;
 @property(strong) NSArray *viewModel;
 
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 @property (strong) NSArray * modelCountries;
+@property (strong) NSDictionary * userInformation;
 
 @property (strong) NSDate * dateCurrent;
 @property (strong) NSMutableArray * hoursArray;
