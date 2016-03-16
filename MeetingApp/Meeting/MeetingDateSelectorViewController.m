@@ -259,11 +259,21 @@
     return indexPath;
 }
 
+- (BOOL) isTheSameHourOf: (NSDate *) currentDate And: (NSDate*) dataCellDate {
+    NSDateFormatter *hourFormatter = [NSDateFormatter new];
+    hourFormatter.dateFormat = @"HH";
+    
+    NSString *currenHour = [hourFormatter stringFromDate: currentDate];
+    NSString *currenDataCellHour = [hourFormatter stringFromDate: dataCellDate];
+    
+    return [currenHour isEqualToString:currenDataCellHour] ? YES : NO;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
-        if (![self.dateCurrent isEqualToDate:self.dateCellsManager.startDate]) {
+        if (![self isTheSameHourOf: self.dateCurrent And: self.dateCellsManager.startDate]) {
             self.dateCurrent = self.dateCellsManager.startDate;
             self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
             [self updateViewModel];
