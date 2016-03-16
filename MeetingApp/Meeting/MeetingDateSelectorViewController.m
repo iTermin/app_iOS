@@ -125,13 +125,11 @@
     
     for (int hourForDay = 1; hourForDay <= 24; ++hourForDay) {
         
-        if (hourForDay == 6) seccion = @"sunsetMoon";
-        
+        if (hourForDay == 5) seccion = @"sunsetMoon";
         else if (hourForDay == 10) seccion = @"sun";
-        else if (hourForDay == 16) seccion = @"sunsetSun";
-        else if (hourForDay > 20) seccion = @"moon";
+        else if (hourForDay == 18) seccion = @"sunsetSun";
+        else if (hourForDay == 21) seccion = @"moon";
 
-        
         if (hourForDay == [hour intValue]){
             return seccion;
             break;
