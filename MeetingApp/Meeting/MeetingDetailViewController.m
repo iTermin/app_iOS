@@ -94,14 +94,15 @@
             [self refreshStatus:statusSelected OfNotification:pushNotification];
             title = @"Push Notification";
             message = @"You have activated the push notifications for send you before the meeting.";
+        
         } else if (buttonPress == _calendarNotification) {
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
-            title = @"Calendar Notifaction";
-            message = @"You have added the meeting to the calendar.";
+        
         } else if (buttonPress == _emailNotification) {
             [self refreshStatus:statusSelected OfNotification:_emailNotification];
             title = @"Email Notification";
             message = @"You have activated email notifications for send you before the meeting..";
+        
         } else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             title = @"Reminder Notifaction";
@@ -112,14 +113,17 @@
             [self refreshStatus:statusSelected OfNotification:pushNotification];
             title = @"Push Notification";
             message = @"You have deactivated the push notifications.";
+        
         } else if (buttonPress == _calendarNotification) {
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
             title = @"Calendar Notifaction";
             message = @"You have removed the meeting of the calendar.";
+        
         } else if (buttonPress == _emailNotification) {
             [self refreshStatus:statusSelected OfNotification:_emailNotification];
             title = @"Email Notifaction";
             message = @"You have deactivated email notifications.";
+        
         } else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             title = @"Reminder Notifaction";
@@ -156,7 +160,7 @@
         
         if ([notification isEqualToString:@"calendar"]
             && [state isEqualToValue:@YES])
-            [self calendar];
+            [self notificationCalendar];
         
         else if ([notification isEqualToString:@"reminder"] && [state isEqualToValue:@YES]) NSLog(@"reminder");
         
@@ -165,22 +169,7 @@
     }];
 }
 
-- (void) calendar {
-//    EKEventStore *store = [EKEventStore new];
-//    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-//        
-//        if (!granted) return;
-//        
-//        EKEvent *event = [EKEvent eventWithEventStore:store];
-//        event.title = @"Event Title";
-//        event.startDate = [NSDate date]; //today
-//        event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
-//        event.calendar = [store defaultCalendarForNewEvents];
-//        NSError *err = nil;
-//        [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
-//        self.savedEventId = event.eventIdentifier;  //save the event id if you want to access this later
-//    }];
-    
+- (void) notificationCalendar {
     EKEventStore *eventStore = [EKEventStore new];
     EKEvent *events = [EKEvent eventWithEventStore:eventStore];
     
@@ -188,11 +177,6 @@
     events.startDate = [NSDate date];
     events.endDate = [NSDate date];
     events.availability = EKEventAvailabilityFree;
-    
-//    [events setCalendar:[eventStore defaultCalendarForNewEvents]];
-//    NSError *err;
-//    [eventStore saveEvent:events span:EKSpanThisEvent error:&err];
-//    NSLog(@"Error From iCal : %@", [err description]);
     
     EKEventEditViewController *editViewController = [[EKEventEditViewController alloc] init];
     editViewController.navigationBar.tintColor = [UIColor redColor];
@@ -203,20 +187,17 @@
 }
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
-    EKEvent *thisEvent = controller.event;
+    EKEvent *events = controller.event;
+    EKEventStore * eventStore = controller.eventStore;
 
     [self dismissViewControllerAnimated:NO completion:^
      {
          switch (action)
          {
              {case EKEventEditViewActionCanceled:
-                 //NSLog(@"Canceled action");
+                 [self buttonChangeColorWhenPressed:self.calendarNotification];
                  break;}
                  
-//             {case EKEventEditViewActionSaved:
-//                 [self.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:nil];
-//                 [self updateEvent:thisEvent];
-//                 break;}
 //             {case EKEventEditViewActionDeleted:
 //                 [self deleteEvent:thisEvent];
 //                 NSError *error;
