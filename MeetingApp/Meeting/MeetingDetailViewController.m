@@ -6,6 +6,8 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import <EventKit/EventKit.h>
+
 #import "MeetingDetailViewController.h"
 #import "MainAssembly.h"
 
@@ -25,8 +27,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController]
-                   getMeetingDetail: self.currentMeeting][@"guests"];
+    self.savedEventId = [NSString new];
+    
+    self.detailMeeting = [NSDictionary dictionaryWithDictionary:
+                          [[[MainAssembly defaultAssembly] meetingBusinessController]
+                   getMeetingDetail: self.currentMeeting][@"detail"]];
+    
+    self.guests = [NSArray arrayWithArray:
+                   [[[MainAssembly defaultAssembly] meetingBusinessController]
+                   getMeetingDetail: self.currentMeeting][@"guests"]];
     
     self.notications = [NSMutableDictionary dictionaryWithDictionary:
                         [[[MainAssembly defaultAssembly] meetingBusinessController]
@@ -145,13 +154,81 @@
     [self.notications enumerateKeysAndObjectsUsingBlock:^(id notification, id state, BOOL *stop) {
         //if ([notification isEqualToString:@"apn"] && [state isEqualToValue:@YES]) NSLog(@"apn");
         
-        if ([notification isEqualToString:@"calendar"] && [state isEqualToValue:@YES]) NSLog(@"calendar");
+        if ([notification isEqualToString:@"calendar"]
+            && [state isEqualToValue:@YES])
+            [self calendar];
         
         else if ([notification isEqualToString:@"reminder"] && [state isEqualToValue:@YES]) NSLog(@"reminder");
         
         else if ([notification isEqualToString:@"email"] && [state isEqualToValue:@YES]) NSLog(@"email");
 
     }];
+}
+
+- (void) calendar {
+//    EKEventStore *store = [EKEventStore new];
+//    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+//        
+//        if (!granted) return;
+//        
+//        EKEvent *event = [EKEvent eventWithEventStore:store];
+//        event.title = @"Event Title";
+//        event.startDate = [NSDate date]; //today
+//        event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
+//        event.calendar = [store defaultCalendarForNewEvents];
+//        NSError *err = nil;
+//        [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+//        self.savedEventId = event.eventIdentifier;  //save the event id if you want to access this later
+//    }];
+    
+    EKEventStore *eventStore = [EKEventStore new];
+    EKEvent *events = [EKEvent eventWithEventStore:eventStore];
+    
+    events.title = self.detailMeeting[@"name"];
+    events.startDate = [NSDate date];
+    events.endDate = [NSDate date];
+    events.availability = EKEventAvailabilityFree;
+    
+//    [events setCalendar:[eventStore defaultCalendarForNewEvents]];
+//    NSError *err;
+//    [eventStore saveEvent:events span:EKSpanThisEvent error:&err];
+//    NSLog(@"Error From iCal : %@", [err description]);
+    
+    EKEventEditViewController *editViewController = [[EKEventEditViewController alloc] init];
+    editViewController.navigationBar.tintColor = [UIColor redColor];
+    editViewController.editViewDelegate = self;
+    editViewController.event = events;
+    editViewController.eventStore = eventStore;
+    [self presentViewController:editViewController animated:YES completion:nil];
+}
+
+- (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
+    EKEvent *thisEvent = controller.event;
+
+    [self dismissViewControllerAnimated:NO completion:^
+     {
+         switch (action)
+         {
+             {case EKEventEditViewActionCanceled:
+                 //NSLog(@"Canceled action");
+                 break;}
+                 
+//             {case EKEventEditViewActionSaved:
+//                 [self.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:nil];
+//                 [self updateEvent:thisEvent];
+//                 break;}
+//             {case EKEventEditViewActionDeleted:
+//                 [self deleteEvent:thisEvent];
+//                 NSError *error;
+//                 EKEvent *eventRemove = [self.eventStore eventWithIdentifier:thisEvent.eventIdentifier];
+//                 [self.eventStore removeEvent:eventRemove span:EKSpanThisEvent error:&error];
+//                 //NSLog(@"Deleted action");
+//                 break;}
+             {default:
+                 break;}
+         }
+     }];
+    
 }
 
 - (IBAction)deleteMeetingPressed:(id)sender {
