@@ -28,7 +28,7 @@
     self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController]
                    getMeetingDetail: self.currentMeeting][@"guests"];
     
-    self.notications = [NSDictionary dictionaryWithDictionary:
+    self.notications = [NSMutableDictionary dictionaryWithDictionary:
                         [[[MainAssembly defaultAssembly] meetingBusinessController]
                          getMeetingDetail: self.currentMeeting][@"notifications"]];
 
@@ -38,10 +38,10 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.allowsSelection = NO;
     
-    [self.pushNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.calendarNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.reminderNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.emailNotification addTarget:self action:@selector(buttonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [self.pushNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
+    [self.calendarNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
+    [self.reminderNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
+    [self.emailNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
     
     [self updateViewModel];
 }
@@ -64,7 +64,7 @@
     [super updateViewModel];
 }
 
--(void)buttonTouchDown:(UIButton *)button{
+-(void)buttonChangeColorWhenPressed:(UIButton *)button{
     if (button.selected == YES) {
         button.selected = NO;
         button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
@@ -82,29 +82,37 @@
     
     if (statusSelected == NO) {
         if (buttonPress == pushNotification) {
+            [self refreshStatus:statusSelected OfNotification:pushNotification];
             title = @"Push Notification";
             message = @"You have activated the push notifications for send you before the meeting.";
         } else if (buttonPress == _calendarNotification) {
+            [self refreshStatus:statusSelected OfNotification:_calendarNotification];
             title = @"Calendar Notifaction";
             message = @"You have added the meeting to the calendar.";
         } else if (buttonPress == _emailNotification) {
+            [self refreshStatus:statusSelected OfNotification:_emailNotification];
             title = @"Email Notification";
             message = @"You have activated email notifications for send you before the meeting..";
         } else if (buttonPress == _reminderNotification) {
+            [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             title = @"Reminder Notifaction";
             message = @"You have added the meeting to the reminders.";
         }
     } else {
         if (buttonPress == pushNotification) {
+            [self refreshStatus:statusSelected OfNotification:pushNotification];
             title = @"Push Notification";
             message = @"You have deactivated the push notifications.";
         } else if (buttonPress == _calendarNotification) {
+            [self refreshStatus:statusSelected OfNotification:_calendarNotification];
             title = @"Calendar Notifaction";
             message = @"You have removed the meeting of the calendar.";
         } else if (buttonPress == _emailNotification) {
+            [self refreshStatus:statusSelected OfNotification:_emailNotification];
             title = @"Email Notifaction";
             message = @"You have deactivated email notifications.";
         } else if (buttonPress == _reminderNotification) {
+            [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             title = @"Reminder Notifaction";
             message = @"You have removed the meeting of the calendar.";
         }
@@ -120,6 +128,30 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
+}
+
+- (void) refreshStatus: (BOOL) stateButton OfNotification: (UIButton *) buttonPressed{
+    NSString * nameOfButton = [NSString new];
+    if ([buttonPressed isEqual:self.pushNotification]) nameOfButton = @"apn";
+    else if ([buttonPressed isEqual:self.calendarNotification]) nameOfButton = @"calendar";
+    else if ([buttonPressed isEqual:self.reminderNotification]) nameOfButton = @"reminder";
+    else if ([buttonPressed isEqual:self.emailNotification]) nameOfButton = @"email";
+    
+    [self.notications setValue: stateButton == NO ? @YES : @NO forKey:nameOfButton];
+    [self performActionNotification];
+}
+
+- (void) performActionNotification {
+    [self.notications enumerateKeysAndObjectsUsingBlock:^(id notification, id state, BOOL *stop) {
+        //if ([notification isEqualToString:@"apn"] && [state isEqualToValue:@YES]) NSLog(@"apn");
+        
+        if ([notification isEqualToString:@"calendar"] && [state isEqualToValue:@YES]) NSLog(@"calendar");
+        
+        else if ([notification isEqualToString:@"reminder"] && [state isEqualToValue:@YES]) NSLog(@"reminder");
+        
+        else if ([notification isEqualToString:@"email"] && [state isEqualToValue:@YES]) NSLog(@"email");
+
+    }];
 }
 
 - (IBAction)deleteMeetingPressed:(id)sender {
