@@ -34,10 +34,10 @@
                 @"photo" : @""
             } ],
             @"notifications" : @{
-                @"apn" : @[ @1 ],
-                @"calendar" : @[ @1 ],
-                @"email" : @[ @1 ],
-                @"reminder" : @[ @1 ]
+                @"apn" : @NO,
+                @"calendar" : @NO,
+                @"email" : @NO,
+                @"reminder" : @NO
             }
         },
         @"m2" : @{
@@ -57,10 +57,10 @@
                 @"photo" : @"14241323.png"
             } ],
             @"notifications" : @{
-                @"apn" : @[ @1 ],
-                @"calendar" : @[ @1 ],
-                @"email" : @[ @1 ],
-                @"reminder" : @[ @1 ]
+                @"apn" : @NO,
+                @"calendar" : @NO,
+                @"email" : @NO,
+                @"reminder" : @NO
             }
         }}];
     }

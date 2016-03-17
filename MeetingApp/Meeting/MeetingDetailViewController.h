@@ -19,6 +19,7 @@
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;
 
 @property(strong) NSArray *guests;
+@property(strong) NSDictionary *notications;
 
 - (IBAction)buttonPressed:(id)sender;
 - (IBAction)deleteMeetingPressed:(id)sender;

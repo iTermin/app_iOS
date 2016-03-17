@@ -25,8 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController] getMeetingDetail: self.currentMeeting][@"guests"];
+    self.guests = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                   getMeetingDetail: self.currentMeeting][@"guests"];
     
+    self.notications = [NSDictionary dictionaryWithDictionary:
+                        [[[MainAssembly defaultAssembly] meetingBusinessController]
+                         getMeetingDetail: self.currentMeeting][@"notifications"]];
+
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
