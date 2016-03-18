@@ -35,7 +35,7 @@
                    [[[MainAssembly defaultAssembly] meetingBusinessController]
                    getMeetingDetail: self.currentMeeting][@"guests"]];
     
-    self.notications = [NSMutableDictionary dictionaryWithDictionary:
+    self.notifications = [NSMutableDictionary dictionaryWithDictionary:
                         [[[MainAssembly defaultAssembly] meetingBusinessController]
                          getMeetingDetail: self.currentMeeting][@"notifications"]];
 
@@ -149,28 +149,58 @@
     else if ([buttonPressed isEqual:self.reminderNotification]) nameOfButton = @"reminder";
     else if ([buttonPressed isEqual:self.emailNotification]) nameOfButton = @"email";
     
-    [self.notications setValue: stateButton == NO ? @YES : @NO forKey:nameOfButton];
+    [self.notifications setValue: stateButton == NO ? @YES : @NO forKey:nameOfButton];
     [self performActionNotification:stateButton];
 }
 
 - (void) performActionNotification: (BOOL) stateNotification {
-    [self.notications enumerateKeysAndObjectsUsingBlock:^(id notification, id state, BOOL *stop) {
-        //if ([notification isEqualToString:@"apn"] && [state isEqualToValue:@YES]) NSLog(@"apn");
-        
-        if ([notification isEqualToString:@"calendar"]
-            && [state isEqualToValue:@YES])
-            [self notificationCalendar:stateNotification];
-        
-        else if ([notification isEqualToString:@"calendar"]
-                 && ![self.savedEventId isEqualToString:@""])
-            [self notificationCalendar:stateNotification];
-        
-        
-        else if ([notification isEqualToString:@"reminder"] && [state isEqualToValue:@YES]) NSLog(@"reminder");
-        
-        else if ([notification isEqualToString:@"email"] && [state isEqualToValue:@YES]) NSLog(@"email");
+    
+    if ([self.notifications[@"apn"] isEqual: @YES])
+        NSLog(@"");
+    
+    else if ([self.notifications[@"calendar"] isEqual: @YES])
+        [self notificationCalendar:stateNotification];
+    
+    else if ([self.notifications[@"calendar"] isEqual: @NO] && [self.savedEventId isEqualToString:@""])
+        [self notificationCalendar:stateNotification];
 
-    }];
+    else if ([self.notifications[@"reminder"] isEqual: @YES])
+        [self notificationReminder:stateNotification];
+    
+//    else if ([self.notifications[@"reminder"] isEqual: @NO] && [self.savedEventId isEqualToString:@""])
+//        [self notificationReminder:stateNotification];
+    
+    else if ([self.notifications[@"email"] isEqual: @YES])
+        NSLog(@"");
+}
+
+- (void) notificationReminder: (BOOL) state {
+    EKEventStore *eventStore = [EKEventStore new];
+    
+    if (state == YES) {
+//        NSPredicate *predicate = [eventStore predicateForRemindersInCalendars:nil];
+//        
+//        [eventStore fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
+//            for (EKReminder *reminder in reminders) {
+//                // You probably were seing this logging, right?
+//                NSLog(@"%@", reminder.title);
+//            }
+//        }];
+    }
+    else{
+        
+        EKReminder *reminder = [EKReminder reminderWithEventStore:eventStore];
+        
+        reminder.title = self.detailMeeting[@"name"];
+        
+        reminder.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithAbsoluteDate:[NSDate date]]];
+        
+        reminder.calendar = [eventStore defaultCalendarForNewReminders];
+        
+        NSError *error = nil;
+        
+        [eventStore saveReminder:reminder commit:YES error:&error];
+    }
 }
 
 - (void) notificationCalendar: (BOOL) state {

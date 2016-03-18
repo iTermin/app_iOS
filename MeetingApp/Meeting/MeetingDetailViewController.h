@@ -21,7 +21,7 @@
 
 @property(strong) NSDictionary *detailMeeting;
 @property(strong) NSArray *guests;
-@property(strong) NSMutableDictionary *notications;
+@property(strong) NSMutableDictionary *notifications;
 
 @property(strong) NSString *savedEventId;
 
