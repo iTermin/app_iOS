@@ -510,7 +510,7 @@
     }
     
     cell.rightUtilityButtons = [self rightButtons];
-    cell.delegate = self;
+    //cell.delegate = self;
     //[cell setCellHeight:cell.frame.size.height];
     
     return cell;

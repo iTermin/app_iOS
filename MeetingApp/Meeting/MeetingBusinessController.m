@@ -50,11 +50,11 @@
             @"guests" : @[ @{
                 @"email" : @"fachinacg@gmail.com",
                 @"name" : @"Estefania Guardado",
-                @"photo" : @"14241341.png"
+                @"photo" : @""
             }, @{
                 @"email" : @"xlarsx@gmail.com",
                 @"name" : @"Luis Alejandro Rangel",
-                @"photo" : @"14241323.png"
+                @"photo" : @""
             } ],
             @"notifications" : @{
                 @"apn" : @NO,
