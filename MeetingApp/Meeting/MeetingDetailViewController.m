@@ -27,8 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.savedEventId = [NSString new];
-    
     self.detailMeeting = [NSDictionary dictionaryWithDictionary:
                           [[[MainAssembly defaultAssembly] meetingBusinessController]
                    getMeetingDetail: self.currentMeeting][@"detail"]];
@@ -85,62 +83,63 @@
 
 - (IBAction)buttonPressed:(id)sender {
     UIButton *buttonPress = (UIButton *)sender;
-    NSString *title = @"";
-    NSString *message = @"";
     BOOL statusSelected = buttonPress.selected;
     
     if (statusSelected == NO) {
         if (buttonPress == pushNotification) {
             [self refreshStatus:statusSelected OfNotification:pushNotification];
-            title = @"Push Notification";
-            message = @"You have activated the push notifications for send you before the meeting.";
+            [self alertStatusNotification:@"Push Notification"
+                                     with:@"You have activated the push notifications for send you before the meeting."];
         
         } else if (buttonPress == _calendarNotification) {
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
         
         } else if (buttonPress == _emailNotification) {
             [self refreshStatus:statusSelected OfNotification:_emailNotification];
-            title = @"Email Notification";
-            message = @"You have activated email notifications for send you before the meeting..";
+            [self alertStatusNotification:@"Email Notification"
+                                     with:@"You have activated email notifications for send you before the meeting.."];
         
         } else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
-            title = @"Reminder Notifaction";
-            message = @"You have added the meeting to the reminders.";
+            [self alertStatusNotification:@"Reminder Notifaction"
+                                     with:@"You have added the meeting to the reminders."];
         }
     } else {
         if (buttonPress == pushNotification) {
             [self refreshStatus:statusSelected OfNotification:pushNotification];
-            title = @"Push Notification";
-            message = @"You have deactivated the push notifications.";
-        
+            [self alertStatusNotification:@"Push Notification"
+                                     with:@"You have deactivated the push notifications."];
+
         } else if (buttonPress == _calendarNotification) {
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
-            title = @"Calendar Notifaction";
-            message = @"You have removed the meeting of the calendar.";
+            [self alertStatusNotification:@"Calendar Notifaction"
+                                     with:@"You have removed the meeting of the calendar."];
         
         } else if (buttonPress == _emailNotification) {
             [self refreshStatus:statusSelected OfNotification:_emailNotification];
-            title = @"Email Notifaction";
-            message = @"You have deactivated email notifications.";
+            [self alertStatusNotification:@"Email Notifaction"
+                                     with:@"You have deactivated email notifications."];
         
         } else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
-            title = @"Reminder Notifaction";
-            message = @"You have removed the meeting of the calendar.";
+            [self alertStatusNotification:@"Reminder Notifaction"
+                                     with:@"You have removed the meeting of the calendar."];
         }
     }
     
+}
+
+- (void) alertStatusNotification: (NSString *)title with: (NSString*) message{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
     
     [alert addAction:firstAction];
     
     [self presentViewController:alert animated:YES completion:nil];
-    
 }
 
 - (void) refreshStatus: (BOOL) stateButton OfNotification: (UIButton *) buttonPressed{
@@ -151,16 +150,21 @@
     else if ([buttonPressed isEqual:self.emailNotification]) nameOfButton = @"email";
     
     [self.notications setValue: stateButton == NO ? @YES : @NO forKey:nameOfButton];
-    [self performActionNotification];
+    [self performActionNotification:stateButton];
 }
 
-- (void) performActionNotification {
+- (void) performActionNotification: (BOOL) stateNotification {
     [self.notications enumerateKeysAndObjectsUsingBlock:^(id notification, id state, BOOL *stop) {
         //if ([notification isEqualToString:@"apn"] && [state isEqualToValue:@YES]) NSLog(@"apn");
         
         if ([notification isEqualToString:@"calendar"]
             && [state isEqualToValue:@YES])
-            [self notificationCalendar];
+            [self notificationCalendar:stateNotification];
+        
+        else if ([notification isEqualToString:@"calendar"]
+                 && ![self.savedEventId isEqualToString:@""])
+            [self notificationCalendar:stateNotification];
+        
         
         else if ([notification isEqualToString:@"reminder"] && [state isEqualToValue:@YES]) NSLog(@"reminder");
         
@@ -169,42 +173,48 @@
     }];
 }
 
-- (void) notificationCalendar {
+- (void) notificationCalendar: (BOOL) state {
     EKEventStore *eventStore = [EKEventStore new];
     EKEvent *events = [EKEvent eventWithEventStore:eventStore];
     
-    events.title = self.detailMeeting[@"name"];
-    events.startDate = [NSDate date];
-    events.endDate = [NSDate date];
-    events.availability = EKEventAvailabilityFree;
-    
-    EKEventEditViewController *editViewController = [[EKEventEditViewController alloc] init];
-    editViewController.navigationBar.tintColor = [UIColor redColor];
-    editViewController.editViewDelegate = self;
-    editViewController.event = events;
-    editViewController.eventStore = eventStore;
-    [self presentViewController:editViewController animated:YES completion:nil];
+    if (state == YES) {
+        EKEventStore* store = [[EKEventStore alloc] init];
+        EKEvent *eventToRemove = (EKEvent *)[store calendarItemWithIdentifier:self.savedEventId];
+        if (eventToRemove != nil) {
+            NSError* error = nil;
+            [store removeEvent:eventToRemove span:EKSpanThisEvent error:&error];
+        }
+    }
+    else{
+        events.title = self.detailMeeting[@"name"];
+        events.startDate = [NSDate date];
+        events.endDate = [NSDate date];
+        events.availability = EKEventAvailabilityFree;
+        
+        NSError *err;
+        [eventStore saveEvent:events span:EKSpanThisEvent error:&err];
+        self.savedEventId = [[NSString alloc] initWithFormat:@"%@", events.calendarItemIdentifier];
+        
+        EKEventEditViewController *editViewController = [[EKEventEditViewController alloc] init];
+        editViewController.navigationBar.tintColor = [UIColor redColor];
+        editViewController.editViewDelegate = self;
+        editViewController.event = events;
+        editViewController.eventStore = eventStore;
+        [self presentViewController:editViewController animated:YES completion:nil];
+    }
 }
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
-    EKEvent *events = controller.event;
-    EKEventStore * eventStore = controller.eventStore;
 
     [self dismissViewControllerAnimated:NO completion:^
      {
          switch (action)
          {
              {case EKEventEditViewActionCanceled:
+                 self.savedEventId = @"";
                  [self buttonChangeColorWhenPressed:self.calendarNotification];
                  break;}
                  
-//             {case EKEventEditViewActionDeleted:
-//                 [self deleteEvent:thisEvent];
-//                 NSError *error;
-//                 EKEvent *eventRemove = [self.eventStore eventWithIdentifier:thisEvent.eventIdentifier];
-//                 [self.eventStore removeEvent:eventRemove span:EKSpanThisEvent error:&error];
-//                 //NSLog(@"Deleted action");
-//                 break;}
              {default:
                  break;}
          }
