@@ -27,8 +27,8 @@
 
 - (BOOL)date:(NSDate *)date isInSameDayAsDate:(NSDate *)dateCompare
 {
-    NSDateComponents *date1Comps = [self components: NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:date];
-    NSDateComponents *date2Comps = [self components: NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:dateCompare];
+    NSDateComponents *date1Comps = [self components: NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSDateComponents *date2Comps = [self components: NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:dateCompare];
     
     return date1Comps.day == date2Comps.day && date1Comps.month == date2Comps.month && date1Comps.year == date2Comps.year;
 }
