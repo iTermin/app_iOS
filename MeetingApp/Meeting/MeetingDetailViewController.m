@@ -161,7 +161,7 @@
     else if ([self.notifications[@"calendar"] isEqual: @YES])
         [self notificationCalendar:stateNotification];
     
-    else if ([self.notifications[@"calendar"] isEqual: @NO] && [self.savedEventId isEqualToString:@""])
+    else if ([self.notifications[@"calendar"] isEqual: @NO] && ![self.savedEventId isEqualToString:@""])
         [self notificationCalendar:stateNotification];
 
     else if ([self.notifications[@"reminder"] isEqual: @YES])
