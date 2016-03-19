@@ -13,6 +13,11 @@
 
 @interface MeetingDetailViewController ()
 
+{
+    BOOL unselectedReminder;
+    BOOL unselectedCalendar;
+}
+
 @property (weak, nonatomic) IBOutlet UIButton *pushNotification;
 @property (weak, nonatomic) IBOutlet UIButton *emailNotification;
 @property (weak, nonatomic) IBOutlet UIButton *reminderNotification;
@@ -154,21 +159,24 @@
 }
 
 - (void) performActionNotification: (BOOL) stateNotification {
-    
     if ([self.notifications[@"apn"] isEqual: @YES])
         NSLog(@"");
     
-    else if ([self.notifications[@"calendar"] isEqual: @YES])
+    else if ([self.notifications[@"calendar"] isEqual: @YES]){
         [self notificationCalendar:stateNotification];
+        unselectedCalendar = YES;
+    }
     
-    else if ([self.notifications[@"calendar"] isEqual: @NO] && ![self.savedEventId isEqualToString:@""])
+    else if ([self.notifications[@"calendar"] isEqual: @NO] && unselectedCalendar == YES)
         [self notificationCalendar:stateNotification];
 
-    else if ([self.notifications[@"reminder"] isEqual: @YES])
+    else if ([self.notifications[@"reminder"] isEqual: @YES]){
         [self notificationReminder:stateNotification];
+        unselectedReminder = YES;
+    }
     
-//    else if ([self.notifications[@"reminder"] isEqual: @NO] && [self.savedEventId isEqualToString:@""])
-//        [self notificationReminder:stateNotification];
+    else if ([self.notifications[@"reminder"] isEqual: @NO] && unselectedReminder == YES)
+        [self notificationReminder:stateNotification];
     
     else if ([self.notifications[@"email"] isEqual: @YES])
         NSLog(@"");
@@ -178,14 +186,17 @@
     EKEventStore *eventStore = [EKEventStore new];
     
     if (state == YES) {
-//        NSPredicate *predicate = [eventStore predicateForRemindersInCalendars:nil];
-//        
-//        [eventStore fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders) {
-//            for (EKReminder *reminder in reminders) {
-//                // You probably were seing this logging, right?
-//                NSLog(@"%@", reminder.title);
-//            }
-//        }];
+        NSArray *calendars = [NSArray arrayWithObject:[eventStore defaultCalendarForNewReminders]];
+        
+        NSPredicate *predicate = [eventStore predicateForRemindersInCalendars:calendars];
+        
+        [eventStore fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders)
+         {
+             for (EKReminder *reminder  in reminders)
+                 if ([reminder.title isEqualToString:self.detailMeeting[@"name"]])
+                     [eventStore removeReminder:reminder commit:YES error:nil];
+         }];
+
     }
     else{
         
@@ -196,7 +207,7 @@
         reminder.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithAbsoluteDate:[NSDate date]]];
         
         reminder.calendar = [eventStore defaultCalendarForNewReminders];
-        
+                
         NSError *error = nil;
         
         [eventStore saveReminder:reminder commit:YES error:&error];
