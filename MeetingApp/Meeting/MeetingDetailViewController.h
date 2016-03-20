@@ -11,10 +11,14 @@
 
 #import "ModelTableViewController.h"
 #import "Meeting.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
 
-@interface MeetingDetailViewController : ModelTableViewController <EKEventEditViewDelegate>
+@interface MeetingDetailViewController : ModelTableViewController
+<EKEventEditViewDelegate>
 
 @property(nonatomic, strong) Meeting * currentMeeting;
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 
 @property(nonatomic, weak) IBOutlet UILabel * dateOfMeeting;
 @property(nonatomic, weak) IBOutlet UILabel * timeOfMeeting;

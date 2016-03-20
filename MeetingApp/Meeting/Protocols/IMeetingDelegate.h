@@ -14,6 +14,8 @@
 
 @optional
 
+- (void) updateDetail: (Meeting *) meeting;
+
 - (void) deleteMeeting: (Meeting *) meeting;
 - (void) deleteMeetingAtIndex: (NSUInteger) index;
 

@@ -27,17 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.detailMeeting = [NSDictionary dictionaryWithDictionary:
-                          [[[MainAssembly defaultAssembly] meetingBusinessController]
-                   getMeetingDetail: self.currentMeeting][@"detail"]];
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    NSDictionary * meetingDetail = [self.meetingbusiness getMeetingDetail: self.currentMeeting];
     
-    self.guests = [NSArray arrayWithArray:
-                   [[[MainAssembly defaultAssembly] meetingBusinessController]
-                   getMeetingDetail: self.currentMeeting][@"guests"]];
-    
-    self.notifications = [NSMutableDictionary dictionaryWithDictionary:
-                        [[[MainAssembly defaultAssembly] meetingBusinessController]
-                         getMeetingDetail: self.currentMeeting][@"notifications"]];
+    self.detailMeeting = [NSDictionary dictionaryWithDictionary: meetingDetail[@"detail"]];
+    self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
+    self.notifications = [NSMutableDictionary dictionaryWithDictionary: meetingDetail[@"notifications"]];
     
     [self updateState:self.notifications];
 
@@ -203,6 +198,9 @@
                                  previewNotifications:previewStateNotifications];
     
     [self performAction:notificationChanged with:stateButton];
+    
+    [self.meetingbusiness updateDetail:self.currentMeeting];
+
 }
 
 - (NSString *) notificationHadBeenChanged: (NSDictionary *) newStateNotification
