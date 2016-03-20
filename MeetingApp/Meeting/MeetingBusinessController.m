@@ -107,7 +107,7 @@
     return [NSMutableDictionary dictionaryWithDictionary: temporalMeeting];
 }
 
-- (void) updateDetail:(Meeting *)meeting{
+- (void) updateDetail:(MutableMeeting *)meeting{
     NSLog(@"%@", meeting);
 }
 

@@ -10,6 +10,7 @@
 
 #import "MeetingDetailViewController.h"
 #import "MainAssembly.h"
+#import "Meeting.h"
 
 @interface MeetingDetailViewController ()
 
@@ -199,7 +200,10 @@
     
     [self performAction:notificationChanged with:stateButton];
     
-    [self.meetingbusiness updateDetail:self.currentMeeting];
+    [self.meetingbusiness updateDetail:[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        self.detailMeeting, @"detail",
+                                        self.guests, @"guests",
+                                        self.notifications, @"notifications", nil]];
 
 }
 
