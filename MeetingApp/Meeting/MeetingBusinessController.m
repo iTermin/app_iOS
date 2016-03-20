@@ -7,10 +7,17 @@
 //
 
 #import "MeetingBusinessController.h"
+#import <Firebase/Firebase.h>
 
 @implementation MeetingBusinessController
 
 - (id) init {
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
+    [myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@", snapshot.value[@"Meetings"]);
+        NSLog(@"%@", snapshot.value[@"Users"]);
+    }];
+    
     if(self = [super init]) {
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary: @{
         @"m1" : @{

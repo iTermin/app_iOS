@@ -9,6 +9,7 @@ target 'MeetingApp' do
     pod 'DZNEmptyDataSet'
     pod 'Typhoon'
     pod 'SWTableViewCell', '~> 0.3.7'
+    pod 'Firebase', '>= 2.5.0'
 
 end
 
