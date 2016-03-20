@@ -13,11 +13,6 @@
 
 @interface MeetingDetailViewController ()
 
-{
-    BOOL unselectedReminder;
-    BOOL unselectedCalendar;
-}
-
 @property (weak, nonatomic) IBOutlet UIButton *pushNotification;
 @property (weak, nonatomic) IBOutlet UIButton *emailNotification;
 @property (weak, nonatomic) IBOutlet UIButton *reminderNotification;
@@ -43,6 +38,8 @@
     self.notifications = [NSMutableDictionary dictionaryWithDictionary:
                         [[[MainAssembly defaultAssembly] meetingBusinessController]
                          getMeetingDetail: self.currentMeeting][@"notifications"]];
+    
+    [self updateState:self.notifications];
 
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -56,6 +53,49 @@
     [self.emailNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
     
     [self updateViewModel];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: YES];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
+}
+
+- (void) updateState: (NSDictionary *) notifications{
+    if ([notifications[@"apn"]  isEqual: @NO]){
+        self.pushNotification.selected = NO;
+        [self buttonChangeColorWhenPressed:self.pushNotification];
+    } else if ([notifications[@"apn"]  isEqual: @YES]){
+        self.pushNotification.selected = YES;
+        [self buttonChangeColorWhenPressed:self.pushNotification];
+    }
+    
+    if ([notifications[@"calendar"]  isEqual: @NO]){
+        self.calendarNotification.selected = NO;
+        [self buttonChangeColorWhenPressed:self.calendarNotification];
+    } else if ([notifications[@"calendar"]  isEqual: @YES]){
+        self.calendarNotification.selected = YES;
+        [self buttonChangeColorWhenPressed:self.calendarNotification];
+    }
+    
+    if ([notifications[@"reminder"]  isEqual: @NO]){
+        self.reminderNotification.selected = NO;
+        [self buttonChangeColorWhenPressed:self.reminderNotification];
+    } else if ([notifications[@"reminder"]  isEqual: @YES]){
+        self.reminderNotification.selected = YES;
+        [self buttonChangeColorWhenPressed:self.reminderNotification];
+    }
+    
+    if ([notifications[@"email"]  isEqual: @NO]){
+        self.emailNotification.selected = NO;
+        [self buttonChangeColorWhenPressed:self.emailNotification];
+    } else if ([notifications[@"email"]  isEqual: @YES]){
+        self.emailNotification.selected = YES;
+        [self buttonChangeColorWhenPressed:self.emailNotification];
+    }
+    
 }
 
 - (void) updateViewModel {
@@ -77,12 +117,12 @@
 }
 
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
-    if (button.selected == YES) {
+    if ([button isSelected]) {
         button.selected = NO;
-        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
-    }else{
-        button.selected = YES;
         button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+    }else if (![button isSelected]){
+        button.selected = YES;
+        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
     }
 }
 
@@ -90,7 +130,7 @@
     UIButton *buttonPress = (UIButton *)sender;
     BOOL statusSelected = buttonPress.selected;
     
-    if (statusSelected == NO) {
+    if (statusSelected == YES) {
         if (buttonPress == pushNotification) {
             [self refreshStatus:statusSelected OfNotification:pushNotification];
             [self alertStatusNotification:@"Push Notification"
@@ -154,38 +194,61 @@
     else if ([buttonPressed isEqual:self.reminderNotification]) nameOfButton = @"reminder";
     else if ([buttonPressed isEqual:self.emailNotification]) nameOfButton = @"email";
     
-    [self.notifications setValue: stateButton == NO ? @YES : @NO forKey:nameOfButton];
-    [self performActionNotification:stateButton];
+    NSDictionary * previewStateNotifications = [NSDictionary
+                                                dictionaryWithDictionary:self.notifications];
+    
+    [self.notifications setValue: stateButton == NO ? @NO : @YES forKey:nameOfButton];
+
+    NSString * notificationChanged = [self notificationHadBeenChanged:self.notifications
+                                 previewNotifications:previewStateNotifications];
+    
+    [self performAction:notificationChanged with:stateButton];
 }
 
-- (void) performActionNotification: (BOOL) stateNotification {
-    if ([self.notifications[@"apn"] isEqual: @YES])
+- (NSString *) notificationHadBeenChanged: (NSDictionary *) newStateNotification
+               previewNotifications:(NSDictionary *) oldStateNotifications{
+    
+    if (![oldStateNotifications[@"email"] isEqualToValue:newStateNotification[@"email"]])
+        return @"email";
+    else if (![oldStateNotifications[@"reminder"] isEqualToValue:newStateNotification[@"reminder"]])
+        return @"reminder";
+    else if (![oldStateNotifications[@"calendar"] isEqualToValue:newStateNotification[@"calendar"]])
+        return @"calendar";
+    else if (![oldStateNotifications[@"apn"] isEqualToValue:newStateNotification[@"apn"]])
+        return @"apn";
+
+    return @"";
+}
+
+- (void) performAction: (NSString*) notification with: (BOOL) stateNotification {
+    
+    if ([notification isEqualToString:@"reminder"]){
+        if ([self.reminderNotification isSelected])
+            [self notificationReminder:stateNotification];
+    
+        else
+            [self notificationReminder:stateNotification];
+    }
+    
+    else if ([notification isEqualToString:@"calendar"]){
+        if ([self.calendarNotification isSelected])
+            [self notificationCalendar:stateNotification];
+
+        else
+            [self notificationCalendar:stateNotification];
+    }
+    
+    else if ([notification isEqualToString:@"email"])
         NSLog(@"");
     
-    else if ([self.notifications[@"calendar"] isEqual: @YES]){
-        [self notificationCalendar:stateNotification];
-        unselectedCalendar = YES;
-    }
-    
-    else if ([self.notifications[@"calendar"] isEqual: @NO] && unselectedCalendar == YES)
-        [self notificationCalendar:stateNotification];
-
-    else if ([self.notifications[@"reminder"] isEqual: @YES]){
-        [self notificationReminder:stateNotification];
-        unselectedReminder = YES;
-    }
-    
-    else if ([self.notifications[@"reminder"] isEqual: @NO] && unselectedReminder == YES)
-        [self notificationReminder:stateNotification];
-    
-    else if ([self.notifications[@"email"] isEqual: @YES])
+    else if ([notification isEqualToString:@"apn"])
         NSLog(@"");
 }
 
 - (void) notificationReminder: (BOOL) state {
     EKEventStore *eventStore = [EKEventStore new];
     
-    if (state == YES) {
+    if (state == NO) {
         NSArray *calendars = [NSArray arrayWithObject:[eventStore defaultCalendarForNewReminders]];
         
         NSPredicate *predicate = [eventStore predicateForRemindersInCalendars:calendars];
@@ -218,7 +281,7 @@
     EKEventStore *eventStore = [EKEventStore new];
     EKEvent *events = [EKEvent eventWithEventStore:eventStore];
     
-    if (state == YES) {
+    if (state == NO) {
         EKEventStore* store = [[EKEventStore alloc] init];
         EKEvent *eventToRemove = (EKEvent *)[store calendarItemWithIdentifier:self.savedEventId];
         if (eventToRemove != nil) {
@@ -287,13 +350,6 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
-    [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
