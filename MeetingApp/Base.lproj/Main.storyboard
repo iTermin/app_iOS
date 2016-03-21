@@ -383,6 +383,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="5Ql-H1-dP9">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="reloadData:" destination="rhm-8l-29H" eventType="valueChanged" id="eoK-S8-SpC"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="tableView" destination="0lq-qO-89k" id="E4X-dX-oFa"/>
                         <segue destination="xny-kL-2zx" kind="push" identifier="meetingDetail" id="Ixy-j7-QDG"/>

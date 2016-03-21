@@ -21,5 +21,6 @@
 @property(strong) NSArray<Meeting *> *meetings;
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 
+- (IBAction)reloadData:(id)sender;
 @end
 
