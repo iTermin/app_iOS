@@ -21,9 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.meetings = [[[MainAssembly defaultAssembly] meetingBusinessController] getAllMeetings];
     
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.meetings = [self.meetingbusiness getAllMeetings];
+    [self.meetingbusiness updateFirebase];
+
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;

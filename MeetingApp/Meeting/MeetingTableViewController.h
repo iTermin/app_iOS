@@ -12,10 +12,14 @@
 #import "ModelTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "Meeting.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
 
-@interface MeetingTableViewController : ModelTableViewController <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface MeetingTableViewController : ModelTableViewController
+<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property(strong) NSArray<Meeting *> *meetings;
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 
 @end
 
