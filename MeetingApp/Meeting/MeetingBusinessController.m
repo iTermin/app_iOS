@@ -9,23 +9,34 @@
 #import "MeetingBusinessController.h"
 #import <Firebase/Firebase.h>
 
+@interface MeetingBusinessController ()
+
+@property (nonatomic, strong) Firebase *myRootRef;
+
+@end
+
 @implementation MeetingBusinessController
 
-- (void) updateMeetings {
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
+-(instancetype) init {
+    if(self = [super init]) {
+        self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
+    }
     
-    [myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSDictionary * userInformation = [NSDictionary
-                                          dictionaryWithDictionary:snapshot.value[@"Users"][@"84DFC119-D29B-44AE-B8E8-257DE184279A"]];
-        
-        NSArray * temp = [NSArray arrayWithArray:self.meetingsUser];
+    return self;
+}
+
+- (void) updateMeetings {
+    [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSDictionary * info = snapshot.value[@"Users"][self.userId];
+        NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
         self.meetingsUser = [NSArray arrayWithArray:userInformation[@"meeting"]];
-        
-        if (![temp isEqualToArray:self.meetingsUser])
-            NSLog(@"%@", self.meetingsUser);
-        
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
     }];
+}
+
+- (NSString *) userId {
+    // TODO: Use real user ID
+    return @"84DFC119-D29B-44AE-B8E8-257DE184279A";
 }
 
 - (NSArray<Meeting *> *) getAllMeetings
