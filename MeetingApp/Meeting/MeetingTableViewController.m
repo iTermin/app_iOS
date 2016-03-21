@@ -24,7 +24,7 @@
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.meetings = [self.meetingbusiness getAllMeetings];
-    [self.meetingbusiness updateFirebase];
+    [self.meetingbusiness updateMeetings];
 
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;

@@ -12,7 +12,7 @@
 
 @protocol IMeetingDatasource <NSObject>
 
-- (void) updateFirebase;
+- (void) updateMeetings;
 - (NSArray<Meeting *> *) getAllMeetings;
 - (Meeting *) getMeetingDetail: (Meeting *) meeting;
 - (MutableMeeting *) getTemporalMeeting;

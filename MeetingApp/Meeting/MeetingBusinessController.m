@@ -11,14 +11,7 @@
 
 @implementation MeetingBusinessController
 
-- (id) init {
-    if(self = [super init])
-        [self updateFirebase];
-    
-    return self;
-}
-
-- (void) updateFirebase {
+- (void) updateMeetings {
     Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
     
     [myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
