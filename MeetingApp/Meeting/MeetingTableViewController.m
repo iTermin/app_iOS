@@ -23,14 +23,20 @@
     [super viewDidLoad];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
-    self.meetings = [self.meetingbusiness getAllMeetings];
-    [self.meetingbusiness updateMeetings];
-
+    
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self updateViewModel];
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        self.meetings = [handler getAllMeetings];
+        [self updateViewModel];
+        [self.tableView reloadData];
+    }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "Meeting.h"
+#import "IMeetingDatasource.h"
 
 @protocol IMeetingDatasource <NSObject>
 
-- (void) updateMeetings;
+- (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>))callback;
 - (NSArray<Meeting *> *) getAllMeetings;
 - (Meeting *) getMeetingDetail: (Meeting *) meeting;
 - (MutableMeeting *) getTemporalMeeting;

@@ -25,12 +25,15 @@
     return self;
 }
 
-- (void) updateMeetings {
+- (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>))callback {
+    __weak id weakSelf = self;
     [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSDictionary * info = snapshot.value[@"Users"][self.userId];
         NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
         self.meetingsUser = [NSArray arrayWithArray:userInformation[@"meeting"]];
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
+
+        callback(weakSelf);
     }];
 }
 
