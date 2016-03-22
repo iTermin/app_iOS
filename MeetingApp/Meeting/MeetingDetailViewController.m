@@ -56,7 +56,7 @@
 
         self.detailMeeting = [NSDictionary dictionaryWithDictionary: meetingDetail[@"detail"]];
         self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
-        self.notifications = [NSMutableDictionary dictionaryWithDictionary: meetingDetail[@"notifications"]];
+        self.notifications = [NSMutableDictionary dictionaryWithDictionary: self.detailMeeting[@"notifications"]];
         
         [self updateState:self.notifications];
         [self updateViewModel];
@@ -205,10 +205,15 @@
     
     [self performAction:notificationChanged with:stateButton];
     
+    NSMutableDictionary *changeDetailMeeting = [NSMutableDictionary dictionaryWithDictionary:self.detailMeeting];
+    [changeDetailMeeting removeObjectForKey:@"notifications"];
+    [changeDetailMeeting setValue:self.notifications forKey:@"notifications"];
+    
+    self.detailMeeting = [NSDictionary dictionaryWithDictionary:changeDetailMeeting];
+    
     [self.meetingbusiness updateDetail:[NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         self.detailMeeting, @"detail",
-                                        self.guests, @"guests",
-                                        self.notifications, @"notifications", nil]];
+                                        self.guests, @"guests", nil]];
 
 }
 
