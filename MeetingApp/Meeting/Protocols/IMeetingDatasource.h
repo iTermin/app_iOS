@@ -13,7 +13,7 @@
 
 @protocol IMeetingDatasource <NSObject>
 
-- (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>, NSArray<Meeting *> *))callback;
+- (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>))callback;
 - (NSArray<Meeting *> *) getAllMeetings;
 - (Meeting *) getMeetingDetail: (Meeting *) meeting;
 - (MutableMeeting *) getTemporalMeeting;

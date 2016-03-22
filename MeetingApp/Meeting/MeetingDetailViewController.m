@@ -29,13 +29,6 @@
     [super viewDidLoad];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
-    NSDictionary * meetingDetail = [self.meetingbusiness getMeetingDetail: self.currentMeeting];
-    
-    self.detailMeeting = [NSDictionary dictionaryWithDictionary: meetingDetail[@"detail"]];
-    self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
-    self.notifications = [NSMutableDictionary dictionaryWithDictionary: meetingDetail[@"notifications"]];
-    
-    [self updateState:self.notifications];
 
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -57,6 +50,18 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
+    
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        NSDictionary * meetingDetail = [handler getMeetingDetail: self.currentMeeting];
+
+        self.detailMeeting = [NSDictionary dictionaryWithDictionary: meetingDetail[@"detail"]];
+        self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
+        self.notifications = [NSMutableDictionary dictionaryWithDictionary: meetingDetail[@"notifications"]];
+        
+        [self updateState:self.notifications];
+        [self updateViewModel];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void) updateState: (NSDictionary *) notifications{

@@ -32,8 +32,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler, NSArray<Meeting *> * newMeetings) {
-        self.meetings = newMeetings;
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        self.meetings = [handler getAllMeetings];;
         [self updateViewModel];
         [self.tableView reloadData];
     }];
@@ -111,10 +111,10 @@
 }
 
 - (IBAction)reloadData:(UIRefreshControl *)sender {
-    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler, NSArray<Meeting *> * newMeetings) {
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
         
         // TODO: Extract to new method
-        self.meetings = newMeetings;
+        self.meetings = [handler getAllMeetings];;
         [self updateViewModel];
         [self.tableView reloadData];
         
