@@ -10,6 +10,7 @@ target 'MeetingApp' do
     pod 'Typhoon'
     pod 'SWTableViewCell', '~> 0.3.7'
     pod 'Firebase', '>= 2.5.0'
+    pod 'MBProgressHUD', '~> 0.9.2'
 
 end
 
