@@ -43,6 +43,7 @@
 		7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BDE1C70F71500B49E90 /* CountryViewCell.m */; };
 		7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */; };
 		7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */; };
+		7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
 		7C79CE9B1C74806E0011C917 /* MeetingDateSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */; };
 		7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC31C7484AD0011C917 /* UXDateCellsManager.m */; };
@@ -161,6 +162,9 @@
 		7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestListCountriesTableViewController.m; path = Guest/GuestListCountriesTableViewController.m; sourceTree = "<group>"; };
 		7C3E2BE41C70F78300B49E90 /* ListCountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListCountriesViewController.h; path = User/ListCountriesViewController.h; sourceTree = "<group>"; };
 		7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCountriesViewController.m; path = User/ListCountriesViewController.m; sourceTree = "<group>"; };
+		7C3F274D1CA15B94005DCD90 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = User/Models/User.h; sourceTree = "<group>"; };
+		7C3F27511CA15DB0005DCD90 /* UserBusinessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserBusinessController.h; path = User/UserBusinessController.h; sourceTree = "<group>"; };
+		7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserBusinessController.m; path = User/UserBusinessController.m; sourceTree = "<group>"; };
 		7C41FEA31C996D2400109B2B /* IMeetingAllDayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMeetingAllDayDelegate.h; path = Meeting/Protocols/IMeetingAllDayDelegate.h; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
 		7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelTableViewController.m; path = ViewControllers/ModelTableViewController.m; sourceTree = "<group>"; };
@@ -294,8 +298,8 @@
 		7C0F7A361C8F2CDD003FC9C7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7C0F7A391C8F2D5C003FC9C7 /* IUserDelegate.h */,
 				7C0F7A381C8F2D45003FC9C7 /* IUserDatasource.h */,
+				7C0F7A391C8F2D5C003FC9C7 /* IUserDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -405,6 +409,7 @@
 		7C3E2B7B1C70A81D00B49E90 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				7C3F274C1CA15B75005DCD90 /* Models */,
 				7C0F7A361C8F2CDD003FC9C7 /* Protocols */,
 				7C3E2B861C70AA9B00B49E90 /* Artifacts */,
 				7C3E2B831C70A96E00B49E90 /* EditProfileUserViewController.h */,
@@ -413,6 +418,8 @@
 				7C3E2B801C70A8C300B49E90 /* SettingsViewController.m */,
 				7C3E2BE41C70F78300B49E90 /* ListCountriesViewController.h */,
 				7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */,
+				7C3F27511CA15DB0005DCD90 /* UserBusinessController.h */,
+				7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -515,6 +522,14 @@
 				7C3B80A21C5559E200678EF4 /* Artifacts */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		7C3F274C1CA15B75005DCD90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C3F274D1CA15B94005DCD90 /* User.h */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		7C65DA6C1C691AE5001F6F32 /* ViewControllers */ = {
@@ -812,6 +827,7 @@
 			files = (
 				7C3E2BAC1C70AD7400B49E90 /* MeetingDetailViewController.m in Sources */,
 				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
+				7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */,
 				7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */,
 				7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */,
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,

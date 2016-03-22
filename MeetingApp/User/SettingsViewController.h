@@ -12,11 +12,17 @@
 #import "ModelTableViewController.h"
 #import "ArrayOfCountries.h"
 
+#import "IUserDelegate.h"
+#import "IUserDatasource.h"
+
 @interface SettingsViewController : ModelTableViewController <IUserDelegate>
 
 @property(strong) NSMutableDictionary *currentUser;
 
 @property (strong) NSArray * modelCountries;
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
+
+@property (weak) id<IUserDatasource, IUserDelegate> userbusiness;
+
 
 @end

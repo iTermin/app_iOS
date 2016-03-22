@@ -9,6 +9,8 @@
 #import "SettingsViewController.h"
 #import "EditProfileUserViewController.h"
 
+#import "MainAssembly.h"
+
 @interface SettingsViewController ()
 {
     BOOL changedInformation;
@@ -26,12 +28,16 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    self.currentUser = [NSMutableDictionary dictionaryWithDictionary: @{
-                         @"name" : @"Estefania Chavez Guardado",
-                         @"email" : @"correo@gmail.com.mx",
-                         @"code": @"MX",
-                         @"photo" : @"",
-                         }];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
+    
+    self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    
+//    self.currentUser = [NSMutableDictionary dictionaryWithDictionary: @{
+//                         @"name" : @"Estefania Chavez Guardado",
+//                         @"email" : @"correo@gmail.com.mx",
+//                         @"code": @"MX",
+//                         @"photo" : @"",
+//                         }];
     
     [self updateViewModel];
     

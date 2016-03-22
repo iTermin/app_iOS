@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "User.h"
+
 @protocol IUserDatasource <NSObject>
+
+- (User *) getUser;
+//- (User *) allUsersIdentify: (User *) user;
+//- (MutableUser *) getTemporalUser;
+
+@optional
+
+- (MutableUser *) getMutableUser: (User *) meeting;
 
 @end

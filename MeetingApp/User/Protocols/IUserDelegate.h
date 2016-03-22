@@ -11,7 +11,11 @@
 
 @protocol IUserDelegate <NSObject>
 
+@optional
+
 - (void) userInformation: (id<IUserDatasource>) userDetail
-    didChangedInformation: (NSDictionary *) user;
+   didChangedInformation: (MutableUser *) user;
+
+- (void) updateDetail: (MutableUser *) user;
 
 @end
