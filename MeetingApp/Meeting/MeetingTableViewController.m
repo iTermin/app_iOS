@@ -21,14 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.meetings = [[[MainAssembly defaultAssembly] meetingBusinessController] getAllMeetings];
+    
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self updateViewModel];
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        self.meetings = [handler getAllMeetings];;
+        [self updateViewModel];
+        [self.tableView reloadData];
+    }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -100,6 +108,18 @@
         BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
         [beginMeetingViewController setCurrentMeeting: newMeeting];
     }
+}
+
+- (IBAction)reloadData:(UIRefreshControl *)sender {
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        
+        // TODO: Extract to new method
+        self.meetings = [handler getAllMeetings];;
+        [self updateViewModel];
+        [self.tableView reloadData];
+        
+        [sender endRefreshing];
+    }];
 }
 
 @end

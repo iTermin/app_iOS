@@ -7,91 +7,50 @@
 //
 
 #import "MeetingBusinessController.h"
+#import <Firebase/Firebase.h>
+
+@interface MeetingBusinessController ()
+
+@property (nonatomic, strong) Firebase *myRootRef;
+
+@end
 
 @implementation MeetingBusinessController
 
-- (id) init {
+-(instancetype) init {
     if(self = [super init]) {
-        self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary: @{
-        @"m1" : @{
-            @"detail" : @{
-                @"creator" : @0,
-                @"date" : @1448008691974,
-                @"duration" : @360,
-                @"name" : @"Meeting 1"
-            },
-            @"guests" : @[ @{
-                @"email" : @"fachinacg@gmail.com",
-                @"name" : @"Estefania Guardado",
-                @"photo" : @""
-            }, @{
-                @"email" : @"xlarsx@gmail.com",
-                @"name" : @"Luis Alejandro Rangel",
-                @"photo" : @""
-            }, @{
-                @"email" : @"set311@gmail.com",
-                @"name" : @"Jesus Cagide",
-                @"photo" : @""
-            } ],
-            @"notifications" : @{
-                @"apn" : @NO,
-                @"calendar" : @NO,
-                @"email" : @NO,
-                @"reminder" : @NO
-            }
-        },
-        @"m2" : @{
-            @"detail" : @{
-                @"creator" : @0,
-                @"date" : @1449822758952,
-                @"duration" : @360,
-                @"name" : @"Meeting 2"
-            },
-            @"guests" : @[ @{
-                @"email" : @"fachinacg@gmail.com",
-                @"name" : @"Estefania Guardado",
-                @"photo" : @""
-            }, @{
-                @"email" : @"xlarsx@gmail.com",
-                @"name" : @"Luis Alejandro Rangel",
-                @"photo" : @""
-            } ],
-            @"notifications" : @{
-                @"apn" : @NO,
-                @"calendar" : @NO,
-                @"email" : @NO,
-                @"reminder" : @NO
-            }
-        }}];
+        self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
     }
     
     return self;
 }
 
+- (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>))callback {
+    __weak id weakSelf = self;
+    [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSDictionary * info = snapshot.value[@"Users"][self.userId];
+        NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
+        self.meetingsUser = [NSArray arrayWithArray:userInformation[@"meeting"]];
+        self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
+
+        callback(weakSelf);
+    }];
+}
+
+- (NSString *) userId {
+    // TODO: Use real user ID
+    return @"84DFC119-D29B-44AE-B8E8-257DE184279A";
+}
+
 - (NSArray<Meeting *> *) getAllMeetings
 {
-    return @[
-             @{
-                 @"id"     : @"m1",
-                 @"active" : @(true),
-                 @"date" : @"2015-12-11",
-                 @"meetingId" : @"m1",
-                 @"name" : @"Meeting 1"
-                 },
-             @{
-                 @"id"     : @"m2",
-                 @"active" : @(true),
-                 @"date" : @"2015-11-15",
-                 @"meetingId" : @"m2",
-                 @"name" : @"Meeting 2"
-                 }
-             ];
+    return self.meetingsUser;
 }
 
 
 - (Meeting *) getMeetingDetail: (Meeting *) meeting
 {
-    return self.detailMeetings[meeting[@"id"]];
+    return self.detailMeetings[meeting[@"meetingId"]];
 }
 
 - (MutableMeeting *) getTemporalMeeting
