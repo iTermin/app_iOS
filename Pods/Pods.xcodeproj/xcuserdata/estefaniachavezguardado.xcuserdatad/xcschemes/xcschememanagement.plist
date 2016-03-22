@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MeetingApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,27 +52,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2AAAFC293BFC8281703F944DF10952E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CEEB13054615608889AFCD4F115CF2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D8673B2709650AF2C7DA4ACAB135991</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>337EC91F8199C1863627683B15381AB0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4B9D86FA71602F08CF479B90928BA832</key>
+		<key>41C803AC48E96C36F565F840EB5C53E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>52A871046292A98A9AFE263979509638</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B570BBF339A9CE2A0AD320F6BCB27FE8</key>
+		<key>818BDF66A0ED011CBC215B216F813EDD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

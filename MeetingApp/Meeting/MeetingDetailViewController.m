@@ -11,6 +11,7 @@
 #import "MeetingDetailViewController.h"
 #import "MainAssembly.h"
 #import "Meeting.h"
+#import "MBProgressHUD.h"
 
 @interface MeetingDetailViewController ()
 
@@ -28,6 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
 
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -58,6 +63,8 @@
         self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
         self.notifications = [NSMutableDictionary dictionaryWithDictionary: self.detailMeeting[@"notifications"]];
         
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         [self updateState:self.notifications];
         [self updateViewModel];
         [self.tableView reloadData];
