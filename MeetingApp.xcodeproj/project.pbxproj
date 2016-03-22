@@ -100,8 +100,8 @@
 		7C0393E91C81D85500BDA9AC /* Guest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Guest.h; path = Meeting/Models/Guest.h; sourceTree = "<group>"; };
 		7C0F7A341C8F273F003FC9C7 /* ICountrySelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICountrySelector.h; path = Common/Protocols/ICountrySelector.h; sourceTree = "<group>"; };
 		7C0F7A351C8F273F003FC9C7 /* ICountrySelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ICountrySelectorDelegate.h; path = Common/Protocols/ICountrySelectorDelegate.h; sourceTree = "<group>"; };
-		7C0F7A381C8F2D45003FC9C7 /* IUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUserInformation.h; path = User/Protocols/IUserInformation.h; sourceTree = "<group>"; };
-		7C0F7A391C8F2D5C003FC9C7 /* IUserInformationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUserInformationDelegate.h; path = User/Protocols/IUserInformationDelegate.h; sourceTree = "<group>"; };
+		7C0F7A381C8F2D45003FC9C7 /* IUserDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUserDatasource.h; path = User/Protocols/IUserDatasource.h; sourceTree = "<group>"; };
+		7C0F7A391C8F2D5C003FC9C7 /* IUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUserDelegate.h; path = User/Protocols/IUserDelegate.h; sourceTree = "<group>"; };
 		7C16877A1C707EB900197DB1 /* RSKImageCropper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSKImageCropper.xcodeproj; path = libs/RSKImageCropper/RSKImageCropper.xcodeproj; sourceTree = "<group>"; };
 		7C30FA7C1C2ED3C70059EAE3 /* MeetingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C30FA801C2ED3C70059EAE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -294,8 +294,8 @@
 		7C0F7A361C8F2CDD003FC9C7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7C0F7A391C8F2D5C003FC9C7 /* IUserInformationDelegate.h */,
-				7C0F7A381C8F2D45003FC9C7 /* IUserInformation.h */,
+				7C0F7A391C8F2D5C003FC9C7 /* IUserDelegate.h */,
+				7C0F7A381C8F2D45003FC9C7 /* IUserDatasource.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

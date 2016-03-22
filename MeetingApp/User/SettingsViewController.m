@@ -105,7 +105,7 @@
     return nameCountry;
 }
 
-- (void)userInformation:(id<IUserInformation>)userDetail didChangedInformation:(NSDictionary *)user{
+- (void)userInformation:(id<IUserDatasource>)userDetail didChangedInformation:(NSDictionary *)user{
     changedInformation = YES;
     [self.currentUser removeAllObjects];
     self.currentUser =  [NSMutableDictionary dictionaryWithDictionary:user];

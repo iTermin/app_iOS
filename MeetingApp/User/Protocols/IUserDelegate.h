@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IUserInformation.h"
+#import "IUserDataSource.h"
 
-@protocol IUserInformationDelegate <NSObject>
+@protocol IUserDelegate <NSObject>
 
-- (void) userInformation: (id<IUserInformation>) userDetail
+- (void) userInformation: (id<IUserDatasource>) userDetail
     didChangedInformation: (NSDictionary *) user;
 
 @end

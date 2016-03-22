@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IUserInformation <NSObject>
+@protocol IUserDatasource <NSObject>
 
 @end

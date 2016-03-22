@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "IUserInformationDelegate.h"
+#import "IUserDelegate.h"
 #import "ModelTableViewController.h"
 #import "ArrayOfCountries.h"
 
-@interface SettingsViewController : ModelTableViewController <IUserInformationDelegate>
+@interface SettingsViewController : ModelTableViewController <IUserDelegate>
 
 @property(strong) NSMutableDictionary *currentUser;
 
