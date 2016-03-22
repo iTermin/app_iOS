@@ -44,6 +44,7 @@
 		7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */; };
 		7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */; };
 		7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */; };
+		7C3F27561CA1E49B005DCD90 /* RegisterUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27551CA1E49B005DCD90 /* RegisterUserViewController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
 		7C79CE9B1C74806E0011C917 /* MeetingDateSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CE9A1C74806E0011C917 /* MeetingDateSelectorViewController.m */; };
 		7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC31C7484AD0011C917 /* UXDateCellsManager.m */; };
@@ -165,6 +166,8 @@
 		7C3F274D1CA15B94005DCD90 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = User/Models/User.h; sourceTree = "<group>"; };
 		7C3F27511CA15DB0005DCD90 /* UserBusinessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserBusinessController.h; path = User/UserBusinessController.h; sourceTree = "<group>"; };
 		7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserBusinessController.m; path = User/UserBusinessController.m; sourceTree = "<group>"; };
+		7C3F27541CA1E49B005DCD90 /* RegisterUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterUserViewController.h; path = User/RegisterUserViewController.h; sourceTree = "<group>"; };
+		7C3F27551CA1E49B005DCD90 /* RegisterUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterUserViewController.m; path = User/RegisterUserViewController.m; sourceTree = "<group>"; };
 		7C41FEA31C996D2400109B2B /* IMeetingAllDayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMeetingAllDayDelegate.h; path = Meeting/Protocols/IMeetingAllDayDelegate.h; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
 		7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelTableViewController.m; path = ViewControllers/ModelTableViewController.m; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 				7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */,
 				7C3F27511CA15DB0005DCD90 /* UserBusinessController.h */,
 				7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */,
+				7C3F27541CA1E49B005DCD90 /* RegisterUserViewController.h */,
+				7C3F27551CA1E49B005DCD90 /* RegisterUserViewController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -833,6 +838,7 @@
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,
 				7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */,
 				7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */,
+				7C3F27561CA1E49B005DCD90 /* RegisterUserViewController.m in Sources */,
 				7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */,
 				7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */,
 				7C3E2B9E1C70ABEE00B49E90 /* OptionsSettingsTableViewCell.m in Sources */,

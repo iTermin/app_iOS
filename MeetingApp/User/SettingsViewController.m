@@ -7,9 +7,10 @@
 //
 
 #import "SettingsViewController.h"
-#import "EditProfileUserViewController.h"
-
 #import "MainAssembly.h"
+
+#import "EditProfileUserViewController.h"
+#import "RegisterUserViewController.h"
 
 @interface SettingsViewController ()
 {
@@ -35,10 +36,13 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (![self.currentUser count]) {
-        NSLog(@"");
-    }
     self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    
+    if (![self.currentUser count]) {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        RegisterUserViewController* myVC = [sb instantiateViewControllerWithIdentifier:@"RegisterUser"];
+        [self presentViewController:myVC animated:YES completion:nil];
+    }
     
     [self updateViewModel];
 }
