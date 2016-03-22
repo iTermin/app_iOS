@@ -147,6 +147,7 @@
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.navigationBar.tintColor = [UIColor blueColor];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
     [self presentViewController:imagePickerController animated:YES completion:nil];

@@ -13,10 +13,10 @@
 - (id) init{
     if(self = [super init]) {
         self.detailUser = @{
-                            @"name" : @"Estefania Chavez Guardado",
-                            @"email" : @"correo@gmail.com.mx",
-                            @"code": @"MX",
-                            @"photo" : @"",
+//                            @"name" : @"Estefania Chavez Guardado",
+//                            @"email" : @"correo@gmail.com.mx",
+//                            @"code": @"MX",
+//                            @"photo" : @"",
                             };
     }
     

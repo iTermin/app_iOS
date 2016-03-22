@@ -30,17 +30,17 @@
 
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (![self.currentUser count]) {
+        NSLog(@"");
+    }
     self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
     
-//    self.currentUser = [NSMutableDictionary dictionaryWithDictionary: @{
-//                         @"name" : @"Estefania Chavez Guardado",
-//                         @"email" : @"correo@gmail.com.mx",
-//                         @"code": @"MX",
-//                         @"photo" : @"",
-//                         }];
-    
     [self updateViewModel];
-    
 }
 
 - (void) updateViewModel {
