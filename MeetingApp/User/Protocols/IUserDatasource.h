@@ -14,10 +14,10 @@
 
 - (User *) getUser;
 //- (User *) allUsersIdentify: (User *) user;
-- (MutableUser *) getTemporalUser;
 
 @optional
 
+- (MutableUser *) getTemporalUser;
 - (MutableUser *) getMutableUser: (User *) meeting;
 
 @end

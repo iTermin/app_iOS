@@ -12,9 +12,10 @@
 #import "IUserDatasource.h"
 #import "IUserDelegate.h"
 
-@interface RegisterUserViewController : UIViewController
+@interface RegisterUserViewController : UIViewController <UITextFieldDelegate>
 
 @property(nonatomic, strong) MutableUser * registerNewUser;
+@property(nonatomic, strong) NSMutableDictionary * userInformation;
 
 @property (weak) id<IUserDatasource, IUserDelegate> userbusiness;
 
