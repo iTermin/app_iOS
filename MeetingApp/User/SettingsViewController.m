@@ -116,7 +116,7 @@
 }
 
 - (NSString*) getNameCountry: (NSDictionary *)dataInformation{
-    NSString *codeCountry = dataInformation[@"codeCountry"];
+    NSString *codeCountry = dataInformation[@"code"];
     NSString *nameCountry = [NSString new];
     
     NSArray * ListCountriesInformation = self.modelCountries;
@@ -135,6 +135,7 @@
     changedInformation = YES;
     [self.currentUser removeAllObjects];
     self.currentUser =  [NSMutableDictionary dictionaryWithDictionary:user];
+    [self.userbusiness updateDetailUser:self.currentUser];
     
     [self updateViewModel];
 }

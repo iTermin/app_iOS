@@ -16,6 +16,6 @@
 - (void) userInformation: (id<IUserDatasource>) userDetail
    didChangedInformation: (MutableUser *) user;
 
-- (void) updateDetail: (MutableUser *) user;
+- (void) updateDetailUser: (MutableUser *) user;
 
 @end

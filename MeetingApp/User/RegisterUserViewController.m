@@ -134,6 +134,6 @@
 - (IBAction)registerNewUser:(id)sender {
     self.registerNewUser = [self.userbusiness getTemporalUser];
 
-    [self.userbusiness updateDetail:self.registerNewUser];
+    [self.userbusiness updateDetailUser:self.registerNewUser];
 }
 @end

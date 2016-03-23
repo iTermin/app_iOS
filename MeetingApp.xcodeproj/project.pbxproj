@@ -354,7 +354,6 @@
 				7C0393E41C81D0B300BDA9AC /* Assembly */,
 				7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */,
 				7C3E2BDA1C70F68B00B49E90 /* Common */,
-				7C3E2B7F1C70A84400B49E90 /* Country */,
 				7C3E2B7E1C70A83800B49E90 /* Guest */,
 				7C3E2B7D1C70A82900B49E90 /* Meeting */,
 				7C3E2B7B1C70A81D00B49E90 /* User */,
@@ -463,13 +462,6 @@
 				7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */,
 			);
 			name = Guest;
-			sourceTree = "<group>";
-		};
-		7C3E2B7F1C70A84400B49E90 /* Country */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Country;
 			sourceTree = "<group>";
 		};
 		7C3E2B861C70AA9B00B49E90 /* Artifacts */ = {

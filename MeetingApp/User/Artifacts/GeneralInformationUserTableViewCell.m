@@ -52,7 +52,7 @@
     [self.emailText setText: _data[@"email"]];
     [self.locationText setText: _data[@"country"]];
     
-    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"codeCountry"]];
+    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
     [self.countryphoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
     
 }

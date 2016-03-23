@@ -46,7 +46,8 @@
     return [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
 }
 
-- (void) updateDetail: (MutableUser *) user{
+- (void) updateDetailUser: (MutableUser *) user{
+    
     NSLog(@"%@", user);
 }
 
