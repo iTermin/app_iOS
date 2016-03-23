@@ -10,4 +10,10 @@
 
 @interface RegisterUserViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField *emailUser;
+@property (strong, nonatomic) IBOutlet UITextField *passwordUser;
+
+- (IBAction)userRegistered:(id)sender;
+- (IBAction)registerNewUser:(id)sender;
+
 @end

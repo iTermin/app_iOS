@@ -7,6 +7,7 @@
 //
 
 #import "RegisterUserViewController.h"
+#import "SettingsViewController.h"
 
 @interface RegisterUserViewController ()
 
@@ -34,4 +35,10 @@
 }
 */
 
+- (IBAction)userRegistered:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)registerNewUser:(id)sender {
+}
 @end
