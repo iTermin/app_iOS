@@ -8,6 +8,7 @@
 
 #import "RegisterUserViewController.h"
 #import "SettingsViewController.h"
+#import "MainAssembly.h"
 
 @interface RegisterUserViewController ()
 
@@ -17,28 +18,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
+    
+    self.registerNewUser = [self.userbusiness getTemporalUser];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 - (IBAction)userRegistered:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)registerNewUser:(id)sender {
+    [self.userbusiness updateDetail:self.registerNewUser];
 }
 @end

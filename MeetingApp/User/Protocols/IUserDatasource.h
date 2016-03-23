@@ -14,7 +14,7 @@
 
 - (User *) getUser;
 //- (User *) allUsersIdentify: (User *) user;
-//- (MutableUser *) getTemporalUser;
+- (MutableUser *) getTemporalUser;
 
 @optional
 

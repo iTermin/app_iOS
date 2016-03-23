@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "User.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
+
 @interface RegisterUserViewController : UIViewController
+
+@property(nonatomic, strong) MutableUser * registerNewUser;
+
+@property (weak) id<IUserDatasource, IUserDelegate> userbusiness;
 
 @property (strong, nonatomic) IBOutlet UITextField *emailUser;
 @property (strong, nonatomic) IBOutlet UITextField *passwordUser;

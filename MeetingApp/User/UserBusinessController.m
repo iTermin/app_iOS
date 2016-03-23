@@ -27,5 +27,21 @@
     return [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
 }
 
+- (void) updateDetail: (MutableUser *) user{
+    NSLog(@"%@", user);
+}
+
+- (MutableUser *) getTemporalUser{
+    NSString *elementWillRegister = [NSString new];
+    
+    id temporalUser = @{
+                        @"name" : elementWillRegister,
+                        @"email" : elementWillRegister,
+                        @"code" : elementWillRegister,
+                        @"photo" : elementWillRegister
+                        };
+    
+    return [NSMutableDictionary dictionaryWithDictionary:temporalUser];
+}
 
 @end
