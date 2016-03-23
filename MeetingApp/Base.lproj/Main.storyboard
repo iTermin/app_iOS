@@ -242,26 +242,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Tx-de-S2h">
-                                <rect key="frame" x="40" y="270" width="297" height="30"/>
+                                <rect key="frame" x="40" y="276" width="297" height="43"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XOV-in-W9P">
-                                <rect key="frame" x="40" y="319" width="297" height="30"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ech-xL-Xoo">
-                                <rect key="frame" x="144" y="373" width="89" height="53"/>
-                                <color key="backgroundColor" red="0.090196078430000007" green="0.20392156859999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <state key="normal" title="Sign In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="userRegistered:" destination="eaX-6f-QdM" eventType="touchUpInside" id="Y1e-d2-ijq"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs0-03-dv5">
                                 <rect key="frame" x="234" y="540" width="77" height="33"/>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.20392156859999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -295,13 +279,23 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ech-xL-Xoo">
+                                <rect key="frame" x="143" y="333" width="89" height="53"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.20392156859999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="userRegistered:" destination="eaX-6f-QdM" eventType="touchUpInside" id="Y1e-d2-ijq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailUser" destination="8Tx-de-S2h" id="vWE-MG-TNz"/>
-                        <outlet property="passwordUser" destination="XOV-in-W9P" id="Col-Eu-fJY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hj-Kh-SPD" userLabel="First Responder" sceneMemberID="firstResponder"/>

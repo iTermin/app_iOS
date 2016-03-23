@@ -29,21 +29,55 @@
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailUser.layer addSublayer:emailBorder];
     self.emailUser.delegate = self;
-    
-    CALayer *passwordBorder = [CALayer layer];
-    passwordBorder.frame = CGRectMake(0.0f,
-                                      self.passwordUser.frame.size.height - 1,
-                                      self.passwordUser.frame.size.width,
-                                      1.0f);
-    passwordBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
-    [self.passwordUser.layer addSublayer:passwordBorder];
-    self.passwordUser.delegate = self;
 }
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     self.userInformation = [NSMutableDictionary dictionary];
+}
+
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
+    
+    return [[device identifierForVendor]UUIDString];
+    //C88D8E50-71C6-415E-9219-3962779D496E
+}
+
+- (void) getUserFromDB{
+    NSString * userDeviceId = [self getDeviceId];
+    [self.userbusiness updateUser:userDeviceId WithCallback:^(id<IUserDatasource> handler) {
+        self.userInformation = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
+        if ([self isValidateEmail]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else{
+            self.emailUser.text = @"";
+            [self alertNotValidateUser];
+            NSLog(@"Datos incorrectos");
+        }
+    }];
+}
+
+- (void) alertNotValidateUser{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Invalid Email"
+                                message:@"Doesn´t exist user with this email."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (BOOL) isValidateEmail{
+    return [self.userInformation[@"email"] isEqualToString:self.emailUser.text] ? YES : NO;
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -54,22 +88,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.emailUser)
         [self inputEmail];
-    if (textField == self.passwordUser)
-        [self verifyPassword];
     
     [textField resignFirstResponder];
     
     return YES;
-}
-
-- (void) verifyPassword{
-    NSString *passwordUser = self.passwordUser.text;
-//    if (![self.passwordUser.text isEqualToString:self.hostInformation[@"name"]]){
-//        changedInformation = YES;
-//        [self.hostInformation removeObjectForKey:@"name"];
-//        [self.hostInformation setObject:nameGuest forKey:@"name"];
-//        [self updateViewModel];
-//    }
 }
 
 - (void) inputEmail {
@@ -111,7 +133,7 @@
 
 
 - (IBAction)userRegistered:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self getUserFromDB];
 }
 
 - (IBAction)registerNewUser:(id)sender {

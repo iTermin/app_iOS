@@ -20,7 +20,6 @@
 @property (weak) id<IUserDatasource, IUserDelegate> userbusiness;
 
 @property (strong, nonatomic) IBOutlet UITextField *emailUser;
-@property (strong, nonatomic) IBOutlet UITextField *passwordUser;
 
 - (IBAction)userRegistered:(id)sender;
 - (IBAction)registerNewUser:(id)sender;

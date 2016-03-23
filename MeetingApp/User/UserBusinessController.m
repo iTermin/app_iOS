@@ -7,11 +7,20 @@
 //
 
 #import "UserBusinessController.h"
+#import <Firebase/Firebase.h>
+
+@interface UserBusinessController ()
+
+@property (nonatomic, strong) Firebase *myRootRef;
+
+@end
 
 @implementation UserBusinessController
 
 - (id) init{
     if(self = [super init]) {
+        self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
+
         self.detailUser = @{
 //                            @"name" : @"Estefania Chavez Guardado",
 //                            @"email" : @"correo@gmail.com.mx",
@@ -21,6 +30,16 @@
     }
     
     return self;
+}
+
+- (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback{
+    __weak id weakSelf = self;
+    [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSDictionary * info = snapshot.value[@"Users"][deviceUserId];
+        self.detailUser = [NSMutableDictionary dictionaryWithDictionary:info];
+        
+        callback(weakSelf);
+    }];
 }
 
 - (MutableUser *) getUser{
