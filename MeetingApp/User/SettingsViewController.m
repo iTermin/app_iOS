@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "MainAssembly.h"
+#import "MBProgressHUD.h"
 
 #import "EditProfileUserViewController.h"
 #import "RegisterUserViewController.h"
@@ -24,27 +25,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
     
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
+        self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (![self.currentUser count]) [self presentRegisterUserViewController];
+        else{
+            [self updateViewModel];
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void) presentRegisterUserViewController{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RegisterUserViewController* myVC = [sb instantiateViewControllerWithIdentifier:@"RegisterUser"];
+    [self presentViewController:myVC animated:YES completion:nil];
+}
+
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
     
-    if (![self.currentUser count]) {
-        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        RegisterUserViewController* myVC = [sb instantiateViewControllerWithIdentifier:@"RegisterUser"];
-        [self presentViewController:myVC animated:YES completion:nil];
-    }
-    
-    [self updateViewModel];
+    return [[device identifierForVendor]UUIDString];
 }
 
 - (void) updateViewModel {
@@ -100,7 +116,7 @@
 }
 
 - (NSString*) getNameCountry: (NSDictionary *)dataInformation{
-    NSString *codeCountry = dataInformation[@"code"];
+    NSString *codeCountry = dataInformation[@"codeCountry"];
     NSString *nameCountry = [NSString new];
     
     NSArray * ListCountriesInformation = self.modelCountries;

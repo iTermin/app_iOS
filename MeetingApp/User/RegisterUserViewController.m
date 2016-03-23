@@ -31,22 +31,14 @@
     self.emailUser.delegate = self;
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    self.userInformation = [NSMutableDictionary dictionary];
-}
-
 - (NSString*) getDeviceId{
     UIDevice *device = [UIDevice currentDevice];
     
     return [[device identifierForVendor]UUIDString];
-    //C88D8E50-71C6-415E-9219-3962779D496E
 }
 
 - (void) getUserFromDB{
-    NSString * userDeviceId = [self getDeviceId];
-    [self.userbusiness updateUser:userDeviceId WithCallback:^(id<IUserDatasource> handler) {
+    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
         self.userInformation = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
         if ([self isValidateEmail]) {
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -103,20 +95,7 @@
             [self.userInformation setObject:emailUser forKey:@"email"];
         }
         else{
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Wrong Email!"
-                                        message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
-                                        preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action){
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
+            [self wrongEmail];
         }
     }
 }
@@ -131,6 +110,22 @@
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
+- (void) wrongEmail{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"Wrong Email!"
+                                message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action){
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (IBAction)userRegistered:(id)sender {
     [self getUserFromDB];

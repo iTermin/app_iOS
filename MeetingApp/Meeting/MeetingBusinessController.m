@@ -38,8 +38,9 @@
 }
 
 - (NSString *) userId {
-    // TODO: Use real user ID
-    return @"84DFC119-D29B-44AE-B8E8-257DE184279A";
+    UIDevice *device = [UIDevice currentDevice];
+        
+    return [[device identifierForVendor]UUIDString];
 }
 
 - (NSArray<Meeting *> *) getAllMeetings
