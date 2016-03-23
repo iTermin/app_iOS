@@ -35,6 +35,7 @@
 - (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback{
     __weak id weakSelf = self;
     [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        self.deviceId = deviceUserId;
         NSDictionary * info = snapshot.value[@"Users"][deviceUserId];
         self.detailUser = [NSMutableDictionary dictionaryWithDictionary:info];
         
@@ -46,8 +47,24 @@
     return [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
 }
 
+- (NSString*) urlDetailUser: (NSString*) detail{
+    return [[[@"/Users/" stringByAppendingString:self.deviceId]
+            stringByAppendingString: @"/"] stringByAppendingString:detail];
+}
+
 - (void) updateDetailUser: (MutableUser *) user{
+    Firebase * usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"code"]];
+    [usersRef setValue: @"DE"];
     
+//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"name"]];
+//    [usersRef setValue: user[@"name"]];
+//    
+//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"email"]];
+//    [usersRef setValue: user[@"email"]];
+//    
+//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"photo"]];
+//    [usersRef setValue: user[@"photo"]];
+
     NSLog(@"%@", user);
 }
 

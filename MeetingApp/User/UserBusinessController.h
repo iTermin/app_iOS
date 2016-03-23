@@ -14,5 +14,6 @@
 @interface UserBusinessController : NSObject <IUserDelegate, IUserDatasource>
 
 @property (nonatomic, retain) NSDictionary <NSString *, User *> * detailUser;
+@property (nonatomic, strong) NSString * deviceId;
 
 @end
