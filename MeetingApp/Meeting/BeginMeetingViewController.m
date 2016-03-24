@@ -63,6 +63,9 @@
     self.nameMeeting.delegate = self;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    [self.addContactAddress addGestureRecognizer:tapRecognizer];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -212,7 +215,7 @@
 
 }
 
-- (IBAction)searchContacts:(id)sender {
+- (void)tapAction:(UITapGestureRecognizer *)tap {
     switch (ABAddressBookGetAuthorizationStatus())
     {
             // Update our UI if the user has granted access to their Contacts

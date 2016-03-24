@@ -23,13 +23,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invite:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRP-tE-BSi">
-                                <rect key="frame" x="20" y="156" width="46" height="21"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <rect key="frame" x="20" y="156" width="86" height="21"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <color key="textColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="guest@email.com" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NPD-tT-gwQ">
-                                <rect key="frame" x="20" y="185" width="307" height="30"/>
+                                <rect key="frame" x="20" y="185" width="289" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
@@ -42,18 +42,14 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Meeting:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJY-U4-cfs">
-                                <rect key="frame" x="20" y="89" width="120" height="21"/>
-                                <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="17"/>
+                                <rect key="frame" x="20" y="89" width="152" height="21"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oet-MG-E15">
-                                <rect key="frame" x="335" y="190" width="20" height="20"/>
-                                <state key="normal" title="Button" image="plus"/>
-                                <connections>
-                                    <action selector="searchContacts:" destination="2QN-cd-kZ6" eventType="touchDown" id="tnw-9E-Tqe"/>
-                                </connections>
-                            </button>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="2jS-XQ-3aA">
+                                <rect key="frame" x="325" y="185" width="30" height="30"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -82,10 +78,10 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="addContactAddress" destination="2jS-XQ-3aA" id="m72-D4-Q9T"/>
                         <outlet property="cancelButton" destination="cew-ja-Z15" id="1Pa-VI-f4W"/>
                         <outlet property="emailGuest" destination="NPD-tT-gwQ" id="hrR-Cs-8ky"/>
                         <outlet property="nameMeeting" destination="eSd-Tv-K5s" id="t3h-Sf-c3A"/>
-                        <outlet property="search" destination="oet-MG-E15" id="sp4-Y4-OrR"/>
                         <outlet property="tableView" destination="2Gk-GQ-omd" id="NfS-bg-fcK"/>
                         <segue destination="j4G-PE-T9P" kind="push" identifier="editGuestDetails" id="BOM-rJ-jqT"/>
                     </connections>

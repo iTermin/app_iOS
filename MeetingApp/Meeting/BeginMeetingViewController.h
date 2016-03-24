@@ -28,7 +28,7 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
-@property (strong, nonatomic) IBOutlet UIButton *search;
+@property (strong, nonatomic) IBOutlet UIImageView *addContactAddress;
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
 
