@@ -21,13 +21,6 @@
 - (id) init{
     if(self = [super init]) {
         self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
-
-        self.detailUser = @{
-//                            @"name" : @"Estefania Chavez Guardado",
-//                            @"email" : @"correo@gmail.com.mx",
-//                            @"code": @"MX",
-//                            @"photo" : @"",
-                            };
     }
     
     return self;

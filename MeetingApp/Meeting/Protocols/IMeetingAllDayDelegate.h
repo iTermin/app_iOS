@@ -10,6 +10,7 @@
 
 @protocol IMeetingAllDayDelegate <NSObject>
 
+@optional
 - (void) meetingAllDay: (BOOL) selected;
 
 @end

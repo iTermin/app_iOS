@@ -12,15 +12,12 @@
 
 @protocol IUserDatasource <NSObject>
 
-- (User *) getUser;
-
-- (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback;
-
-//- (User *) allUsersIdentify: (User *) user;
-
 @optional
 
+- (User *) getUser;
 - (MutableUser *) getTemporalUser;
 - (MutableUser *) getMutableUser: (User *) meeting;
+
+- (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback;
 
 @end
