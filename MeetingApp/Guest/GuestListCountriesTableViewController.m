@@ -36,7 +36,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"CountryViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"data":cellModel }];
     }];
     

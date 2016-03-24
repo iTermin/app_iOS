@@ -114,7 +114,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"GuestDateViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"data":cellModel }];
     }];
     

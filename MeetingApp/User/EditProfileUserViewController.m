@@ -9,6 +9,7 @@
 #import "EditProfileUserViewController.h"
 #import "ListCountriesViewController.h"
 #import "UIImageView+Letters.h"
+#import "MBProgressHUD.h"
 
 
 @interface EditProfileUserViewController ()
@@ -62,7 +63,7 @@
     NSArray * viewModel = @[
                             @{
                                 @"nib" : @"LocationUserTableViewCell",
-                                @"height" : @(80),
+                                @"height" : @(70),
                                 @"segue" : @"selectCountry",
                                 @"data": [self.hostInformation copy]
                                 }
@@ -152,10 +153,17 @@
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.navigationBar.tintColor = [UIColor blueColor];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 

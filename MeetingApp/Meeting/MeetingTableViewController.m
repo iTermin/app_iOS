@@ -9,8 +9,9 @@
 #import "MeetingTableViewController.h"
 #import "MeetingDetailViewController.h"
 #import "BeginMeetingViewController.h"
-
 #import "MainAssembly.h"
+#import "MBProgressHUD.h"
+
 
 @interface MeetingTableViewController ()
 
@@ -21,6 +22,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     
@@ -33,7 +38,9 @@
     [super viewWillAppear:animated];
     
     [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
-        self.meetings = [handler getAllMeetings];;
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        self.meetings = [handler getAllMeetings];
         [self updateViewModel];
         [self.tableView reloadData];
     }];
@@ -77,7 +84,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"segue" : @"meetingDetail",
                                @"data":cellModel }];
     }];
