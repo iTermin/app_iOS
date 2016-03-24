@@ -41,8 +41,9 @@
         } else {
             self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2.0f;
             self.profilePicture.clipsToBounds = YES;
-            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", _data[@"photo"]];
-            [self.profilePicture setImage:[UIImage imageNamed:getPhoto]];
+            
+            [self.profilePicture setImage:[UIImage imageWithData:
+                                             [self decodeBase64ToImage:_data[@"photo"]]]];
         }
     } else {
         [self.profilePicture setImage:_data[@"photo"]];
@@ -55,6 +56,11 @@
     NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
     [self.countryphoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
     
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
 }
 
 @end

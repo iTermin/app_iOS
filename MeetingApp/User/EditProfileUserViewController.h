@@ -11,12 +11,12 @@
 #import "ICountrySelectorDelegate.h"
 #import "ModelTableViewController.h"
 
-#import "IUserInformation.h"
-#import "IUserInformationDelegate.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<ICountrySelectorDelegate, IUserInformation,
+<ICountrySelectorDelegate, IUserDatasource,
 UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
@@ -28,7 +28,7 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDele
 
 @property(nonatomic, strong) NSDictionary * currentLocation;
 
-@property(weak) id<IUserInformationDelegate> userInformationDelegate;
+@property(weak) id<IUserDelegate> userInformationDelegate;
 
 
 @end

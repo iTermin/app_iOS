@@ -11,9 +11,14 @@
 #import "IMeetingDelegate.h"
 #import "IMeetingDatasource.h"
 
+#import "IUserDelegate.h"
+#import "IUserDatasource.h"
+
 
 @interface MainAssembly : TyphoonAssembly
 
 - (id<IMeetingDatasource, IMeetingDelegate>) meetingBusinessController;
+- (id<IUserDelegate, IUserDatasource>) userBusinessController;
+
 
 @end

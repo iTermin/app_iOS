@@ -94,12 +94,18 @@
         } else {
             self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
             self.photoProfileEdit.clipsToBounds = YES;
-            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.hostInformation[@"photo"]];
-            [self.photoProfileEdit setImage:[UIImage imageNamed:getPhoto]];
+
+            [self.photoProfileEdit setImage:[UIImage imageWithData:
+                                             [self decodeBase64ToImage:self.hostInformation[@"photo"]]]];
         }
     } else {
         [self.photoProfileEdit setImage:self.hostInformation[@"photo"]];
     }
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
@@ -147,6 +153,7 @@
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.navigationBar.tintColor = [UIColor blueColor];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
     [self presentViewController:imagePickerController animated:YES completion:nil];
@@ -159,12 +166,19 @@
     //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     changedInformation = YES;
+
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(100, 100)];
+    self.hostInformation[@"photo"] = [self encodeToBase64String:image];
     
-    self.hostInformation[@"photo"] = [self imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
     [self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image)
+            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 - (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
