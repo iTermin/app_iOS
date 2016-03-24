@@ -76,28 +76,28 @@
                                 },
                             @{
                                 @"nib" : @"HeaderTableViewCell",
-                                @"height" : @(50),
+                                @"height" : @(60),
                                 @"data" : @{
                                         @"text" : @"Help"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Report Bug"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Privacy"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Terms of Service"
                                         }

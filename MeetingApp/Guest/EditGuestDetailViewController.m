@@ -82,7 +82,7 @@
     NSArray *viewModel = @[
                   @{
                       @"nib" : @"LocationGuestTableViewCell",
-                      @"height" : @(60),
+                      @"height" : @(70),
                       @"segue" : @"guestListCountries",
                       @"data": [self.guestInformation copy]
                       }

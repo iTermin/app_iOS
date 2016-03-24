@@ -62,7 +62,7 @@
     NSArray * viewModel = @[
                             @{
                                 @"nib" : @"LocationUserTableViewCell",
-                                @"height" : @(80),
+                                @"height" : @(70),
                                 @"segue" : @"selectCountry",
                                 @"data": [self.hostInformation copy]
                                 }

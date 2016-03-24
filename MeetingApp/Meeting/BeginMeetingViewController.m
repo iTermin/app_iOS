@@ -87,7 +87,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"GuestViewCellCountry",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"segue" : @"editGuestDetails",
                                @"data":cellModel }];
     }];

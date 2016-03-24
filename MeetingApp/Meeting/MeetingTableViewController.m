@@ -77,7 +77,7 @@
         
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"segue" : @"meetingDetail",
                                @"data":cellModel }];
     }];
