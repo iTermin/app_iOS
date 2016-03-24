@@ -12,6 +12,7 @@
 @interface UserBusinessController ()
 
 @property (nonatomic, strong) Firebase *myRootRef;
+@property (nonatomic, strong) Firebase * urlDetailUser;
 
 @end
 
@@ -53,17 +54,23 @@
 }
 
 - (void) updateDetailUser: (MutableUser *) user{
-    Firebase * usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"code"]];
-    [usersRef setValue: @"DE"];
     
-//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"name"]];
-//    [usersRef setValue: user[@"name"]];
-//    
-//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"email"]];
-//    [usersRef setValue: user[@"email"]];
-//    
-//    usersRef = [_myRootRef childByAppendingPath:[self urlDetailUser:@"photo"]];
-//    [usersRef setValue: user[@"photo"]];
+    if(![self.detailUser[@"code"] isEqual:[user valueForKeyPath:@"code"]]){
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"code"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"code"]];
+    }
+    if(![self.detailUser[@"name"] isEqual:[user valueForKeyPath:@"name"]]){
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"name"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"name"]];
+    }
+    if(![self.detailUser[@"email"] isEqual:[user valueForKeyPath:@"email"]]){
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"email"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"email"]];
+    }
+    if(![self.detailUser[@"photo"] isEqual:[user valueForKeyPath:@"photo"]]){
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"photo"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"photo"]];
+    }
 
     NSLog(@"%@", user);
 }
