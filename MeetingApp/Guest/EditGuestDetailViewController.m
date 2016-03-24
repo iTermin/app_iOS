@@ -10,6 +10,7 @@
 #import "UIImageView+Letters.h"
 #import "GuestListCountriesTableViewController.h"
 #import "ArrayOfCountries.h"
+#import "MBProgressHUD.h"
 
 
 @interface EditGuestDetailViewController ()
@@ -207,9 +208,17 @@
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.navigationBar.tintColor = [UIColor blueColor];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
