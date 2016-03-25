@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ArrayOfCountries.h"
 #import "IMeetingAllDayDelegate.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
@@ -21,6 +23,8 @@
 
 @property (strong) NSDate * dateCurrent;
 @property (strong) NSMutableArray * hoursArray;
+
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 
 - (IBAction)sharePressed:(id)sender;
 - (IBAction)trashPressed:(id)sender;

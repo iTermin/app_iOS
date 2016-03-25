@@ -7,11 +7,15 @@
 //
 
 #import "UXDateCellsManager.h"
-#import "MeetingDateSelectorViewController.h"
-#import "ArrayOfCountries.h"
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+
+#import "MeetingDateSelectorViewController.h"
+#import "ArrayOfCountries.h"
+
+#import "MainAssembly.h"
+
 
 @interface MeetingDateSelectorViewController ()
 
@@ -29,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -393,6 +399,34 @@
 
 - (IBAction)doneMeetingPressed:(id)sender {
     //TODO : get the meeting and upload the meeting to server
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
+    NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
+
+    NSMutableDictionary * updateMeeting = [NSMutableDictionary
+                                           dictionaryWithDictionary:@{
+                                           @"detail": @{
+                                                   @"name": self.detailMeeting[@"name"],
+                                                   @"startDate": start,
+                                                   @"endDate" : end,
+                                                   @"creator" : [self getHostMeeting],
+                                                   @"notifications" : @{
+                                                           @"apn" : @NO,
+                                                           @"calendar" : @NO,
+                                                           @"email" : @NO,
+                                                           @"reminder" : @NO
+                                                           },
+                                                   },
+                                           @"guests": self.detailMeeting [@"guests"]
+                                           }];
+    
+    [self.meetingbusiness updateDetail:updateMeeting];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (NSString*) getHostMeeting{
+    return @"";
+}
+
 @end
