@@ -368,6 +368,11 @@
     return completeName;
 }
 
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image)
+            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
     
@@ -375,7 +380,8 @@
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                                                                              @"photo" : photoContact ? photoContact : @"",
+                                                                                              @"photo" : photoContact ?
+                                                                                              [self encodeToBase64String:photoContact] : @"",
                                                                                               @"codePhone" : codeContact ? codeContact : @"",
                                                                                               @"email" : emailGuest ? emailGuest : @"",
                                                                                               @"name" : nameGuest,
