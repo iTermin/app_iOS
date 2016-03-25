@@ -11,6 +11,8 @@
 #import "IMeetingAllDayDelegate.h"
 #import "IMeetingDelegate.h"
 #import "IMeetingDatasource.h"
+#import "IUserDelegate.h"
+#import "IUserDatasource.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
@@ -25,6 +27,7 @@
 @property (strong) NSMutableArray * hoursArray;
 
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
 - (IBAction)sharePressed:(id)sender;
 - (IBAction)trashPressed:(id)sender;

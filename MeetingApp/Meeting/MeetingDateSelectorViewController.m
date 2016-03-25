@@ -13,6 +13,7 @@
 
 #import "MeetingDateSelectorViewController.h"
 #import "ArrayOfCountries.h"
+#import "MBProgressHUD.h"
 
 #import "MainAssembly.h"
 
@@ -35,6 +36,7 @@
     [super viewDidLoad];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -399,34 +401,57 @@
 
 - (IBAction)doneMeetingPressed:(id)sender {
     //TODO : get the meeting and upload the meeting to server
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
-    NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
-    NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
-
-    NSMutableDictionary * updateMeeting = [NSMutableDictionary
-                                           dictionaryWithDictionary:@{
-                                           @"detail": @{
-                                                   @"name": self.detailMeeting[@"name"],
-                                                   @"startDate": start,
-                                                   @"endDate" : end,
-                                                   @"creator" : [self getHostMeeting],
-                                                   @"notifications" : @{
-                                                           @"apn" : @NO,
-                                                           @"calendar" : @NO,
-                                                           @"email" : @NO,
-                                                           @"reminder" : @NO
-                                                           },
-                                                   },
-                                           @"guests": self.detailMeeting [@"guests"]
-                                           }];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Update...";
+    hud.color = [UIColor lightGrayColor];
     
-    [self.meetingbusiness updateDetail:updateMeeting];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self checkHostOfMeeting];
 }
 
-- (NSString*) getHostMeeting{
-    return @"";
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
+    
+    return [[device identifierForVendor]UUIDString];
+}
+
+- (void) checkHostOfMeeting{
+    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+        NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
+        NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
+        
+        NSDictionary *detailMeeting = [handler getUser];
+        
+        [self.meetingbusiness updateDetail:
+         [self prepareInformationForMeeting:start endDate:end hostOfMeeting:detailMeeting[@"name"]]];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+- (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) startDate
+                                               endDate: (NSString *) endDate
+                                         hostOfMeeting: (NSString*) host {
+    
+    return [NSMutableDictionary
+            dictionaryWithDictionary:@{
+                                       @"detail": @{
+                                               @"name": self.detailMeeting[@"name"],
+                                               @"startDate": startDate,
+                                               @"endDate" : endDate,
+                                               @"creator" : host,
+                                               @"notifications" : @{
+                                                       @"apn" : @NO,
+                                                       @"calendar" : @NO,
+                                                       @"email" : @NO,
+                                                       @"reminder" : @NO
+                                                       },
+                                               },
+                                       @"guests": self.detailMeeting [@"guests"]
+                                       }];
 }
 
 @end
