@@ -568,12 +568,25 @@
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
-        //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSDictionary *detailInformation = @{ @"name" : self.nameMeeting.text,
-                                             @"guests" : self.listOfGuests };
+        [self clearInformationOfGuests];
+        NSDictionary *detailInformation = @{
+                                            @"detail" : @{
+                                                    @"name" : self.nameMeeting.text,
+                                            },
+                                            @"guests" : self.listOfGuests,
+                                            };
         [meetingDateSelectorViewController setTitle:detailInformation[@"name"]];
         [meetingDateSelectorViewController setDetailMeeting:detailInformation];
     }
+}
+
+- (void) clearInformationOfGuests{
+    [self.listOfGuests enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * stop) {
+        NSMutableDictionary * guest = [NSMutableDictionary dictionaryWithDictionary:object];
+        [guest removeObjectForKey:@"codePhone"];
+        [self.listOfGuests removeObjectAtIndex:idx];
+        [self.listOfGuests addObject:guest];
+    }];
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
