@@ -11,6 +11,7 @@
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <SWTableViewCell.h>
 
 #import "UIScrollView+EmptyDataSet.h"
 #import "Meeting.h"
@@ -20,7 +21,7 @@
 
 
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
-DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
+DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, assign) ABAddressBookRef addressBook;
 @property (nonatomic, strong) NSMutableArray *menuArray;
