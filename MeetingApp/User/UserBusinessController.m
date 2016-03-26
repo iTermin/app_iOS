@@ -28,7 +28,7 @@
 
 - (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback{
     __weak id weakSelf = self;
-    [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self.myRootRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.deviceId = deviceUserId;
         NSDictionary * info = snapshot.value[@"Users"][deviceUserId];
         self.detailUser = [NSMutableDictionary dictionaryWithDictionary:info];
@@ -64,8 +64,6 @@
         self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"photo"]];
         [self.urlDetailUser setValue:[user valueForKeyPath:@"photo"]];
     }
-
-    NSLog(@"%@", user);
 }
 
 - (MutableUser *) getTemporalUser{
@@ -79,6 +77,12 @@
                         };
     
     return [NSMutableDictionary dictionaryWithDictionary:temporalUser];
+}
+
+- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation{
+    self.urlDetailUser = [_myRootRef childByAppendingPath:
+                          [@"/Users/" stringByAppendingString:self.deviceId]];
+    [self.urlDetailUser setValue:updatedInformation];
 }
 
 @end

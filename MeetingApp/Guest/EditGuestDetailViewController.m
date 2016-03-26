@@ -62,12 +62,19 @@
         } else {
             self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
             self.guestPhoto.clipsToBounds = YES;
-            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.guestInformation[@"photo"]];
-            [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+            
+            [self.guestPhoto setImage:[UIImage imageWithData:
+                                             [self decodeBase64ToImage:self.guestInformation[@"photo"]]]];
+
         }
     } else {
         [self.guestPhoto setImage:self.guestInformation[@"photo"]];
     }
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
 }
 
 - (void) updateViewModel {
@@ -229,11 +236,18 @@
     
     changedInformation = YES;
     
-    self.guestInformation[@"photo"] = [self imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(100, 100)];
+    self.guestInformation[@"photo"] = [self encodeToBase64String:image];
+    
     [self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image)
+            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 - (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;

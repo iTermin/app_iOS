@@ -7,11 +7,16 @@
 //
 
 #import "UXDateCellsManager.h"
-#import "MeetingDateSelectorViewController.h"
-#import "ArrayOfCountries.h"
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+
+#import "MeetingDateSelectorViewController.h"
+#import "ArrayOfCountries.h"
+#import "MBProgressHUD.h"
+
+#import "MainAssembly.h"
+
 
 @interface MeetingDateSelectorViewController ()
 
@@ -29,6 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -393,6 +401,107 @@
 
 - (IBAction)doneMeetingPressed:(id)sender {
     //TODO : get the meeting and upload the meeting to server
-    [self dismissViewControllerAnimated:YES completion:nil];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Update...";
+    hud.color = [UIColor lightGrayColor];
+    
+    [self checkHostOfMeeting];
 }
+
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
+    
+    return [[device identifierForVendor]UUIDString];
+}
+
+- (void) checkHostOfMeeting{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
+    NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
+    
+    //NSDictionary *detailMeeting = [handler getUser];
+    NSString * meetingUuId = [NSString stringWithString:[self uuIdMeeting]];
+    
+    NSMutableDictionary * newMeeting = [NSMutableDictionary
+                                        dictionaryWithDictionary:
+                                        [self prepareInformationForMeeting:meetingUuId
+                                                                 startDate:start
+                                                                   endDate:end
+                                                             hostOfMeeting:[self getDeviceId]]];
+    
+    [self.meetingbusiness update:newMeeting];
+    
+    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource>handler) {
+        NSMutableDictionary * detailUser = [NSMutableDictionary
+                                      dictionaryWithDictionary:
+                                      [handler getUser]];
+        
+        NSArray * updatedMeetingsUser = [NSArray arrayWithArray:
+                                         [self addToUser:detailUser
+                                              newMeeting:start
+                                               idMeeting:meetingUuId]];
+        
+        [self.userbusiness refreshInformationOfUserAddingNewMeeting:
+         [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+- (NSString *) uuIdMeeting {
+    return [[NSUUID UUID] UUIDString];
+}
+
+- (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) idMeeting
+                                             startDate: (NSString *) startDate
+                                               endDate: (NSString *) endDate
+                                         hostOfMeeting: (NSString*) host {
+    return [NSMutableDictionary
+            dictionaryWithDictionary:@{
+                                       idMeeting: @{
+                                               @"detail": @{
+                                                       @"name": self.detailMeeting[@"name"],
+                                                       @"startDate": startDate,
+                                                       @"endDate" : endDate,
+                                                       @"creator" : host,
+                                                       @"notifications" : @{
+                                                               @"apn" : @NO,
+                                                               @"calendar" : @NO,
+                                                               @"email" : @NO,
+                                                               @"reminder" : @NO
+                                                               },
+                                                       },
+                                               @"guests": self.detailMeeting [@"guests"]
+                                               }
+                                       }];
+}
+
+- (NSMutableArray *) addToUser: (NSMutableDictionary *) user
+                            newMeeting: (NSString *) start
+                             idMeeting: (NSString *) meetingId {
+    
+    NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
+    NSDictionary * detailNewMeeting = @{
+                                        @"active" : @YES,
+                                        @"name" : self.detailMeeting[@"name"],
+                                        @"date" : start,
+                                        @"meetingId": meetingId
+                                        };
+
+    
+    [meetingsUser addObject:detailNewMeeting];
+    
+    return meetingsUser;
+}
+
+- (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
+          withChangesInMeetings: (NSArray*) updatedMeetingsUser{
+    [detailUser removeObjectForKey:@"meeting"];
+    [detailUser setObject:updatedMeetingsUser forKey:@"meeting"];
+    return [NSDictionary dictionaryWithDictionary:detailUser];
+}
+
 @end

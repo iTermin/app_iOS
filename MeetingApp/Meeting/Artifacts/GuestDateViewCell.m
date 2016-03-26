@@ -34,8 +34,9 @@
         } else{
             self.photoGuest.layer.cornerRadius = self.photoGuest.frame.size.width/2.0f;
             self.photoGuest.clipsToBounds = YES;
-            NSString *identyPhoto = [NSString stringWithFormat:@"%@.png", _data[@"photo"]];
-            [self.photoGuest setImage:[UIImage imageNamed:identyPhoto]];
+            
+            [self.photoGuest setImage:[UIImage imageWithData:
+                                           [self decodeBase64ToImage:_data[@"photo"]]]];
         }
     } else {
         self.photoGuest.layer.cornerRadius = self.photoGuest.frame.size.width/2.0f;
@@ -49,6 +50,11 @@
 
     
     
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
 }
 
 @end

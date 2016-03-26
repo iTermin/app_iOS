@@ -18,4 +18,6 @@
 
 - (void) updateDetailUser: (MutableUser *) user;
 
+- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation;
+
 @end

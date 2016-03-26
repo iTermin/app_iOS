@@ -368,6 +368,11 @@
     return completeName;
 }
 
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image)
+            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
 
 -(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
     
@@ -375,7 +380,8 @@
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                                                                              @"photo" : photoContact ? photoContact : @"",
+                                                                                              @"photo" : photoContact ?
+                                                                                              [self encodeToBase64String:photoContact] : @"",
                                                                                               @"codePhone" : codeContact ? codeContact : @"",
                                                                                               @"email" : emailGuest ? emailGuest : @"",
                                                                                               @"name" : nameGuest,
@@ -513,7 +519,7 @@
     }
     
     cell.rightUtilityButtons = [self rightButtons];
-    //cell.delegate = self;
+    cell.delegate = self;
     //[cell setCellHeight:cell.frame.size.height];
     
     return cell;
@@ -568,12 +574,23 @@
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
         MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
-        //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSDictionary *detailInformation = @{ @"name" : self.nameMeeting.text,
-                                             @"guests" : self.listOfGuests };
+        [self clearInformationOfGuests];
+        NSDictionary *detailInformation = @{
+                                            @"name" : self.nameMeeting.text,
+                                            @"guests" : self.listOfGuests,
+                                            };
         [meetingDateSelectorViewController setTitle:detailInformation[@"name"]];
         [meetingDateSelectorViewController setDetailMeeting:detailInformation];
     }
+}
+
+- (void) clearInformationOfGuests{
+    [self.listOfGuests enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * stop) {
+        NSMutableDictionary * guest = [NSMutableDictionary dictionaryWithDictionary:object];
+        [guest removeObjectForKey:@"codePhone"];
+        [self.listOfGuests removeObjectAtIndex:idx];
+        [self.listOfGuests addObject:guest];
+    }];
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
