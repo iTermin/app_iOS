@@ -81,4 +81,8 @@
     return [NSMutableDictionary dictionaryWithDictionary:temporalUser];
 }
 
+- (void) updateNewMeetingToUser:(MutableMeeting *) newMeeting{
+    NSLog(@"%@", newMeeting);
+}
+
 @end
