@@ -421,31 +421,48 @@
     NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
     
     //NSDictionary *detailMeeting = [handler getUser];
+    NSString * meetingUuId = [NSString stringWithString:[self uuIdMeeting]];
+    
     NSMutableDictionary * newMeeting = [NSMutableDictionary
                                         dictionaryWithDictionary:
-                                        [self prepareInformationForMeeting:start
+                                        [self prepareInformationForMeeting:meetingUuId
+                                                                 startDate:start
                                                                    endDate:end
                                                              hostOfMeeting:[self getDeviceId]]];
     
     [self.meetingbusiness update:newMeeting];
     
-    [self.userbusiness updateNewMeetingToUser:newMeeting];
-    
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource>handler) {
+        NSMutableDictionary * detailUser = [NSMutableDictionary
+                                      dictionaryWithDictionary:
+                                      [handler getUser]];
+        
+        NSArray * updatedMeetingsUser = [NSArray arrayWithArray:
+                                         [self addToUser:detailUser
+                                              newMeeting:start
+                                               idMeeting:meetingUuId]];
+        
+        ;
+        [self.userbusiness refreshInformationOfUserAddingNewMeeting:
+         [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 - (NSString *) uuIdMeeting {
     return [[NSUUID UUID] UUIDString];
 }
 
-- (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) startDate
+- (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) idMeeting
+                                             startDate: (NSString *) startDate
                                                endDate: (NSString *) endDate
                                          hostOfMeeting: (NSString*) host {
     return [NSMutableDictionary
             dictionaryWithDictionary:@{
-                                       self.uuIdMeeting: @{
+                                       idMeeting: @{
                                                @"detail": @{
                                                        @"name": self.detailMeeting[@"name"],
                                                        @"startDate": startDate,
@@ -461,6 +478,31 @@
                                                @"guests": self.detailMeeting [@"guests"]
                                                }
                                        }];
+}
+
+- (NSMutableArray *) addToUser: (NSMutableDictionary *) user
+                            newMeeting: (NSString *) start
+                             idMeeting: (NSString *) meetingId {
+    
+    NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
+    NSDictionary * detailNewMeeting = @{
+                                        @"active" : @YES,
+                                        @"name" : self.detailMeeting[@"name"],
+                                        @"date" : start,
+                                        @"meetingId": meetingId
+                                        };
+
+    
+    [meetingsUser addObject:detailNewMeeting];
+    
+    return meetingsUser;
+}
+
+- (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
+          withChangesInMeetings: (NSArray*) updatedMeetingsUser{
+    [detailUser removeObjectForKey:@"meeting"];
+    [detailUser setObject:updatedMeetingsUser forKey:@"meeting"];
+    return [NSDictionary dictionaryWithDictionary:detailUser];
 }
 
 @end

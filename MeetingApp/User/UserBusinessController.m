@@ -81,8 +81,11 @@
     return [NSMutableDictionary dictionaryWithDictionary:temporalUser];
 }
 
-- (void) updateNewMeetingToUser:(MutableMeeting *) newMeeting{
-    NSLog(@"%@", newMeeting);
+- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation{
+    self.urlDetailUser = [_myRootRef childByAppendingPath:
+                          [@"/Users/" stringByAppendingString:self.deviceId]];
+    [self.urlDetailUser setValue:updatedInformation];
+    NSLog(@"%@", updatedInformation);
 }
 
 @end

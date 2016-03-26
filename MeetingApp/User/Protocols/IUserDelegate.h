@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "IUserDataSource.h"
-#import "Meeting.h"
 
 @protocol IUserDelegate <NSObject>
 
@@ -19,6 +18,6 @@
 
 - (void) updateDetailUser: (MutableUser *) user;
 
-- (void) updateNewMeetingToUser: (MutableMeeting *) newMeeting;
+- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation;
 
 @end
