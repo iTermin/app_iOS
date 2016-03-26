@@ -415,42 +415,45 @@
 }
 
 - (void) checkHostOfMeeting{
-    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
-        NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
-        NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
-        
-        //NSDictionary *detailMeeting = [handler getUser];
-        
-        [self.meetingbusiness updateDetail:
-         [self prepareInformationForMeeting:start endDate:end hostOfMeeting:[self getDeviceId]]];
-        
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
+    NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
+    
+    //NSDictionary *detailMeeting = [handler getUser];
+    
+    [self.meetingbusiness update:
+     [self prepareInformationForMeeting:start endDate:end hostOfMeeting:[self getDeviceId]]];
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSString *) uuIdMeeting {
+    return [[NSUUID UUID] UUIDString];
 }
 
 - (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) startDate
                                                endDate: (NSString *) endDate
                                          hostOfMeeting: (NSString*) host {
-    
     return [NSMutableDictionary
             dictionaryWithDictionary:@{
-                                       @"detail": @{
-                                               @"name": self.detailMeeting[@"name"],
-                                               @"startDate": startDate,
-                                               @"endDate" : endDate,
-                                               @"creator" : host,
-                                               @"notifications" : @{
-                                                       @"apn" : @NO,
-                                                       @"calendar" : @NO,
-                                                       @"email" : @NO,
-                                                       @"reminder" : @NO
+                                       self.uuIdMeeting: @{
+                                               @"detail": @{
+                                                       @"name": self.detailMeeting[@"name"],
+                                                       @"startDate": startDate,
+                                                       @"endDate" : endDate,
+                                                       @"creator" : host,
+                                                       @"notifications" : @{
+                                                               @"apn" : @NO,
+                                                               @"calendar" : @NO,
+                                                               @"email" : @NO,
+                                                               @"reminder" : @NO
+                                                               },
                                                        },
-                                               },
-                                       @"guests": self.detailMeeting [@"guests"]
+                                               @"guests": self.detailMeeting [@"guests"]
+                                               }
                                        }];
 }
 

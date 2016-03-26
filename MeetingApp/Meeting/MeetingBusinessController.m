@@ -12,6 +12,7 @@
 @interface MeetingBusinessController ()
 
 @property (nonatomic, strong) Firebase *myRootRef;
+@property (nonatomic, strong) Firebase * urlMeetings;
 
 @end
 
@@ -67,7 +68,15 @@
     return [NSMutableDictionary dictionaryWithDictionary: temporalMeeting];
 }
 
+- (void) update: (MutableMeeting *) newMeeting{
+    [self.detailMeetings addEntriesFromDictionary:newMeeting];
+    
+    self.urlMeetings = [_myRootRef childByAppendingPath:@"/Meetings"];
+    [self.urlMeetings setValue:self.detailMeetings];
+}
+
 - (void) updateDetail:(MutableMeeting *)meeting{
+    
     NSLog(@"%@", meeting);
 }
 

@@ -14,6 +14,8 @@
 
 @optional
 
+- (void) update: (MutableMeeting *) newMeeting;
+
 - (void) updateDetail: (MutableMeeting *) meeting;
 
 - (void) deleteMeeting: (Meeting *) meeting;
