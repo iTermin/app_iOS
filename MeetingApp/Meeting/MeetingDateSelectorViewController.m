@@ -442,7 +442,6 @@
                                               newMeeting:start
                                                idMeeting:meetingUuId]];
         
-        ;
         [self.userbusiness refreshInformationOfUserAddingNewMeeting:
          [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
         
