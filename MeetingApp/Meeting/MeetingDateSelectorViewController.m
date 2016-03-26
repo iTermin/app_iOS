@@ -421,10 +421,10 @@
         NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
         NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
         
-        NSDictionary *detailMeeting = [handler getUser];
+        //NSDictionary *detailMeeting = [handler getUser];
         
         [self.meetingbusiness updateDetail:
-         [self prepareInformationForMeeting:start endDate:end hostOfMeeting:detailMeeting[@"name"]]];
+         [self prepareInformationForMeeting:start endDate:end hostOfMeeting:[self getDeviceId]]];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
