@@ -442,6 +442,7 @@
                                               newMeeting:start
                                                idMeeting:meetingUuId]];
         
+        //TODO: refresh information of guest with URL and not all the dictionary
         [self.userbusiness refreshInformationOfUserAddingNewMeeting:
          [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
         

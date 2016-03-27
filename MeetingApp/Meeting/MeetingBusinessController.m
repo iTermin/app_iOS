@@ -31,7 +31,7 @@
     [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSDictionary * info = snapshot.value[@"Users"][self.userId];
         NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
-        self.meetingsUser = [NSArray arrayWithArray:userInformation[@"meeting"]];
+        self.meetingsUser = [NSArray arrayWithArray:userInformation[@"activeMeetings"]];
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
 
         callback(weakSelf);
