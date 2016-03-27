@@ -7,6 +7,9 @@
 //
 
 #import "MeetingTableViewController.h"
+
+#import <SWTableViewCell.h>
+
 #import "MeetingDetailViewController.h"
 #import "BeginMeetingViewController.h"
 #import "MainAssembly.h"
@@ -92,6 +95,58 @@
     self.viewModel = viewModel;
     
     [super updateViewModel];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    NSString * cellIdentifier = cellViewModel[@"nib"];
+    
+    SWTableViewCell * cell = (SWTableViewCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
+    
+    return cell;
+}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            // Delete button was pressed
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            
+            //[self.listOfGuests removeObjectAtIndex:cellIndexPath.row];
+            [self removeIndexPathFromViewModel: cellIndexPath];
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void) removeIndexPathFromViewModel: (NSIndexPath *) indexPath{
+    NSMutableArray *temporalViewModel = [NSMutableArray arrayWithArray:self.viewModel];
+    [temporalViewModel removeObjectAtIndex:indexPath.row];
+    self.viewModel = temporalViewModel;
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
