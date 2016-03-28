@@ -587,6 +587,7 @@
     [self.listOfGuests enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * stop) {
         NSMutableDictionary * guest = [NSMutableDictionary dictionaryWithDictionary:object];
         [guest removeObjectForKey:@"codePhone"];
+        [guest setObject:@0 forKey:@"status"];
         [self.listOfGuests removeObjectAtIndex:idx];
         [self.listOfGuests addObject:guest];
     }];
