@@ -127,22 +127,25 @@
     switch (index) {
         case 0:
         {
-            // Delete button was pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            
-            NSMutableArray * refreshMeetings = [NSMutableArray arrayWithArray:self.meetings];
-            [self setInactiveMeeting:refreshMeetings inIndex:(int)cellIndexPath.row];
-            [refreshMeetings removeObjectAtIndex:cellIndexPath.row];
-            [self removeIndexPathFromViewModel: cellIndexPath];
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
+            [self alertDeleteMeetingIn: cell];
             break;
         }
         default:
             break;
     }
+}
+
+- (void) deleteMeetingWhenAcceptAlert: (SWTableViewCell *)cell{
+    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+    
+    NSMutableArray * refreshMeetings = [NSMutableArray arrayWithArray:self.meetings];
+    [self setInactiveMeeting:refreshMeetings inIndex:(int)cellIndexPath.row];
+    [refreshMeetings removeObjectAtIndex:cellIndexPath.row];
+    [self removeIndexPathFromViewModel: cellIndexPath];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 - (void) removeIndexPathFromViewModel: (NSIndexPath *) indexPath{
@@ -162,6 +165,31 @@
     UIDevice *device = [UIDevice currentDevice];
     
     return [[device identifierForVendor]UUIDString];
+}
+
+- (void) alertDeleteMeetingIn: (SWTableViewCell *)cell {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Meeting"
+                                                                   message:@"Are you sure you want to delete this meeting?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       [self deleteMeetingWhenAcceptAlert:cell];
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       [cell hideUtilityButtonsAnimated:YES];
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{

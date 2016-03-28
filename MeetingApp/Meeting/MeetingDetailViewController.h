@@ -30,6 +30,5 @@
 @property(strong) NSString *savedEventId;
 
 - (IBAction)buttonPressed:(id)sender;
-- (IBAction)deleteMeetingPressed:(id)sender;
 
 @end
