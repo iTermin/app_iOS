@@ -345,32 +345,6 @@
     
 }
 
-- (IBAction)deleteMeetingPressed:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Meeting"
-                                                                   message:@"Are you sure you want to delete this meeting? This meeting will be deleted for all."
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
-                                                     style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       //Do some thing here
-                                                       [alert dismissViewControllerAnimated:YES completion:nil];
-                                                   }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
-                                                     style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action){
-                                                       //Do some thing here
-                                                       [alert dismissViewControllerAnimated:YES completion:nil];
-                                                   }];
-    
-    [alert addAction:delete];
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }

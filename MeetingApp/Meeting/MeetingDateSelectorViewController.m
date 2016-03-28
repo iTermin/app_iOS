@@ -442,6 +442,7 @@
                                               newMeeting:start
                                                idMeeting:meetingUuId]];
         
+        //TODO: refresh information of guest with URL and not all the dictionary
         [self.userbusiness refreshInformationOfUserAddingNewMeeting:
          [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
         
@@ -464,6 +465,7 @@
                                        idMeeting: @{
                                                @"detail": @{
                                                        @"name": self.detailMeeting[@"name"],
+                                                       @"active": @YES,
                                                        @"startDate": startDate,
                                                        @"endDate" : endDate,
                                                        @"creator" : host,
@@ -485,7 +487,6 @@
     
     NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
     NSDictionary * detailNewMeeting = @{
-                                        @"active" : @YES,
                                         @"name" : self.detailMeeting[@"name"],
                                         @"date" : start,
                                         @"meetingId": meetingId
@@ -499,9 +500,14 @@
 
 - (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
           withChangesInMeetings: (NSArray*) updatedMeetingsUser{
-    [detailUser removeObjectForKey:@"meeting"];
-    [detailUser setObject:updatedMeetingsUser forKey:@"meeting"];
+    if (![detailUser[@"activeMeetings"] count]) {
+        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
+    } else{
+        [detailUser removeObjectForKey:@"activeMeetings"];
+        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
+    }
     return [NSDictionary dictionaryWithDictionary:detailUser];
+
 }
 
 @end

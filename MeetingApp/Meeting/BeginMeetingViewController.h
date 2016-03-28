@@ -40,7 +40,6 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTab
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 - (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)searchContacts:(id)sender;
 - (IBAction)nextPressed:(id)sender;
 
 @end

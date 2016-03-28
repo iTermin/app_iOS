@@ -16,6 +16,9 @@
 
 - (void) update: (MutableMeeting *) newMeeting;
 
+- (void) moveToInactiveMeetings:(int) indexMeeting
+          andInactiveTheMeeting: (NSString *) idMeeting;
+
 - (void) updateDetail: (MutableMeeting *) meeting;
 
 - (void) deleteMeeting: (Meeting *) meeting;
