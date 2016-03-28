@@ -75,6 +75,39 @@
     [self.urlMeetings setValue:self.detailMeetings];
 }
 
+- (void) moveToInactiveMeetings:(int)indexMeeting
+          andInactiveTheMeeting:(NSString *)idMeeting{
+    
+    [self.myRootRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSDictionary * info = snapshot.value[@"Users"][self.userId];
+        NSMutableArray * activeMeetingsUser = [NSMutableArray arrayWithArray:
+                                  [NSDictionary dictionaryWithDictionary:info][@"activeMeetings"]];
+        
+        NSDictionary * willInactiveMeeting = [NSDictionary dictionaryWithDictionary:activeMeetingsUser[indexMeeting]];
+        
+        [activeMeetingsUser removeObjectAtIndex:indexMeeting];
+        
+        self.urlMeetings = [_myRootRef childByAppendingPath:
+                            [[@"/Users/" stringByAppendingString:self.userId]
+                              stringByAppendingString:@"/activeMeetings/"]];
+        
+        [self.urlMeetings setValue:activeMeetingsUser];
+        
+        NSMutableArray * inactiveMeetingsUser = [NSMutableArray arrayWithArray:
+                                        [NSDictionary dictionaryWithDictionary:info][@"inactiveMeetings"]];
+        
+        [inactiveMeetingsUser addObject:willInactiveMeeting];
+        
+        self.urlMeetings = [_myRootRef childByAppendingPath:
+                            [[@"/Users/" stringByAppendingString:self.userId]
+                              stringByAppendingString:@"/inactiveMeetings"]];
+        
+        [self.urlMeetings setValue:inactiveMeetingsUser];
+        
+    }];
+    
+}
+
 - (void) updateDetail:(MutableMeeting *)meeting{
     
     NSLog(@"%@", meeting);

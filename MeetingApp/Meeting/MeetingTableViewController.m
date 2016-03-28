@@ -130,7 +130,9 @@
             // Delete button was pressed
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
-            //[self.listOfGuests removeObjectAtIndex:cellIndexPath.row];
+            NSMutableArray * refreshMeetings = [NSMutableArray arrayWithArray:self.meetings];
+            [self setInactiveMeeting:refreshMeetings inIndex:(int)cellIndexPath.row];
+            [refreshMeetings removeObjectAtIndex:cellIndexPath.row];
             [self removeIndexPathFromViewModel: cellIndexPath];
             [self.tableView beginUpdates];
             [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
@@ -147,6 +149,19 @@
     NSMutableArray *temporalViewModel = [NSMutableArray arrayWithArray:self.viewModel];
     [temporalViewModel removeObjectAtIndex:indexPath.row];
     self.viewModel = temporalViewModel;
+}
+
+- (void) setInactiveMeeting: (NSMutableArray *) meetings
+                    inIndex: (int) index{
+    NSDictionary * inactiveMeeting = [meetings objectAtIndex:index];
+    NSString * idMeeting = [NSString stringWithString:inactiveMeeting[@"meetingId"]];
+    [self.meetingbusiness moveToInactiveMeetings:index andInactiveTheMeeting:idMeeting];
+}
+
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
+    
+    return [[device identifierForVendor]UUIDString];
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{

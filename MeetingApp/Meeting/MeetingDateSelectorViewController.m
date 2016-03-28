@@ -465,6 +465,7 @@
                                        idMeeting: @{
                                                @"detail": @{
                                                        @"name": self.detailMeeting[@"name"],
+                                                       @"active": @YES,
                                                        @"startDate": startDate,
                                                        @"endDate" : endDate,
                                                        @"creator" : host,
@@ -486,7 +487,6 @@
     
     NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
     NSDictionary * detailNewMeeting = @{
-                                        @"active" : @YES,
                                         @"name" : self.detailMeeting[@"name"],
                                         @"date" : start,
                                         @"meetingId": meetingId
