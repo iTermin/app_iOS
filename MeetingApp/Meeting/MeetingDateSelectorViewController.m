@@ -500,9 +500,14 @@
 
 - (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
           withChangesInMeetings: (NSArray*) updatedMeetingsUser{
-    [detailUser removeObjectForKey:@"meeting"];
-    [detailUser setObject:updatedMeetingsUser forKey:@"meeting"];
+    if (![detailUser[@"activeMeetings"] count]) {
+        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
+    } else{
+        [detailUser removeObjectForKey:@"activeMeetings"];
+        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
+    }
     return [NSDictionary dictionaryWithDictionary:detailUser];
+
 }
 
 @end
