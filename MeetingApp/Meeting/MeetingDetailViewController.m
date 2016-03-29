@@ -54,7 +54,7 @@
     [super viewWillAppear: YES];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    [self.timeOfMeeting setText: self.currentMeeting[@"date"]];
+    [self setDateInLabels];
     
     [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
         NSDictionary * meetingDetail = [handler getMeetingDetail: self.currentMeeting];
@@ -69,6 +69,18 @@
         [self updateViewModel];
         [self.tableView reloadData];
     }];
+}
+
+- (void) setDateInLabels{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSDate *dateFromString = [dateFormatter dateFromString:self.currentMeeting[@"date"]];
+    
+    [dateFormatter setDateFormat:@"dd-MMMM-yyyy"];
+    [self.dateOfMeeting setText:[dateFormatter stringFromDate:dateFromString]];
+    
+    [dateFormatter setDateFormat:@"HH:mm:ss ZZZZ"];
+    [self.timeOfMeeting setText:[dateFormatter stringFromDate:dateFromString]];
 }
 
 - (void) updateState: (NSDictionary *) notifications{
