@@ -25,7 +25,13 @@
     _data = data;
     
     [self.nameMeeting setText: _data[@"name"]];
-    [self.dateMeeting setText: _data[@"date"]];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSDate *date = [dateFormatter dateFromString:_data[@"date"]];
+    [dateFormatter setDateFormat:@"dd MMMM yyyy   HH:mm:ss"];
+
+    [self.dateMeeting setText:[dateFormatter stringFromDate:date]];
     
     NSString *nameMeeting = data[@"name"];
     [self.imageMeeting setImageWithString:nameMeeting color:[UIColor colorWithRed:0.992 green:0.694 blue:.294 alpha:1] circular:YES];
