@@ -7,6 +7,8 @@
 //
 
 #import "SettingsViewController.h"
+#import <AdSupport/ASIdentifierManager.h>
+
 #import "MainAssembly.h"
 #import "MBProgressHUD.h"
 
@@ -58,9 +60,9 @@
 }
 
 - (NSString*) getDeviceId{
-    UIDevice *device = [UIDevice currentDevice];
-    
-    return [[device identifierForVendor]UUIDString];
+    //UIDevice *device = [UIDevice currentDevice];
+    //return [[device identifierForVendor]UUIDString];
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 - (void) updateViewModel {

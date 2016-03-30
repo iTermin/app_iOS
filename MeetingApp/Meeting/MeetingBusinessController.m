@@ -8,6 +8,7 @@
 
 #import "MeetingBusinessController.h"
 #import <Firebase/Firebase.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 @interface MeetingBusinessController ()
 
@@ -39,9 +40,9 @@
 }
 
 - (NSString *) userId {
-    UIDevice *device = [UIDevice currentDevice];
-        
-    return [[device identifierForVendor]UUIDString];
+    //UIDevice *device = [UIDevice currentDevice];
+    //return [[device identifierForVendor]UUIDString];
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 - (NSArray<Meeting *> *) getAllMeetings
