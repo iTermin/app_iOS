@@ -81,9 +81,9 @@
 
 - (void) updateViewModel {
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.meetings enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+    [self.meetings enumerateObjectsUsingBlock:^(id meeting, NSUInteger idx, BOOL * stop) {
         
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:meeting];
         
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",

@@ -21,6 +21,7 @@
 
 -(instancetype) init {
     if(self = [super init]) {
+        [Firebase defaultConfig].persistenceEnabled = YES;
         self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
     }
     
@@ -29,7 +30,7 @@
 
 - (void) updateMeetingsWithCallback: (void (^)(id<IMeetingDatasource>))callback {
     __weak id weakSelf = self;
-    [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self.myRootRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSDictionary * info = snapshot.value[@"Users"][self.userId];
         NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
         self.meetingsUser = [NSArray arrayWithArray:userInformation[@"activeMeetings"]];

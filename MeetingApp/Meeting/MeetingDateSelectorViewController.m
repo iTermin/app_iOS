@@ -10,6 +10,7 @@
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 #import "MeetingDateSelectorViewController.h"
 #import "ArrayOfCountries.h"
@@ -409,9 +410,9 @@
 }
 
 - (NSString*) getDeviceId{
-    UIDevice *device = [UIDevice currentDevice];
-    
-    return [[device identifierForVendor]UUIDString];
+    //UIDevice *device = [UIDevice currentDevice];
+    //return [[device identifierForVendor]UUIDString];
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 - (void) checkHostOfMeeting{
@@ -500,12 +501,14 @@
 
 - (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
           withChangesInMeetings: (NSArray*) updatedMeetingsUser{
-    if (![detailUser[@"activeMeetings"] count]) {
-        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
-    } else{
-        [detailUser removeObjectForKey:@"activeMeetings"];
-        [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
-    }
+    [updatedMeetingsUser enumerateObjectsUsingBlock:^(id element, NSUInteger idx, BOOL * stop) {
+        if ([detailUser[@"activeMeetings"] count])
+            [detailUser[@"activeMeetings"] addObject:
+             [NSDictionary dictionaryWithDictionary:element]];
+        else
+            [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
+    }];
+    
     return [NSDictionary dictionaryWithDictionary:detailUser];
 
 }
