@@ -21,9 +21,4 @@
 
 - (void) updateDetail: (MutableMeeting *) meeting;
 
-- (void) deleteMeeting: (Meeting *) meeting;
-- (void) deleteMeetingAtIndex: (NSUInteger) index;
-
-- (void) saveNewMeeting: (MutableMeeting *) meeting;
-
 @end

@@ -8,6 +8,7 @@
 
 #import "MeetingBusinessController.h"
 #import <Firebase/Firebase.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 @interface MeetingBusinessController ()
 
@@ -20,6 +21,7 @@
 
 -(instancetype) init {
     if(self = [super init]) {
+        [Firebase defaultConfig].persistenceEnabled = YES;
         self.myRootRef = [[Firebase alloc] initWithUrl:@"https://fiery-fire-7264.firebaseio.com"];
     }
     
@@ -30,7 +32,7 @@
     __weak id weakSelf = self;
     [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSDictionary * info = snapshot.value[@"Users"][self.userId];
-        NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info];
+        NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info ];
         self.meetingsUser = [NSArray arrayWithArray:userInformation[@"activeMeetings"]];
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
 
@@ -39,9 +41,9 @@
 }
 
 - (NSString *) userId {
-    UIDevice *device = [UIDevice currentDevice];
-        
-    return [[device identifierForVendor]UUIDString];
+    //UIDevice *device = [UIDevice currentDevice];
+    //return [[device identifierForVendor]UUIDString];
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 - (NSArray<Meeting *> *) getAllMeetings
@@ -95,6 +97,8 @@
     
     NSDictionary * willInactiveMeeting = [NSDictionary dictionaryWithDictionary:activeMeetingsUser[index]];
     
+    [self performInactiveMeetingsIn:userInformation withMeetingDeleted:willInactiveMeeting];
+
     [activeMeetingsUser removeObjectAtIndex:index];
     
     self.urlMeetings = [_myRootRef childByAppendingPath:
@@ -102,17 +106,30 @@
                          stringByAppendingString:@"/activeMeetings"]];
     
     [self.urlMeetings setValue:activeMeetingsUser];
-    
+}
+
+- (void) performInactiveMeetingsIn: (NSDictionary *) user
+                withMeetingDeleted: (NSDictionary *) inactiveMeeting {
     NSMutableArray * inactiveMeetingsUser = [NSMutableArray arrayWithArray:
-                                             [NSDictionary dictionaryWithDictionary:userInformation][@"inactiveMeetings"]];
-    
-    [inactiveMeetingsUser addObject:willInactiveMeeting];
-    
-    self.urlMeetings = [_myRootRef childByAppendingPath:
-                        [[@"/Users/" stringByAppendingString:self.userId]
-                         stringByAppendingString:@"/inactiveMeetings"]];
-    
-    [self.urlMeetings setValue:inactiveMeetingsUser];
+                                             [NSDictionary dictionaryWithDictionary:user][@"inactiveMeetings"]];
+    if ([inactiveMeetingsUser count]) {
+        self.urlMeetings = [_myRootRef childByAppendingPath:
+                            [[@"/Users/" stringByAppendingString:self.userId]
+                             stringByAppendingString:@"/inactiveMeetings"]];
+        
+        [inactiveMeetingsUser addObject:inactiveMeeting];
+        [self.urlMeetings setValue:inactiveMeetingsUser];
+        
+    } else {
+        self.urlMeetings = [_myRootRef childByAppendingPath:
+                            [@"/Users/" stringByAppendingString:self.userId]];
+        NSMutableDictionary * setArrayOfInactiveMeetingsToUser =
+        [NSMutableDictionary dictionaryWithDictionary:user];
+        
+        NSArray * inactiveMeetings = [NSArray arrayWithObjects:inactiveMeeting, nil];
+        [setArrayOfInactiveMeetingsToUser setObject:inactiveMeetings forKey:@"inactiveMeetings"];
+        [self.urlMeetings setValue:setArrayOfInactiveMeetingsToUser];
+    }
 }
 
 - (void) setInactiveInDetailOfMeeting: (NSString *) meetingId {
