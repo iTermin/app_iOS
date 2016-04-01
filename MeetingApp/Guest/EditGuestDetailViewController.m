@@ -24,6 +24,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self updateViewModel];
 }
 
 - (void)viewDidLoad {
@@ -33,8 +35,6 @@
     self.modelCountries = [self.arrayCountries getModelCountries];
     
     self.guestInformation = [NSMutableDictionary dictionary];
-
-    [self updateViewModel];
     
     self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
     self.guestPhoto.clipsToBounds = YES;
@@ -199,16 +199,11 @@
 }
 
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
-    NSDictionary *currentGuestInformation = self.currentGuest;
-
     changedInformation = YES;
     
-    self.guestInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                        currentGuestInformation[@"name"], @"name",
-                        currentGuestInformation[@"codePhone"], @"codePhone",
-                        currentGuestInformation[@"email"], @"email",
-                        currentGuestInformation[@"photo"], @"photo",
-                        newCountry[@"code"], @"codeCountry", nil];
+    [self.guestInformation removeObjectForKey:@"codeCountry"];
+    [self.guestInformation removeObjectForKey:@"nameCountry"];
+    [self.guestInformation setObject:newCountry[@"code"] forKey:@"codeCountry"];
     
     [self updateViewModel];
 }
