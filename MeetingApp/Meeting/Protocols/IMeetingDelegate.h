@@ -10,6 +10,11 @@
 
 #import "Meeting.h"
 
+typedef enum  NotificationType {
+    NOTIFICATION_TYPE_EMAIL,
+    NOTIFICATION_TYPE_CALENDAR
+} NotificationType;
+
 @protocol IMeetingDelegate <NSObject>
 
 @optional
@@ -20,5 +25,8 @@
           andInactiveTheMeeting: (NSString *) idMeeting;
 
 - (void) updateDetail: (MutableMeeting *) meeting;
+
+// TODO: Send to update the notification
+- (void) updateNotification: (NotificationType) type withCallback:(void (^)(BOOL updated)) callback;
 
 @end
