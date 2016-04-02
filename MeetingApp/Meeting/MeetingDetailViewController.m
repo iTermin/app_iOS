@@ -30,9 +30,9 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading...";
     hud.color = [UIColor lightGrayColor];
-
+    
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
-
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
@@ -53,14 +53,14 @@
     
     [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
         NSDictionary * meetingDetail = [handler getMeetingDetail: self.currentMeeting];
-
+        
         self.detailMeeting = [NSDictionary dictionaryWithDictionary: meetingDetail[@"detail"]];
         self.guests = [NSArray arrayWithArray: meetingDetail[@"guests"]];
         self.notifications =
-            [NSMutableDictionary dictionaryWithDictionary: self.detailMeeting[@"notifications"]];
-
+        [NSMutableDictionary dictionaryWithDictionary: self.detailMeeting[@"notifications"]];
+        
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+        
         [self updateState:self.notifications];
         [self updateViewModel];
         [self.tableView reloadData];
@@ -98,7 +98,7 @@
 }
 
 - (void) verifyEventHasNotDeletedOfCalendar{
-
+    
 }
 
 // TODO: Extract to handler
@@ -112,24 +112,28 @@
     
     [eventStore fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders)
      {
-         for (EKReminder *reminder  in reminders)
+         for (EKReminder *reminder  in reminders) {
              if ([reminder.title isEqualToString:self.detailMeeting[@"name"]]){
                  existReminder = YES;
                  NSLog(@"%@", reminder.title);
+                 break;
              }
-         
-         if (existReminder == YES) {
-             self.reminderNotification.selected = YES;
-             [self buttonChangeColorWhenPressed:self.reminderNotification];
-         } else{
-             self.reminderNotification.selected = NO;
-             [self.notifications setValue:@NO forKey:@"reminder"];
-             [self buttonChangeColorWhenPressed:self.reminderNotification];
-             
-             [self updateDetailChangedInBusinessController];
-             [self alertStatusNotification:@"Reminder Notifaction"
-                                      with:@"You have removed the reminder of the meeting directly in Reminders."];
          }
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             if (existReminder == YES) {
+                 self.reminderNotification.selected = YES;
+                 [self buttonChangeColorWhenPressed:self.reminderNotification];
+             } else{
+                 self.reminderNotification.selected = NO;
+                 [self.notifications setValue:@NO forKey:@"reminder"];
+                 [self buttonChangeColorWhenPressed:self.reminderNotification];
+                 
+                 [self updateDetailChangedInBusinessController];
+                 [self alertStatusNotification:@"Reminder Notifaction"
+                                          with:@"You have removed the reminder of the meeting directly in Reminders."];
+             }
+         });
      }];
     
 }
@@ -153,15 +157,14 @@
 }
 
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([button isSelected]) {
-            button.selected = NO;
-            button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
-        }else if (![button isSelected]){
-            button.selected = YES;
-            button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
-        }
-    });
+    
+    if ([button isSelected]) {
+        button.selected = NO;
+        button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+    }else if (![button isSelected]){
+        button.selected = YES;
+        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
+    }
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -169,10 +172,10 @@
     BOOL statusSelected = buttonPress.selected;
     
     if (statusSelected == YES) {
-
+        
         if (buttonPress == _calendarNotification)
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
-
+        
         else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             [self alertStatusNotification:@"Reminder Notifaction"
@@ -184,9 +187,9 @@
             [self refreshStatus:statusSelected OfNotification:_calendarNotification];
             [self alertStatusNotification:@"Calendar Notifaction"
                                      with:@"You have removed the meeting of the Calendar."];
-        
+            
         }
-
+        
         else if (buttonPress == _reminderNotification) {
             [self refreshStatus:statusSelected OfNotification:_reminderNotification];
             [self alertStatusNotification:@"Reminder Notifaction"
@@ -247,7 +250,7 @@
     if ([notification isEqualToString:@"reminder"]){
         if ([self.reminderNotification isSelected])
             [self notificationReminder:stateNotification];
-    
+        
         else
             [self notificationReminder:stateNotification];
     }
@@ -255,11 +258,11 @@
     else if ([notification isEqualToString:@"calendar"]){
         if ([self.calendarNotification isSelected])
             [self notificationCalendar:stateNotification];
-
+        
         else
             [self notificationCalendar:stateNotification];
     }
-
+    
 }
 
 - (void) notificationReminder: (BOOL) state {
@@ -276,7 +279,7 @@
                  if ([reminder.title isEqualToString:self.detailMeeting[@"name"]])
                      [eventStore removeReminder:reminder commit:YES error:nil];
          }];
-
+        
     }
     else{
         
@@ -287,7 +290,7 @@
         reminder.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithAbsoluteDate:[NSDate date]]];
         
         reminder.calendar = [eventStore defaultCalendarForNewReminders];
-                
+        
         NSError *error = nil;
         
         [eventStore saveReminder:reminder commit:YES error:&error];
@@ -326,7 +329,7 @@
 }
 
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
-
+    
     [self dismissViewControllerAnimated:NO completion:^
      {
          switch (action)
