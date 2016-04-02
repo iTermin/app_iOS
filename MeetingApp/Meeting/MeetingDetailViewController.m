@@ -153,7 +153,7 @@
 }
 
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         if ([button isSelected]) {
             button.selected = NO;
             button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
