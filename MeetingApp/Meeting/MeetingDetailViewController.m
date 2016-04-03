@@ -81,10 +81,10 @@
 
 - (void) updateState: (NSDictionary *) notifications{
     
-    if ([notifications[@"calendar"]  isEqual: @NO]){
+    if ([notifications[@"calendar"][@"state"]  isEqual: @NO]){
         self.calendarNotification.selected = NO;
         [self buttonChangeColorWhenPressed:self.calendarNotification];
-    } else if ([notifications[@"calendar"]  isEqual: @YES]){
+    } else if ([notifications[@"calendar"][@"state"]  isEqual: @YES]){
         [self verifyEventHasNotDeletedOfCalendar];
     }
     
@@ -159,43 +159,43 @@
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
     
     if ([button isSelected]) {
-        button.selected = NO;
         button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
     }else if (![button isSelected]){
-        button.selected = YES;
         button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
     }
 }
 
 - (IBAction)buttonPressed:(id)sender {
     UIButton *buttonPress = (UIButton *)sender;
-    BOOL statusSelected = buttonPress.selected;
     
-    if (statusSelected == YES) {
+    if ([buttonPress isEqual:self.calendarNotification]) {
+        [self.notifications[@"calendar"]
+         setValue: [self.notifications[@"calendar"][@"state"]  isEqual: @NO] ? @YES : @NO
+         forKey:@"state"];
         
-        if (buttonPress == _calendarNotification)
-            [self refreshStatus:statusSelected OfNotification:_calendarNotification];
+        [self notificationCalendar:self.notifications[@"calendar"][@"state"]];
         
-        else if (buttonPress == _reminderNotification) {
-            [self refreshStatus:statusSelected OfNotification:_reminderNotification];
-            [self alertStatusNotification:@"Reminder Notifaction"
-                                     with:@"You have added the meeting to the Reminders."];
-        }
-    } else {
-        
-        if (buttonPress == _calendarNotification) {
-            [self refreshStatus:statusSelected OfNotification:_calendarNotification];
+        if ([self.notifications[@"calendar"][@"state"] isEqual:@NO]) {
             [self alertStatusNotification:@"Calendar Notifaction"
                                      with:@"You have removed the meeting of the Calendar."];
-            
         }
+    
+    } else if ([buttonPress isEqual:self.reminderNotification]) {
+        [self.notifications setValue: [self.notifications[@"reminder"]  isEqual: @NO] ? @YES : @NO
+                              forKey: @"reminder"];
         
-        else if (buttonPress == _reminderNotification) {
-            [self refreshStatus:statusSelected OfNotification:_reminderNotification];
+        [self notificationReminder:self.notifications[@"reminder"]];
+        
+        if ([self.notifications[@"reminder"] isEqual:@YES]) {
+            [self alertStatusNotification:@"Reminder Notifaction"
+                                     with:@"You have added the meeting to the Reminders."];
+        } else {
             [self alertStatusNotification:@"Reminder Notifaction"
                                      with:@"You have removed the meeting of the Reminders."];
         }
     }
+    
+    [self updateDetailChangedInBusinessController];
 }
 
 - (void) alertStatusNotification: (NSString *)title with: (NSString*) message{
@@ -211,26 +211,6 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) refreshStatus: (BOOL) stateButton OfNotification: (UIButton *) buttonPressed{
-    NSString * nameOfButton = [NSString new];
-    
-    if ([buttonPressed isEqual:self.calendarNotification]) {
-        nameOfButton = @"calendar";
-        [self.notifications setValue:@{ @"state": stateButton == NO ? @NO : @YES,
-                                        @"idEvent": self.savedEventId } forKey:@"calendar"];
-    }
-    else if ([buttonPressed isEqual:self.reminderNotification]) {
-        nameOfButton = @"reminder";
-        [self.notifications setValue:stateButton == NO ? @NO : @YES forKey:@"reminder"];
-    }
-    
-    [self performAction:nameOfButton with:stateButton];
-    
-    //[self.notifications setValue: stateButton == NO ? @NO : @YES forKey:nameOfButton];
-    
-    [self updateDetailChangedInBusinessController];
-}
-
 - (void) updateDetailChangedInBusinessController{
     NSMutableDictionary *changeDetailMeeting =
     [NSMutableDictionary dictionaryWithDictionary:self.detailMeeting];
@@ -243,26 +223,6 @@
     [self.meetingbusiness updateDetail:[NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         self.detailMeeting, @"detail",
                                         self.guests, @"guests", nil]];
-}
-
-- (void) performAction: (NSString*) notification with: (BOOL) stateNotification {
-    
-    if ([notification isEqualToString:@"reminder"]){
-        if ([self.reminderNotification isSelected])
-            [self notificationReminder:stateNotification];
-        
-        else
-            [self notificationReminder:stateNotification];
-    }
-    
-    else if ([notification isEqualToString:@"calendar"]){
-        if ([self.calendarNotification isSelected])
-            [self notificationCalendar:stateNotification];
-        
-        else
-            [self notificationCalendar:stateNotification];
-    }
-    
 }
 
 - (void) notificationReminder: (BOOL) state {
@@ -307,6 +267,9 @@
         if (eventToRemove != nil) {
             NSError* error = nil;
             [store removeEvent:eventToRemove span:EKSpanThisEvent error:&error];
+            [self.notifications setValue: @{@"state" : @NO,
+                                            @"idEvent" : @""}
+                                  forKey:@"calendar"];
         }
     }
     else{
@@ -334,8 +297,18 @@
      {
          switch (action)
          {
+             {case EKEventEditViewActionSaved:
+                 [self.notifications setValue: @{@"state" : @YES,
+                                                 @"idEvent" : self.savedEventId}
+                                       forKey:@"calendar"];
+                 [self buttonChangeColorWhenPressed:self.calendarNotification];
+                 break;}
+                 
              {case EKEventEditViewActionCanceled:
                  self.savedEventId = @"";
+                 [self.notifications setValue: @{@"state" : @NO,
+                                                 @"idEvent" : self.savedEventId}
+                                       forKey:@"calendar"];
                  [self buttonChangeColorWhenPressed:self.calendarNotification];
                  break;}
                  
