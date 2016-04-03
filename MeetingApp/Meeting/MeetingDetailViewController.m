@@ -157,25 +157,28 @@
 }
 
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
-    
-    if ([button isSelected]) {
-        button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
-    }else if (![button isSelected]){
-        button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([button isSelected]) {
+            button.backgroundColor = [UIColor colorWithRed:1 green:0.412 blue:0.412 alpha:1];
+        }else if (![button isSelected]){
+            button.backgroundColor = [UIColor colorWithRed:0.608 green:0.608 blue:0.608 alpha:1];
+        }
+    });
 }
 
 - (IBAction)buttonPressed:(id)sender {
     UIButton *buttonPress = (UIButton *)sender;
     
     if ([buttonPress isEqual:self.calendarNotification]) {
-        [self.notifications[@"calendar"]
-         setValue: [self.notifications[@"calendar"][@"state"]  isEqual: @NO] ? @YES : @NO
-         forKey:@"state"];
+        [self.notifications
+         setValue: @{@"state" : [self.notifications[@"calendar"][@"state"] isEqual: @NO] ? @YES : @NO,
+                     @"id": self.notifications[@"calendar"][@"idEvent"]} forKey:@"calendar"];
         
-        [self notificationCalendar:self.notifications[@"calendar"][@"state"]];
+        [self notificationCalendar:[self.notifications[@"calendar"][@"state"] isEqual: @NO] ? NO : YES];
         
         if ([self.notifications[@"calendar"][@"state"] isEqual:@NO]) {
+            self.calendarNotification.selected = NO;
+            [self buttonChangeColorWhenPressed:self.calendarNotification];
             [self alertStatusNotification:@"Calendar Notifaction"
                                      with:@"You have removed the meeting of the Calendar."];
         }
@@ -301,6 +304,7 @@
                  [self.notifications setValue: @{@"state" : @YES,
                                                  @"idEvent" : self.savedEventId}
                                        forKey:@"calendar"];
+                 self.calendarNotification.selected = YES;
                  [self buttonChangeColorWhenPressed:self.calendarNotification];
                  break;}
                  
@@ -309,7 +313,6 @@
                  [self.notifications setValue: @{@"state" : @NO,
                                                  @"idEvent" : self.savedEventId}
                                        forKey:@"calendar"];
-                 [self buttonChangeColorWhenPressed:self.calendarNotification];
                  break;}
                  
              {default:
