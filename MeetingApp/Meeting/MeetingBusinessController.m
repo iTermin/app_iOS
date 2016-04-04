@@ -144,9 +144,11 @@
     [self.urlMeetings setValue:setInactiveDetailMeeting];
 }
 
-- (void) updateDetail:(MutableMeeting *)meeting{
-    
-    NSLog(@"%@", meeting);
+- (void) updateNotifications:(MutableMeeting *)detailMeeting InMeeting:(Meeting *)meeting{
+    self.urlMeetings = [_myRootRef childByAppendingPath:
+                       [[@"/Meetings/" stringByAppendingString:meeting[@"meetingId"]]
+                         stringByAppendingString:@"/detail"]];
+    [self.urlMeetings setValue:detailMeeting];
 }
 
 @end
