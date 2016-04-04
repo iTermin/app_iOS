@@ -85,7 +85,7 @@
         self.calendarNotification.selected = NO;
         [self buttonChangeColorWhenPressed:self.calendarNotification];
     } else if ([notifications[@"calendar"][@"state"]  isEqual: @YES]){
-        [self verifyEventHasNotDeletedOfCalendar];
+        [self verifyEventHasNotDeletedOfCalendar: notifications[@"calendar"][@"idEvent"]];
     }
     
     if ([notifications[@"reminder"]  isEqual: @NO]){
@@ -97,8 +97,22 @@
     
 }
 
-- (void) verifyEventHasNotDeletedOfCalendar{
-    
+- (void) verifyEventHasNotDeletedOfCalendar: (NSString *) eventId{
+    EKEventStore* store = [EKEventStore new];
+    EKEvent *identifyEvent = (EKEvent *)[store calendarItemWithIdentifier:eventId];
+    if (identifyEvent == nil) {
+        [self.notifications setValue: @{@"state" : @NO,
+                                        @"idEvent" : @""}
+                              forKey:@"calendar"];
+        self.calendarNotification.selected = NO;
+        [self buttonChangeColorWhenPressed:self.calendarNotification];
+        [self updateDetailChangedInBusinessController];
+        [self alertStatusNotification:@"Calendar Notifaction"
+                                 with:@"You have removed the event of the meeting from the Calendar."];
+    } else {
+        self.calendarNotification.selected = YES;
+        [self buttonChangeColorWhenPressed:self.calendarNotification];
+    }
 }
 
 // TODO: Extract to handler
@@ -131,7 +145,7 @@
                  
                  [self updateDetailChangedInBusinessController];
                  [self alertStatusNotification:@"Reminder Notifaction"
-                                          with:@"You have removed the reminder of the meeting directly in Reminders."];
+                                          with:@"You have removed the reminder of the meeting from the Reminders."];
              }
          });
      }];
@@ -198,7 +212,6 @@
         }
     }
     
-    [self updateDetailChangedInBusinessController];
 }
 
 - (void) alertStatusNotification: (NSString *)title with: (NSString*) message{
@@ -218,14 +231,12 @@
     NSMutableDictionary *changeDetailMeeting =
     [NSMutableDictionary dictionaryWithDictionary:self.detailMeeting];
     
-    [changeDetailMeeting removeObjectForKey:@"notifications"];
-    [changeDetailMeeting setValue:self.notifications forKey:@"notifications"];
-    
-    self.detailMeeting = [NSDictionary dictionaryWithDictionary:changeDetailMeeting];
-    
-    [self.meetingbusiness updateDetail:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        self.detailMeeting, @"detail",
-                                        self.guests, @"guests", nil]];
+    if (![changeDetailMeeting[@"notifications"] isEqual:self.notifications]) {
+        [changeDetailMeeting removeObjectForKey:@"notifications"];
+        [changeDetailMeeting setValue:self.notifications forKey:@"notifications"];
+        
+        [self.meetingbusiness updateNotifications:changeDetailMeeting InMeeting: self.currentMeeting];
+    }
 }
 
 - (void) notificationReminder: (BOOL) state {
@@ -238,9 +249,12 @@
         
         [eventStore fetchRemindersMatchingPredicate:predicate completion:^(NSArray *reminders)
          {
-             for (EKReminder *reminder  in reminders)
-                 if ([reminder.title isEqualToString:self.detailMeeting[@"name"]])
+             for (EKReminder *reminder  in reminders){
+                 if ([reminder.title isEqualToString:self.detailMeeting[@"name"]]){
                      [eventStore removeReminder:reminder commit:YES error:nil];
+                     [self updateDetailChangedInBusinessController];
+                 }
+             }
          }];
         
     }
@@ -257,6 +271,8 @@
         NSError *error = nil;
         
         [eventStore saveReminder:reminder commit:YES error:&error];
+        [self updateDetailChangedInBusinessController];
+
     }
 }
 
@@ -273,6 +289,7 @@
             [self.notifications setValue: @{@"state" : @NO,
                                             @"idEvent" : @""}
                                   forKey:@"calendar"];
+            [self updateDetailChangedInBusinessController];
         }
     }
     else{
@@ -306,6 +323,7 @@
                                        forKey:@"calendar"];
                  self.calendarNotification.selected = YES;
                  [self buttonChangeColorWhenPressed:self.calendarNotification];
+                 [self updateDetailChangedInBusinessController];
                  break;}
                  
              {case EKEventEditViewActionCanceled:
@@ -313,6 +331,7 @@
                  [self.notifications setValue: @{@"state" : @NO,
                                                  @"idEvent" : self.savedEventId}
                                        forKey:@"calendar"];
+                 [self updateDetailChangedInBusinessController];
                  break;}
                  
              {default:
