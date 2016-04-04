@@ -129,7 +129,6 @@
          for (EKReminder *reminder  in reminders) {
              if ([reminder.title isEqualToString:self.detailMeeting[@"name"]]){
                  existReminder = YES;
-                 NSLog(@"%@", reminder.title);
                  break;
              }
          }
