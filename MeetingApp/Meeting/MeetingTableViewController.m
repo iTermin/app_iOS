@@ -209,13 +209,18 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
-        //[self.meetingbusiness updateNewMeeting:newMeeting];
-        newMeeting = [[[MainAssembly defaultAssembly] userBusinessController] getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
-        [self.userbusiness updateCurrentMeetingToUser:newMeeting];
+        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                                       getTemporalMeeting];
+        [self.meetingbusiness updateNewMeeting:newMeeting];
+        
+        MutableMeeting * newMeetingForUser = [[[MainAssembly defaultAssembly] userBusinessController]
+                                              getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
+        [self.userbusiness updateCurrentMeetingToUser:newMeetingForUser];
+        
         UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
         BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
         [beginMeetingViewController setCurrentMeeting: newMeeting];
+        [beginMeetingViewController setCurrentMeetingToUserDetail:newMeetingForUser];
     }
 }
 
