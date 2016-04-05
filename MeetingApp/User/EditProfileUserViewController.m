@@ -93,9 +93,6 @@
 
             [self.photoProfileEdit setImage:circularImageWithImage
              ([UIImage imageWithData: [self decodeBase64ToImage:self.hostInformation[@"photo"]]])];
-            
-//            [self.photoProfileEdit setImage:[UIImage imageWithData:
-//                                             [self decodeBase64ToImage:self.hostInformation[@"photo"]]]];
         }
     } else {
         [self.photoProfileEdit setImage:self.hostInformation[@"photo"]];

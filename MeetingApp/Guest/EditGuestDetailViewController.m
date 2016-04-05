@@ -36,9 +36,6 @@
     
     self.guestInformation = [NSMutableDictionary dictionary];
     
-    self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-    self.guestPhoto.clipsToBounds = YES;
-    
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
     
@@ -60,16 +57,37 @@
             NSString *userName = self.guestInformation[@"name"];
             [self.guestPhoto setImageWithString:userName color:nil circular:YES];
         } else {
-            self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-            self.guestPhoto.clipsToBounds = YES;
             
-            [self.guestPhoto setImage:[UIImage imageWithData:
-                                             [self decodeBase64ToImage:self.guestInformation[@"photo"]]]];
+            [self.guestPhoto setImage:circularImageWithImage
+             ([UIImage imageWithData: [self decodeBase64ToImage:self.guestInformation[@"photo"]]])];
 
         }
     } else {
         [self.guestPhoto setImage:self.guestInformation[@"photo"]];
     }
+}
+
+static UIImage *circularImageWithImage(UIImage *inputImage)
+{
+    
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    
+    // Create an image context containing the original UIImage.
+    UIGraphicsBeginImageContext(inputImage.size);
+    
+    // Clip to the bezier path and clear that portion of the image.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddPath(context,bezierPath.CGPath);
+    CGContextClip(context);
+    
+    // Draw here when the context is clipped
+    [inputImage drawAtPoint:CGPointZero];
+    
+    // Build a new UIImage from the image context.
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
@@ -231,7 +249,7 @@
     
     changedInformation = YES;
     
-    image = [self imageWithImage:image scaledToSize:CGSizeMake(100, 100)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
     self.guestInformation[@"photo"] = [self encodeToBase64String:image];
     
     [self updateViewModel];
