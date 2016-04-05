@@ -73,7 +73,7 @@
     NSArray * viewModel = @[
                             @{
                                 @"nib" : @"GeneralInformationUserTableViewCell",
-                                @"height" : @(255),
+                                @"height" : @(300),
                                 @"data" : [self.currentUser copy]
                                 },
                             @{

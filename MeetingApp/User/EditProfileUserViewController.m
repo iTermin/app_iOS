@@ -167,6 +167,31 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+- (UIImage *)imageWithImage:(UIImage *)sourceImage size:(CGSize)size {
+    CGSize newSize = CGSizeZero;
+    if ((sourceImage.size.width / size.width) < (sourceImage.size.height / size.height)) {
+        newSize = CGSizeMake(sourceImage.size.width, size.height * (sourceImage.size.width / size.width));
+    } else {
+        newSize = CGSizeMake(size.width * (sourceImage.size.height / size.height), sourceImage.size.height);
+    }
+    
+    CGRect cropRect = CGRectZero;
+    cropRect.origin.x = (sourceImage.size.width - newSize.width) / 2.0f;
+    cropRect.origin.y = (sourceImage.size.height - newSize.height) / 2.0f;
+    cropRect.size = newSize;
+    
+    CGImageRef croppedImageRef = CGImageCreateWithImageInRect([sourceImage CGImage], cropRect);
+    UIImage *croppedImage = [UIImage imageWithCGImage:croppedImageRef];
+    CGImageRelease(croppedImageRef);
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size.width, size.height), NO, 0.0);
+    [croppedImage drawInRect:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
@@ -174,8 +199,8 @@
     //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     changedInformation = YES;
-
-    image = [self imageWithImage:image scaledToSize:CGSizeMake(100, 100)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
+    //image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
     self.hostInformation[@"photo"] = [self encodeToBase64String:image];
     
     [self updateViewModel];
