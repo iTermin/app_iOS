@@ -8,6 +8,8 @@
 
 #import "UserBusinessController.h"
 #import <Firebase/Firebase.h>
+#import <AdSupport/ASIdentifierManager.h>
+
 
 @interface UserBusinessController ()
 
@@ -79,7 +81,34 @@
     return [NSMutableDictionary dictionaryWithDictionary:temporalUser];
 }
 
-- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation{
+- (MutableMeeting *) getTemporalNewMeeting: (NSString *) idMeeting{
+    id temporalNewMeeting = @{
+                        @"date" : @"init",
+                        @"meetingId" : idMeeting,
+                        @"name" : @"init",
+                        };
+    
+    return [NSMutableDictionary dictionaryWithDictionary:temporalNewMeeting];
+}
+
+- (NSString*) getDeviceId{
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+}
+
+- (void) updateCurrentMeetingToUser: (MutableMeeting *) meeting{
+    [self updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
+        self.urlDetailUser = [_myRootRef childByAppendingPath:
+                              [@"/Users/" stringByAppendingString:self.deviceId]];
+        
+        NSMutableDictionary * updateDetailUser = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
+        [updateDetailUser setValue:meeting forKeyPath:@"currentMeeting"];
+        [self.urlDetailUser setValue:updateDetailUser];
+
+    }];
+}
+
+
+- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation{ //change for updateNewMeetingsToUser
     self.urlDetailUser = [_myRootRef childByAppendingPath:
                           [@"/Users/" stringByAppendingString:self.deviceId]];
     [self.urlDetailUser setValue:updatedInformation];

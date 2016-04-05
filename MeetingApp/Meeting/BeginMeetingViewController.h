@@ -32,6 +32,7 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTab
 @property (strong, nonatomic) IBOutlet UIImageView *addContactAddress;
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;
 
 @property (strong) NSMutableArray *listOfGuests;
 @property (strong) NSIndexPath *indexPathGuestSelected;

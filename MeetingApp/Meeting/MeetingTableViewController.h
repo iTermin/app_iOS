@@ -15,12 +15,15 @@
 #import "Meeting.h"
 #import "IMeetingDelegate.h"
 #import "IMeetingDatasource.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 
 @interface MeetingTableViewController : ModelTableViewController
 <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, SWTableViewCellDelegate>
 
 @property(strong) NSArray<Meeting *> *meetings;
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
 - (IBAction)reloadData:(id)sender;
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #import "User.h"
+#import "Meeting.h"
+
 
 @protocol IUserDatasource <NSObject>
 
@@ -17,6 +19,8 @@
 - (User *) getUser;
 - (MutableUser *) getTemporalUser;
 - (MutableUser *) getMutableUser: (User *) meeting;
+
+- (MutableMeeting *) getTemporalNewMeeting: (NSString *) idMeeting;
 
 - (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback;
 

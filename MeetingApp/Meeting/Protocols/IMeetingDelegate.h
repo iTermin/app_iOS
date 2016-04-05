@@ -19,6 +19,8 @@ typedef enum  NotificationType {
 
 @optional
 
+- (void) updateNewMeeting: (MutableMeeting *) newMeeting;
+
 - (void) update: (MutableMeeting *) newMeeting;
 
 - (void) moveToInactiveMeetings:(int) indexMeeting

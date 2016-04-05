@@ -31,6 +31,7 @@
     hud.color = [UIColor lightGrayColor];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
@@ -208,10 +209,18 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
+        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                                       getTemporalMeeting];
+        [self.meetingbusiness updateNewMeeting:newMeeting];
+        
+        MutableMeeting * newMeetingForUser = [[[MainAssembly defaultAssembly] userBusinessController]
+                                              getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
+        [self.userbusiness updateCurrentMeetingToUser:newMeetingForUser];
+        
         UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
         BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
         [beginMeetingViewController setCurrentMeeting: newMeeting];
+        [beginMeetingViewController setCurrentMeetingToUserDetail:newMeetingForUser];
     }
 }
 
