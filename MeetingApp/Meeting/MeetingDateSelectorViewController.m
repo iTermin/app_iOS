@@ -98,7 +98,7 @@
 
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    NSArray * guestsOfMeeting = self.detailMeeting[@"guests"];
+    NSArray * guestsOfMeeting = self.currentMeeting[@"guests"];
     
     //TODO: change this section when implement algorithm
     int diferencialHour;
@@ -197,7 +197,7 @@
     NSDictionary * userDate = self.userInformation;
     [self.hoursArray addObject:userDate[@"hour"]];
     
-    [self.detailMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+    [self.currentMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         [self gethourGuest: guest[@"codeCountry"] respectUser:userDate];
     }];
     
@@ -386,7 +386,7 @@
 - (IBAction)sharePressed:(id)sender {
         
     NSMutableString *texttoshare = [NSMutableString stringWithFormat:@"You are invited to "];
-    [texttoshare appendString:self.detailMeeting[@"name"]];
+    [texttoshare appendString:self.currentMeetingToUserDetail[@"name"]];
     //TODO : extract date and send url
     
     NSArray *activityItems = @[texttoshare];
@@ -465,7 +465,7 @@
             dictionaryWithDictionary:@{
                                        idMeeting: @{
                                                @"detail": @{
-                                                       @"name": self.detailMeeting[@"name"],
+                                                       @"name": self.currentMeetingToUserDetail[@"name"],
                                                        @"active": @YES,
                                                        @"startDate": startDate,
                                                        @"endDate" : endDate,
@@ -477,7 +477,7 @@
                                                                @"reminder" : @NO
                                                                },
                                                        },
-                                               @"guests": self.detailMeeting [@"guests"]
+                                               @"guests": self.currentMeeting[@"guests"]
                                                }
                                        }];
 }
@@ -488,7 +488,7 @@
     
     NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
     NSDictionary * detailNewMeeting = @{
-                                        @"name" : self.detailMeeting[@"name"],
+                                        @"name" : self.currentMeetingToUserDetail[@"name"],
                                         @"date" : start,
                                         @"meetingId": meetingId
                                         };

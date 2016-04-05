@@ -13,10 +13,13 @@
 #import "IMeetingDatasource.h"
 #import "IUserDelegate.h"
 #import "IUserDatasource.h"
+#import "Meeting.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
-@property(nonatomic, strong) NSDictionary * detailMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;
+
 @property(strong) NSArray *viewModel;
 
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
