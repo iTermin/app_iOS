@@ -209,6 +209,7 @@
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
         MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
+        [self.meetingbusiness updateNewMeeting:newMeeting];
         UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
         BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
         [beginMeetingViewController setCurrentMeeting: newMeeting];

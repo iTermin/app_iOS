@@ -32,6 +32,8 @@
     __weak id weakSelf = self;
     [self.myRootRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSDictionary * info = snapshot.value[@"Users"][self.userId];
+        self.allMeetings = snapshot.value[@"Meetings"];
+
         NSDictionary * userInformation = [NSDictionary dictionaryWithDictionary:info ];
         self.meetingsUser = [NSArray arrayWithArray:userInformation[@"activeMeetings"]];
         self.detailMeetings = [NSMutableDictionary dictionaryWithDictionary:snapshot.value[@"Meetings"]];
@@ -57,20 +59,37 @@
     return self.detailMeetings[meeting[@"meetingId"]];
 }
 
+- (NSString *) uuIdMeeting {
+    return [[NSUUID UUID] UUIDString];
+}
+
 - (MutableMeeting *) getTemporalMeeting
 {
-    NSMutableArray *guests = [NSMutableArray array];
-    NSMutableDictionary *detail = [NSMutableDictionary dictionary];
+    NSMutableArray *guests = [NSMutableArray arrayWithObjects:@"init", nil];
+    NSMutableDictionary *detail = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"init", @"init", nil];
     
-    id temporalMeeting = @{
-              @"detail" : detail,
-              @"guests" : guests,
-    };
+    NSString *idMeeting = [self uuIdMeeting];
+    
+    id temporalMeeting = [NSMutableDictionary dictionaryWithDictionary:@{
+                                idMeeting: @{
+                                        @"detail": detail,
+                                        @"guests": guests
+                                        }
+                                }];
     
     return [NSMutableDictionary dictionaryWithDictionary: temporalMeeting];
 }
 
-- (void) update: (MutableMeeting *) newMeeting{
+- (void) updateNewMeeting: (MutableMeeting *) newMeeting{
+    NSMutableDictionary * updateAllMeetings = [NSMutableDictionary dictionaryWithDictionary:self.allMeetings];
+    [updateAllMeetings addEntriesFromDictionary:newMeeting];
+    
+    self.urlMeetings = [_myRootRef childByAppendingPath:@"/Meetings"];
+    [self.urlMeetings setValue:updateAllMeetings];
+    
+}
+
+- (void) update: (MutableMeeting *) newMeeting{ //change for updateNewMeeting
     [self.detailMeetings addEntriesFromDictionary:newMeeting];
     
     self.urlMeetings = [_myRootRef childByAppendingPath:@"/Meetings"];
