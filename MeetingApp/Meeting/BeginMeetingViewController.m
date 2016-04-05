@@ -598,7 +598,7 @@
         }];
         
         [self.currentMeeting setDictionary:meeting];
-        [self.meetingbusiness updateNewMeeting:[NSMutableDictionary dictionaryWithDictionary:@{}]];
+        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
 
 //        NSDictionary *detailInformation = @{
 //                                            @"name" : self.nameMeeting.text,
