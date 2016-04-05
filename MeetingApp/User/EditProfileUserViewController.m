@@ -28,10 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
-    self.photoProfileEdit.clipsToBounds = YES;
-    
+ 
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
@@ -93,15 +90,39 @@
             NSString *userName = self.hostInformation[@"name"];
             [self.photoProfileEdit setImageWithString:userName color:[UIColor colorWithRed:1 green:0.411 blue:0.411 alpha:1] circular:YES];
         } else {
-            self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
-            self.photoProfileEdit.clipsToBounds = YES;
 
-            [self.photoProfileEdit setImage:[UIImage imageWithData:
-                                             [self decodeBase64ToImage:self.hostInformation[@"photo"]]]];
+            [self.photoProfileEdit setImage:circularImageWithImage
+             ([UIImage imageWithData: [self decodeBase64ToImage:self.hostInformation[@"photo"]]])];
+            
+//            [self.photoProfileEdit setImage:[UIImage imageWithData:
+//                                             [self decodeBase64ToImage:self.hostInformation[@"photo"]]]];
         }
     } else {
         [self.photoProfileEdit setImage:self.hostInformation[@"photo"]];
     }
+}
+
+static UIImage *circularImageWithImage(UIImage *inputImage)
+{
+    
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    
+    // Create an image context containing the original UIImage.
+    UIGraphicsBeginImageContext(inputImage.size);
+    
+    // Clip to the bezier path and clear that portion of the image.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddPath(context,bezierPath.CGPath);
+    CGContextClip(context);
+    
+    // Draw here when the context is clipped
+    [inputImage drawAtPoint:CGPointZero];
+    
+    // Build a new UIImage from the image context.
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
@@ -200,7 +221,6 @@
     
     changedInformation = YES;
     image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
-    //image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
     self.hostInformation[@"photo"] = [self encodeToBase64String:image];
     
     [self updateViewModel];

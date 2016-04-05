@@ -33,8 +33,8 @@
             self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2.0f;
             self.profilePicture.clipsToBounds = YES;
 
-            [self.profilePicture setImage:circularImageWithImage([UIImage imageWithData:
-                                                                  [self decodeBase64ToImage:_data[@"photo"]]], [UIColor whiteColor], 4.0f)];
+            [self.profilePicture setImage:circularImageWithImage
+                ([UIImage imageWithData: [self decodeBase64ToImage:_data[@"photo"]]])];
         }
     } else {
         [self.profilePicture setImage:_data[@"photo"]];
@@ -54,8 +54,7 @@
     return data;
 }
 
-static UIImage *circularImageWithImage(UIImage *inputImage,
-                                       UIColor *borderColor, CGFloat borderWidth)
+static UIImage *circularImageWithImage(UIImage *inputImage)
 {
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
