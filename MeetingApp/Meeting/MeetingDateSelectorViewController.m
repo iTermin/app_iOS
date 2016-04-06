@@ -98,7 +98,12 @@
 
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    NSArray * guestsOfMeeting = self.currentMeeting[@"guests"];
+    NSMutableDictionary *detailMeeting = [NSMutableDictionary dictionary];
+    [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
+        [detailMeeting setDictionary:[self.currentMeeting valueForKey:key]];
+    }];
+    
+    NSArray * guestsOfMeeting = [NSArray arrayWithArray:detailMeeting[@"guests"]];
     
     //TODO: change this section when implement algorithm
     int diferencialHour;

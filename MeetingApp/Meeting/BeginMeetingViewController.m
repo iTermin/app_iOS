@@ -580,7 +580,7 @@
             (MeetingDateSelectorViewController *)segue.destinationViewController;
         
         [self.currentMeetingToUserDetail setValue:self.nameMeeting.text forKey:@"name"];
-        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        //[self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
         
         NSMutableDictionary * meeting = [NSMutableDictionary dictionary];
         [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
@@ -598,7 +598,7 @@
         }];
         
         [self.currentMeeting setDictionary:meeting];
-        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+        //[self.meetingbusiness updateNewMeeting:self.currentMeeting];
 
 //        NSDictionary *detailInformation = @{
 //                                            @"name" : self.nameMeeting.text,
