@@ -22,6 +22,6 @@
 
 - (void) updateCurrentMeetingToUser: (MutableMeeting *) meeting;
 
-- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation;
+- (void) updateInformationUserWithNewMeeting:(User *) detailUser;
 
 @end

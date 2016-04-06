@@ -108,10 +108,10 @@
 }
 
 
-- (void) refreshInformationOfUserAddingNewMeeting:(User *) updatedInformation{ //change for updateNewMeetingsToUser
+- (void) updateInformationUserWithNewMeeting:(User *) detailUser{ //change for updateNewMeetingsToUser
     self.urlDetailUser = [_myRootRef childByAppendingPath:
                           [@"/Users/" stringByAppendingString:self.deviceId]];
-    [self.urlDetailUser setValue:updatedInformation];
+    [self.urlDetailUser setValue:detailUser];
 }
 
 @end

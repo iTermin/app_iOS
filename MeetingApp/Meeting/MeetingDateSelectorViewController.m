@@ -416,111 +416,89 @@
     hud.labelText = @"Update...";
     hud.color = [UIColor lightGrayColor];
     
-    [self checkHostOfMeeting];
+    [self updateMeetings:YES];
+    [self updateDetailOfUser];
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSString*) getDeviceId{
-    //UIDevice *device = [UIDevice currentDevice];
-    //return [[device identifierForVendor]UUIDString];
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
-- (void) checkHostOfMeeting{
+- (void) updateMeetings: (BOOL) activeMeeting{
+    
+    [self updateCurrentMeeting:activeMeeting];
+    [self updateCurrentMeetingToUserDetail];
+    
+}
+
+- (void) updateCurrentMeetingToUserDetail{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
+    [self.currentMeetingToUserDetail setValue:start forKey:@"date"];
+}
+
+-(void) updateCurrentMeeting: (BOOL) activeMeeting{
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
     NSString *start = [dateFormatter stringFromDate:self.dateCellsManager.startDate];
     NSString *end = [dateFormatter stringFromDate:self.dateCellsManager.endDate];
     
-    //NSDictionary *detailMeeting = [handler getUser];
-    NSString * meetingUuId = [NSString stringWithString:[self uuIdMeeting]];
-    
-    NSMutableDictionary * newMeeting = [NSMutableDictionary
-                                        dictionaryWithDictionary:
-                                        [self prepareInformationForMeeting:meetingUuId
-                                                                 startDate:start
-                                                                   endDate:end
-                                                             hostOfMeeting:[self getDeviceId]]];
-    
-    [self.meetingbusiness update:newMeeting];
-    
+    NSMutableDictionary * meeting = [NSMutableDictionary dictionary];
+    [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
+        [meeting setDictionary:[NSMutableDictionary
+                                dictionaryWithDictionary:[self.currentMeeting valueForKey:key]]];
+        [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                          @"name": self.currentMeetingToUserDetail[@"name"],
+                                                                          @"active": activeMeeting ? @YES : @NO,
+                                                                          @"startDate": start,
+                                                                          @"endDate" : end,
+                                                                          @"creator" : [self getDeviceId],
+                                                                          @"notifications" : @{
+                                                                                  @"apn" : @NO,
+                                                                                  @"calendar" : @{
+                                                                                          @"idEvent": @"init",
+                                                                                          @"state": @NO,
+                                                                                          },
+                                                                                  @"email" : @NO,
+                                                                                  @"reminder" : @NO
+                                                                                  },
+                                                                          }] forKey:@"detail"];
+        
+        [meeting setValue:self.guestsOfMeeting forKey:@"guests"];
+        
+        [meeting setDictionary:[NSMutableDictionary
+                                dictionaryWithDictionary:@{
+                                                           key: [NSMutableDictionary dictionaryWithDictionary:meeting]
+                                                           }]];
+    }];
+    [self.currentMeeting setDictionary:meeting];
+}
+
+- (void) updateDetailOfUser{
     [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource>handler) {
         NSMutableDictionary * detailUser = [NSMutableDictionary
-                                      dictionaryWithDictionary:
-                                      [handler getUser]];
-        
-        NSArray * updatedMeetingsUser = [NSArray arrayWithArray:
-                                         [self addToUser:detailUser
-                                              newMeeting:start
-                                               idMeeting:meetingUuId]];
+                                            dictionaryWithDictionary:
+                                            [handler getUser]];
         
         //TODO: refresh information of guest with URL and not all the dictionary
-        [self.userbusiness refreshInformationOfUserAddingNewMeeting:
-         [self refreshInformationUser:detailUser withChangesInMeetings:updatedMeetingsUser]];
-        
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.userbusiness updateInformationUserWithNewMeeting:
+        [self modifyInformationUser:detailUser]];
     }];
 }
 
-- (NSString *) uuIdMeeting {
-    return [[NSUUID UUID] UUIDString];
-}
-
-- (NSMutableDictionary *) prepareInformationForMeeting: (NSString *) idMeeting
-                                             startDate: (NSString *) startDate
-                                               endDate: (NSString *) endDate
-                                         hostOfMeeting: (NSString*) host {
-    return [NSMutableDictionary
-            dictionaryWithDictionary:@{
-                                       idMeeting: @{
-                                               @"detail": @{
-                                                       @"name": self.currentMeetingToUserDetail[@"name"],
-                                                       @"active": @YES,
-                                                       @"startDate": startDate,
-                                                       @"endDate" : endDate,
-                                                       @"creator" : host,
-                                                       @"notifications" : @{
-                                                               @"apn" : @NO,
-                                                               @"calendar" : @NO,
-                                                               @"email" : @NO,
-                                                               @"reminder" : @NO
-                                                               },
-                                                       },
-                                               @"guests": self.currentMeeting[@"guests"]
-                                               }
-                                       }];
-}
-
-- (NSMutableArray *) addToUser: (NSMutableDictionary *) user
-                            newMeeting: (NSString *) start
-                             idMeeting: (NSString *) meetingId {
-    
-    NSMutableArray * meetingsUser = [NSMutableArray arrayWithArray:user[@"meeting"]];
-    NSDictionary * detailNewMeeting = @{
-                                        @"name" : self.currentMeetingToUserDetail[@"name"],
-                                        @"date" : start,
-                                        @"meetingId": meetingId
-                                        };
-
-    
-    [meetingsUser addObject:detailNewMeeting];
-    
-    return meetingsUser;
-}
-
-- (NSDictionary *) refreshInformationUser: (NSMutableDictionary *) detailUser
-          withChangesInMeetings: (NSArray*) updatedMeetingsUser{
-    [updatedMeetingsUser enumerateObjectsUsingBlock:^(id element, NSUInteger idx, BOOL * stop) {
-        if ([detailUser[@"activeMeetings"] count])
-            [detailUser[@"activeMeetings"] addObject:
-             [NSDictionary dictionaryWithDictionary:element]];
-        else
-            [detailUser setObject:updatedMeetingsUser forKey:@"activeMeetings"];
-    }];
+- (NSDictionary *) modifyInformationUser: (NSMutableDictionary *) detailUser{
+    if ([detailUser[@"activeMeetings"] count])
+        [detailUser[@"activeMeetings"] addObject:
+         [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail]];
+    else
+        [detailUser setObject:self.currentMeetingToUserDetail forKey:@"activeMeetings"];
     
     return [NSDictionary dictionaryWithDictionary:detailUser];
-
+    
 }
 
 @end
