@@ -22,6 +22,7 @@
 
 @property(strong) NSArray *viewModel;
 
+@property(nonatomic, strong) NSArray * guestsOfMeeting;
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 @property (strong) NSArray * modelCountries;
 @property (strong) NSDictionary * userInformation;

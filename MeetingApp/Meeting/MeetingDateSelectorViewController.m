@@ -73,6 +73,8 @@
     
     [self inputAlgoritm:startDate];
     
+    [self getGuestsOfCurrentMeeting];
+    
     [self updateViewModel];
     
     __weak UITableView * tableView = self.tableView;
@@ -96,14 +98,17 @@
     //BOOL bien = YES == self.dateCellsManager.allDay ? YES : NO;
 }
 
--(void) updateViewModel{
-    NSMutableArray * viewModel = [NSMutableArray array];
+- (void) getGuestsOfCurrentMeeting {
     NSMutableDictionary *detailMeeting = [NSMutableDictionary dictionary];
     [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
         [detailMeeting setDictionary:[self.currentMeeting valueForKey:key]];
     }];
     
-    NSArray * guestsOfMeeting = [NSArray arrayWithArray:detailMeeting[@"guests"]];
+    self.guestsOfMeeting = [NSArray arrayWithArray:detailMeeting[@"guests"]];
+}
+
+-(void) updateViewModel{
+    NSMutableArray * viewModel = [NSMutableArray array];
     
     //TODO: change this section when implement algorithm
     int diferencialHour;
@@ -113,7 +118,7 @@
     }
     //
 
-    [guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
+    [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         NSString * iconSelector = [NSString new];
         if (selectedAllDay == YES)
             iconSelector = @"allDay";
