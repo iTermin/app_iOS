@@ -481,9 +481,10 @@
     
     [self updateMeetings:YES];
     [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+    NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
+    [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
     [self.currentMeetingToUserDetail setDictionary:@{}];
     [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-    [self updateDetailOfUser];
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -542,28 +543,6 @@
                                                            }]];
     }];
     [self.currentMeeting setDictionary:meeting];
-}
-
-- (void) updateDetailOfUser{
-    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource>handler) {
-        NSMutableDictionary * detailUser = [NSMutableDictionary
-                                            dictionaryWithDictionary:
-                                            [handler getUser]];
-        
-        [self.userbusiness updateInformationUserWithNewMeeting:
-        [self modifyInformationUser:detailUser]];
-    }];
-}
-
-- (NSDictionary *) modifyInformationUser: (NSMutableDictionary *) detailUser{
-    if ([detailUser[@"activeMeetings"] count])
-        [detailUser[@"activeMeetings"] addObject:
-         [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail]];
-    else
-        [detailUser setObject:self.currentMeetingToUserDetail forKey:@"activeMeetings"];
-    
-    return [NSDictionary dictionaryWithDictionary:detailUser];
-    
 }
 
 @end
