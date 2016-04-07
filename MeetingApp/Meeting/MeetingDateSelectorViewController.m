@@ -411,7 +411,6 @@
 }
 
 - (IBAction)doneMeetingPressed:(id)sender {
-    //TODO : get the meeting and upload the meeting to server
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Update...";
     hud.color = [UIColor lightGrayColor];
@@ -482,12 +481,11 @@
 }
 
 - (void) updateDetailOfUser{
-    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource>handler) {
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource>handler) {
         NSMutableDictionary * detailUser = [NSMutableDictionary
                                             dictionaryWithDictionary:
                                             [handler getUser]];
         
-        //TODO: refresh information of guest with URL and not all the dictionary
         [self.userbusiness updateInformationUserWithNewMeeting:
         [self modifyInformationUser:detailUser]];
     }];

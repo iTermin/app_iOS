@@ -42,7 +42,7 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
         self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (![self.currentUser count]) [self presentRegisterUserViewController];
@@ -57,12 +57,6 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     RegisterUserViewController* myVC = [sb instantiateViewControllerWithIdentifier:@"RegisterUser"];
     [self presentViewController:myVC animated:YES completion:nil];
-}
-
-- (NSString*) getDeviceId{
-    //UIDevice *device = [UIDevice currentDevice];
-    //return [[device identifierForVendor]UUIDString];
-    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 - (void) updateViewModel {

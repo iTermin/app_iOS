@@ -22,6 +22,6 @@
 
 - (MutableMeeting *) getTemporalNewMeeting: (NSString *) idMeeting;
 
-- (void) updateUser: (NSString*) deviceUserId WithCallback: (void (^)(id<IUserDatasource>))callback;
+- (void) updateUserWithCallback: (void (^)(id<IUserDatasource>))callback;
 
 @end
