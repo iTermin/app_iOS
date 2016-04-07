@@ -14,6 +14,7 @@
 #import "MeetingDateSelectorViewController.h"
 #import "EditGuestDetailViewController.h"
 #import "ArrayOfCountries.h"
+#import "MainAssembly.h"
 
 @interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
 {
@@ -33,6 +34,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     self.listOfGuests = [NSMutableArray arrayWithArray:self.currentMeeting[@"guests"]];
 
@@ -572,14 +576,37 @@
         [editGuestDetailViewController setGuestInformationDelegate:self];
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
-        MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
-        [self clearInformationOfGuests];
-        NSDictionary *detailInformation = @{
-                                            @"name" : self.nameMeeting.text,
-                                            @"guests" : self.listOfGuests,
-                                            };
-        [meetingDateSelectorViewController setTitle:detailInformation[@"name"]];
-        [meetingDateSelectorViewController setDetailMeeting:detailInformation];
+        MeetingDateSelectorViewController *meetingDateSelectorViewController =
+            (MeetingDateSelectorViewController *)segue.destinationViewController;
+        
+        [self.currentMeetingToUserDetail setValue:self.nameMeeting.text forKey:@"name"];
+        //[self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        
+        NSMutableDictionary * meeting = [NSMutableDictionary dictionary];
+        [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
+            [meeting setDictionary:[NSMutableDictionary
+                                     dictionaryWithDictionary:[self.currentMeeting valueForKey:key]]];
+            [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                             @"name" : self.nameMeeting.text,
+                                                                             }] forKey:@"detail"];
+            [self clearInformationOfGuests];
+            [meeting setValue:self.listOfGuests forKey:@"guests"];
+            
+            [meeting setDictionary:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                   key: [NSMutableDictionary dictionaryWithDictionary:meeting]
+                                                                                   }]];
+        }];
+        
+        [self.currentMeeting setDictionary:meeting];
+        //[self.meetingbusiness updateNewMeeting:self.currentMeeting];
+
+//        NSDictionary *detailInformation = @{
+//                                            @"name" : self.nameMeeting.text,
+//                                            @"guests" : self.listOfGuests,
+//                                            };
+        [meetingDateSelectorViewController setTitle:self.nameMeeting.text];
+        [meetingDateSelectorViewController setCurrentMeeting:self.currentMeeting];
+        [meetingDateSelectorViewController setCurrentMeetingToUserDetail:self.currentMeetingToUserDetail];
     }
 }
 

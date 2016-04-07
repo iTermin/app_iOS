@@ -18,6 +18,10 @@
 #import "ModelTableViewController.h"
 #import "IGuestInformationDelegate.h"
 #import "ArrayOfCountries.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 
 
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
@@ -30,6 +34,9 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTab
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
 @property (strong, nonatomic) IBOutlet UIImageView *addContactAddress;
+
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
 @property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;
