@@ -415,18 +415,18 @@
 
 -(void) validateCurrentMeetingWithSharedMeetings {
     NSMutableDictionary * detailUser = [NSMutableDictionary dictionary];
-    NSDictionary * sharedMeetings = [NSDictionary dictionary];
+    NSMutableArray * sharedMeetings = [NSMutableArray array];
     
     [self.userbusiness updateUserWithCallback:^(id<IUserDatasource>handler) {
         [detailUser setDictionary: [handler getUser]];
         [detailUser enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
             if ([key isEqualToString:@"sharedMeetings"]) {
-                [sharedMeetings setValuesForKeysWithDictionary:detailUser[@"sharedMeetings"]];
+                [sharedMeetings setArray:detailUser[@"sharedMeetings"]];
             }
         }];
         
         if ([sharedMeetings count]) {
-            [self currentMeetingInSharedMeetings:sharedMeetings];
+            [self existCurrentMeetingInSharedMeetings:sharedMeetings];
         } else {
             [self cleanCurrentMeeting];
         }
@@ -436,10 +436,19 @@
     }];
 }
 
-- (void) currentMeetingInSharedMeetings: (NSDictionary *) meetings{
-    [meetings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
-        NSLog(@"%@", key);
+- (void) existCurrentMeetingInSharedMeetings: (NSArray *) meetings{
+    __block BOOL existCurrentMeeting = NO;
+    [meetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sharedMeeting, NSUInteger idx, BOOL * stop) {
+        id idCurrentMeeting = @"B4770644-0C63-4C87-A245-647A1A1C8F49";//self.currentMeetingToUserDetail[@"meetingId"];
+        id idSharedMeeting = sharedMeeting[@"meetingId"];
+        if ([idCurrentMeeting isEqual:idSharedMeeting]) {
+            existCurrentMeeting = YES;
+            [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
+            [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
+        }
     }];
+    
+    if (existCurrentMeeting == NO) [self cleanCurrentMeeting];
 }
 
 - (void) cleanCurrentMeeting{

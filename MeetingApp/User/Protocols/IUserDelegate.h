@@ -24,4 +24,10 @@
 
 - (void) updateInformationUserWithNewMeeting:(User *) detailUser;
 
+- (void) addMeetingOfActiveOrSharedMeetings: (NSString*) sectionName
+             ToInactiveMeetingsInDetailUser: (MutableMeeting *) meeting;
+
+- (void) removeMeeting: (MutableMeeting*) meeting
+OfActiveOrSharedMeetingsInDetailUser: (NSString *) sectionName;
+
 @end

@@ -107,6 +107,78 @@
     }];
 }
 
+- (void) addMeetingOfActiveOrSharedMeetings: (NSString*) sectionName
+             ToInactiveMeetingsInDetailUser: (MutableMeeting *) meeting {
+    
+    [self updateUserWithCallback:^(id<IUserDatasource> handler) {
+        NSDictionary * userDetail = [NSDictionary dictionaryWithDictionary:self.detailUser];
+
+        __block NSMutableArray * inactiveMeetings = [NSMutableArray arrayWithArray:userDetail[@"inactiveMeetings"]];
+        
+        if ([sectionName isEqualToString:@"activeMeeting"]) {
+            NSMutableArray * activeMetings = [NSMutableArray arrayWithArray:userDetail[@"activeMeetings"]];
+            [activeMetings enumerateObjectsUsingBlock:^(NSMutableDictionary * aMeeting, NSUInteger idx, BOOL * stop) {
+                if ([[meeting valueForKey:@"meetingId"] isEqualToValue:[aMeeting valueForKey:@"meetingId"]]) {
+                    [inactiveMeetings addObject:[NSDictionary dictionaryWithDictionary:activeMetings[idx]]];
+                }
+            }];
+            
+        } else if ([sectionName isEqualToString:@"sharedMeeting"]) {
+            NSMutableArray * sharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+            [sharedMeetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sMeeting, NSUInteger idx, BOOL * stop) {
+                if ([[meeting valueForKey:@"meetingId"] isEqual:[sMeeting valueForKey:@"meetingId"]]) {
+                    [inactiveMeetings addObject:[NSDictionary dictionaryWithDictionary:sharedMeetings[idx]]];
+                }
+            }];
+            
+        }
+
+        self.urlDetailUser = [_myRootRef childByAppendingPath:
+                            [[@"/Users/" stringByAppendingString:self.deviceId]
+                             stringByAppendingString:@"/inactiveMeetings"]];
+        [self.urlDetailUser setValue:inactiveMeetings];
+    }];
+
+}
+
+- (void) removeMeeting: (MutableMeeting*) meeting
+        OfActiveOrSharedMeetingsInDetailUser: (NSString *) sectionName{
+    
+    [self updateUserWithCallback:^(id<IUserDatasource> handler) {
+        NSDictionary * userDetail = [NSDictionary dictionaryWithDictionary:self.detailUser];
+
+        if ([sectionName isEqualToString:@"activeMeeting"]) {
+            
+            NSMutableArray * activeMetings = [NSMutableArray arrayWithArray:userDetail[@"activeMeetings"]];
+            [activeMetings enumerateObjectsUsingBlock:^(NSMutableDictionary * aMeeting, NSUInteger idx, BOOL * stop) {
+                if ([[meeting valueForKey:@"meetingId"] isEqualToValue:[aMeeting valueForKey:@"meetingId"]]) {
+                    [activeMetings removeObjectAtIndex:idx];
+                }
+            }];
+            
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [[@"/Users/" stringByAppendingString:self.deviceId]
+                                   stringByAppendingString:@"/activeMeetings"]];
+            [self.urlDetailUser setValue:activeMetings];
+            
+        } else if ([sectionName isEqualToString:@"sharedMeeting"]) {
+            
+            NSMutableArray * sharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+            [sharedMeetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sMeeting, NSUInteger idx, BOOL * stop) {
+                if ([[meeting valueForKey:@"meetingId"] isEqual:[sMeeting valueForKey:@"meetingId"]]) {
+                    [sharedMeetings removeObjectAtIndex:idx];
+                }
+            }];
+
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [[@"/Users/" stringByAppendingString:self.deviceId]
+                                   stringByAppendingString:@"/sharedMeetings"]];
+            [self.urlDetailUser setValue:sharedMeetings];
+        }
+        
+    }];
+}
+
 
 - (void) updateInformationUserWithNewMeeting:(User *) detailUser{
     self.urlDetailUser = [_myRootRef childByAppendingPath:
