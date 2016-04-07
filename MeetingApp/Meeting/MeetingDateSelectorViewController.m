@@ -428,7 +428,9 @@
         if ([sharedMeetings count]) {
             [self existCurrentMeetingInSharedMeetings:sharedMeetings];
         } else {
-            [self cleanCurrentMeeting];
+            [self cleanCurrentsMeetings];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -439,25 +441,30 @@
 - (void) existCurrentMeetingInSharedMeetings: (NSArray *) meetings{
     __block BOOL existCurrentMeeting = NO;
     [meetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sharedMeeting, NSUInteger idx, BOOL * stop) {
-        id idCurrentMeeting = @"B4770644-0C63-4C87-A245-647A1A1C8F49";//self.currentMeetingToUserDetail[@"meetingId"];
-        id idSharedMeeting = sharedMeeting[@"meetingId"];
-        if ([idCurrentMeeting isEqual:idSharedMeeting]) {
+        NSString * idCurrentMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"meetingId"]];
+        NSString * idSharedMeeting = [NSString stringWithString:sharedMeeting[@"meetingId"]];
+        if ([idCurrentMeeting isEqualToString:idSharedMeeting]) {
             existCurrentMeeting = YES;
             [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
             [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
+            [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
+            [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
         }
     }];
     
-    if (existCurrentMeeting == NO) [self cleanCurrentMeeting];
+    if (existCurrentMeeting == NO){
+        [self cleanCurrentsMeetings];
+        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+    }
 }
 
-- (void) cleanCurrentMeeting{
+- (void) cleanCurrentsMeetings{
     [self.currentMeetingToUserDetail setDictionary:@{
                                                      @"date": @"init",
                                                      @"meeingId": self.currentMeetingToUserDetail[@"meetingId"],
                                                      @"name": @"init"
                                                      }];
-    [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
     
     [self.currentMeeting setDictionary:@{
                                          [[self.currentMeeting allKeys] objectAtIndex:0] : @{
@@ -465,7 +472,6 @@
                                                  @"guests" : [NSMutableArray arrayWithObjects:@"init", nil],
                                                  }
                                          }];
-    [self.meetingbusiness updateNewMeeting:self.currentMeeting];
 }
 
 - (IBAction)doneMeetingPressed:(id)sender {

@@ -97,13 +97,22 @@
 
 - (void) updateCurrentMeetingToUser: (MutableMeeting *) meeting{
     [self updateUserWithCallback:^(id<IUserDatasource> handler) {
-        self.urlDetailUser = [_myRootRef childByAppendingPath:
-                              [@"/Users/" stringByAppendingString:self.deviceId]];
         
-        NSMutableDictionary * updateDetailUser = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
-        [updateDetailUser setValue:meeting forKeyPath:@"currentMeeting"];
-        [self.urlDetailUser setValue:updateDetailUser];
-
+        if ([self.detailUser[@"currentMeeting"] count]) {
+            
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [[@"/Users/" stringByAppendingString:self.deviceId]
+                                   stringByAppendingString:@"/currentMeeting"]];
+            [self.urlDetailUser setValue:meeting];
+            
+        } else {
+            
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [@"/Users/" stringByAppendingString:self.deviceId]];
+            NSMutableDictionary * updateDetailUser = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
+            [updateDetailUser setValue:meeting forKeyPath:@"currentMeeting"];
+            [self.urlDetailUser setValue:meeting];
+        }
     }];
 }
 
