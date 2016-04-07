@@ -417,6 +417,9 @@
     hud.color = [UIColor lightGrayColor];
     
     [self updateMeetings:YES];
+    [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+    [self.currentMeeting setDictionary:@{}];
+    [self.userbusiness updateCurrentMeetingToUser:self.currentMeeting];
     [self updateDetailOfUser];
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
