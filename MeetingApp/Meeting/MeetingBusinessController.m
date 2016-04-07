@@ -89,13 +89,6 @@
     
 }
 
-- (void) update: (MutableMeeting *) newMeeting{ //change for updateNewMeeting
-    [self.detailMeetings addEntriesFromDictionary:newMeeting];
-    
-    self.urlMeetings = [_myRootRef childByAppendingPath:@"/Meetings"];
-    [self.urlMeetings setValue:self.detailMeetings];
-}
-
 - (void) moveToInactiveMeetings:(int)indexMeeting
           andInactiveTheMeeting:(NSString *)idMeeting{
     
