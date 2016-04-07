@@ -21,12 +21,12 @@ typedef enum  NotificationType {
 
 - (void) updateNewMeeting: (MutableMeeting *) newMeeting;
 
-- (void) update: (MutableMeeting *) newMeeting;
-
 - (void) moveToInactiveMeetings:(int) indexMeeting
           andInactiveTheMeeting: (NSString *) idMeeting;
 
 - (void) updateNotifications: (MutableMeeting *) detailMeeting InMeeting:(Meeting *) meeting;
+
+- (void) setInactiveInDetailOfMeeting: (NSString *) meetingId;
 
 // TODO: Send to update the notification
 - (void) updateNotification: (NotificationType) type withCallback:(void (^)(BOOL updated)) callback;

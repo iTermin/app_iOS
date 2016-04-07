@@ -31,14 +31,8 @@
     self.emailUser.delegate = self;
 }
 
-- (NSString*) getDeviceId{
-    UIDevice *device = [UIDevice currentDevice];
-    
-    return [[device identifierForVendor]UUIDString];
-}
-
 - (void) getUserFromDB{
-    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource> handler) {
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
         self.userInformation = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
         if ([self isValidateEmail]) {
             [self dismissViewControllerAnimated:YES completion:nil];

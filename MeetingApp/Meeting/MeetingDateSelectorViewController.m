@@ -407,17 +407,84 @@
 }
 
 - (IBAction)trashPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Update...";
+    hud.color = [UIColor lightGrayColor];
+    [self validateCurrentMeetingWithSharedMeetings];
+}
+
+-(void) validateCurrentMeetingWithSharedMeetings {
+    NSMutableDictionary * detailUser = [NSMutableDictionary dictionary];
+    NSMutableArray * sharedMeetings = [NSMutableArray array];
+    
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource>handler) {
+        [detailUser setDictionary: [handler getUser]];
+        [detailUser enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
+            if ([key isEqualToString:@"sharedMeetings"]) {
+                [sharedMeetings setArray:detailUser[@"sharedMeetings"]];
+            }
+        }];
+        
+        if ([sharedMeetings count]) {
+            [self existCurrentMeetingInSharedMeetings:sharedMeetings];
+        } else {
+            [self cleanCurrentsMeetings];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+        }
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+- (void) existCurrentMeetingInSharedMeetings: (NSArray *) meetings{
+    __block BOOL existCurrentMeeting = NO;
+    [meetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sharedMeeting, NSUInteger idx, BOOL * stop) {
+        NSString * idCurrentMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"meetingId"]];
+        NSString * idSharedMeeting = [NSString stringWithString:sharedMeeting[@"meetingId"]];
+        if ([idCurrentMeeting isEqualToString:idSharedMeeting]) {
+            existCurrentMeeting = YES;
+            [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
+            [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
+            [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
+            [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
+        }
+    }];
+    
+    if (existCurrentMeeting == NO){
+        [self cleanCurrentsMeetings];
+        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+    }
+}
+
+- (void) cleanCurrentsMeetings{
+    [self.currentMeetingToUserDetail setDictionary:@{
+                                                     @"date": @"init",
+                                                     @"meeingId": self.currentMeetingToUserDetail[@"meetingId"],
+                                                     @"name": @"init"
+                                                     }];
+    
+    [self.currentMeeting setDictionary:@{
+                                         [[self.currentMeeting allKeys] objectAtIndex:0] : @{
+                                                 @"detail" : [NSMutableDictionary dictionaryWithObjectsAndKeys:@"init", @"init", nil],
+                                                 @"guests" : [NSMutableArray arrayWithObjects:@"init", nil],
+                                                 }
+                                         }];
 }
 
 - (IBAction)doneMeetingPressed:(id)sender {
-    //TODO : get the meeting and upload the meeting to server
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Update...";
     hud.color = [UIColor lightGrayColor];
     
     [self updateMeetings:YES];
-    [self updateDetailOfUser];
+    [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+    NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
+    [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
+    [self.currentMeetingToUserDetail setDictionary:@{}];
+    [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -476,29 +543,6 @@
                                                            }]];
     }];
     [self.currentMeeting setDictionary:meeting];
-}
-
-- (void) updateDetailOfUser{
-    [self.userbusiness updateUser:[self getDeviceId] WithCallback:^(id<IUserDatasource>handler) {
-        NSMutableDictionary * detailUser = [NSMutableDictionary
-                                            dictionaryWithDictionary:
-                                            [handler getUser]];
-        
-        //TODO: refresh information of guest with URL and not all the dictionary
-        [self.userbusiness updateInformationUserWithNewMeeting:
-        [self modifyInformationUser:detailUser]];
-    }];
-}
-
-- (NSDictionary *) modifyInformationUser: (NSMutableDictionary *) detailUser{
-    if ([detailUser[@"activeMeetings"] count])
-        [detailUser[@"activeMeetings"] addObject:
-         [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail]];
-    else
-        [detailUser setObject:self.currentMeetingToUserDetail forKey:@"activeMeetings"];
-    
-    return [NSDictionary dictionaryWithDictionary:detailUser];
-    
 }
 
 @end
