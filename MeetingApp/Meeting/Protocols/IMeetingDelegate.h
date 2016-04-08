@@ -21,9 +21,6 @@ typedef enum  NotificationType {
 
 - (void) updateNewMeeting: (MutableMeeting *) newMeeting;
 
-- (void) moveToInactiveMeetings:(int) indexMeeting
-          andInactiveTheMeeting: (NSString *) idMeeting;
-
 - (void) updateNotifications: (MutableMeeting *) detailMeeting InMeeting:(Meeting *) meeting;
 
 - (void) setInactiveInDetailOfMeeting: (NSString *) meetingId;

@@ -157,9 +157,18 @@
 
 - (void) setInactiveMeeting: (NSMutableArray *) meetings
                     inIndex: (int) index{
-    NSDictionary * inactiveMeeting = [meetings objectAtIndex:index];
+    NSMutableDictionary * inactiveMeeting =
+        [NSMutableDictionary dictionaryWithDictionary:[meetings objectAtIndex:index]];
+    
     NSString * idMeeting = [NSString stringWithString:inactiveMeeting[@"meetingId"]];
-    [self.meetingbusiness moveToInactiveMeetings:index andInactiveTheMeeting:idMeeting];
+    
+    [self.meetingbusiness setInactiveInDetailOfMeeting:idMeeting];
+    
+    [self.userbusiness removeMeeting:inactiveMeeting
+        OfActiveOrSharedMeetingsInDetailUser:@"activeMeeting"];
+    
+    [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"activeMeeting"
+                           ToInactiveMeetingsInDetailUser:inactiveMeeting];
 }
 
 - (NSString*) getDeviceId{
