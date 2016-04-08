@@ -127,7 +127,7 @@
         if ([sectionName isEqualToString:@"activeMeeting"]) {
             NSMutableArray * activeMetings = [NSMutableArray arrayWithArray:userDetail[@"activeMeetings"]];
             [activeMetings enumerateObjectsUsingBlock:^(NSMutableDictionary * aMeeting, NSUInteger idx, BOOL * stop) {
-                if ([[meeting valueForKey:@"meetingId"] isEqualToValue:[aMeeting valueForKey:@"meetingId"]]) {
+                if ([[meeting valueForKey:@"meetingId"] isEqual:[aMeeting valueForKey:@"meetingId"]]) {
                     [inactiveMeetings addObject:[NSDictionary dictionaryWithDictionary:activeMetings[idx]]];
                 }
             }];
@@ -160,7 +160,7 @@
             
             NSMutableArray * activeMetings = [NSMutableArray arrayWithArray:userDetail[@"activeMeetings"]];
             [activeMetings enumerateObjectsUsingBlock:^(NSMutableDictionary * aMeeting, NSUInteger idx, BOOL * stop) {
-                if ([[meeting valueForKey:@"meetingId"] isEqualToValue:[aMeeting valueForKey:@"meetingId"]]) {
+                if ([[meeting valueForKey:@"meetingId"] isEqual:[aMeeting valueForKey:@"meetingId"]]) {
                     [activeMetings removeObjectAtIndex:idx];
                 }
             }];
