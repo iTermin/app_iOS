@@ -139,7 +139,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecm-gY-F9O">
-                                <rect key="frame" x="112" y="79" width="150" height="150"/>
+                                <rect key="frame" x="122" y="91" width="130" height="130"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -374,7 +374,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Exh-wY-agr">
-                                <rect key="frame" x="121" y="79" width="150" height="150"/>
+                                <rect key="frame" x="122" y="81" width="130" height="130"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

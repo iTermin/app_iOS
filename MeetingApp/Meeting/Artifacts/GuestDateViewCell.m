@@ -49,7 +49,7 @@
 static UIImage *circularImageWithImage(UIImage *inputImage)
 {
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
     
     // Create an image context containing the original UIImage.
     UIGraphicsBeginImageContext(inputImage.size);
