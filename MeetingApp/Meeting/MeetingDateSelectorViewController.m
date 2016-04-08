@@ -401,7 +401,15 @@
     
     NSArray *activityItems = @[texttoshare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [activityVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed,  NSArray *returnedItems, NSError *activityError) {
+        if (completed) {
+            [self updateMeetings:YES];
+            [self.userbusiness addMeetingInSharedMeetingsOfUser:self.currentMeetingToUserDetail];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            NSLog(@"action");
+        }
+    }];
     [self presentViewController:activityVC animated:TRUE completion:nil];
     
 }

@@ -111,7 +111,7 @@
                                   [@"/Users/" stringByAppendingString:self.deviceId]];
             NSMutableDictionary * updateDetailUser = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
             [updateDetailUser setValue:meeting forKeyPath:@"currentMeeting"];
-            [self.urlDetailUser setValue:meeting];
+            [self.urlDetailUser setValue:updateDetailUser];
         }
     }];
 }
@@ -205,7 +205,31 @@
         } else{
             self.urlDetailUser = [_myRootRef childByAppendingPath:
                                   [@"/Users/" stringByAppendingString:self.deviceId]];
-            [self.urlDetailUser setValue:meeting forKey:@"activeMeetings"];
+            
+            [userDetail setValue:@[meeting] forKey:@"activeMeetings"];
+            [self.urlDetailUser setValue:userDetail];
+        }
+    }];
+}
+
+- (void) addMeetingInSharedMeetingsOfUser: (Meeting *) sharedMeeting{
+    [self updateUserWithCallback:^(id<IUserDatasource> handler) {
+        NSMutableDictionary * userDetail = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
+    
+        if ([userDetail[@"sharedMeetings"] count]) {
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [[@"/Users/" stringByAppendingString:self.deviceId]
+                                   stringByAppendingString:@"/sharedMeetings"]];
+            NSMutableArray * listOfSharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+            [listOfSharedMeetings addObject:[NSDictionary dictionaryWithDictionary:sharedMeeting]];
+            
+            [self.urlDetailUser setValue:listOfSharedMeetings];
+        } else{
+            self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                  [@"/Users/" stringByAppendingString:self.deviceId]];
+            
+            [userDetail setValue:@[sharedMeeting] forKey:@"sharedMeetings"];
+            [self.urlDetailUser setValue:userDetail];
         }
     }];
 }
