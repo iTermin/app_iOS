@@ -30,4 +30,8 @@
 - (void) removeMeeting: (MutableMeeting*) meeting
 OfActiveOrSharedMeetingsInDetailUser: (NSString *) sectionName;
 
+- (void) addMeetingInSharedMeetingsOfUser: (Meeting *) sharedMeeting;
+
+- (void) removeSharedMeeting: (MutableMeeting*) meeting;
+
 @end

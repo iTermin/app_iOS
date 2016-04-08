@@ -23,6 +23,7 @@
 
 {
     BOOL selectedAllDay;
+    BOOL isSharedMeeting;
 }
 
 @property (strong, nonatomic) UXDateCellsManager *dateCellsManager;
@@ -39,18 +40,18 @@
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
+    isSharedMeeting = NO; //Todo verify with the base de datos
+    
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    // Set up the initial values for the date cells manager
     NSDate *startDate = [NSDate date]; //now
-    NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:7200]; //one week from now
+    NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:7200];
     NSIndexPath *allDayCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSIndexPath *startDateCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     NSIndexPath *endDateCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     
-    // Set up the date cells manager
     self.dateCellsManager = [[UXDateCellsManager alloc] initWithTableView:self.tableView
                                                                 startDate:startDate
                                                                   endDate:endDate
@@ -401,7 +402,16 @@
     
     NSArray *activityItems = @[texttoshare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [activityVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed,  NSArray *returnedItems, NSError *activityError) {
+        if (completed) {
+            isSharedMeeting = YES;
+            [self updateMeetings:YES];
+            [self.userbusiness addMeetingInSharedMeetingsOfUser:self.currentMeetingToUserDetail];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            NSLog(@"action");
+        }
+    }];
     [self presentViewController:activityVC animated:TRUE completion:nil];
     
 }
@@ -410,10 +420,10 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Update...";
     hud.color = [UIColor lightGrayColor];
-    [self validateCurrentMeetingWithSharedMeetings];
+    [self inspectSharedMeetings:@"deleteMeeting"];
 }
 
--(void) validateCurrentMeetingWithSharedMeetings {
+-(void) inspectSharedMeetings:(NSString*) actionName {
     NSMutableDictionary * detailUser = [NSMutableDictionary dictionary];
     NSMutableArray * sharedMeetings = [NSMutableArray array];
     
@@ -425,12 +435,21 @@
             }
         }];
         
-        if ([sharedMeetings count]) {
-            [self existCurrentMeetingInSharedMeetings:sharedMeetings];
-        } else {
-            [self cleanCurrentsMeetings];
-            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+        if ([actionName isEqualToString:@"deleteMeeting"]) {
+            if ([sharedMeetings count]) {
+                [self existCurrentMeetingInSharedMeetings:sharedMeetings WithActionName:actionName];
+            } else {
+                [self cleanCurrentsMeetings];
+                [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+                [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+            }
+        } else if ([actionName isEqualToString:@"confirmMeetings"]){
+            if ([sharedMeetings count]) {
+                [self existCurrentMeetingInSharedMeetings:sharedMeetings WithActionName:actionName];
+            } else {
+                [self.currentMeetingToUserDetail setDictionary:@{}];
+                [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            }
         }
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -438,24 +457,36 @@
     }];
 }
 
-- (void) existCurrentMeetingInSharedMeetings: (NSArray *) meetings{
+- (void) existCurrentMeetingInSharedMeetings: (NSArray *) meetings WithActionName: (NSString *) actionName{
     __block BOOL existCurrentMeeting = NO;
+    NSString * idCurrentMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"meetingId"]];
+
     [meetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sharedMeeting, NSUInteger idx, BOOL * stop) {
-        NSString * idCurrentMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"meetingId"]];
         NSString * idSharedMeeting = [NSString stringWithString:sharedMeeting[@"meetingId"]];
         if ([idCurrentMeeting isEqualToString:idSharedMeeting]) {
             existCurrentMeeting = YES;
-            [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
-            [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
-            [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
-            [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
+            if ([actionName isEqualToString:@"deleteMeeting"]) {
+                
+                [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
+                [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
+                [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
+                [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
+                
+            } else if ([actionName isEqualToString:@"confirmMeetings"]){
+                [self.userbusiness removeSharedMeeting:sharedMeeting];
+            }
         }
     }];
     
     if (existCurrentMeeting == NO){
-        [self cleanCurrentsMeetings];
-        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+        if ([actionName isEqualToString:@"deleteMeeting"]) {
+            [self cleanCurrentsMeetings];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+        } else if ([actionName isEqualToString:@"confirmMeeting"]){
+            [self.currentMeetingToUserDetail setDictionary:@{}];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        }
     }
 }
 
@@ -483,8 +514,13 @@
     [self.meetingbusiness updateNewMeeting:self.currentMeeting];
     NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
     [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
-    [self.currentMeetingToUserDetail setDictionary:@{}];
-    [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+    if (isSharedMeeting) {
+        [self inspectSharedMeetings:@"confirmMeetings"];
+        
+    } else{
+        [self.currentMeetingToUserDetail setDictionary:@{}];
+        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+    }
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
