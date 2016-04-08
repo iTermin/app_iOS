@@ -29,6 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
+    self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
+    self.photoProfileEdit.clipsToBounds = YES;
+    
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
@@ -102,7 +105,7 @@
 static UIImage *circularImageWithImage(UIImage *inputImage)
 {
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
     
     // Create an image context containing the original UIImage.
     UIGraphicsBeginImageContext(inputImage.size);
@@ -217,7 +220,7 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //NSURL *path = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     changedInformation = YES;
-    image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(220, 260)];
     self.hostInformation[@"photo"] = [self encodeToBase64String:image];
     
     [self updateViewModel];

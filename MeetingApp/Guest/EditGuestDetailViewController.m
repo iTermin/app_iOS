@@ -70,7 +70,7 @@
 static UIImage *circularImageWithImage(UIImage *inputImage)
 {
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
     
     // Create an image context containing the original UIImage.
     UIGraphicsBeginImageContext(inputImage.size);
@@ -249,7 +249,7 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     
     changedInformation = YES;
     
-    image = [self imageWithImage:image scaledToSize:CGSizeMake(160, 200)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(220, 260)];
     self.guestInformation[@"photo"] = [self encodeToBase64String:image];
     
     [self updateViewModel];

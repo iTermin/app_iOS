@@ -30,7 +30,8 @@
             NSString *userName = _data[@"name"];
             [self.profilePicture setImageWithString:userName color:nil circular:YES];
         } else {
-
+            self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2.0f;
+            self.profilePicture.clipsToBounds = YES;
             [self.profilePicture setImage:circularImageWithImage
                 ([UIImage imageWithData: [self decodeBase64ToImage:_data[@"photo"]]])];
         }
@@ -55,7 +56,7 @@
 static UIImage *circularImageWithImage(UIImage *inputImage)
 {
     
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 160, 160)];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
     
     // Create an image context containing the original UIImage.
     UIGraphicsBeginImageContext(inputImage.size);

@@ -600,10 +600,6 @@
         [self.currentMeeting setDictionary:meeting];
         [self.meetingbusiness updateNewMeeting:self.currentMeeting];
 
-//        NSDictionary *detailInformation = @{
-//                                            @"name" : self.nameMeeting.text,
-//                                            @"guests" : self.listOfGuests,
-//                                            };
         [meetingDateSelectorViewController setTitle:self.nameMeeting.text];
         [meetingDateSelectorViewController setCurrentMeeting:self.currentMeeting];
         [meetingDateSelectorViewController setCurrentMeetingToUserDetail:self.currentMeetingToUserDetail];
