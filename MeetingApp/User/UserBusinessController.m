@@ -234,4 +234,23 @@
     }];
 }
 
+- (void) removeSharedMeeting: (MutableMeeting*) meeting{
+    
+    [self updateUserWithCallback:^(id<IUserDatasource> handler) {
+        NSDictionary * userDetail = [NSDictionary dictionaryWithDictionary:self.detailUser];
+        
+        NSMutableArray * sharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+        [sharedMeetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sMeeting, NSUInteger idx, BOOL * stop) {
+            if ([[meeting valueForKey:@"meetingId"] isEqual:[sMeeting valueForKey:@"meetingId"]]) {
+                [sharedMeetings removeObjectAtIndex:idx];
+            }
+        }];
+        
+        self.urlDetailUser = [_myRootRef childByAppendingPath:
+                              [[@"/Users/" stringByAppendingString:self.deviceId]
+                               stringByAppendingString:@"/sharedMeetings"]];
+        [self.urlDetailUser setValue:sharedMeetings];
+    }];
+}
+
 @end
