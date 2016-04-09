@@ -27,6 +27,9 @@
 @property (strong) NSArray * modelCountries;
 @property (strong) NSDictionary * userInformation;
 
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) NSDate * endDate;
+
 @property (strong) NSDate * dateCurrent;
 @property (strong) NSMutableArray * hoursArray;
 

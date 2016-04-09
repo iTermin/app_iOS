@@ -38,6 +38,8 @@
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
+    self.listOfGuests = [NSMutableArray array];
+    
     [self verifyDataOfCurrentMeeting];
     
     self.indexPathGuestSelected = [NSIndexPath new];
@@ -74,10 +76,8 @@
 
 - (void) verifyDataOfCurrentMeeting{
     [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary * meeting, BOOL * stop) {
-        if ([meeting[@"guests"] count]) {
+        if (![[meeting[@"guests"] objectAtIndex:0] isKindOfClass:[NSString class]]) {
             self.listOfGuests = [NSMutableArray arrayWithArray:meeting[@"guests"]];
-        } else{
-            self.listOfGuests = [NSMutableArray arrayWithArray:@[]];
         }
         
         NSString * nameMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"name"]];
@@ -112,7 +112,7 @@
                                @"data":cellModel }];
     }];
     
-    self.viewModel = viewModel;
+    self.viewModel = [NSArray arrayWithArray:viewModel];
     
     if (changedInformation){
         [self.tableView beginUpdates];
@@ -399,23 +399,25 @@
     NSArray *codeContact = [self codesCountriesWith:phoneGuest];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
-    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                                                                              @"photo" : photoContact ?
-                                                                                              [self encodeToBase64String:photoContact] : @"",
-                                                                                              @"codePhone" : codeContact ? codeContact : @"",
-                                                                                              @"email" : emailGuest ? emailGuest : @"",
-                                                                                              @"name" : nameGuest,
-                                                                                              @"codeCountry" : code
-                                                                                              }];
-    if ([guestInformation[@"email"] isEqualToString:@""])
-        [self warningRegisterEmailGuest:guestInformation[@"name"]];
+    NSDictionary * guestInformation = @{
+                                        @"photo" : photoContact ?
+                                        [self encodeToBase64String:photoContact] : @"",
+                                        @"codePhone" : codeContact ? codeContact : @"",
+                                        @"email" : emailGuest ? emailGuest : @"",
+                                        @"name" : nameGuest ? nameGuest : @"",
+                                        @"codeCountry" : code
+                                        };
     
     [self.listOfGuests addObject:guestInformation];
+
     [self updateViewModel];
-    
+        
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+    
+    if ([guestInformation[@"email"] isEqualToString:@""])
+        [self warningRegisterEmailGuest:guestInformation[@"name"]];
 }
 
 - (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{
@@ -602,9 +604,13 @@
         [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
             [meeting setDictionary:[NSMutableDictionary
                                      dictionaryWithDictionary:[self.currentMeeting valueForKey:key]]];
-            [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
-                                                                             @"name" : self.nameMeeting.text,
-                                                                             }] forKey:@"detail"];
+            
+            if ([meeting[@"detail"] count] < 2) {
+                [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                  @"name" : self.nameMeeting.text,
+                                                                                }] forKey:@"detail"];
+            }
+            
             [self clearInformationOfGuests];
             [meeting setValue:self.listOfGuests forKey:@"guests"];
             
