@@ -230,7 +230,11 @@
                 NSMutableDictionary * detailMeeting = [NSMutableDictionary dictionaryWithDictionary:
                                                        [self.meetingbusiness getMeetingDetail:currentMeetingInDetailUser]];
                 
-                [beginMeetingViewController setCurrentMeeting:detailMeeting];
+                [beginMeetingViewController setCurrentMeeting:
+                    [NSMutableDictionary dictionaryWithDictionary:
+                                    @{
+                                      [currentMeetingInDetailUser valueForKey:@"meetingId"]: detailMeeting
+                                      }]];
                 [beginMeetingViewController setCurrentMeetingToUserDetail:currentMeetingInDetailUser];
                 
             } else{

@@ -38,8 +38,8 @@
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
-    self.listOfGuests = [NSMutableArray arrayWithArray:self.currentMeeting[@"guests"]];
-
+    [self verifyDataOfCurrentMeeting];
+    
     self.indexPathGuestSelected = [NSIndexPath new];
     
     CGSize nameSize = self.nameMeeting.frame.size;
@@ -70,6 +70,22 @@
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.addContactAddress addGestureRecognizer:tapRecognizer];
+}
+
+- (void) verifyDataOfCurrentMeeting{
+    [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary * meeting, BOOL * stop) {
+        if ([meeting[@"guests"] count]) {
+            self.listOfGuests = [NSMutableArray arrayWithArray:meeting[@"guests"]];
+        } else{
+            self.listOfGuests = [NSMutableArray arrayWithArray:@[]];
+        }
+        
+        NSString * nameMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"name"]];
+        if (![nameMeeting isEqualToString:@"init"]) {
+            self.nameMeeting.text = nameMeeting;
+        }
+    }];
+    
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
