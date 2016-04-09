@@ -40,25 +40,13 @@
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
+    [self verifyDataOfCurrentMeeting];
+    
     isSharedMeeting = NO; //Todo verify with the base de datos
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    NSDate *startDate = [NSDate date]; //now
-    NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:7200];
-    NSIndexPath *allDayCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    NSIndexPath *startDateCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-    NSIndexPath *endDateCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    
-    self.dateCellsManager = [[UXDateCellsManager alloc] initWithTableView:self.tableView
-                                                                startDate:startDate
-                                                                  endDate:endDate
-                                                                 isAllDay:NO
-                                                   indexPathForAllDayCell:allDayCellIndexPath
-                                                indexPathForStartDateCell:startDateCellIndexPath
-                                                  indexPathForEndDateCell:endDateCellIndexPath];
     
     self.registeredNibs = [NSMutableSet set];
 
@@ -66,15 +54,13 @@
     
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
-    self.dateCurrent = [NSDate dateWithTimeInterval:0 sinceDate:startDate];
+    self.dateCurrent = [NSDate dateWithTimeInterval:0 sinceDate:self.startDate];
     self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
     selectedAllDay = NO;
     
     self.hoursArray = [NSMutableArray array];
     
-    [self inputAlgoritm:startDate];
-    
-    [self getGuestsOfCurrentMeeting];
+    [self inputAlgoritm:self.startDate];
     
     [self updateViewModel];
     
@@ -99,13 +85,41 @@
     //BOOL bien = YES == self.dateCellsManager.allDay ? YES : NO;
 }
 
-- (void) getGuestsOfCurrentMeeting {
+- (void) verifyDataOfCurrentMeeting{
     NSMutableDictionary *detailMeeting = [NSMutableDictionary dictionary];
+    
     [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
         [detailMeeting setDictionary:[self.currentMeeting valueForKey:key]];
     }];
     
     self.guestsOfMeeting = [NSArray arrayWithArray:detailMeeting[@"guests"]];
+    
+    if ([detailMeeting[@"detail"] count] > 1) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+        self.startDate = [dateFormatter dateFromString:detailMeeting[@"detail"][@"startDate"]];
+        self.endDate = [dateFormatter dateFromString:detailMeeting[@"detail"][@"endDate"]];
+        
+    } else{
+        self.startDate = [NSDate date]; //now
+        self.endDate = [NSDate dateWithTimeIntervalSinceNow:7200];
+    }
+    
+    [self setDatesInDateSelector];
+}
+
+- (void) setDatesInDateSelector{
+    NSIndexPath *allDayCellIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *startDateCellIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *endDateCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    
+    self.dateCellsManager = [[UXDateCellsManager alloc] initWithTableView:self.tableView
+                                                                startDate:self.startDate
+                                                                  endDate:self.endDate
+                                                                 isAllDay:NO
+                                                   indexPathForAllDayCell:allDayCellIndexPath
+                                                indexPathForStartDateCell:startDateCellIndexPath
+                                                  indexPathForEndDateCell:endDateCellIndexPath];
 }
 
 -(void) updateViewModel{
@@ -493,7 +507,7 @@
 - (void) cleanCurrentsMeetings{
     [self.currentMeetingToUserDetail setDictionary:@{
                                                      @"date": @"init",
-                                                     @"meeingId": self.currentMeetingToUserDetail[@"meetingId"],
+                                                     @"meetingId": self.currentMeetingToUserDetail[@"meetingId"],
                                                      @"name": @"init"
                                                      }];
     
