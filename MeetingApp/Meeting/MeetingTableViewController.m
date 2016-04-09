@@ -218,18 +218,34 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
-                                       getTemporalMeeting];
-        [self.meetingbusiness updateNewMeeting:newMeeting];
         
-        MutableMeeting * newMeetingForUser = [[[MainAssembly defaultAssembly] userBusinessController]
-                                              getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
-        [self.userbusiness updateCurrentMeetingToUser:newMeetingForUser];
-        
-        UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
-        BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
-        [beginMeetingViewController setCurrentMeeting: newMeeting];
-        [beginMeetingViewController setCurrentMeetingToUserDetail:newMeetingForUser];
+        [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
+            NSMutableDictionary * currentMeetingInDetailUser =
+                [NSMutableDictionary dictionaryWithDictionary:[handler getCurrentMeetingIfExistInDetailUser]];
+            
+            UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
+            BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
+            
+            if ([currentMeetingInDetailUser count]) {
+                NSMutableDictionary * detailMeeting = [NSMutableDictionary dictionaryWithDictionary:
+                                                       [self.meetingbusiness getMeetingDetail:currentMeetingInDetailUser]];
+                
+                [beginMeetingViewController setCurrentMeeting:detailMeeting];
+                [beginMeetingViewController setCurrentMeetingToUserDetail:currentMeetingInDetailUser];
+                
+            } else{
+                MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                                               getTemporalMeeting];
+                [self.meetingbusiness updateNewMeeting:newMeeting];
+                
+                MutableMeeting * newMeetingForUser = [[[MainAssembly defaultAssembly] userBusinessController]
+                                                      getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
+                [self.userbusiness updateCurrentMeetingToUser:newMeetingForUser];
+                
+                [beginMeetingViewController setCurrentMeeting: newMeeting];
+                [beginMeetingViewController setCurrentMeetingToUserDetail:newMeetingForUser];
+            }
+        }];
     }
 }
 

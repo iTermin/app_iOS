@@ -91,6 +91,11 @@
     return [NSMutableDictionary dictionaryWithDictionary:temporalNewMeeting];
 }
 
+- (MutableMeeting *) getCurrentMeetingIfExistInDetailUser{
+
+    return [NSMutableDictionary dictionaryWithDictionary:self.detailUser[@"currentMeeting"]];
+}
+
 - (NSString*) getDeviceId{
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
