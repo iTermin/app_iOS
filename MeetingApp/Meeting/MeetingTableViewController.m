@@ -30,6 +30,9 @@
     hud.labelText = @"Loading...";
     hud.color = [UIColor lightGrayColor];
     
+    self.currentMeeting = [NSMutableDictionary dictionary];
+    self.currentMeetingInDetailUser = [NSMutableDictionary dictionary];
+    
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
@@ -219,38 +222,45 @@
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
         
-        [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
-            NSMutableDictionary * currentMeetingInDetailUser =
-                [NSMutableDictionary dictionaryWithDictionary:[handler getCurrentMeetingIfExistInDetailUser]];
-            
-            UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
-            BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
-            
-            if ([currentMeetingInDetailUser count]) {
-                NSMutableDictionary * detailMeeting = [NSMutableDictionary dictionaryWithDictionary:
-                                                       [self.meetingbusiness getMeetingDetail:currentMeetingInDetailUser]];
-                
-                [beginMeetingViewController setCurrentMeeting:
-                    [NSMutableDictionary dictionaryWithDictionary:
-                                    @{
-                                      [currentMeetingInDetailUser valueForKey:@"meetingId"]: detailMeeting
-                                      }]];
-                [beginMeetingViewController setCurrentMeetingToUserDetail:currentMeetingInDetailUser];
-                
-            } else{
-                MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
-                                               getTemporalMeeting];
-                [self.meetingbusiness updateNewMeeting:newMeeting];
-                
-                MutableMeeting * newMeetingForUser = [[[MainAssembly defaultAssembly] userBusinessController]
-                                                      getTemporalNewMeeting:[[newMeeting allKeys] objectAtIndex:0]];
-                [self.userbusiness updateCurrentMeetingToUser:newMeetingForUser];
-                
-                [beginMeetingViewController setCurrentMeeting: newMeeting];
-                [beginMeetingViewController setCurrentMeetingToUserDetail:newMeetingForUser];
-            }
-        }];
+        UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
+        BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
+        
+        [beginMeetingViewController setCurrentMeeting:self.currentMeeting];
+        [beginMeetingViewController setCurrentMeetingToUserDetail:self.currentMeetingInDetailUser];
+
     }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
+        
+        NSMutableDictionary * getCurrentMeetingInDetailUser =
+        [NSMutableDictionary dictionaryWithDictionary:[handler getCurrentMeetingIfExistInDetailUser]];
+
+        
+        if ([getCurrentMeetingInDetailUser count]) {
+            NSMutableDictionary * detailMeeting = [NSMutableDictionary dictionaryWithDictionary:
+                                                   [self.meetingbusiness getMeetingDetail:getCurrentMeetingInDetailUser]];
+            
+            self.currentMeeting = [NSMutableDictionary dictionaryWithDictionary: @{
+                [getCurrentMeetingInDetailUser valueForKey:@"meetingId"]: detailMeeting
+                }];
+            self.currentMeetingInDetailUser = [NSMutableDictionary dictionaryWithDictionary:getCurrentMeetingInDetailUser];
+            
+        } else{
+            self.currentMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                                           getTemporalMeeting];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+            
+            self.currentMeetingInDetailUser = [[[MainAssembly defaultAssembly] userBusinessController]
+                                                  getTemporalNewMeeting:[[self.currentMeeting allKeys] objectAtIndex:0]];
+            
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingInDetailUser];
+        }
+        
+        [self performSegueWithIdentifier:@"newMeeting" sender:sender];
+    }];
+    return NO;
 }
 
 - (IBAction)reloadData:(UIRefreshControl *)sender {

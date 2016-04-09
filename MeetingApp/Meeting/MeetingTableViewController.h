@@ -25,6 +25,9 @@
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 @property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
+@property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingInDetailUser;
+
 - (IBAction)reloadData:(id)sender;
 @end
 
