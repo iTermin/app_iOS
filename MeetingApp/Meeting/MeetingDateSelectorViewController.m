@@ -409,12 +409,10 @@
 }
 
 - (IBAction)sharePressed:(id)sender {
-        
-    NSMutableString *texttoshare = [NSMutableString stringWithFormat:@"You are invited to "];
-    [texttoshare appendString:self.currentMeetingToUserDetail[@"name"]];
-    //TODO : extract date and send url
+    NSString * meetingId = [self.currentMeetingToUserDetail valueForKey:@"meetingId"];
+    NSURL * urlShareMeeting = [NSURL URLWithString:[@"http://blueberry-crumble-60073.herokuapp.com/meetingDetail/" stringByAppendingString:meetingId]];
     
-    NSArray *activityItems = @[texttoshare];
+    NSArray *activityItems = @[urlShareMeeting];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     [activityVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed,  NSArray *returnedItems, NSError *activityError) {
         if (completed) {
@@ -423,7 +421,6 @@
             [self.userbusiness addMeetingInSharedMeetingsOfUser:self.currentMeetingToUserDetail];
             [self.meetingbusiness updateNewMeeting:self.currentMeeting];
             [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-            NSLog(@"action");
         }
     }];
     [self presentViewController:activityVC animated:TRUE completion:nil];
