@@ -479,12 +479,9 @@
             if ([actionName isEqualToString:@"deleteMeeting"]) {
                 
                 [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
-                [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
                 [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
                 [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
                 
-            } else if ([actionName isEqualToString:@"confirmMeetings"]){
-                [self.userbusiness removeSharedMeeting:sharedMeeting];
             }
         }
     }];
