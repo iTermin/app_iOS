@@ -133,23 +133,28 @@
     }
     //
 
+    __block NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
     [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        NSString * iconSelector = [NSString new];
-        if (selectedAllDay == YES)
-            iconSelector = @"allDay";
-        else if (selectedAllDay == NO){
-            NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
-            NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
-            iconSelector = [self detectIconDepend:actualGuestHour];
+        if (![self existUser:userInfo AsGuest:guest]) {
+            
+            NSString * iconSelector = [NSString new];
+            if (selectedAllDay == YES)
+                iconSelector = @"allDay";
+            else if (selectedAllDay == NO){
+                NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
+                NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
+                iconSelector = [self detectIconDepend:actualGuestHour];
+            }
+            
+            NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
+            [cellModel setObject:iconSelector forKey:@"selector"];
+            
+            [viewModel addObject:@{
+                                   @"nib" : @"GuestDateViewCell",
+                                   @"height" : @(70),
+                                   @"data":cellModel }];
         }
-        
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
-        [cellModel setObject:iconSelector forKey:@"selector"];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestDateViewCell",
-                               @"height" : @(70),
-                               @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
@@ -158,6 +163,13 @@
     
 }
 
+- (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
+    BOOL existUser = NO;
+    if ([[userDetail valueForKey:@"email"] isEqualToString:[guestDetail valueForKey:@"email"]]) {
+        existUser = YES;
+    }
+    return existUser;
+}
 
 - (int) outputAlgoritm : (NSArray *) arrayHours {
     //TODO: input of self.hoursArray before removeAllObjects, implement with algoritm

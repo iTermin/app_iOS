@@ -641,12 +641,15 @@
 }
 
 - (void) clearInformationOfGuests{
-    [self.listOfGuests enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL * stop) {
-        NSMutableDictionary * guest = [NSMutableDictionary dictionaryWithDictionary:object];
-        [guest removeObjectForKey:@"codePhone"];
-        [guest setObject:@0 forKey:@"status"];
-        [self.listOfGuests removeObjectAtIndex:idx];
-        [self.listOfGuests addObject:guest];
+    __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSMutableDictionary * guest, NSUInteger idx, BOOL * stop) {
+        if (![self existUser:detailUser AsGuest:guest]) {
+            [guest removeObjectForKey:@"codePhone"];
+            [guest setObject:@0 forKey:@"status"];
+            [self.listOfGuests removeObjectAtIndex:idx];
+            [self.listOfGuests setObject:guest atIndexedSubscript:idx];
+        }
     }];
 }
 
