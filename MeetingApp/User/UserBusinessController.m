@@ -220,15 +220,26 @@
 - (void) addMeetingInSharedMeetingsOfUser: (Meeting *) sharedMeeting{
     [self updateUserWithCallback:^(id<IUserDatasource> handler) {
         NSMutableDictionary * userDetail = [NSMutableDictionary dictionaryWithDictionary:self.detailUser];
-    
-        if ([userDetail[@"sharedMeetings"] count]) {
-            self.urlDetailUser = [_myRootRef childByAppendingPath:
-                                  [[@"/Users/" stringByAppendingString:self.deviceId]
-                                   stringByAppendingString:@"/sharedMeetings"]];
-            NSMutableArray * listOfSharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
-            [listOfSharedMeetings addObject:[NSDictionary dictionaryWithDictionary:sharedMeeting]];
+        NSArray * sharedMeetings = [NSArray arrayWithArray:userDetail[@"sharedMeetings"]];
+                                    
+        if ([sharedMeetings count]) {
+            __block BOOL existSharedMeeting;
+            [sharedMeetings enumerateObjectsUsingBlock:^(NSDictionary * meeting, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([[meeting valueForKey:@"meetingId"] isEqual:[sharedMeeting valueForKey:@"meetingId"]]) {
+                    existSharedMeeting = YES;
+                }
+            }];
             
-            [self.urlDetailUser setValue:listOfSharedMeetings];
+            if (!existSharedMeeting) {
+                self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                      [[@"/Users/" stringByAppendingString:self.deviceId]
+                                       stringByAppendingString:@"/sharedMeetings"]];
+                NSMutableArray * listOfSharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+                [listOfSharedMeetings addObject:[NSDictionary dictionaryWithDictionary:sharedMeeting]];
+                
+                [self.urlDetailUser setValue:listOfSharedMeetings];
+            }
+            
         } else{
             self.urlDetailUser = [_myRootRef childByAppendingPath:
                                   [@"/Users/" stringByAppendingString:self.deviceId]];
