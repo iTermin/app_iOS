@@ -582,7 +582,7 @@
                                                                                   },
                                                                           }] forKey:@"detail"];
         
-        [meeting setValue:self.guestsOfMeeting forKey:@"guests"];
+        [meeting setValue:[self addHostToListOfGuests] forKey:@"guests"];
         
         [meeting setDictionary:[NSMutableDictionary
                                 dictionaryWithDictionary:@{
@@ -590,6 +590,23 @@
                                                            }]];
     }];
     [self.currentMeeting setDictionary:meeting];
+}
+
+- (NSArray *) addHostToListOfGuests{
+    NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    userInfo = @{
+                 @"codeCountry": userInfo[@"code"],
+                 @"email": userInfo[@"email"],
+                 @"name": userInfo[@"name"],
+                 @"photo": userInfo[@"photo"],
+                 @"status": @1
+                 };
+    
+    NSMutableArray * newListGuests = [NSMutableArray array];
+    [newListGuests addObject:userInfo];
+    [newListGuests addObjectsFromArray:self.guestsOfMeeting];
+    
+    return [NSArray arrayWithArray:newListGuests];
 }
 
 @end
