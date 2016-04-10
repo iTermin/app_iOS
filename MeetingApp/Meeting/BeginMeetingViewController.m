@@ -96,20 +96,24 @@
 - (void) updateViewModel {
     
     NSMutableArray * viewModel = [NSMutableArray array];
+    __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
-        
-        UIImage * contactPhoto = [UIImage imageNamed:
-                                  [NSString stringWithFormat:@"%@.png",
-                                   guests[@"photo"]]];
-        if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestViewCellCountry",
-                               @"height" : @(70),
-                               @"segue" : @"editGuestDetails",
-                               @"data":cellModel }];
+        if (![self existUser:detailUser AsGuest:guests]) {
+            NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+            
+            UIImage * contactPhoto = [UIImage imageNamed:
+                                      [NSString stringWithFormat:@"%@.png",
+                                       guests[@"photo"]]];
+            if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
+            
+            [viewModel addObject:@{
+                                   @"nib" : @"GuestViewCellCountry",
+                                   @"height" : @(70),
+                                   @"segue" : @"editGuestDetails",
+                                   @"data":cellModel }];
+        }
     }];
     
     self.viewModel = [NSArray arrayWithArray:viewModel];
@@ -122,6 +126,14 @@
     }
     
     [super updateViewModel];
+}
+
+- (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
+    BOOL existUser = NO;
+    if ([[userDetail valueForKey:@"email"] isEqualToString:[guestDetail valueForKey:@"email"]]) {
+        existUser = YES;
+    }
+    return existUser;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
