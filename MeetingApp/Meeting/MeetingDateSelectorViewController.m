@@ -133,23 +133,28 @@
     }
     //
 
+    __block NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
     [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        NSString * iconSelector = [NSString new];
-        if (selectedAllDay == YES)
-            iconSelector = @"allDay";
-        else if (selectedAllDay == NO){
-            NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
-            NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
-            iconSelector = [self detectIconDepend:actualGuestHour];
+        if (![self existUser:userInfo AsGuest:guest]) {
+            
+            NSString * iconSelector = [NSString new];
+            if (selectedAllDay == YES)
+                iconSelector = @"allDay";
+            else if (selectedAllDay == NO){
+                NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
+                NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
+                iconSelector = [self detectIconDepend:actualGuestHour];
+            }
+            
+            NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
+            [cellModel setObject:iconSelector forKey:@"selector"];
+            
+            [viewModel addObject:@{
+                                   @"nib" : @"GuestDateViewCell",
+                                   @"height" : @(70),
+                                   @"data":cellModel }];
         }
-        
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guest];
-        [cellModel setObject:iconSelector forKey:@"selector"];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestDateViewCell",
-                               @"height" : @(70),
-                               @"data":cellModel }];
     }];
     
     self.viewModel = viewModel;
@@ -158,6 +163,13 @@
     
 }
 
+- (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
+    BOOL existUser = NO;
+    if ([[userDetail valueForKey:@"email"] isEqualToString:[guestDetail valueForKey:@"email"]]) {
+        existUser = YES;
+    }
+    return existUser;
+}
 
 - (int) outputAlgoritm : (NSArray *) arrayHours {
     //TODO: input of self.hoursArray before removeAllObjects, implement with algoritm
@@ -479,12 +491,9 @@
             if ([actionName isEqualToString:@"deleteMeeting"]) {
                 
                 [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"sharedMeeting" ToInactiveMeetingsInDetailUser:sharedMeeting];
-                [self.userbusiness removeMeeting:sharedMeeting OfActiveOrSharedMeetingsInDetailUser:@"sharedMeeting"];
                 [self.meetingbusiness setInactiveInDetailOfMeeting:idCurrentMeeting];
                 [self.userbusiness updateCurrentMeetingToUser:[NSMutableDictionary dictionaryWithDictionary:@{}]];
                 
-            } else if ([actionName isEqualToString:@"confirmMeetings"]){
-                [self.userbusiness removeSharedMeeting:sharedMeeting];
             }
         }
     }];
@@ -582,7 +591,7 @@
                                                                                   },
                                                                           }] forKey:@"detail"];
         
-        [meeting setValue:self.guestsOfMeeting forKey:@"guests"];
+        [meeting setValue:[self addHostToListOfGuestsIfNotExist] forKey:@"guests"];
         
         [meeting setDictionary:[NSMutableDictionary
                                 dictionaryWithDictionary:@{
@@ -590,6 +599,35 @@
                                                            }]];
     }];
     [self.currentMeeting setDictionary:meeting];
+}
+
+- (NSArray *) addHostToListOfGuestsIfNotExist{
+    NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    __block BOOL existUserInListOfGuest = NO;
+    
+    [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([userInfo[@"email"] isEqualToString:guest[@"email"]]) {
+            existUserInListOfGuest = YES;
+        }
+    }];
+    
+    if (!existUserInListOfGuest) {
+        userInfo = @{
+                     @"codeCountry": userInfo[@"code"],
+                     @"email": userInfo[@"email"],
+                     @"name": userInfo[@"name"],
+                     @"photo": userInfo[@"photo"],
+                     @"status": @1
+                     };
+        
+        NSMutableArray * newListGuests = [NSMutableArray array];
+        [newListGuests addObject:userInfo];
+        [newListGuests addObjectsFromArray:self.guestsOfMeeting];
+        
+        return [NSArray arrayWithArray:newListGuests];
+    }
+    
+    return self.guestsOfMeeting;
 }
 
 @end
