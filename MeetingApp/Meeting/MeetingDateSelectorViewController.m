@@ -591,7 +591,7 @@
                                                                                   },
                                                                           }] forKey:@"detail"];
         
-        [meeting setValue:[self addHostToListOfGuests] forKey:@"guests"];
+        [meeting setValue:[self addHostToListOfGuestsIfNotExist] forKey:@"guests"];
         
         [meeting setDictionary:[NSMutableDictionary
                                 dictionaryWithDictionary:@{
@@ -601,21 +601,33 @@
     [self.currentMeeting setDictionary:meeting];
 }
 
-- (NSArray *) addHostToListOfGuests{
+- (NSArray *) addHostToListOfGuestsIfNotExist{
     NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
-    userInfo = @{
-                 @"codeCountry": userInfo[@"code"],
-                 @"email": userInfo[@"email"],
-                 @"name": userInfo[@"name"],
-                 @"photo": userInfo[@"photo"],
-                 @"status": @1
-                 };
+    __block BOOL existUserInListOfGuest = NO;
     
-    NSMutableArray * newListGuests = [NSMutableArray array];
-    [newListGuests addObject:userInfo];
-    [newListGuests addObjectsFromArray:self.guestsOfMeeting];
+    [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([userInfo[@"email"] isEqualToString:guest[@"email"]]) {
+            existUserInListOfGuest = YES;
+        }
+    }];
     
-    return [NSArray arrayWithArray:newListGuests];
+    if (!existUserInListOfGuest) {
+        userInfo = @{
+                     @"codeCountry": userInfo[@"code"],
+                     @"email": userInfo[@"email"],
+                     @"name": userInfo[@"name"],
+                     @"photo": userInfo[@"photo"],
+                     @"status": @1
+                     };
+        
+        NSMutableArray * newListGuests = [NSMutableArray array];
+        [newListGuests addObject:userInfo];
+        [newListGuests addObjectsFromArray:self.guestsOfMeeting];
+        
+        return [NSArray arrayWithArray:newListGuests];
+    }
+    
+    return self.guestsOfMeeting;
 }
 
 @end
