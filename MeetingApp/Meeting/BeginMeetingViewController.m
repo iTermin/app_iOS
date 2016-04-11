@@ -331,9 +331,11 @@
     NSArray *phoneNumbers = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
     
     UIImage *retrievedImage;
-    if (person != nil && ABPersonHasImageData(person))
-        retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
-    else retrievedImage = nil;
+    if (person != nil && ABPersonHasImageData(person)){
+        retrievedImage = [UIImage imageWithData:
+                          (__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
+        retrievedImage = [self imageWithImage:retrievedImage scaledToSize:CGSizeMake(220, 260)];
+    } else retrievedImage = nil;
     
     NSString *retrievedName;
     
@@ -349,6 +351,16 @@
         [self dismissViewControllerAnimated:NO completion:^(){}];
         [self alertGuestRegistered];
     }
+}
+
+- (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
+{
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (BOOL) existName: (NSString *) name Middle: (NSString *) middle Last: (NSString *) last{
@@ -613,9 +625,9 @@
         [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
         
         NSMutableDictionary * meeting = [NSMutableDictionary dictionary];
-        [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL * stop) {
+        [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(NSString * key, id obj, BOOL * stop) {
             [meeting setDictionary:[NSMutableDictionary
-                                     dictionaryWithDictionary:[self.currentMeeting valueForKey:key]]];
+                                     dictionaryWithDictionary:self.currentMeeting[key]]];
             
             if ([meeting[@"detail"] count] < 2) {
                 [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
@@ -642,15 +654,25 @@
 
 - (void) clearInformationOfGuests{
     __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
-
+    __block NSMutableArray * guestInformation = [NSMutableArray array];
+    
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSMutableDictionary * guest, NSUInteger idx, BOOL * stop) {
         if (![self existUser:detailUser AsGuest:guest]) {
-            [guest removeObjectForKey:@"codePhone"];
-            [guest setObject:@0 forKey:@"status"];
-            [self.listOfGuests removeObjectAtIndex:idx];
-            [self.listOfGuests setObject:guest atIndexedSubscript:idx];
+            NSMutableDictionary * tempGuest = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                    @"codeCountry": guest[@"codeCountry"],
+                                                                    @"email": guest[@"email"],
+                                                                    @"name": guest[@"name"],
+                                                                    @"photo": guest[@"photo"],
+                                                                    @"status": @0
+                                                                    }];
+            [guestInformation addObject:tempGuest];
+        } else{
+            [guestInformation addObject:guest];
         }
     }];
+    
+    [self.listOfGuests removeAllObjects];
+    [self.listOfGuests addObjectsFromArray:guestInformation];
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{

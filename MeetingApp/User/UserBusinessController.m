@@ -228,6 +228,16 @@
                 if ([[meeting valueForKey:@"meetingId"] isEqual:[sharedMeeting valueForKey:@"meetingId"]]) {
                     existSharedMeeting = YES;
                 }
+                
+                if (existSharedMeeting) {
+                    self.urlDetailUser = [_myRootRef childByAppendingPath:
+                                          [[@"/Users/" stringByAppendingString:self.deviceId]
+                                           stringByAppendingString:@"/sharedMeetings"]];
+                    NSMutableArray * listOfSharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
+                    [listOfSharedMeetings replaceObjectAtIndex:idx withObject:sharedMeeting];
+                    
+                    [self.urlDetailUser setValue:listOfSharedMeetings];
+                }
             }];
             
             if (!existSharedMeeting) {
@@ -247,25 +257,6 @@
             [userDetail setValue:@[sharedMeeting] forKey:@"sharedMeetings"];
             [self.urlDetailUser setValue:userDetail];
         }
-    }];
-}
-
-- (void) removeSharedMeeting: (MutableMeeting*) meeting{
-    
-    [self updateUserWithCallback:^(id<IUserDatasource> handler) {
-        NSDictionary * userDetail = [NSDictionary dictionaryWithDictionary:self.detailUser];
-        
-        NSMutableArray * sharedMeetings = [NSMutableArray arrayWithArray:userDetail[@"sharedMeetings"]];
-        [sharedMeetings enumerateObjectsUsingBlock:^(NSMutableDictionary * sMeeting, NSUInteger idx, BOOL * stop) {
-            if ([[meeting valueForKey:@"meetingId"] isEqual:[sMeeting valueForKey:@"meetingId"]]) {
-                [sharedMeetings removeObjectAtIndex:idx];
-            }
-        }];
-        
-        self.urlDetailUser = [_myRootRef childByAppendingPath:
-                              [[@"/Users/" stringByAppendingString:self.deviceId]
-                               stringByAppendingString:@"/sharedMeetings"]];
-        [self.urlDetailUser setValue:sharedMeetings];
     }];
 }
 
