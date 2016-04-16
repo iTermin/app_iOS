@@ -25,13 +25,6 @@
 
 @implementation BeginMeetingViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setToolbarHidden:YES animated:YES];
-
-    [self updateViewModel];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -72,6 +65,13 @@
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.addContactAddress addGestureRecognizer:tapRecognizer];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    [self updateViewModel];
 }
 
 - (void) verifyDataOfCurrentMeeting{
@@ -149,33 +149,35 @@
     BOOL guestIsValid = NO;
     if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        guestIsValid = [self validateEmail:self.emailGuest.text];
-        if(guestIsValid){
-            BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
-            if (isDiferentGuest) {
-                [self addNewGuestWith:self.emailGuest.text];
-                textField.text = nil;
-                return guestIsValid;
+        if (![self.emailGuest.text isEqualToString:@""]) {
+            guestIsValid = [self validateEmail:self.emailGuest.text];
+            if(guestIsValid){
+                BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
+                if (isDiferentGuest) {
+                    [self addNewGuestWith:self.emailGuest.text];
+                    textField.text = nil;
+                    return guestIsValid;
+                }
+                else{
+                    [self alertGuestRegistered];
+                    return guestIsValid = NO;
+                }
+            } else{
+                UIAlertController *alert = [UIAlertController
+                                            alertControllerWithTitle:@"Wrong Email!"
+                                            message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                            preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action){
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                
+                [alert addAction:ok];
+                [self presentViewController:alert animated:YES completion:nil];
             }
-            else{
-                [self alertGuestRegistered];
-                return guestIsValid = NO;
-            }
-        } else{
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Wrong Email!"
-                                        message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
-                                        preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action){
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
         }
     }
     if (textField == self.nameMeeting)
@@ -230,13 +232,10 @@
 
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
                                             @"photo" : @"",
-                                            @"codePhone" : @"",
                                             @"email" : email,
-                                            @"name" : @""
+                                            @"name" : @"",
+                                            @"codeCountry" : [self getCodeCountryUser]
                                                                                               }];
-    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
-    
-    [guestInformation setObject:code forKey:@"codeCountry"];
     
     [self.listOfGuests addObject: guestInformation];
     [self updateViewModel];
@@ -514,17 +513,17 @@
     return codesCountries;
 }
 
--(NSString *) getCountryUser {
-    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
-    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-    return countryCode;
+-(NSString *) getCodeCountryUser {
+    NSDictionary *detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
+    return detailUser[@"code"];
 }
 
 - (NSString *)getFlagCodeWithCodePhoneGuest:(NSArray *)codePhone {
     __block NSString * code = [NSString new];
 
-    if (codePhone.count == 0) {
-        code = [self getCountryUser];
+    if (![codePhone count]) {
+        code = [self getCodeCountryUser];
     } else{
         [codePhone enumerateObjectsUsingBlock:^(id codePhone, NSUInteger idx, BOOL * stop){
             NSArray *countriesInformation = self.modelCountries;

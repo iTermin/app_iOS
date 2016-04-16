@@ -299,13 +299,13 @@
     [dateFormatter setDateFormat:@"mm"];
     int minutes = [[dateFormatter stringFromDate:startDate] intValue];
     
-    return @{ @"hour" : @(hour), @"minutes" : @(minutes), @"countryCode" : [self getCountryUser]};
+    return @{ @"hour" : @(hour), @"minutes" : @(minutes), @"countryCode" : [self getCodeCountryUser]};
 }
 
--(NSString *) getCountryUser {
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *mobileNetworkInfo = [networkInfo subscriberCellularProvider];
-    return [[mobileNetworkInfo isoCountryCode] uppercaseString];
+-(NSString *) getCodeCountryUser {
+    NSDictionary *detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    
+    return detailUser[@"code"];
 }
 
 #pragma mark - Table view delegate
