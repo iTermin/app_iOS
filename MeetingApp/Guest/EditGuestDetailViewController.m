@@ -39,9 +39,34 @@
     self.nameGuest.delegate = self;
     self.emailGuest.delegate = self;
     
+    CGSize nameSize = self.nameGuest.frame.size;
+    CGFloat xPosition = 0.0f;
+    CGFloat yPosition = 1.0f;
+    UIColor *grayColorSeparator = [UIColor colorWithWhite: 0.70 alpha:1];
+    
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(xPosition, nameSize.height - 1, nameSize.width, yPosition);
+    nameBorder.backgroundColor = grayColorSeparator.CGColor;
+    [self.nameGuest.layer addSublayer:nameBorder];
+    
+    CALayer *emailBorder = [CALayer layer];
+    CGSize meetingSize = self.emailGuest.frame.size;
+    emailBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
+    emailBorder.backgroundColor = grayColorSeparator.CGColor;
+    [self.emailGuest.layer addSublayer:emailBorder];
+    
     UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
     [self.guestPhoto addGestureRecognizer:tapImage];
     
+    UIGestureRecognizer * tapper = [[UITapGestureRecognizer alloc]
+                                    initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
 }
 
 -(void) customCell {
