@@ -32,6 +32,7 @@
     hud.color = [UIColor lightGrayColor];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -42,7 +43,6 @@
     [self.calendarNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
     [self.reminderNotification addTarget:self action:@selector(buttonChangeColorWhenPressed:) forControlEvents:UIControlEventTouchDown];
     
-    [self updateViewModel];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -59,9 +59,12 @@
         self.notifications =
         [NSMutableDictionary dictionaryWithDictionary: self.detailMeeting[@"notifications"]];
         
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
         [self updateState:self.notifications];
+    }];
+    
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource>handler) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         [self updateViewModel];
         [self.tableView reloadData];
     }];
@@ -153,20 +156,33 @@
 
 - (void) updateViewModel {
     NSMutableArray * viewModel = [NSMutableArray array];
+    __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
     [self.guests enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestViewCell",
-                               @"height" : @(70),
-                               @"segue" : @"guestDetail",
-                               @"data":cellModel }];
+        if (![self existUser:detailUser AsGuest:guests]) {
+            
+            NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+            
+            [viewModel addObject:@{
+                                   @"nib" : @"GuestViewCell",
+                                   @"height" : @(70),
+                                   @"segue" : @"guestDetail",
+                                   @"data":cellModel }];
+        }
     }];
     
     self.viewModel = viewModel;
     
     [super updateViewModel];
+}
+
+- (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
+    BOOL existUser = NO;
+    if ([[userDetail valueForKey:@"email"] isEqualToString:[guestDetail valueForKey:@"email"]]) {
+        existUser = YES;
+    }
+    return existUser;
 }
 
 -(void)buttonChangeColorWhenPressed:(UIButton *)button{
