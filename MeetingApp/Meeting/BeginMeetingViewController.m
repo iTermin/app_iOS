@@ -65,6 +65,15 @@
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.addContactAddress addGestureRecognizer:tapRecognizer];
+    UIGestureRecognizer * tapper = [[UITapGestureRecognizer alloc]
+                                  initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -134,11 +143,6 @@
         existUser = YES;
     }
     return existUser;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
