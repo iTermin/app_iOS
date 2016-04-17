@@ -14,6 +14,7 @@
 #import "IUserDelegate.h"
 #import "IUserDatasource.h"
 #import "Meeting.h"
+#import "AlgorithmMain.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
 
@@ -31,10 +32,15 @@
 @property (nonatomic, strong) NSDate * endDate;
 
 @property (strong) NSDate * dateCurrent;
-@property (strong) NSMutableArray * hoursArray;
+
+@property (strong) NSMutableArray * hoursArrayCurrentManipulating;
+@property (strong) NSMutableArray * hoursArrayCurrent;
+@property (strong) NSMutableArray * hoursArrayAlgorithm;
 
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
 @property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
+
+@property (strong) AlgorithmMain * algoritmClass;
 
 - (IBAction)sharePressed:(id)sender;
 - (IBAction)trashPressed:(id)sender;
