@@ -22,15 +22,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IMeetingAllDayDelegate.h"
+#import "IMeetingDateSelectorDelegate.h"
 
 /**
  *  Provides methods to manage the logic of 'Start Date', 'End Date' and 'All day' 
  *  UITableViewCells, as found in the 'Add Event' section of many calendar apps.
  */
-@interface UXDateCellsManager : NSObject <IMeetingAllDayDelegate>
+@interface UXDateCellsManager : NSObject <IMeetingDateSelectorDelegate>
 
-@property (weak) id<IMeetingAllDayDelegate> switchCellData;
+@property (weak) id<IMeetingDateSelectorDelegate> cellDateSelector;
 /**
  *  If it's currently visible, the index path of the date picker cell, otherwise nil.
  */

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ArrayOfCountries.h"
-#import "IMeetingAllDayDelegate.h"
+#import "IMeetingDateSelectorDelegate.h"
 #import "IMeetingDelegate.h"
 #import "IMeetingDatasource.h"
 #import "IUserDelegate.h"
@@ -16,7 +16,7 @@
 #import "Meeting.h"
 #import "AlgorithmMain.h"
 
-@interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
+@interface MeetingDateSelectorViewController : UITableViewController <IMeetingDateSelectorDelegate>
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
 @property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;

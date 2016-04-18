@@ -168,7 +168,7 @@
 		7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserBusinessController.m; path = User/UserBusinessController.m; sourceTree = "<group>"; };
 		7C3F27541CA1E49B005DCD90 /* RegisterUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterUserViewController.h; path = User/RegisterUserViewController.h; sourceTree = "<group>"; };
 		7C3F27551CA1E49B005DCD90 /* RegisterUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterUserViewController.m; path = User/RegisterUserViewController.m; sourceTree = "<group>"; };
-		7C41FEA31C996D2400109B2B /* IMeetingAllDayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMeetingAllDayDelegate.h; path = Meeting/Protocols/IMeetingAllDayDelegate.h; sourceTree = "<group>"; };
+		7C41FEA31C996D2400109B2B /* IMeetingDateSelectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMeetingDateSelectorDelegate.h; path = Meeting/Protocols/IMeetingDateSelectorDelegate.h; sourceTree = "<group>"; };
 		7C65DA6D1C691B53001F6F32 /* ModelTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelTableViewController.h; path = ViewControllers/ModelTableViewController.h; sourceTree = "<group>"; };
 		7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelTableViewController.m; path = ViewControllers/ModelTableViewController.m; sourceTree = "<group>"; };
 		7C79CE991C74806E0011C917 /* MeetingDateSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingDateSelectorViewController.h; path = Meeting/MeetingDateSelectorViewController.h; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 			children = (
 				7C0393DC1C81C65000BDA9AC /* IMeetingDatasource.h */,
 				7C0393DE1C81C6BB00BDA9AC /* IMeetingDelegate.h */,
-				7C41FEA31C996D2400109B2B /* IMeetingAllDayDelegate.h */,
+				7C41FEA31C996D2400109B2B /* IMeetingDateSelectorDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
