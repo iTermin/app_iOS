@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    self.algoritmClass = [AlgorithmMain new];
+    self.algoritmClass = [[MainAssembly defaultAssembly] algorithmMain];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
