@@ -1,5 +1,5 @@
 //
-//  IMeetingAllDayDelegate.h
+//  IMeetingDateSelectorDelegate.h
 //  MeetingApp
 //
 //  Created by Estefania Chavez Guardado on 3/16/16.
@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IMeetingAllDayDelegate <NSObject>
+@protocol IMeetingDateSelectorDelegate <NSObject>
 
 @optional
 - (void) meetingAllDay: (BOOL) selected;
+
+-(void) selectedCellDateSelector;
 
 @end

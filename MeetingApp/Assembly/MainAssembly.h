@@ -14,11 +14,13 @@
 #import "IUserDelegate.h"
 #import "IUserDatasource.h"
 
+#import "AlgorithmMain.h"
+
 
 @interface MainAssembly : TyphoonAssembly
 
 - (id<IMeetingDatasource, IMeetingDelegate>) meetingBusinessController;
 - (id<IUserDelegate, IUserDatasource>) userBusinessController;
-
+- (AlgorithmMain *) algorithmMain;
 
 @end

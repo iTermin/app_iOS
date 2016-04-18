@@ -15,6 +15,7 @@
 #import "MeetingDateSelectorViewController.h"
 #import "ArrayOfCountries.h"
 #import "MBProgressHUD.h"
+#import "AlgorithmMain.h"
 
 #import "MainAssembly.h"
 
@@ -24,6 +25,7 @@
 {
     BOOL selectedAllDay;
     BOOL isSharedMeeting;
+    BOOL existOutputAlgorithm;
 }
 
 @property (strong, nonatomic) UXDateCellsManager *dateCellsManager;
@@ -36,6 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.algoritmClass = [[MainAssembly defaultAssembly] algorithmMain];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
@@ -54,14 +58,15 @@
     
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
-    self.dateCurrent = [NSDate dateWithTimeInterval:0 sinceDate:self.startDate];
-    self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
+    self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.startDate]];
     selectedAllDay = NO;
     
-    self.hoursArray = [NSMutableArray array];
+    self.hoursArrayCurrent = [NSMutableArray array];
+    self.hoursArrayAlgorithm = [NSMutableArray array];
+    self.hoursArrayCurrentManipulating = [NSMutableArray array];
     
     [self inputAlgoritm:self.startDate];
-    
+
     [self updateViewModel];
     
     __weak UITableView * tableView = self.tableView;
@@ -99,13 +104,13 @@
         [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
         self.startDate = [dateFormatter dateFromString:detailMeeting[@"detail"][@"startDate"]];
         self.endDate = [dateFormatter dateFromString:detailMeeting[@"detail"][@"endDate"]];
+        existOutputAlgorithm = NO;
         
     } else{
         self.startDate = [NSDate date]; //now
         self.endDate = [NSDate dateWithTimeIntervalSinceNow:7200];
+        existOutputAlgorithm = YES;
     }
-    
-    [self setDatesInDateSelector];
 }
 
 - (void) setDatesInDateSelector{
@@ -122,28 +127,55 @@
                                                   indexPathForEndDateCell:endDateCellIndexPath];
 }
 
+- (void) updateHourRespectHourAlgorithm{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components: NSCalendarUnitYear|
+                                    NSCalendarUnitMonth|
+                                    NSCalendarUnitDay
+                                               fromDate:self.startDate];
+    [components setHour:[[self.hoursArrayAlgorithm objectAtIndex:0] intValue]];
+    [components setMinute:[[self.userInformation objectForKey:@"minutes"] intValue]];
+    [components setSecond:0];
+    self.startDate = [calendar dateFromComponents:components];
+    
+    [components setHour:[[self.hoursArrayAlgorithm objectAtIndex:0] intValue] + 2];
+    [components setMinute:[[self.userInformation objectForKey:@"minutes"] intValue]];
+    [components setSecond:0];
+    self.endDate = [calendar dateFromComponents:components];
+}
+
 -(void) updateViewModel{
     NSMutableArray * viewModel = [NSMutableArray array];
-    
-    //TODO: change this section when implement algorithm
     int diferencialHour;
-    if([self.hoursArray count]){
-        NSArray *testHoursOutput = @[@20, @2, @3, @4, @5];
-        diferencialHour = [self outputAlgoritm : testHoursOutput];
+    
+    if (existOutputAlgorithm) {
+        diferencialHour = [self extractDiferencialHours];
+        [self updateHourRespectHourAlgorithm];
     }
-    //
-
+    
     __block NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
 
     [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         if (![self existUser:userInfo AsGuest:guest]) {
             
             NSString * iconSelector = [NSString new];
-            if (selectedAllDay == YES)
+            if (selectedAllDay == YES){
                 iconSelector = @"allDay";
-            else if (selectedAllDay == NO){
-                NSNumber * totalHoursToAdd = [self getTotalHoursToAddTo: guest[@"codeCountry"] withIdentify:diferencialHour];
-                NSNumber * actualGuestHour = [NSNumber numberWithInt:([totalHoursToAdd intValue] + [self.userInformation[@"hour"] intValue])];
+                [self inputAlgoritm:self.startDate];
+                existOutputAlgorithm = YES;
+            }
+            else{
+                [self setDatesInDateSelector];
+
+                NSNumber * actualGuestHour = [NSNumber new];
+                
+                if (existOutputAlgorithm){
+                    actualGuestHour = [self getActualHoursOf: guest[@"codeCountry"] withDiferencial:diferencialHour];
+                    existOutputAlgorithm = [self.guestsOfMeeting count] == idx + 1 ? NO : YES;
+                } else{
+                    actualGuestHour = [self updateHourGuest:guest[@"codeCountry"] respectUserCountry:userInfo[@"code"]];
+                }
+                
                 iconSelector = [self detectIconDepend:actualGuestHour];
             }
             
@@ -160,7 +192,44 @@
     self.viewModel = viewModel;
     
     [self.tableView reloadData];
+}
+
+-(NSNumber *) updateHourGuest: (NSString*) codeGuest respectUserCountry: (NSString *) codeUser{
+    NSArray * arrayUTCGuest  = [self getUTCGuest: codeGuest];
+    NSArray * arrayUTCUser = [self getUTCGuest: codeUser];
     
+    int utcGuest = [arrayUTCGuest count] / 2 == 0 ?
+                        [[arrayUTCGuest objectAtIndex:[arrayUTCGuest count]/2] intValue] :
+                        [[arrayUTCGuest objectAtIndex:[arrayUTCGuest count]/2 - 1] intValue];
+    
+    int utcUser = [arrayUTCUser count] / 2 == 0 ?
+                        [[arrayUTCUser objectAtIndex:[arrayUTCUser count]/2] intValue] :
+                        [[arrayUTCUser objectAtIndex:[arrayUTCUser count]/2 - 1] intValue];
+    
+    double diferenceBetweenUTC = 0.0;
+    
+    if (utcUser > utcGuest)
+        diferenceBetweenUTC = utcGuest - utcUser;
+    
+    else if (utcUser < utcGuest){
+        diferenceBetweenUTC = utcUser - utcGuest;
+        diferenceBetweenUTC = diferenceBetweenUTC * -1;
+    }
+    
+    double updateHourGuest;
+    
+    if (utcUser == utcGuest)
+        updateHourGuest = [[self.userInformation valueForKey:@"hour"]doubleValue];
+    else
+        updateHourGuest = [[self.userInformation valueForKey:@"hour"]doubleValue] + diferenceBetweenUTC;
+    
+    if (updateHourGuest <= 0) {
+        updateHourGuest = updateHourGuest + 24;
+    } else if (updateHourGuest > 24) {
+        updateHourGuest = updateHourGuest - 24;
+    }
+
+    return [NSNumber numberWithInt:updateHourGuest];
 }
 
 - (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
@@ -171,11 +240,22 @@
     return existUser;
 }
 
-- (int) outputAlgoritm : (NSArray *) arrayHours {
-    //TODO: input of self.hoursArray before removeAllObjects, implement with algoritm
-    int subtract = 21 - [[@[@20, @2, @3, @4, @5] objectAtIndex:0] intValue];
+- (int) extractDiferencialHours {
+    int hourCurrentUser = [[self.userInformation valueForKey:@"hour"] intValue];
+    int outputHourAlgoritm = [[self.hoursArrayAlgorithm objectAtIndex:0] intValue];
     
-    return [[NSNumber numberWithInt:subtract] intValue];
+    int difererencialHours;
+    
+    if (hourCurrentUser > outputHourAlgoritm) {
+        difererencialHours = 24 - hourCurrentUser;
+        difererencialHours = difererencialHours + outputHourAlgoritm;
+    } else if (hourCurrentUser < outputHourAlgoritm) {
+        difererencialHours = outputHourAlgoritm - hourCurrentUser;
+    } else if (hourCurrentUser == outputHourAlgoritm) {
+        difererencialHours = outputHourAlgoritm;
+    }
+    
+    return difererencialHours;
 }
 
 - (void) meetingAllDay: (BOOL) selected{
@@ -193,12 +273,14 @@
     NSString * seccion = @"moon";
     
     for (int hourForDay = 1; hourForDay <= 24; ++hourForDay) {
-        
-        if (hourForDay == 5) seccion = @"sunsetMoon";
-        else if (hourForDay == 10) seccion = @"sun";
-        else if (hourForDay == 18) seccion = @"sunsetSun";
-        else if (hourForDay == 21) seccion = @"moon";
 
+        if (hourForDay == 5) seccion = @"endmoon";
+        else if (hourForDay == 7) seccion = @"beginDay";
+        else if (hourForDay == 10) seccion = @"sun";
+        else if (hourForDay == 17) seccion = @"sunsetSun";
+        else if (hourForDay == 20) seccion = @"beginmoon";
+        else if (hourForDay == 22) seccion = @"moon";
+        
         if (hourForDay == dayHour){
             return seccion;
             break;
@@ -208,22 +290,22 @@
     return @"";
 }
 
-- (NSNumber *) getTotalHoursToAddTo: (NSString *) guestCountry withIdentify: (int) hours{
+- (NSNumber *) getActualHoursOf: (NSString *) guestCountry withDiferencial: (int) hours{
     NSArray * UTCGuest  = [self getUTCGuest: guestCountry];
     NSArray * UTCUser = [self getUTCGuest:self.userInformation[@"countryCode"]];
     
     if(![UTCUser isEqualToArray:UTCGuest]){
-        NSNumber * middleUTCUser = [UTCUser count]/2 == 0 ?
-        [UTCUser objectAtIndex:[UTCUser count]/2] : [UTCUser objectAtIndex:[UTCUser count]/2 - 1];
         
-        NSNumber * middleUTCGuest = [UTCGuest count]/2 == 0 ?
-        [UTCGuest objectAtIndex:[UTCGuest count]/2] : [UTCGuest objectAtIndex:[UTCGuest count]/2 - 1];
+        NSArray * hoursGuest = [NSArray arrayWithArray:
+                                [self.hoursArrayCurrentManipulating subarrayWithRange:NSMakeRange(1, [UTCGuest count])]];
+        [self.hoursArrayCurrentManipulating removeObjectsInRange:NSMakeRange(1, [UTCGuest count])];
         
+        NSNumber * newHourGuest = [hoursGuest count] / 2 == 0 ?
+        [hoursGuest objectAtIndex:[hoursGuest count]/2] : [hoursGuest objectAtIndex:[hoursGuest count]/2 - 1];
         
-        int differenceHourGuest = [middleUTCUser intValue] > 0 ?
-        ([middleUTCGuest intValue] - [middleUTCUser intValue]) : ([middleUTCUser intValue] + [middleUTCGuest intValue]);
-        
-        return [NSNumber numberWithInt:differenceHourGuest];
+        return newHourGuest;
+    } else{
+        return [NSNumber numberWithDouble:[[self.hoursArrayCurrentManipulating objectAtIndex:0] doubleValue]];
     }
     
     return @0;
@@ -232,28 +314,31 @@
 -(void) inputAlgoritm: (NSDate *) startDate {
     
     NSDictionary * userDate = self.userInformation;
-    [self.hoursArray addObject:userDate[@"hour"]];
+    [self.hoursArrayCurrent addObject:userDate[@"hour"]];
     
-    [self.currentMeeting[@"guests"] enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
-        [self gethourGuest: guest[@"codeCountry"] respectUser:userDate];
+    [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self prepareArrayHoursWith: guest[@"codeCountry"] respectUser:userDate];
     }];
     
-    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArray];
-    [self prepareHoursForAlgorithm: prepareHours];
+    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
+    [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    
+    [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
+    [self.hoursArrayCurrentManipulating setArray:self.hoursArrayAlgorithm];
 }
 
-- (void) prepareHoursForAlgorithm : (NSArray *) hours{
-    [self.hoursArray removeAllObjects];
+- (void) eliminateHoursRepeatForAlgorithm: (NSArray *) hours{
+    [self.hoursArrayCurrent removeAllObjects];
     NSMutableSet *existingHours = [NSMutableSet set];
     [hours enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop){
         if (![existingHours containsObject:hour]) {
             [existingHours addObject:hour];
-            [self.hoursArray addObject:hour];
+            [self.hoursArrayCurrent addObject:hour];
         }
     }];
 }
 
-- (void) gethourGuest: (NSString *) guestCountry respectUser: (NSDictionary *) userDate{
+- (void) prepareArrayHoursWith: (NSString *) guestCountry respectUser: (NSDictionary *) userDate{
     NSArray * UTCGuest  = [self getUTCGuest: guestCountry];
     NSArray * UTCUser = [self getUTCGuest: userDate[@"countryCode"]];
     if(![UTCUser isEqualToArray:UTCGuest]){
@@ -263,7 +348,7 @@
         }];
         
     } else {
-        [self.hoursArray addObject:userDate[@"hour"]];
+        [self.hoursArrayCurrent addObject:userDate[@"hour"]];
     }
 }
 
@@ -278,17 +363,29 @@
 }
 
 - (void) addDiferencial: (double) UTC_hourUser ToGuest: (NSArray *) UTC_country withCurrentHours: (double) currentHours{
-    [UTC_country enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop) {
+    
+    [UTC_country enumerateObjectsUsingBlock:^(id utc, NSUInteger idx, BOOL * stop) {
+        double diferenceBetweenUTC;
+
+        if (UTC_hourUser > [utc doubleValue])
+            diferenceBetweenUTC = [utc doubleValue] - UTC_hourUser;
         
-        double temporalHour = UTC_hourUser < 0 ?
-        (UTC_hourUser + [hour doubleValue]) + currentHours :
-        (UTC_hourUser - [hour doubleValue]) + currentHours;
+        else if (UTC_hourUser < [utc doubleValue]){
+            diferenceBetweenUTC = UTC_hourUser - [utc doubleValue];
+            diferenceBetweenUTC = diferenceBetweenUTC * -1;
+        }
+        else if (UTC_hourUser == [utc doubleValue])
+            diferenceBetweenUTC = UTC_hourUser;
         
-        temporalHour = temporalHour <= 0 ? temporalHour + 24.0 : temporalHour;
-        temporalHour = temporalHour > 24 ? temporalHour - 24 : temporalHour;
+        double updateHourGuest = currentHours + diferenceBetweenUTC;
         
-        NSNumber *hourGuest = [NSNumber numberWithDouble:(temporalHour)];
-        [self.hoursArray addObject: hourGuest];
+        if (updateHourGuest <= 0) {
+            updateHourGuest = updateHourGuest + 24;
+        } else if (updateHourGuest > 24) {
+            updateHourGuest = updateHourGuest - 24;
+        }
+        
+        [self.hoursArrayCurrent addObject: [NSNumber numberWithDouble:updateHourGuest]];
     }];
 }
 
@@ -334,16 +431,19 @@
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
-        if (![self isTheSameHourOf: self.dateCurrent And: self.dateCellsManager.startDate]) {
-            self.dateCurrent = self.dateCellsManager.startDate;
-            self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.dateCurrent]];
-            [self updateViewModel];
-        }
         return [self.dateCellsManager tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     
     // Other cells
     // ...
+}
+
+- (void)selectedCellDateSelector{
+    if (![self isTheSameHourOf: self.startDate And: self.dateCellsManager.startDate]) {
+        self.startDate = self.dateCellsManager.startDate;
+        self.userInformation = [NSDictionary dictionaryWithDictionary:[self getHourOfDate:self.startDate]];
+        [self updateViewModel];
+    }
 }
 
 #pragma mark - Table view data source
@@ -388,7 +488,7 @@
 {
     // Date Cells
     if ([self.dateCellsManager isManagedDateCell:indexPath]) {
-        [self.dateCellsManager setSwitchCellData:self];
+        [self.dateCellsManager setCellDateSelector:self];
         return [self.dateCellsManager tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     

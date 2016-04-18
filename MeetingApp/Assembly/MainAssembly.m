@@ -10,6 +10,7 @@
 
 #import "MeetingBusinessController.h"
 #import "UserBusinessController.h"
+#import "AlgorithmMain.h"
 
 @implementation MainAssembly
 
@@ -23,6 +24,13 @@
 - (id<IUserDelegate, IUserDatasource>)userBusinessController
 {
     return [TyphoonDefinition withClass:[UserBusinessController class] configuration:^(TyphoonDefinition *definition) {
+        [definition setScope: TyphoonScopeLazySingleton];
+    }];
+}
+
+- (AlgorithmMain *) algorithmMain
+{
+    return [TyphoonDefinition withClass:[AlgorithmMain class] configuration:^(TyphoonDefinition *definition) {
         [definition setScope: TyphoonScopeLazySingleton];
     }];
 }
