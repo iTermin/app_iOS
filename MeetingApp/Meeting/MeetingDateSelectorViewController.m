@@ -153,17 +153,20 @@
         [self updateHourRespectHourAlgorithm];
     }
     
-    [self setDatesInDateSelector];
-    
     __block NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
 
     [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         if (![self existUser:userInfo AsGuest:guest]) {
             
             NSString * iconSelector = [NSString new];
-            if (selectedAllDay == YES)
+            if (selectedAllDay == YES){
                 iconSelector = @"allDay";
+                [self inputAlgoritm:self.startDate];
+                existOutputAlgorithm = YES;
+            }
             else{
+                [self setDatesInDateSelector];
+
                 NSNumber * actualGuestHour = [NSNumber new];
                 
                 if (existOutputAlgorithm){
@@ -270,12 +273,14 @@
     NSString * seccion = @"moon";
     
     for (int hourForDay = 1; hourForDay <= 24; ++hourForDay) {
-        
-        if (hourForDay == 7) seccion = @"sunsetMoon";
-        else if (hourForDay == 10) seccion = @"sun";
-        else if (hourForDay == 18) seccion = @"sunsetSun";
-        else if (hourForDay == 22) seccion = @"moon";
 
+        if (hourForDay == 5) seccion = @"endmoon";
+        else if (hourForDay == 7) seccion = @"beginDay";
+        else if (hourForDay == 10) seccion = @"sun";
+        else if (hourForDay == 17) seccion = @"sunsetSun";
+        else if (hourForDay == 20) seccion = @"beginmoon";
+        else if (hourForDay == 22) seccion = @"moon";
+        
         if (hourForDay == dayHour){
             return seccion;
             break;
