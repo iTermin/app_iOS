@@ -63,8 +63,6 @@
     
     self.hoursArrayCurrent = [NSMutableArray array];
     self.hoursArrayAlgorithm = [NSMutableArray array];
-    self.hoursArrayCurrentManipulating = [NSMutableArray array];
-    self.UTCRegistered = [NSMutableArray array];
     
     [self inputAlgoritm:self.startDate];
 
@@ -155,7 +153,6 @@
     }
     
     __block NSDictionary * userInfo = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
-    [self.UTCRegistered addObjectsFromArray:[self getUTCGuest:userInfo[@"code"]]];
     
     [self.guestsOfMeeting enumerateObjectsUsingBlock:^(NSDictionary * guest, NSUInteger idx, BOOL * stop) {
         if (![self existUser:userInfo AsGuest:guest]) {
@@ -195,7 +192,6 @@
     
     [self.tableView reloadData];
     
-    [self.UTCRegistered removeAllObjects];
 }
 
 -(NSNumber *) updateHourGuest: (NSString*) codeGuest respectUserCountry: (NSString *) codeUser{
@@ -294,50 +290,36 @@
     return @"";
 }
 
-- (int) differenceUTCBetweenUTCRegisteredAndActualGuest: (NSString *) guest{
-    NSArray * UTCGuest = [self getUTCGuest:guest];
-    
-    NSMutableSet* setUTCRegistered = [NSMutableSet setWithArray:self.UTCRegistered];
-    NSMutableSet* setUTCGuest = [NSMutableSet setWithArray:UTCGuest];
-    [setUTCRegistered intersectSet:setUTCGuest]; //this will give you only the obejcts that are in both sets
-    
-    [self.UTCRegistered addObjectsFromArray:UTCGuest];
-    if ([setUTCRegistered count]) {
-        NSMutableArray * orderUTCRegistered = [NSMutableArray arrayWithArray:self.UTCRegistered];
-        [self.UTCRegistered removeAllObjects];
-        
-        NSMutableSet *existingHours = [NSMutableSet set];
-        [orderUTCRegistered enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop){
-            if (![existingHours containsObject:hour]) {
-                [existingHours addObject:hour];
-                [self.UTCRegistered addObject:hour];
-            }
-        }];
-    }
-
-    return (int)[setUTCRegistered count];
-}
-
 - (NSNumber *) getActualHoursOf: (NSString *) guestCountry withDiferencial: (int) hours{
     NSArray * UTCGuest  = [self getUTCGuest: guestCountry];
     NSArray * UTCUser = [self getUTCGuest:self.userInformation[@"countryCode"]];
     
     if(![UTCUser isEqualToArray:UTCGuest]){
         
-        int registeredUTC = [self differenceUTCBetweenUTCRegisteredAndActualGuest:guestCountry];
-        
-        int maxRangeGuest = (int)[UTCGuest count] - registeredUTC;
-        
         NSArray * hoursGuest = [NSArray arrayWithArray:
-                                [self.hoursArrayCurrentManipulating subarrayWithRange:NSMakeRange(1, maxRangeGuest)]];
-        [self.hoursArrayCurrentManipulating removeObjectsInRange:NSMakeRange(1, maxRangeGuest)];
+                                [self.hoursArrayAlgorithm
+                                 objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:
+                                                   NSMakeRange(1, [UTCGuest count])]]];
         
-        NSNumber * newHourGuest = [hoursGuest count] / 2 == 0 ?
-        [hoursGuest objectAtIndex:[hoursGuest count]/2] : [hoursGuest objectAtIndex:[hoursGuest count]/2 - 1];
+        NSSortDescriptor* sortHoursGuest = [NSSortDescriptor sortDescriptorWithKey:nil
+                                                                         ascending:YES];
+        
+        NSArray *sortedHoursGuest = [hoursGuest sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortHoursGuest]];
+
+        __block NSNumber * newHourGuest;
+        
+        [sortedHoursGuest enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([hour intValue] >= 7 && [hour intValue] <= 21)
+                newHourGuest = [NSNumber numberWithInt:
+                                [[sortedHoursGuest objectAtIndex:idx] intValue]];
+        }];
+        
+        if (!newHourGuest) newHourGuest = [sortedHoursGuest count] / 2 == 0 ?
+            [sortedHoursGuest objectAtIndex:[sortedHoursGuest count]/2] : [sortedHoursGuest objectAtIndex:[sortedHoursGuest count]/2 - 1];
         
         return newHourGuest;
     } else{
-        return [NSNumber numberWithDouble:[[self.hoursArrayCurrentManipulating objectAtIndex:0] doubleValue]];
+        return [NSNumber numberWithDouble:[[self.hoursArrayAlgorithm objectAtIndex:0] doubleValue]];
     }
     
     return @0;
@@ -356,7 +338,6 @@
     [self eliminateHoursRepeatForAlgorithm: prepareHours];
     
     [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
-    [self.hoursArrayCurrentManipulating setArray:self.hoursArrayAlgorithm];
 }
 
 - (void) eliminateHoursRepeatForAlgorithm: (NSArray *) hours{
