@@ -39,6 +39,11 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
+    self.navigationItem.title = @"Meetings";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
