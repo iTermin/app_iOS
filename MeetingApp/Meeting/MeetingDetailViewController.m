@@ -216,7 +216,7 @@
         [self.notifications setValue: [self.notifications[@"reminder"]  isEqual: @NO] ? @YES : @NO
                               forKey: @"reminder"];
         
-        [self notificationReminder:self.notifications[@"reminder"]];
+        [self notificationReminder:[self.notifications[@"reminder"]  isEqual: @YES] ? YES : NO];
         
         if ([self.notifications[@"reminder"] isEqual:@YES]) {
             [self alertStatusNotification:@"Reminder Notifaction"
