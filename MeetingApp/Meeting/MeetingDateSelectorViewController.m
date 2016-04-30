@@ -339,8 +339,10 @@
         [self prepareArrayHoursWith: guest[@"codeCountry"] respectUser:userDate];
     }];
     
-    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
-    [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    if([self.guestsOfMeeting count] > 1){
+        NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
+        [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    }
     
     [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
     [self.arrayEditableHours setArray:self.hoursArrayAlgorithm];
