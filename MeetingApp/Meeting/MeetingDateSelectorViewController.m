@@ -40,6 +40,7 @@
     [super viewDidLoad];
     
     self.algoritmClass = [[MainAssembly defaultAssembly] algorithmMain];
+    self.sendInvitationMeeting = [[MainAssembly defaultAssembly] sendInvitationsMeeting];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];

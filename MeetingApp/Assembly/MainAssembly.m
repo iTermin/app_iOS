@@ -11,6 +11,7 @@
 #import "MeetingBusinessController.h"
 #import "UserBusinessController.h"
 #import "AlgorithmMain.h"
+#import "InvitationEmailGuest.h"
 
 @implementation MainAssembly
 
@@ -31,6 +32,13 @@
 - (AlgorithmMain *) algorithmMain
 {
     return [TyphoonDefinition withClass:[AlgorithmMain class] configuration:^(TyphoonDefinition *definition) {
+        [definition setScope: TyphoonScopeLazySingleton];
+    }];
+}
+
+- (InvitationEmailGuest *) sendInvitationsMeeting
+{
+    return [TyphoonDefinition withClass:[InvitationEmailGuest class] configuration:^(TyphoonDefinition *definition) {
         [definition setScope: TyphoonScopeLazySingleton];
     }];
 }

@@ -43,6 +43,7 @@
 		7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BDE1C70F71500B49E90 /* CountryViewCell.m */; };
 		7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */; };
 		7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */; };
+		7C3ED7941CD4F8AF005F4A55 /* InvitationEmailGuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3ED7931CD4F8AF005F4A55 /* InvitationEmailGuest.m */; };
 		7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */; };
 		7C3F27561CA1E49B005DCD90 /* RegisterUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27551CA1E49B005DCD90 /* RegisterUserViewController.m */; };
 		7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65DA6E1C691B53001F6F32 /* ModelTableViewController.m */; };
@@ -163,6 +164,8 @@
 		7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestListCountriesTableViewController.m; path = Guest/GuestListCountriesTableViewController.m; sourceTree = "<group>"; };
 		7C3E2BE41C70F78300B49E90 /* ListCountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListCountriesViewController.h; path = User/ListCountriesViewController.h; sourceTree = "<group>"; };
 		7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCountriesViewController.m; path = User/ListCountriesViewController.m; sourceTree = "<group>"; };
+		7C3ED7921CD4F8AF005F4A55 /* InvitationEmailGuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvitationEmailGuest.h; path = Services/InvitationEmailGuest.h; sourceTree = "<group>"; };
+		7C3ED7931CD4F8AF005F4A55 /* InvitationEmailGuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InvitationEmailGuest.m; path = Services/InvitationEmailGuest.m; sourceTree = "<group>"; };
 		7C3F274D1CA15B94005DCD90 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = User/Models/User.h; sourceTree = "<group>"; };
 		7C3F27511CA15DB0005DCD90 /* UserBusinessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserBusinessController.h; path = User/UserBusinessController.h; sourceTree = "<group>"; };
 		7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserBusinessController.m; path = User/UserBusinessController.m; sourceTree = "<group>"; };
@@ -351,6 +354,7 @@
 		7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */ = {
 			isa = PBXGroup;
 			children = (
+				7C3ED78F1CD4F80E005F4A55 /* Services */,
 				7C0393E41C81D0B300BDA9AC /* Assembly */,
 				7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */,
 				7C3E2BDA1C70F68B00B49E90 /* Common */,
@@ -519,6 +523,15 @@
 				7C3B80A21C5559E200678EF4 /* Artifacts */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		7C3ED78F1CD4F80E005F4A55 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7C3ED7921CD4F8AF005F4A55 /* InvitationEmailGuest.h */,
+				7C3ED7931CD4F8AF005F4A55 /* InvitationEmailGuest.m */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		7C3F274C1CA15B75005DCD90 /* Models */ = {
@@ -826,6 +839,7 @@
 				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
 				7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */,
 				7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */,
+				7C3ED7941CD4F8AF005F4A55 /* InvitationEmailGuest.m in Sources */,
 				7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */,
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,
 				7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */,
