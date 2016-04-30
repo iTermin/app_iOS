@@ -663,12 +663,8 @@
         [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
     }
     
-    NSMutableString * meetingID = [NSMutableString stringWithFormat:@"meetingId="];
-    meetingID = [NSMutableString stringWithString:
-                 [meetingID stringByAppendingString:
-                  [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]]];
-    
-    [self.sendInvitationMeeting sendInvitationToGuestOfMeeting:[NSString stringWithString:meetingID]];
+    [self.sendInvitationMeeting sendInvitationToGuestOfMeeting:
+        [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]];
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
