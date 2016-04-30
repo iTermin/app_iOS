@@ -62,6 +62,7 @@
     selectedAllDay = NO;
     
     self.hoursArrayCurrent = [NSMutableArray array];
+    self.arrayEditableHours = [NSMutableArray array];
     self.hoursArrayAlgorithm = [NSMutableArray array];
     
     [self inputAlgoritm:self.startDate];
@@ -297,9 +298,12 @@
     if(![UTCUser isEqualToArray:UTCGuest]){
         
         NSArray * hoursGuest = [NSArray arrayWithArray:
-                                [self.hoursArrayAlgorithm
+                                [self.arrayEditableHours
                                  objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:
                                                    NSMakeRange(1, [UTCGuest count])]]];
+        
+        [self.arrayEditableHours removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:
+                                                         NSMakeRange(1, [UTCGuest count])]];
         
         NSSortDescriptor* sortHoursGuest = [NSSortDescriptor sortDescriptorWithKey:nil
                                                                          ascending:YES];
@@ -338,6 +342,7 @@
     [self eliminateHoursRepeatForAlgorithm: prepareHours];
     
     [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
+    [self.arrayEditableHours setArray:self.hoursArrayAlgorithm];
 }
 
 - (void) eliminateHoursRepeatForAlgorithm: (NSArray *) hours{

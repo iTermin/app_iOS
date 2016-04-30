@@ -34,6 +34,7 @@
 @property (strong) NSDate * dateCurrent;
 
 @property (strong) NSMutableArray * hoursArrayCurrent;
+@property (strong) NSMutableArray * arrayEditableHours;
 @property (strong) NSMutableArray * hoursArrayAlgorithm;
 
 @property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
