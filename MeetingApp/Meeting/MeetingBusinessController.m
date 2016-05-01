@@ -81,12 +81,19 @@
 }
 
 - (void) updateNewMeeting: (MutableMeeting *) newMeeting{
+    [self updateNewMeeting:newMeeting withCallback:nil];
+}
+
+- (void) updateNewMeeting: (MutableMeeting *) newMeeting withCallback: (void (^)()) callback {
     NSMutableDictionary * updateAllMeetings = [NSMutableDictionary dictionaryWithDictionary:self.allMeetings];
     [updateAllMeetings addEntriesFromDictionary:newMeeting];
     
     self.urlMeetings = [_myRootRef childByAppendingPath:@"/Meetings"];
-    [self.urlMeetings setValue:updateAllMeetings];
-    
+    [self.urlMeetings setValue:updateAllMeetings withCompletionBlock:^(NSError *error, Firebase *ref) {
+        if(callback) {
+            callback();
+        }
+    }];
 }
 
 - (void) setInactiveInDetailOfMeeting: (NSString *) meetingId {

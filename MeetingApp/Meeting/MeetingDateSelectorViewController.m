@@ -652,24 +652,23 @@
     hud.color = [UIColor lightGrayColor];
     
     [self updateMeetings:YES];
-    [self.meetingbusiness updateNewMeeting:self.currentMeeting];
-    NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
-    [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
-    if (isSharedMeeting) {
-        [self inspectSharedMeetings:@"confirmMeetings"];
+    
+    [self.meetingbusiness updateNewMeeting:self.currentMeeting withCallback:^{
+        NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
+        [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
+        if (isSharedMeeting) {
+            [self inspectSharedMeetings:@"confirmMeetings"];
+            
+        } else{
+            [self.currentMeetingToUserDetail setDictionary:@{}];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        }
         
-    } else{
-        [self.currentMeetingToUserDetail setDictionary:@{}];
-        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-    }
-    
-    // TODO: Cordinate the updates to the models, then request to send the invitation
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.sendInvitationMeeting sendInvitationToGuestOfMeeting: [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]];
-    });
-    
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 - (NSString*) getDeviceId{
