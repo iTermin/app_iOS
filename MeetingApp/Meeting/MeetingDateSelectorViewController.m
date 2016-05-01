@@ -663,8 +663,10 @@
         [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
     }
     
-    [self.sendInvitationMeeting sendInvitationToGuestOfMeeting:
-        [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]];
+    // TODO: Cordinate the updates to the models, then request to send the invitation
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.sendInvitationMeeting sendInvitationToGuestOfMeeting: [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]];
+    });
     
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
