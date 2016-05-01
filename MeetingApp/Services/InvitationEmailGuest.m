@@ -16,9 +16,11 @@
                                @"cache-control": @"no-cache",
                                @"postman-token": @"aac90afb-bdb1-ccce-8f41-1b9cb31110fd" };
     
-    meetingId = [NSString stringWithString:[[NSMutableString stringWithFormat:@"meetingId="] stringByAppendingString:meetingId]];
     
-    NSMutableData *postData = [[NSMutableData alloc] initWithData:[meetingId dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString * body = [@"meetingId=" stringByAppendingString: meetingId];
+    NSLog(@"MeetingId:%@", meetingId);
+    NSLog(@"Body:%@", body);
+    NSData *postData = [body dataUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://blueberry-crumble-60073.herokuapp.com/meeting"]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
