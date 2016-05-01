@@ -15,6 +15,7 @@
 #import "IUserDatasource.h"
 #import "Meeting.h"
 #import "AlgorithmMain.h"
+#import "InvitationEmailGuest.h"
 
 @interface MeetingDateSelectorViewController : UITableViewController <IMeetingDateSelectorDelegate>
 
@@ -41,6 +42,7 @@
 @property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
 @property (strong) AlgorithmMain * algoritmClass;
+@property (strong) InvitationEmailGuest * sendInvitationMeeting;
 
 - (IBAction)sharePressed:(id)sender;
 - (IBAction)trashPressed:(id)sender;

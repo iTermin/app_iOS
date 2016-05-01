@@ -40,6 +40,7 @@
     [super viewDidLoad];
     
     self.algoritmClass = [[MainAssembly defaultAssembly] algorithmMain];
+    self.sendInvitationMeeting = [[MainAssembly defaultAssembly] sendInvitationsMeeting];
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
@@ -338,8 +339,10 @@
         [self prepareArrayHoursWith: guest[@"codeCountry"] respectUser:userDate];
     }];
     
-    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
-    [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    if([self.guestsOfMeeting count] > 1){
+        NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
+        [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    }
     
     [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
     [self.arrayEditableHours setArray:self.hoursArrayAlgorithm];
@@ -649,19 +652,23 @@
     hud.color = [UIColor lightGrayColor];
     
     [self updateMeetings:YES];
-    [self.meetingbusiness updateNewMeeting:self.currentMeeting];
-    NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
-    [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
-    if (isSharedMeeting) {
-        [self inspectSharedMeetings:@"confirmMeetings"];
-        
-    } else{
-        [self.currentMeetingToUserDetail setDictionary:@{}];
-        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
-    }
     
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.meetingbusiness updateNewMeeting:self.currentMeeting withCallback:^{
+        NSDictionary * activeMeeting = [NSDictionary dictionaryWithDictionary:self.currentMeetingToUserDetail];
+        [self.userbusiness addNewMeetingToActiveMeetings:activeMeeting];
+        if (isSharedMeeting) {
+            [self inspectSharedMeetings:@"confirmMeetings"];
+            
+        } else{
+            [self.currentMeetingToUserDetail setDictionary:@{}];
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        }
+        
+        [self.sendInvitationMeeting sendInvitationToGuestOfMeeting: [NSString stringWithString:[activeMeeting valueForKey:@"meetingId"]]];
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 - (NSString*) getDeviceId{
