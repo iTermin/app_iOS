@@ -339,16 +339,18 @@
         [self prepareArrayHoursWith: guest[@"codeCountry"] respectUser:userDate];
     }];
     
-    if([self.guestsOfMeeting count] > 1){
-        NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
-        [self eliminateHoursRepeatForAlgorithm: prepareHours];
+    NSArray * prepareHours = [NSArray arrayWithArray:self.hoursArrayCurrent];
+    if ([self isNotTheSameHourBetweenUserAndGuests: prepareHours]) {
+        [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
+        [self.arrayEditableHours setArray:self.hoursArrayAlgorithm];
+        
+    } else{
+        [self.arrayEditableHours setArray:prepareHours];
+        [self.hoursArrayAlgorithm setArray:prepareHours];
     }
-    
-    [self.hoursArrayAlgorithm setArray:[self.algoritmClass getHourProposal:self.hoursArrayCurrent]];
-    [self.arrayEditableHours setArray:self.hoursArrayAlgorithm];
 }
 
-- (void) eliminateHoursRepeatForAlgorithm: (NSArray *) hours{
+- (BOOL) isNotTheSameHourBetweenUserAndGuests: (NSArray *) hours{
     [self.hoursArrayCurrent removeAllObjects];
     NSMutableSet *existingHours = [NSMutableSet set];
     [hours enumerateObjectsUsingBlock:^(id hour, NSUInteger idx, BOOL * stop){
@@ -357,6 +359,8 @@
             [self.hoursArrayCurrent addObject:hour];
         }
     }];
+    
+    return [self.hoursArrayCurrent count] > 1 ? YES : NO;
 }
 
 - (void) prepareArrayHoursWith: (NSString *) guestCountry respectUser: (NSDictionary *) userDate{
