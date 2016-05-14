@@ -279,8 +279,12 @@
         
         reminder.title = self.detailMeeting[@"name"];
         
-        reminder.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithAbsoluteDate:[NSDate date]]];
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+        NSDate *dateFromString = [dateFormatter dateFromString:self.currentMeeting[@"date"]];
         
+        reminder.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithAbsoluteDate:dateFromString]];
+                
         reminder.calendar = [eventStore defaultCalendarForNewReminders];
         
         NSError *error = nil;
@@ -308,9 +312,13 @@
         }
     }
     else{
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+        NSDate *dateFromString = [dateFormatter dateFromString:self.currentMeeting[@"date"]];
+        
         events.title = self.detailMeeting[@"name"];
-        events.startDate = [NSDate date];
-        events.endDate = [NSDate date];
+        events.startDate = dateFromString;
+        events.endDate = dateFromString;
         events.availability = EKEventAvailabilityFree;
         
         NSError *err;
