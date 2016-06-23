@@ -126,7 +126,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
         [(*cell).datePicker setDate:self.startDate animated:NO];
         
         // Can pick any date (a minimum may have been set by the end date cell - see below)
-        (*cell).datePicker.minimumDate = nil;
+        (*cell).datePicker.minimumDate = [NSDate date];
     }
     // If date picker is for endDate:
     else {
@@ -418,7 +418,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
             [((UXDatePickerCell *) cell).datePicker setDate:self.startDate animated:NO];
             
             // Can pick any date (a minimum may have been set by the end date cell - see below)
-            ((UXDatePickerCell *) cell).datePicker.minimumDate = nil;
+            ((UXDatePickerCell *) cell).datePicker.minimumDate = [NSDate date];
         }
         // If date picker is for endDate:
         else {
