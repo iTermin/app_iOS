@@ -50,9 +50,31 @@
 
 - (NSArray<Meeting *> *) getAllMeetings
 {
-    return self.meetingsUser;
+    return [NSArray arrayWithArray:[self returnMeetingsActiveDate]];
+    //return self.meetingsUser;
 }
 
+- (NSMutableArray *) returnMeetingsActiveDate{
+
+    __block NSDate* currentDate = [NSDate date];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss ZZZZ"];
+    
+    NSMutableArray * meetingsActiveDate = [NSMutableArray array];
+    
+    [self.meetingsUser enumerateObjectsUsingBlock:^(id meeting, NSUInteger idx, BOOL * stop) {
+        NSDate *dateMeeting = [dateFormatter dateFromString:[meeting valueForKey:@"date"]];
+        
+        if ([currentDate compare:dateMeeting] == NSOrderedAscending) {
+            [meetingsActiveDate addObject:[NSDictionary dictionaryWithDictionary:meeting]];
+        }
+        
+    }];
+    
+    return meetingsActiveDate;
+    
+}
 
 - (Meeting *) getMeetingDetail: (Meeting *) meeting
 {
