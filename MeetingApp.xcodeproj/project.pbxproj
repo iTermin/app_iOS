@@ -52,7 +52,7 @@
 		7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */; };
 		7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */; };
 		7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */; };
-		7C903F741D2BD64300517B0F /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F721D2BD64300517B0F /* ContactAddress.m */; };
+		7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F771D2BED7E00517B0F /* ContactAddress.m */; };
 		7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */; };
 		7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */; };
 		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
@@ -187,9 +187,9 @@
 		7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXSwitchCell.h; path = Meeting/DateCell/UXSwitchCell.h; sourceTree = "<group>"; };
 		7C80CA1D1C7F9AFC00216CF9 /* IGuestInformationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformationDelegate.h; path = Guest/Protocols/IGuestInformationDelegate.h; sourceTree = "<group>"; };
 		7C80CA1F1C7F9E3600216CF9 /* IGuestInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformation.h; path = Guest/Protocols/IGuestInformation.h; sourceTree = "<group>"; };
-		7C903F711D2BD64300517B0F /* ContactAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactAddress.h; path = ../../../Desktop/Prueba/Prueba/ContactAddress.h; sourceTree = "<group>"; };
-		7C903F721D2BD64300517B0F /* ContactAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactAddress.m; path = ../../../Desktop/Prueba/Prueba/ContactAddress.m; sourceTree = "<group>"; };
-		7C903F731D2BD64300517B0F /* IContactInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IContactInformation.h; path = ../../../Desktop/Prueba/Prueba/IContactInformation.h; sourceTree = "<group>"; };
+		7C903F761D2BED7E00517B0F /* IContactInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IContactInformation.h; path = Meeting/ContactAddress/IContactInformation.h; sourceTree = "<group>"; };
+		7C903F771D2BED7E00517B0F /* ContactAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactAddress.m; path = Meeting/ContactAddress/ContactAddress.m; sourceTree = "<group>"; };
+		7C903F781D2BED7E00517B0F /* ContactAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactAddress.h; path = Meeting/ContactAddress/ContactAddress.h; sourceTree = "<group>"; };
 		7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmMeeting.m; sourceTree = "<group>"; };
 		7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmMain.h; path = AlgorithmMeeting/AlgorithmMain.h; sourceTree = "<group>"; };
 		7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmMain.m; path = AlgorithmMeeting/AlgorithmMain.m; sourceTree = "<group>"; };
@@ -574,9 +574,9 @@
 		7C903F751D2BD64C00517B0F /* ContactAddress */ = {
 			isa = PBXGroup;
 			children = (
-				7C903F731D2BD64300517B0F /* IContactInformation.h */,
-				7C903F711D2BD64300517B0F /* ContactAddress.h */,
-				7C903F721D2BD64300517B0F /* ContactAddress.m */,
+				7C903F761D2BED7E00517B0F /* IContactInformation.h */,
+				7C903F771D2BED7E00517B0F /* ContactAddress.m */,
+				7C903F781D2BED7E00517B0F /* ContactAddress.h */,
 			);
 			name = ContactAddress;
 			sourceTree = "<group>";
@@ -879,7 +879,7 @@
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
 				7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */,
 				7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */,
-				7C903F741D2BD64300517B0F /* ContactAddress.m in Sources */,
+				7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 				7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */,
 				7C3E2BBB1C70AF9000B49E90 /* GuestViewCellCountry.m in Sources */,
