@@ -59,8 +59,6 @@
 		7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB029F71C722360003D4204 /* GuestDateViewCell.xib */; };
 		7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */; };
 		7CBD957F1C7DB3A3000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */; };
-		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
-		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
 		7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */; };
 		F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 837704A4712A97F96CAF554C /* libPods-MeetingApp.a */; };
@@ -199,8 +197,6 @@
 		7CBD957A1C7DB352000A8DE4 /* InputsAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputsAlgorithm.h; path = AlgorithmMeeting/InputsAlgorithm.h; sourceTree = "<group>"; };
 		7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputsAlgorithm.m; path = AlgorithmMeeting/InputsAlgorithm.m; sourceTree = "<group>"; };
 		7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputsAlgorithm.m; sourceTree = "<group>"; };
-		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
 		7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "QuickContacts-Info.plist"; path = "Resources/QuickContacts-Info.plist"; sourceTree = SOURCE_ROOT; };
 		837704A4712A97F96CAF554C /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,8 +210,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */,
-				7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */,
 				F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,8 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				7C1687771C707E3E00197DB1 /* libs */,
-				7CF9343C1C5A14BA00D928EA /* AddressBook.framework */,
-				7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */,
 				7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */,
 				7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */,
 				7C30FAA31C2ED3C70059EAE3 /* MeetingAppUITests */,
