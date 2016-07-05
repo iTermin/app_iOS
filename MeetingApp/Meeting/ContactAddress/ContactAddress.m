@@ -88,8 +88,9 @@
 }
 
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(nonnull CNContact *)contact{
-    [self parseContactWithContact:contact];
-    [self.viewController dismissViewControllerAnimated:YES completion:nil];
+    [self.viewController dismissViewControllerAnimated:YES completion:^{
+        [self parseContactWithContact:contact];
+    }];
 }
 
 - (void)parseContactWithContact :(CNContact* )contact

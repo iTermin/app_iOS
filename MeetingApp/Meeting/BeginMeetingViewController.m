@@ -278,8 +278,9 @@
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
-    if ([guestInfo[@"email"] isEqualToString:@""])
+    if ([guestInfo[@"email"] isEqualToString:@""]) {
         [self warningRegisterEmailGuest:guestInfo[@"name"]];
+    }
 }
 
 - (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{
