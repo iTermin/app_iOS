@@ -6,8 +6,6 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import <SWTableViewCell.h>
 
 #import "BeginMeetingViewController.h"
@@ -16,7 +14,7 @@
 #import "ArrayOfCountries.h"
 #import "MainAssembly.h"
 
-@interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
+@interface BeginMeetingViewController () <CNContactPickerDelegate, CNContactViewControllerDelegate>
 {
     BOOL changedInformation;
 }
@@ -30,6 +28,9 @@
     
     self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
     self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
+    self.pickerAddress = [[MainAssembly defaultAssembly] contactAddress];
+    self.pickerAddress.viewController = self;
+    self.pickerAddress.contactInformation = self;
     
     self.listOfGuests = [NSMutableArray array];
     
@@ -225,7 +226,7 @@
         if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
             if ([information[@"email"] length])
                 isDiferentGuest = NO;
-            
+        
         if (isDiferentGuest)
             if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
                 isDiferentGuest =  NO;
@@ -252,191 +253,24 @@
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap {
-    switch (ABAddressBookGetAuthorizationStatus())
-    {
-            // Update our UI if the user has granted access to their Contacts
-        case  kABAuthorizationStatusAuthorized:
-            [self accessGrantedForAddressBook];
-            break;
-            // Prompt the user for access to Contacts if there is no definitive answer
-        case  kABAuthorizationStatusNotDetermined :
-            [self requestAddressBookAccess];
-            break;
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Privacy Warning"
-                                                            message:@"Permission was not granted for Contacts."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-            break;
-        default:
-            break;
-    }
+    [self.pickerAddress contactScan];
 }
 
--(void)requestAddressBookAccess
-{
-    BeginMeetingViewController * __weak weakSelf = self;
-    
-    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error)
-                                             {
-                                                 if (granted)
-                                                 {
-                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                         [weakSelf accessGrantedForAddressBook];
-                                                         
-                                                     });
-                                                 }
-                                             });
-}
-
--(void)accessGrantedForAddressBook
-{
-    // Load data from the plist file
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Menu" ofType:@"plist"];
-    self.menuArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
-    [self showPeoplePickerController];
-    
-    //[self.tableView reloadData];
-}
-
--(void)showPeoplePickerController
-{
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-    picker.peoplePickerDelegate = self;
-    // Display only a person's phone, email, and birthdate
-    NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty],
-                               [NSNumber numberWithInt:kABPersonEmailProperty],
-                               [NSNumber numberWithInt:kABPersonBirthdayProperty], nil];
-    
-    
-    picker.displayedProperties = displayedItems;
-    // Show the picker
-    [self presentViewController:picker animated:YES completion:nil];
-}
-
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
-    
-    NSString *first_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-    
-    NSString *middle_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
-    
-    NSString *last_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
-    
-    ABMutableMultiValueRef multiEmail = ABRecordCopyValue(person, kABPersonEmailProperty);
-    NSString *email = (__bridge NSString *) ABMultiValueCopyValueAtIndex(multiEmail, 0);
-    
-    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    NSArray *phoneNumbers = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
-    
-    UIImage *retrievedImage;
-    if (person != nil && ABPersonHasImageData(person)){
-        retrievedImage = [UIImage imageWithData:
-                          (__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
-        retrievedImage = [self imageWithImage:retrievedImage scaledToSize:CGSizeMake(220, 260)];
-    } else retrievedImage = nil;
-    
-    NSString *retrievedName;
-    
-    if (![self existName:first_Name Middle:middle_Name Last:last_Name])
-        retrievedName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonOrganizationProperty));
-    else retrievedName = [self extractCompleteName:first_Name Middle:middle_Name Last:last_Name];
-
-    if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
-        [self dismissViewControllerAnimated:NO completion:^(){}];
-        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
-    }
-    else{
-        [self dismissViewControllerAnimated:NO completion:^(){}];
+- (void)getContactSelected:(NSDictionary *)contactInformation{
+    if ([self isDiferentGuest:contactInformation])
+        [self addGuest:[NSMutableDictionary dictionaryWithDictionary:contactInformation]];
+    else
         [self alertGuestRegistered];
-    }
 }
 
-- (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
-{
-    UIGraphicsBeginImageContext( newSize );
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+-(void) addGuest: (NSMutableDictionary *) guestInfo {
     
-    return newImage;
-}
-
-- (BOOL) existName: (NSString *) name Middle: (NSString *) middle Last: (NSString *) last{
-    if (![name length])
-        if (![middle length])
-            if (![last length]) return NO;
-    
-    return YES;
-}
-
-- (NSString *) extractCompleteName: (NSString *) firstName Middle: (NSString *) middleName Last: (NSString *) lastName{
-    NSString * completeName = [NSString new];
-    
-    if (firstName != NULL && middleName != NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
-    }
-    
-    if (firstName != NULL && middleName != NULL & lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName, middleName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName,lastName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@",firstName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",middleName, lastName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@",middleName];
-    }
-    
-    if (firstName == NULL && middleName == NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@", lastName];
-    }
-    
-    return completeName;
-}
-
-- (NSString *)encodeToBase64String:(UIImage *)image {
-    return [UIImagePNGRepresentation(image)
-            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-}
-
-
--(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-    
-    NSArray *codeContact = [self codesCountriesWith:phoneGuest];
+    NSArray *codeContact = [self codesCountriesWith:guestInfo[@"phone"]];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
-    NSDictionary * guestInformation = @{
-                                        @"photo" : photoContact ?
-                                        [self encodeToBase64String:photoContact] : @"",
-                                        @"codePhone" : codeContact ? codeContact : @"",
-                                        @"email" : emailGuest ? emailGuest : @"",
-                                        @"name" : nameGuest ? nameGuest : @"",
-                                        @"codeCountry" : code
-                                        };
+    [guestInfo setValue:code forKey:@"codeCountry"];
     
-    [self.listOfGuests addObject:guestInformation];
+    [self.listOfGuests addObject:guestInfo];
 
     [self updateViewModel];
         
@@ -444,8 +278,8 @@
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
-    if ([guestInformation[@"email"] isEqualToString:@""])
-        [self warningRegisterEmailGuest:guestInformation[@"name"]];
+    if ([guestInfo[@"email"] isEqualToString:@""])
+        [self warningRegisterEmailGuest:guestInfo[@"name"]];
 }
 
 - (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{

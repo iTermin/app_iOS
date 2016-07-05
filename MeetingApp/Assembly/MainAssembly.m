@@ -43,4 +43,11 @@
     }];
 }
 
+- (ContactAddress *) contactAddress
+{
+    return [TyphoonDefinition withClass:[ContactAddress class] configuration:^(TyphoonDefinition *definition) {
+        [definition setScope: TyphoonScopeLazySingleton];
+    }];
+}
+
 @end
