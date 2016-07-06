@@ -98,14 +98,19 @@
     NSString * name = [[contact.givenName stringByAppendingString:@" " ] stringByAppendingString:contact.familyName];
     NSArray * phone = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
     NSArray * email = [contact.emailAddresses valueForKey:@"value"];
-    UIImage *image = [UIImage imageWithData:contact.imageData];
-    NSString * stringImage = [self encodeToBase64String:image];
     
+    NSString *stringImage = [NSString string];
+    
+    if (contact.imageData != nil) {
+        UIImage *image = [UIImage imageWithData:contact.imageData];
+        stringImage = [self encodeToBase64String:image];
+    }
+
     NSDictionary * contactInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                   [name isEqualToString:@""] ? @"" : name, @"name",
                                   [phone isEqualToArray:@[]] ? @[] : phone, @"phone",
                                   [email isEqualToArray:@[]] ? @"" : email[0], @"email",
-                                  [stringImage isEqualToString:@""] ? @"" : stringImage, @"image", nil];
+                                  [stringImage isEqualToString:@""] ? @"" : stringImage, @"photo", nil];
     
     [self.contactInformation getContactSelected:contactInfo];
 }
