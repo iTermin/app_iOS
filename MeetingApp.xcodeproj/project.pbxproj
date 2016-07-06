@@ -52,14 +52,13 @@
 		7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC41C7484AD0011C917 /* UXDatePickerCell.m */; };
 		7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */; };
 		7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */; };
+		7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F771D2BED7E00517B0F /* ContactAddress.m */; };
 		7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */; };
 		7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */; };
 		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
 		7CB029F91C722361003D4204 /* GuestDateViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB029F71C722360003D4204 /* GuestDateViewCell.xib */; };
 		7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */; };
 		7CBD957F1C7DB3A3000A8DE4 /* InputsAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */; };
-		7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343C1C5A14BA00D928EA /* AddressBook.framework */; };
-		7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */; };
 		7CF934421C5A1CBB00D928EA /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934401C5A1CBB00D928EA /* Menu.plist */; };
 		7CF934431C5A1CBB00D928EA /* QuickContacts-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */; };
 		F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 837704A4712A97F96CAF554C /* libPods-MeetingApp.a */; };
@@ -186,6 +185,9 @@
 		7C79CEC91C7484AD0011C917 /* UXSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXSwitchCell.h; path = Meeting/DateCell/UXSwitchCell.h; sourceTree = "<group>"; };
 		7C80CA1D1C7F9AFC00216CF9 /* IGuestInformationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformationDelegate.h; path = Guest/Protocols/IGuestInformationDelegate.h; sourceTree = "<group>"; };
 		7C80CA1F1C7F9E3600216CF9 /* IGuestInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IGuestInformation.h; path = Guest/Protocols/IGuestInformation.h; sourceTree = "<group>"; };
+		7C903F761D2BED7E00517B0F /* IContactInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IContactInformation.h; path = Meeting/ContactAddress/IContactInformation.h; sourceTree = "<group>"; };
+		7C903F771D2BED7E00517B0F /* ContactAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactAddress.m; path = Meeting/ContactAddress/ContactAddress.m; sourceTree = "<group>"; };
+		7C903F781D2BED7E00517B0F /* ContactAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactAddress.h; path = Meeting/ContactAddress/ContactAddress.h; sourceTree = "<group>"; };
 		7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmMeeting.m; sourceTree = "<group>"; };
 		7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmMain.h; path = AlgorithmMeeting/AlgorithmMain.h; sourceTree = "<group>"; };
 		7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmMain.m; path = AlgorithmMeeting/AlgorithmMain.m; sourceTree = "<group>"; };
@@ -195,8 +197,6 @@
 		7CBD957A1C7DB352000A8DE4 /* InputsAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputsAlgorithm.h; path = AlgorithmMeeting/InputsAlgorithm.h; sourceTree = "<group>"; };
 		7CBD957B1C7DB352000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputsAlgorithm.m; path = AlgorithmMeeting/InputsAlgorithm.m; sourceTree = "<group>"; };
 		7CBD957E1C7DB3A3000A8DE4 /* InputsAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputsAlgorithm.m; sourceTree = "<group>"; };
-		7CF9343C1C5A14BA00D928EA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7CF934401C5A1CBB00D928EA /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Menu.plist; path = Resources/Menu.plist; sourceTree = SOURCE_ROOT; };
 		7CF934411C5A1CBB00D928EA /* QuickContacts-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "QuickContacts-Info.plist"; path = "Resources/QuickContacts-Info.plist"; sourceTree = SOURCE_ROOT; };
 		837704A4712A97F96CAF554C /* libPods-MeetingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeetingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,8 +210,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CF9343E1C5A14BA00D928EA /* AddressBook.framework in Frameworks */,
-				7CF9343F1C5A14BA00D928EA /* AddressBookUI.framework in Frameworks */,
 				F094D6279295DC45F6613428 /* libPods-MeetingApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,8 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				7C1687771C707E3E00197DB1 /* libs */,
-				7CF9343C1C5A14BA00D928EA /* AddressBook.framework */,
-				7CF9343D1C5A14BA00D928EA /* AddressBookUI.framework */,
 				7C30FA7E1C2ED3C70059EAE3 /* MeetingApp */,
 				7C30FA981C2ED3C70059EAE3 /* MeetingAppTests */,
 				7C30FAA31C2ED3C70059EAE3 /* MeetingAppUITests */,
@@ -435,6 +431,7 @@
 		7C3E2B7D1C70A82900B49E90 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				7C903F751D2BD64C00517B0F /* ContactAddress */,
 				7C0393DF1C81C6EA00BDA9AC /* Models */,
 				7C0393DB1C81C62200BDA9AC /* Protocols */,
 				7C79CE9D1C7480940011C917 /* DateCell */,
@@ -564,6 +561,16 @@
 				7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */,
 			);
 			name = DateCell;
+			sourceTree = "<group>";
+		};
+		7C903F751D2BD64C00517B0F /* ContactAddress */ = {
+			isa = PBXGroup;
+			children = (
+				7C903F761D2BED7E00517B0F /* IContactInformation.h */,
+				7C903F771D2BED7E00517B0F /* ContactAddress.m */,
+				7C903F781D2BED7E00517B0F /* ContactAddress.h */,
+			);
+			name = ContactAddress;
 			sourceTree = "<group>";
 		};
 		7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */ = {
@@ -864,6 +871,7 @@
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
 				7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */,
 				7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */,
+				7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */,
 				7C30FA811C2ED3C70059EAE3 /* main.m in Sources */,
 				7C65DA6F1C691B53001F6F32 /* ModelTableViewController.m in Sources */,
 				7C3E2BBB1C70AF9000B49E90 /* GuestViewCellCountry.m in Sources */,

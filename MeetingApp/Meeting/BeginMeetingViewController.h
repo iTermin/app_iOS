@@ -8,9 +8,6 @@
 /* MeetingBeginViewController_h */
 
 #import <UIKit/UIKit.h>
-
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import <SWTableViewCell.h>
 
 #import "UIScrollView+EmptyDataSet.h"
@@ -23,12 +20,13 @@
 #import "IUserDatasource.h"
 #import "IUserDelegate.h"
 
+#import "ContactAddress.h"
+#import "IContactInformation.h"
 
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
-DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTableViewCellDelegate>
+DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTableViewCellDelegate, IContactInformation>
 
-@property (nonatomic, assign) ABAddressBookRef addressBook;
-@property (nonatomic, strong) NSMutableArray *menuArray;
+@property (strong) ContactAddress * pickerAddress;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
