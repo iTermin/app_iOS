@@ -7,7 +7,6 @@
 //
 
 #import "EditProfileUserViewController.h"
-#import "ListCountriesViewController.h"
 #import "UIImageView+Letters.h"
 #import "MBProgressHUD.h"
 
@@ -44,10 +43,14 @@
     [self.emailText.layer addSublayer:emailBorder];
     self.emailText.delegate = self;
     
+    self.locationTextField.delegate = self;
+    
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
     
     [self updateViewModel];
     
@@ -64,7 +67,6 @@
                             @{
                                 @"nib" : @"LocationUserTableViewCell",
                                 @"height" : @(70),
-                                @"segue" : @"selectCountry",
                                 @"data": [self.hostInformation copy]
                                 }
                             ];
@@ -130,31 +132,11 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return data;
 }
 
-- (void) performSegue: (NSIndexPath *)indexPath{
-    NSString *country = self.hostInformation[@"country"];
-    NSDictionary * cellModel = self.viewModel[indexPath.row];
-    NSString * segueToPerform = cellModel[@"segue"];
-    [self performSegueWithIdentifier:segueToPerform sender:country];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"selectCountry"]){
-        ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
-        [locationViewController setCurrentLocation:sender];
-        [locationViewController setCountrySelectorDelegate:self];
-    }
-}
-
-- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-        didSelectCountry: (NSDictionary *) country{
-    [self changedCountryUpdateUserInformation: country];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+//        didSelectCountry: (NSDictionary *) country{
+//    [self changedCountryUpdateUserInformation: country];
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void) changedCountryUpdateUserInformation: (NSDictionary *) newCountry{
     NSDictionary *currentUserInformation = [NSDictionary dictionaryWithDictionary:self.hostInformation];
@@ -245,14 +227,24 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.nameText)
+    if (textField == self.nameText){
         [self changedTextName];
-    if (textField == self.emailText)
+    } else if (textField == self.emailText){
         [self changedTextEmail];
+    } else if (textField == self.locationTextField){
+        NSLog(@"location");
+    }
     
     [textField resignFirstResponder];
     
     return YES;
+}
+
+- (void) changedLocationUser {
+    NSString * locationGuest = self.locationTextField.text;
+    if (![self.locationTextField.text isEqualToString:self.hostInformation[@"country"]]) {
+        NSLog(@"hola");
+    }
 }
 
 - (void) changedTextName{

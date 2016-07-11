@@ -45,11 +45,11 @@
     [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
         self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (![self.currentUser count]) [self presentRegisterUserViewController];
-        else{
+        //if (![self.currentUser count]) [self presentRegisterUserViewController];
+        //else{
             [self updateViewModel];
             [self.tableView reloadData];
-        }
+        //}
     }];
 }
 

@@ -25,7 +25,7 @@
 
     [self.locationText setText: _data[@"country"]];
 
-    NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
+    NSString *identifyFlagPhoto = @"MX";//[NSString stringWithFormat:@"%@.png", _data[@"code"]];
     [self.locationPhoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
 }
 
