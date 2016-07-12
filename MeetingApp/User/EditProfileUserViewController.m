@@ -226,13 +226,31 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return newImage;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -200., self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y +200., self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.nameText){
         [self changedTextName];
     } else if (textField == self.emailText){
         [self changedTextEmail];
     } else if (textField == self.locationTextField){
-        NSLog(@"location");
+        [self changedLocationUser];
     }
     
     [textField resignFirstResponder];
@@ -241,7 +259,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
 }
 
 - (void) changedLocationUser {
-    NSString * locationGuest = self.locationTextField.text;
     if (![self.locationTextField.text isEqualToString:self.hostInformation[@"country"]]) {
         NSLog(@"hola");
     }
