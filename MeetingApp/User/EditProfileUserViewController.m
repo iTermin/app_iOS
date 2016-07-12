@@ -31,22 +31,13 @@
     self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
     self.photoProfileEdit.clipsToBounds = YES;
     
-    CALayer *nameBorder = [CALayer layer];
-    nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
-    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
-    [self.nameText.layer addSublayer:nameBorder];
-    self.nameText.delegate = self;
-    
-    CALayer *emailBorder = [CALayer layer];
-    emailBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
-    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
-    [self.emailText.layer addSublayer:emailBorder];
-    self.emailText.delegate = self;
-    
-    self.locationTextField.delegate = self;
+    [self layoutTextFieldsView];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
+    
+    UITapGestureRecognizer *onScreenRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:onScreenRecognizer];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.allowsSelection = NO;
@@ -54,6 +45,29 @@
     
     [self updateViewModel];
     
+}
+
+- (void) layoutTextFieldsView{
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameText.layer addSublayer:nameBorder];
+    self.nameText.delegate = self;
+    [self.nameText setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *emailBorder = [CALayer layer];
+    emailBorder.frame = CGRectMake(0.0f, self.emailText.frame.size.height - 1, self.emailText.frame.size.width, 1.0f);
+    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.emailText.layer addSublayer:emailBorder];
+    self.emailText.delegate = self;
+    [self.emailText setReturnKeyType:UIReturnKeyDone];
+
+    CALayer *locationBorder = [CALayer layer];
+    locationBorder.frame = CGRectMake(0.0f, self.locationTextField.frame.size.height - 1, self.locationTextField.frame.size.width, 1.0f);
+    locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.locationTextField.layer addSublayer:locationBorder];
+    self.locationTextField.delegate = self;
+    [self.locationTextField setReturnKeyType:UIReturnKeyDone];
 }
 
 - (void) updateViewModel {
@@ -152,6 +166,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
                              newCountry[@"code"], @"code", nil];
     
     [self updateViewModel];
+}
+
+- (void) hideKeyboard{
+    [self.locationTextField resignFirstResponder];
+    [self.nameText resignFirstResponder];
+    [self.emailText resignFirstResponder];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
