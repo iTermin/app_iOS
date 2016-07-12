@@ -7,7 +7,6 @@
 //
 
 #import "EditProfileUserViewController.h"
-#import "ListCountriesViewController.h"
 #import "UIImageView+Letters.h"
 #import "MBProgressHUD.h"
 
@@ -32,25 +31,43 @@
     self.photoProfileEdit.layer.cornerRadius = self.photoProfileEdit.frame.size.width/2.0f;
     self.photoProfileEdit.clipsToBounds = YES;
     
+    [self layoutTextFieldsView];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
+    
+    UITapGestureRecognizer *onScreenRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:onScreenRecognizer];
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
+    
+    [self updateViewModel];
+    
+}
+
+- (void) layoutTextFieldsView{
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
     nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.nameText.layer addSublayer:nameBorder];
     self.nameText.delegate = self;
+    [self.nameText setReturnKeyType:UIReturnKeyDone];
     
     CALayer *emailBorder = [CALayer layer];
-    emailBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
+    emailBorder.frame = CGRectMake(0.0f, self.emailText.frame.size.height - 1, self.emailText.frame.size.width, 1.0f);
     emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.emailText.layer addSublayer:emailBorder];
     self.emailText.delegate = self;
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
-    
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    [self updateViewModel];
-    
+    [self.emailText setReturnKeyType:UIReturnKeyDone];
+
+    CALayer *locationBorder = [CALayer layer];
+    locationBorder.frame = CGRectMake(0.0f, self.locationTextField.frame.size.height - 1, self.locationTextField.frame.size.width, 1.0f);
+    locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.locationTextField.layer addSublayer:locationBorder];
+    self.locationTextField.delegate = self;
+    [self.locationTextField setReturnKeyType:UIReturnKeyDone];
 }
 
 - (void) updateViewModel {
@@ -64,7 +81,6 @@
                             @{
                                 @"nib" : @"LocationUserTableViewCell",
                                 @"height" : @(70),
-                                @"segue" : @"selectCountry",
                                 @"data": [self.hostInformation copy]
                                 }
                             ];
@@ -130,31 +146,11 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return data;
 }
 
-- (void) performSegue: (NSIndexPath *)indexPath{
-    NSString *country = self.hostInformation[@"country"];
-    NSDictionary * cellModel = self.viewModel[indexPath.row];
-    NSString * segueToPerform = cellModel[@"segue"];
-    [self performSegueWithIdentifier:segueToPerform sender:country];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"selectCountry"]){
-        ListCountriesViewController * locationViewController = (ListCountriesViewController *)segue.destinationViewController;
-        [locationViewController setCurrentLocation:sender];
-        [locationViewController setCountrySelectorDelegate:self];
-    }
-}
-
-- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-        didSelectCountry: (NSDictionary *) country{
-    [self changedCountryUpdateUserInformation: country];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+//        didSelectCountry: (NSDictionary *) country{
+//    [self changedCountryUpdateUserInformation: country];
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void) changedCountryUpdateUserInformation: (NSDictionary *) newCountry{
     NSDictionary *currentUserInformation = [NSDictionary dictionaryWithDictionary:self.hostInformation];
@@ -170,6 +166,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
                              newCountry[@"code"], @"code", nil];
     
     [self updateViewModel];
+}
+
+- (void) hideKeyboard{
+    [self.locationTextField resignFirstResponder];
+    [self.nameText resignFirstResponder];
+    [self.emailText resignFirstResponder];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
@@ -244,15 +246,42 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return newImage;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -200., self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y +200., self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.nameText)
+    if (textField == self.nameText){
         [self changedTextName];
-    if (textField == self.emailText)
+    } else if (textField == self.emailText){
         [self changedTextEmail];
+    } else if (textField == self.locationTextField){
+        [self changedLocationUser];
+    }
     
     [textField resignFirstResponder];
     
     return YES;
+}
+
+- (void) changedLocationUser {
+    if (![self.locationTextField.text isEqualToString:self.hostInformation[@"country"]]) {
+        NSLog(@"hola");
+    }
 }
 
 - (void) changedTextName{

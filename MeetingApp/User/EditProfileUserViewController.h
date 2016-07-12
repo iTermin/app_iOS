@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ICountrySelectorDelegate.h"
 #import "ModelTableViewController.h"
 
 #import "IUserDatasource.h"
@@ -16,12 +15,12 @@
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<ICountrySelectorDelegate, IUserDatasource,
-UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+<IUserDatasource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
+@property (weak, nonatomic) IBOutlet UITextField *locationTextField;
 
 @property(nonatomic, strong) NSDictionary * currentHost;
 @property(nonatomic, strong) NSMutableDictionary * hostInformation;
