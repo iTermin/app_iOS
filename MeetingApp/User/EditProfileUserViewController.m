@@ -6,6 +6,8 @@
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "EditProfileUserViewController.h"
 #import "UIImageView+Letters.h"
 #import "MBProgressHUD.h"
@@ -47,6 +49,21 @@
     
 }
 
+- (void) viewDidAppear:(BOOL)animated{
+    self.locationTextField.autoCompleteRegularFontName =  @"HelveticaNeue-Bold";
+    self.locationTextField.autoCompleteBoldFontName = @"HelveticaNeue";
+    self.locationTextField.autoCompleteTableCornerRadius=0.0;
+    self.locationTextField.autoCompleteRowHeight=35;
+    self.locationTextField.autoCompleteTableCellTextColor=[UIColor colorWithWhite:0.131 alpha:1.000];
+    self.locationTextField.autoCompleteFontSize=14;
+    self.locationTextField.autoCompleteTableBorderWidth=1.0;
+    self.locationTextField.showTextFieldDropShadowWhenAutoCompleteTableIsOpen=YES;
+    self.locationTextField.autoCompleteShouldHideOnSelection=YES;
+    self.locationTextField.autoCompleteShouldHideClosingKeyboard=YES;
+    self.locationTextField.autoCompleteShouldSelectOnExactMatchAutomatically = YES;
+    self.locationTextField.autoCompleteTableFrame = CGRectMake(self.locationTextField.frame.origin.x, (self.locationTextField.frame.origin.y+self.locationTextField.frame.size.height), self.locationTextField.frame.size.width, 200.0);
+}
+
 - (void) layoutTextFieldsView{
     CALayer *nameBorder = [CALayer layer];
     nameBorder.frame = CGRectMake(0.0f, self.nameText.frame.size.height - 1, self.nameText.frame.size.width, 1.0f);
@@ -61,13 +78,23 @@
     [self.emailText.layer addSublayer:emailBorder];
     self.emailText.delegate = self;
     [self.emailText setReturnKeyType:UIReturnKeyDone];
+    
+    [self specificLayoutLocationTextField];
+}
 
+- (void) specificLayoutLocationTextField{
     CALayer *locationBorder = [CALayer layer];
     locationBorder.frame = CGRectMake(0.0f, self.locationTextField.frame.size.height - 1, self.locationTextField.frame.size.width, 1.0f);
     locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.locationTextField.layer addSublayer:locationBorder];
     self.locationTextField.delegate = self;
     [self.locationTextField setReturnKeyType:UIReturnKeyDone];
+    
+    self.locationTextField.placeSearchDelegate = self;
+    self.locationTextField.strApiKey = @"AIzaSyCDi2dklT-95tEHqYoE7Tklwzn3eJP-MtM";
+    self.locationTextField.superViewOfList = self.view;
+    self.locationTextField.autoCompleteShouldHideOnSelection = YES;
+    self.locationTextField.maximumNumberOfAutoCompleteRows = 5;
 }
 
 - (void) updateViewModel {
@@ -269,8 +296,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
         [self changedTextName];
     } else if (textField == self.emailText){
         [self changedTextEmail];
-    } else if (textField == self.locationTextField){
-        [self changedLocationUser];
     }
     
     [textField resignFirstResponder];
@@ -333,5 +358,42 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
+- (void) placeSearchResponseForSelectedPlace:(NSMutableDictionary *)responseDict{
+    [self.view endEditing:YES];
+    //NSLog(@"%@",responseDict);
+    
+    NSDictionary* locationPlaceSearch =[[[responseDict objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
+    
+    NSDictionary* addressPlaceSearch=[[responseDict objectForKey:@"result"] objectForKey:@"formatted_address"];
+    NSLog(@"SELECTED ADDRESS :%@",addressPlaceSearch);
+    
+    double latitude = [[locationPlaceSearch valueForKey:@"lat"] doubleValue];
+    double longitude = [[locationPlaceSearch valueForKey:@"lng"] doubleValue];
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude
+                                                      longitude:longitude];
+    
+    CLGeocoder * reference = [CLGeocoder new];
+    
+    [reference reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSLog(@"Timezone -%@",placemark.timeZone.abbreviation);
+        NSLog(@"Timezone -%@",placemark.timeZone.name);
+    }];
+}
+
+- (void) placeSearchWillShowResult{
+}
+
+-(void) placeSearchWillHideResult{
+}
+
+- (void) placeSearchResultCell:(UITableViewCell *)cell withPlaceObject:(PlaceObject *)placeObject atIndex:(NSInteger)index{
+    if(index%2==0){
+        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    }else{
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
+}
 
 @end
