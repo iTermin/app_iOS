@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 
 #import "ModelTableViewController.h"
+#import "MVPlaceSearchTextField.h"
 
 #import "IUserDatasource.h"
 #import "IUserDelegate.h"
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<IUserDatasource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+<IUserDatasource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+PlaceSearchTextFieldDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
-@property (weak, nonatomic) IBOutlet UITextField *locationTextField;
+@property (weak, nonatomic) IBOutlet MVPlaceSearchTextField *locationTextField;
 
 @property(nonatomic, strong) NSDictionary * currentHost;
 @property(nonatomic, strong) NSMutableDictionary * hostInformation;

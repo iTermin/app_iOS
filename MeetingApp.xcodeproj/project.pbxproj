@@ -53,6 +53,11 @@
 		7C79CECC1C7484AD0011C917 /* UXSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC51C7484AD0011C917 /* UXSwitchCell.m */; };
 		7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C79CEC71C7484AD0011C917 /* NSCalendar+UX.m */; };
 		7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F771D2BED7E00517B0F /* ContactAddress.m */; };
+		7C9941C91D38DBCF00B89063 /* MVPlaceSearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9941BB1D38DBCF00B89063 /* MVPlaceSearchTextField.m */; };
+		7C9941CA1D38DBCF00B89063 /* PlaceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9941BC1D38DBCF00B89063 /* PlaceDetail.m */; };
+		7C9941CB1D38DBCF00B89063 /* MLPAutoCompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9941BF1D38DBCF00B89063 /* MLPAutoCompleteTextField.m */; };
+		7C9941CC1D38DBCF00B89063 /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9941C41D38DBCF00B89063 /* NSString+Levenshtein.m */; };
+		7C9941CD1D38DBCF00B89063 /* PlaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9941C81D38DBCF00B89063 /* PlaceObject.m */; };
 		7CA953E51C78D7F90060E1F7 /* AlgorithmMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */; };
 		7CA953EA1C78DAF20060E1F7 /* AlgorithmMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */; };
 		7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB029F61C722360003D4204 /* GuestDateViewCell.m */; };
@@ -188,6 +193,19 @@
 		7C903F761D2BED7E00517B0F /* IContactInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IContactInformation.h; path = Meeting/ContactAddress/IContactInformation.h; sourceTree = "<group>"; };
 		7C903F771D2BED7E00517B0F /* ContactAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactAddress.m; path = Meeting/ContactAddress/ContactAddress.m; sourceTree = "<group>"; };
 		7C903F781D2BED7E00517B0F /* ContactAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactAddress.h; path = Meeting/ContactAddress/ContactAddress.h; sourceTree = "<group>"; };
+		7C9941BB1D38DBCF00B89063 /* MVPlaceSearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MVPlaceSearchTextField.m; path = Common/MVPlaceSearchTextField/MVPlaceSearchTextField.m; sourceTree = "<group>"; };
+		7C9941BC1D38DBCF00B89063 /* PlaceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceDetail.m; path = Common/MVPlaceSearchTextField/PlaceDetail.m; sourceTree = "<group>"; };
+		7C9941BE1D38DBCF00B89063 /* MLPAutoCompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextField.h; sourceTree = "<group>"; };
+		7C9941BF1D38DBCF00B89063 /* MLPAutoCompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPAutoCompleteTextField.m; sourceTree = "<group>"; };
+		7C9941C01D38DBCF00B89063 /* MLPAutoCompleteTextFieldDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextFieldDataSource.h; sourceTree = "<group>"; };
+		7C9941C11D38DBCF00B89063 /* MLPAutoCompleteTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompleteTextFieldDelegate.h; sourceTree = "<group>"; };
+		7C9941C21D38DBCF00B89063 /* MLPAutoCompletionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPAutoCompletionObject.h; sourceTree = "<group>"; };
+		7C9941C31D38DBCF00B89063 /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
+		7C9941C41D38DBCF00B89063 /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
+		7C9941C51D38DBCF00B89063 /* MVPlaceSearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MVPlaceSearchTextField.h; path = Common/MVPlaceSearchTextField/MVPlaceSearchTextField.h; sourceTree = "<group>"; };
+		7C9941C61D38DBCF00B89063 /* PlaceDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceDetail.h; path = Common/MVPlaceSearchTextField/PlaceDetail.h; sourceTree = "<group>"; };
+		7C9941C71D38DBCF00B89063 /* PlaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceObject.h; path = Common/MVPlaceSearchTextField/PlaceObject.h; sourceTree = "<group>"; };
+		7C9941C81D38DBCF00B89063 /* PlaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceObject.m; path = Common/MVPlaceSearchTextField/PlaceObject.m; sourceTree = "<group>"; };
 		7CA953E41C78D7F90060E1F7 /* AlgorithmMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmMeeting.m; sourceTree = "<group>"; };
 		7CA953E81C78DAF20060E1F7 /* AlgorithmMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmMain.h; path = AlgorithmMeeting/AlgorithmMain.h; sourceTree = "<group>"; };
 		7CA953E91C78DAF20060E1F7 /* AlgorithmMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmMain.m; path = AlgorithmMeeting/AlgorithmMain.m; sourceTree = "<group>"; };
@@ -516,6 +534,7 @@
 		7C3E2BDA1C70F68B00B49E90 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7C9941BA1D38DBBA00B89063 /* MVPlaceSearchTextField */,
 				7C0F7A331C8F26F2003FC9C7 /* Protocols */,
 				7C3B80A21C5559E200678EF4 /* Artifacts */,
 			);
@@ -571,6 +590,35 @@
 				7C903F781D2BED7E00517B0F /* ContactAddress.h */,
 			);
 			name = ContactAddress;
+			sourceTree = "<group>";
+		};
+		7C9941BA1D38DBBA00B89063 /* MVPlaceSearchTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7C9941BD1D38DBCF00B89063 /* MLPAutoCompleteTextField */,
+				7C9941C51D38DBCF00B89063 /* MVPlaceSearchTextField.h */,
+				7C9941BB1D38DBCF00B89063 /* MVPlaceSearchTextField.m */,
+				7C9941C61D38DBCF00B89063 /* PlaceDetail.h */,
+				7C9941BC1D38DBCF00B89063 /* PlaceDetail.m */,
+				7C9941C71D38DBCF00B89063 /* PlaceObject.h */,
+				7C9941C81D38DBCF00B89063 /* PlaceObject.m */,
+			);
+			name = MVPlaceSearchTextField;
+			sourceTree = "<group>";
+		};
+		7C9941BD1D38DBCF00B89063 /* MLPAutoCompleteTextField */ = {
+			isa = PBXGroup;
+			children = (
+				7C9941BE1D38DBCF00B89063 /* MLPAutoCompleteTextField.h */,
+				7C9941BF1D38DBCF00B89063 /* MLPAutoCompleteTextField.m */,
+				7C9941C01D38DBCF00B89063 /* MLPAutoCompleteTextFieldDataSource.h */,
+				7C9941C11D38DBCF00B89063 /* MLPAutoCompleteTextFieldDelegate.h */,
+				7C9941C21D38DBCF00B89063 /* MLPAutoCompletionObject.h */,
+				7C9941C31D38DBCF00B89063 /* NSString+Levenshtein.h */,
+				7C9941C41D38DBCF00B89063 /* NSString+Levenshtein.m */,
+			);
+			name = MLPAutoCompleteTextField;
+			path = Common/MVPlaceSearchTextField/MLPAutoCompleteTextField;
 			sourceTree = "<group>";
 		};
 		7CA953E71C78DA990060E1F7 /* AlgorithmMeeting */ = {
@@ -844,9 +892,12 @@
 			files = (
 				7C3E2BAC1C70AD7400B49E90 /* MeetingDetailViewController.m in Sources */,
 				7C3E2B851C70A96E00B49E90 /* EditProfileUserViewController.m in Sources */,
+				7C9941C91D38DBCF00B89063 /* MVPlaceSearchTextField.m in Sources */,
 				7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */,
+				7C9941CD1D38DBCF00B89063 /* PlaceObject.m in Sources */,
 				7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */,
 				7C3ED7941CD4F8AF005F4A55 /* InvitationEmailGuest.m in Sources */,
+				7C9941CC1D38DBCF00B89063 /* NSString+Levenshtein.m in Sources */,
 				7C3E2BAA1C70AD7400B49E90 /* BeginMeetingViewController.m in Sources */,
 				7C3E2BBC1C70AF9000B49E90 /* MeetingTableViewCell.m in Sources */,
 				7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */,
@@ -865,10 +916,12 @@
 				7C3E2BCB1C70E95B00B49E90 /* EditGuestDetailViewController.m in Sources */,
 				7C3E2B9C1C70ABEE00B49E90 /* GeneralInformationUserTableViewCell.m in Sources */,
 				7CBD957C1C7DB352000A8DE4 /* InputsAlgorithm.m in Sources */,
+				7C9941CA1D38DBCF00B89063 /* PlaceDetail.m in Sources */,
 				7C0393D91C81C20B00BDA9AC /* MeetingBusinessController.m in Sources */,
 				7C30FA841C2ED3C70059EAE3 /* AppDelegate.m in Sources */,
 				7C36ADC51C83898300813935 /* ArrayOfCountries.m in Sources */,
 				7C3E2BBA1C70AF9000B49E90 /* GuestViewCell.m in Sources */,
+				7C9941CB1D38DBCF00B89063 /* MLPAutoCompleteTextField.m in Sources */,
 				7C79CECA1C7484AD0011C917 /* UXDateCellsManager.m in Sources */,
 				7C0393E81C81D0E800BDA9AC /* MainAssembly.m in Sources */,
 				7C903F791D2BED7E00517B0F /* ContactAddress.m in Sources */,
