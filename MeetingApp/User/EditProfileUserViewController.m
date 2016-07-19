@@ -170,12 +170,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return data;
 }
 
-//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-//        didSelectCountry: (NSDictionary *) country{
-//    [self changedCountryUpdateUserInformation: country];
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-
 - (void) changedCountryUpdateUserInformation: (NSDictionary *) newCountry{
     NSDictionary *currentUserInformation = [NSDictionary dictionaryWithDictionary:self.hostInformation];
     
@@ -186,8 +180,8 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
                              currentUserInformation[@"name"], @"name",
                              currentUserInformation[@"email"], @"email",
                              currentUserInformation[@"photo"], @"photo",
-                             newCountry[@"name"], @"country",
-                             newCountry[@"code"], @"code", nil];
+                             newCountry[@"country"], @"country",
+                             newCountry[@"isoCountry"], @"code", nil];
     
     [self updateViewModel];
 }
@@ -294,12 +288,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     return YES;
 }
 
-- (void) changedLocationUser {
-    if (![self.locationTextField.text isEqualToString:self.hostInformation[@"country"]]) {
-        NSLog(@"hola");
-    }
-}
-
 - (void) changedTextName{
     NSString *nameGuest = self.nameText.text;
     if (![self.nameText.text isEqualToString:self.hostInformation[@"name"]]){
@@ -349,14 +337,17 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
+
+- (void) changedLocationUser: (NSDictionary *) locationInfo {
+    if (![locationInfo[@"country"] isEqualToString:self.hostInformation[@"country"]]) {
+        [self changedCountryUpdateUserInformation: locationInfo];
+    }
+}
+
 - (void) placeSearchResponseForSelectedPlace:(NSMutableDictionary *)responseDict{
-    [self.view endEditing:YES];
-    //NSLog(@"%@",responseDict);
-    
     NSDictionary* locationPlaceSearch =[[[responseDict objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
     
-    NSDictionary* addressPlaceSearch=[[responseDict objectForKey:@"result"] objectForKey:@"formatted_address"];
-    NSLog(@"SELECTED ADDRESS :%@",addressPlaceSearch);
+    NSString* addressPlaceSearch=[[responseDict objectForKey:@"result"] objectForKey:@"formatted_address"];
     
     double latitude = [[locationPlaceSearch valueForKey:@"lat"] doubleValue];
     double longitude = [[locationPlaceSearch valueForKey:@"lng"] doubleValue];
@@ -368,10 +359,15 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     
     [reference reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"Timezone -%@",placemark.timeZone.abbreviation);
-        NSLog(@"Timezone -%@",placemark.timeZone.name);
-        NSLog(@"Country -%@",placemark.country);
-        NSLog(@"Country -%@",placemark.ISOcountryCode);
+        NSDictionary * locationUser = @{
+                                        @"placeSelected": [NSString stringWithString:addressPlaceSearch],
+                                        @"timezone": [NSString stringWithString:placemark.timeZone.abbreviation],
+                                        @"nameTimezone": [NSString stringWithString:placemark.timeZone.name],
+                                        @"country": [NSString stringWithString:placemark.country],
+                                        @"isoCountry" : [NSString stringWithString:placemark.ISOcountryCode]
+                                        };
+        [self changedLocationUser: locationUser];
+        [self.view endEditing:YES];
     }];
 }
 
