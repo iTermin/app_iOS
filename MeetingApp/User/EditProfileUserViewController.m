@@ -47,14 +47,14 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated{
-    self.locationTextField.autoCompleteRegularFontName =  @"HelveticaNeue-Bold";
-    self.locationTextField.autoCompleteBoldFontName = @"HelveticaNeue";
+    self.locationTextField.autoCompleteRegularFontName =  @"Optima";
+    self.locationTextField.autoCompleteBoldFontName = @"Optima-Bold";
     self.locationTextField.autoCompleteTableCornerRadius=0.0;
     self.locationTextField.autoCompleteRowHeight=35;
     self.locationTextField.autoCompleteTableCellTextColor=[UIColor colorWithWhite:0.131 alpha:1.000];
     self.locationTextField.autoCompleteFontSize=14;
     self.locationTextField.autoCompleteTableBorderWidth=1.0;
-    self.locationTextField.showTextFieldDropShadowWhenAutoCompleteTableIsOpen=YES;
+    self.locationTextField.showTextFieldDropShadowWhenAutoCompleteTableIsOpen=NO;
     self.locationTextField.autoCompleteShouldHideOnSelection=YES;
     self.locationTextField.autoCompleteShouldHideClosingKeyboard=YES;
     self.locationTextField.autoCompleteShouldSelectOnExactMatchAutomatically = YES;
@@ -370,6 +370,8 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         NSLog(@"Timezone -%@",placemark.timeZone.abbreviation);
         NSLog(@"Timezone -%@",placemark.timeZone.name);
+        NSLog(@"Country -%@",placemark.country);
+        NSLog(@"Country -%@",placemark.ISOcountryCode);
     }];
 }
 
