@@ -38,9 +38,6 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [self.photoProfileEdit addGestureRecognizer:tapRecognizer];
     
-    UITapGestureRecognizer *onScreenRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    [self.view addGestureRecognizer:onScreenRecognizer];
-    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.allowsSelection = NO;
     self.tableView.scrollEnabled = NO;
@@ -94,7 +91,7 @@
     self.locationTextField.strApiKey = @"AIzaSyCDi2dklT-95tEHqYoE7Tklwzn3eJP-MtM";
     self.locationTextField.superViewOfList = self.view;
     self.locationTextField.autoCompleteShouldHideOnSelection = YES;
-    self.locationTextField.maximumNumberOfAutoCompleteRows = 5;
+    self.locationTextField.maximumNumberOfAutoCompleteRows = 4;
 }
 
 - (void) updateViewModel {
@@ -193,12 +190,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
                              newCountry[@"code"], @"code", nil];
     
     [self updateViewModel];
-}
-
-- (void) hideKeyboard{
-    [self.locationTextField resignFirstResponder];
-    [self.nameText resignFirstResponder];
-    [self.emailText resignFirstResponder];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
