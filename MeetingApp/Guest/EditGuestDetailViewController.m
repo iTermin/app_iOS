@@ -38,6 +38,10 @@
     
     [self layoutUITextFields];
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
+    
     UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
     [self.guestPhoto addGestureRecognizer:tapImage];
     
