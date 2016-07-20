@@ -177,11 +177,14 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     
     [self.hostInformation removeAllObjects];
     self.hostInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                             currentUserInformation[@"name"], @"name",
-                             currentUserInformation[@"email"], @"email",
-                             currentUserInformation[@"photo"], @"photo",
-                             newCountry[@"country"], @"country",
-                             newCountry[@"isoCountry"], @"code", nil];
+                            currentUserInformation[@"name"], @"name",
+                            currentUserInformation[@"email"], @"email",
+                            currentUserInformation[@"photo"], @"photo",
+                            newCountry[@"country"], @"country",
+                            newCountry[@"isoCountry"], @"code",
+                            newCountry[@"placeSelected"], @"place",
+                            newCountry[@"timezone"], @"timezone",
+                            newCountry[@"nameTimezone"], @"nameTimezone", nil];
     
     [self updateViewModel];
 }
