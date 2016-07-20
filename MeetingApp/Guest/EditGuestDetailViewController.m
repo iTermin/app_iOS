@@ -36,24 +36,7 @@
     
     self.guestInformation = [NSMutableDictionary dictionary];
     
-    self.nameGuest.delegate = self;
-    self.emailGuest.delegate = self;
-    
-    CGSize nameSize = self.nameGuest.frame.size;
-    CGFloat xPosition = 0.0f;
-    CGFloat yPosition = 1.0f;
-    UIColor *grayColorSeparator = [UIColor colorWithWhite: 0.70 alpha:1];
-    
-    CALayer *nameBorder = [CALayer layer];
-    nameBorder.frame = CGRectMake(xPosition, nameSize.height - 1, nameSize.width, yPosition);
-    nameBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.nameGuest.layer addSublayer:nameBorder];
-    
-    CALayer *emailBorder = [CALayer layer];
-    CGSize meetingSize = self.emailGuest.frame.size;
-    emailBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
-    emailBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.emailGuest.layer addSublayer:emailBorder];
+    [self layoutUITextFields];
     
     UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
     [self.guestPhoto addGestureRecognizer:tapImage];
@@ -62,6 +45,40 @@
                                     initWithTarget:self action:@selector(handleSingleTap:)];
     tapper.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapper];
+}
+
+- (void) layoutUITextFields{
+    
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f,
+                                  self.nameGuest.frame.size.height - 1,
+                                  self.nameGuest.frame.size.width,
+                                  1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameGuest.layer addSublayer:nameBorder];
+    self.nameGuest.delegate = self;
+    [self.nameGuest setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *emailBorder = [CALayer layer];
+    emailBorder.frame = CGRectMake(0.0f,
+                                   self.emailGuest.frame.size.height - 1,
+                                   self.emailGuest.frame.size.width,
+                                   1.0f);
+    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.emailGuest.layer addSublayer:emailBorder];
+    self.emailGuest.delegate = self;
+    [self.emailGuest setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *locationBorder = [CALayer layer];
+    locationBorder.frame = CGRectMake(0.0f,
+                                      self.locationGuest.frame.size.height - 1,
+                                      self.locationGuest.frame.size.width,
+                                      1.0f);
+    locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.locationGuest.layer addSublayer:locationBorder];
+    self.locationGuest.delegate = self;
+    [self.locationGuest setReturnKeyType:UIReturnKeyDone];
+
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender

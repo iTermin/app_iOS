@@ -124,14 +124,11 @@
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tLg-sY-SO2">
-                                <rect key="frame" x="0.0" y="399" width="375" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="j4G-PE-T9P" id="vpm-tS-SfX"/>
-                                    <outlet property="delegate" destination="j4G-PE-T9P" id="bhG-hx-zF2"/>
-                                </connections>
-                            </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VzP-xJ-rXA">
+                                <rect key="frame" x="20" y="404" width="335" height="30"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhM-jJ-EMg">
                                 <rect key="frame" x="20" y="370" width="94" height="21"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
@@ -141,6 +138,14 @@
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecm-gY-F9O">
                                 <rect key="frame" x="122" y="91" width="130" height="130"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tLg-sY-SO2">
+                                <rect key="frame" x="0.0" y="453" width="375" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="j4G-PE-T9P" id="vpm-tS-SfX"/>
+                                    <outlet property="delegate" destination="j4G-PE-T9P" id="bhG-hx-zF2"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -149,47 +154,14 @@
                     <connections>
                         <outlet property="emailGuest" destination="Y25-fZ-Uwa" id="fPN-CJ-e5U"/>
                         <outlet property="guestPhoto" destination="ecm-gY-F9O" id="6ds-uZ-o3R"/>
+                        <outlet property="locationGuest" destination="VzP-xJ-rXA" id="kVP-vY-OtZ"/>
                         <outlet property="nameGuest" destination="VO1-SU-fo0" id="JKm-He-0G0"/>
                         <outlet property="tableView" destination="tLg-sY-SO2" id="82N-qh-TNj"/>
-                        <segue destination="Xsy-7b-UdF" kind="push" identifier="guestListCountries" id="HMm-vW-AR0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26i-Pe-aAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-169.5" y="2365.5"/>
-        </scene>
-        <!--Guest List Countries Table View Controller-->
-        <scene sceneID="KGv-eA-wrw">
-            <objects>
-                <tableViewController id="Xsy-7b-UdF" customClass="GuestListCountriesTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iVK-mw-Uyn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hrF-y7-NSk">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hrF-y7-NSk" id="jeo-9N-HYt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Xsy-7b-UdF" id="Nhd-pP-gAq"/>
-                            <outlet property="delegate" destination="Xsy-7b-UdF" id="ak9-0f-yVS"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="7pr-XN-vds"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="tableView" destination="iVK-mw-Uyn" id="9zw-lm-fLH"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0M2-MX-ytI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="383.5" y="2365.5"/>
         </scene>
         <!--Meetings-->
         <scene sceneID="s2z-pc-Yp9">

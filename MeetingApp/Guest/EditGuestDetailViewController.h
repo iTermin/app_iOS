@@ -22,6 +22,7 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
+@property (weak, nonatomic) IBOutlet UITextField *locationGuest;
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;
