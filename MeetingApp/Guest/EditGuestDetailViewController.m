@@ -8,7 +8,6 @@
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
-#import "GuestListCountriesTableViewController.h"
 #import "ArrayOfCountries.h"
 #import "MBProgressHUD.h"
 
@@ -262,20 +261,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"guestListCountries"]){
-        GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
-        [guestListCountries setCurrentGuest: sender];
-        [guestListCountries setCountrySelectorDelegate:self];
-    }
-}
-
-- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-        didSelectCountry: (NSDictionary *) country
-{
-    [self changedCountryUpdateGuestInformation: country];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+//        didSelectCountry: (NSDictionary *) country
+//{
+//    [self changedCountryUpdateGuestInformation: country];
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
     changedInformation = YES;
