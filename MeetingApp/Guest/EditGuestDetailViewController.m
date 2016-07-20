@@ -8,7 +8,6 @@
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
-#import "GuestListCountriesTableViewController.h"
 #import "ArrayOfCountries.h"
 #import "MBProgressHUD.h"
 
@@ -36,37 +35,73 @@
     
     self.guestInformation = [NSMutableDictionary dictionary];
     
-    self.nameGuest.delegate = self;
-    self.emailGuest.delegate = self;
+    [self layoutUITextFields];
     
-    CGSize nameSize = self.nameGuest.frame.size;
-    CGFloat xPosition = 0.0f;
-    CGFloat yPosition = 1.0f;
-    UIColor *grayColorSeparator = [UIColor colorWithWhite: 0.70 alpha:1];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
     
-    CALayer *nameBorder = [CALayer layer];
-    nameBorder.frame = CGRectMake(xPosition, nameSize.height - 1, nameSize.width, yPosition);
-    nameBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.nameGuest.layer addSublayer:nameBorder];
-    
-    CALayer *emailBorder = [CALayer layer];
-    CGSize meetingSize = self.emailGuest.frame.size;
-    emailBorder.frame = CGRectMake(xPosition, meetingSize.height - 1, meetingSize.width, yPosition);
-    emailBorder.backgroundColor = grayColorSeparator.CGColor;
-    [self.emailGuest.layer addSublayer:emailBorder];
-    
-    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
+    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(tapAction:)];
     [self.guestPhoto addGestureRecognizer:tapImage];
-    
-    UIGestureRecognizer * tapper = [[UITapGestureRecognizer alloc]
-                                    initWithTarget:self action:@selector(handleSingleTap:)];
-    tapper.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapper];
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *) sender
-{
-    [self.view endEditing:YES];
+- (void) layoutUITextFields{
+    
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f,
+                                  self.nameGuest.frame.size.height - 1,
+                                  self.nameGuest.frame.size.width,
+                                  1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameGuest.layer addSublayer:nameBorder];
+    self.nameGuest.delegate = self;
+    [self.nameGuest setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *emailBorder = [CALayer layer];
+    emailBorder.frame = CGRectMake(0.0f,
+                                   self.emailGuest.frame.size.height - 1,
+                                   self.emailGuest.frame.size.width,
+                                   1.0f);
+    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.emailGuest.layer addSublayer:emailBorder];
+    self.emailGuest.delegate = self;
+    [self.emailGuest setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *locationBorder = [CALayer layer];
+    locationBorder.frame = CGRectMake(0.0f,
+                                      self.locationGuest.frame.size.height - 1,
+                                      self.locationGuest.frame.size.width,
+                                      1.0f);
+    locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.locationGuest.layer addSublayer:locationBorder];
+    self.locationGuest.delegate = self;
+    [self.locationGuest setReturnKeyType:UIReturnKeyDone];
+
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y -200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+        [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y +200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+    [UIView commitAnimations];
 }
 
 -(void) customCell {
@@ -226,20 +261,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"guestListCountries"]){
-        GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
-        [guestListCountries setCurrentGuest: sender];
-        [guestListCountries setCountrySelectorDelegate:self];
-    }
-}
-
-- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-        didSelectCountry: (NSDictionary *) country
-{
-    [self changedCountryUpdateGuestInformation: country];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
+//        didSelectCountry: (NSDictionary *) country
+//{
+//    [self changedCountryUpdateGuestInformation: country];
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
     changedInformation = YES;

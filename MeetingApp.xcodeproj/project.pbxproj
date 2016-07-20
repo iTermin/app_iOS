@@ -41,7 +41,6 @@
 		7C3E2BD21C70EA7000B49E90 /* LocationGuestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BD01C70EA7000B49E90 /* LocationGuestTableViewCell.m */; };
 		7C3E2BDF1C70F71500B49E90 /* CountryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3E2BDD1C70F71500B49E90 /* CountryViewCell.xib */; };
 		7C3E2BE01C70F71500B49E90 /* CountryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BDE1C70F71500B49E90 /* CountryViewCell.m */; };
-		7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */; };
 		7C3E2BE61C70F78300B49E90 /* ListCountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */; };
 		7C3ED7941CD4F8AF005F4A55 /* InvitationEmailGuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3ED7931CD4F8AF005F4A55 /* InvitationEmailGuest.m */; };
 		7C3F27531CA15DB0005DCD90 /* UserBusinessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F27521CA15DB0005DCD90 /* UserBusinessController.m */; };
@@ -164,8 +163,6 @@
 		7C3E2BDC1C70F71500B49E90 /* CountryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryViewCell.h; path = Common/Artifacts/CountryViewCell.h; sourceTree = "<group>"; };
 		7C3E2BDD1C70F71500B49E90 /* CountryViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CountryViewCell.xib; path = Common/Artifacts/CountryViewCell.xib; sourceTree = "<group>"; };
 		7C3E2BDE1C70F71500B49E90 /* CountryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryViewCell.m; path = Common/Artifacts/CountryViewCell.m; sourceTree = "<group>"; };
-		7C3E2BE11C70F73D00B49E90 /* GuestListCountriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestListCountriesTableViewController.h; path = Guest/GuestListCountriesTableViewController.h; sourceTree = "<group>"; };
-		7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestListCountriesTableViewController.m; path = Guest/GuestListCountriesTableViewController.m; sourceTree = "<group>"; };
 		7C3E2BE41C70F78300B49E90 /* ListCountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListCountriesViewController.h; path = User/ListCountriesViewController.h; sourceTree = "<group>"; };
 		7C3E2BE51C70F78300B49E90 /* ListCountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListCountriesViewController.m; path = User/ListCountriesViewController.m; sourceTree = "<group>"; };
 		7C3ED7921CD4F8AF005F4A55 /* InvitationEmailGuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvitationEmailGuest.h; path = Services/InvitationEmailGuest.h; sourceTree = "<group>"; };
@@ -477,8 +474,6 @@
 				7C3E2BCD1C70EA3000B49E90 /* Artifacts */,
 				7C3E2BC71C70E95B00B49E90 /* EditGuestDetailViewController.h */,
 				7C3E2BC81C70E95B00B49E90 /* EditGuestDetailViewController.m */,
-				7C3E2BE11C70F73D00B49E90 /* GuestListCountriesTableViewController.h */,
-				7C3E2BE21C70F73D00B49E90 /* GuestListCountriesTableViewController.m */,
 			);
 			name = Guest;
 			sourceTree = "<group>";
@@ -909,7 +904,6 @@
 				7C3E2B9B1C70ABEE00B49E90 /* LocationUserTableViewCell.m in Sources */,
 				7C79CECD1C7484AD0011C917 /* NSCalendar+UX.m in Sources */,
 				7C79CECB1C7484AD0011C917 /* UXDatePickerCell.m in Sources */,
-				7C3E2BE31C70F73D00B49E90 /* GuestListCountriesTableViewController.m in Sources */,
 				7C3E2BAB1C70AD7400B49E90 /* MeetingTableViewController.m in Sources */,
 				7CB029F81C722361003D4204 /* GuestDateViewCell.m in Sources */,
 				7C3E2B9D1C70ABEE00B49E90 /* HeaderTableViewCell.m in Sources */,
