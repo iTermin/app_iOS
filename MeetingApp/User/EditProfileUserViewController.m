@@ -123,6 +123,7 @@
 -(void) customCell {
     [self.nameText setText: self.hostInformation[@"name"]];
     [self.emailText setText: self.hostInformation[@"email"]];
+    [self.locationTextField setText: self.hostInformation[@"place"]];
     
     [self setImage];
 }
@@ -267,6 +268,10 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     [UIView setAnimationBeginsFromCurrentState:TRUE];
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -200., self.view.frame.size.width, self.view.frame.size.height);
     
+    if (textField == self.locationTextField) {
+        [self.locationTextField setText:@""];
+    }
+    
     [UIView commitAnimations];
 }
 
@@ -284,6 +289,10 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
         [self changedTextName];
     } else if (textField == self.emailText){
         [self changedTextEmail];
+    } else if (textField == self.locationTextField){
+        if ([self.locationTextField.text isEqualToString:@""]) {
+            [self.locationTextField setText: self.hostInformation[@"place"]];
+        }
     }
     
     [textField resignFirstResponder];
@@ -342,7 +351,7 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
 
 
 - (void) changedLocationUser: (NSDictionary *) locationInfo {
-    if (![locationInfo[@"country"] isEqualToString:self.hostInformation[@"country"]]) {
+    if (![locationInfo[@"placeSelected"] isEqualToString:self.hostInformation[@"place"]]) {
         [self changedCountryUpdateUserInformation: locationInfo];
     }
 }

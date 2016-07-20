@@ -50,7 +50,7 @@
 
 - (void) updateDetailUser: (MutableUser *) user{
     
-    if(![self.detailUser[@"code"] isEqual:[user valueForKeyPath:@"code"]]){
+    if(![self.detailUser[@"place"] isEqual:[user valueForKeyPath:@"place"]]){
         self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"code"]];
         [self.urlDetailUser setValue:[user valueForKeyPath:@"code"]];
         self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"country"]];
