@@ -286,19 +286,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
-//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-//        didSelectCountry: (NSDictionary *) country
-//{
-//    [self changedCountryUpdateGuestInformation: country];
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
     changedInformation = YES;
     
     [self.guestInformation removeObjectForKey:@"codeCountry"];
     [self.guestInformation removeObjectForKey:@"nameCountry"];
-    [self.guestInformation setObject:newCountry[@"code"] forKey:@"codeCountry"];
+    [self.guestInformation setDictionary:newCountry];
     
     [self updateViewModel];
 }
@@ -369,10 +362,10 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
                                         @"placeSelected": [NSString stringWithString:addressPlaceSearch],
                                         @"timezone": [NSString stringWithString:placemark.timeZone.abbreviation],
                                         @"nameTimezone": [NSString stringWithString:placemark.timeZone.name],
-                                        @"country": [NSString stringWithString:placemark.country],
-                                        @"isoCountry" : [NSString stringWithString:placemark.ISOcountryCode]
+                                        @"nameCountry": [NSString stringWithString:placemark.country],
+                                        @"code" : [NSString stringWithString:placemark.ISOcountryCode]
                                         };
-        //[self changedLocationUser: locationUser];
+        [self changedCountryUpdateGuestInformation: locationGuest];
         [self.view endEditing:YES];
     }];
 }
