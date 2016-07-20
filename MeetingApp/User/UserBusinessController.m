@@ -50,9 +50,17 @@
 
 - (void) updateDetailUser: (MutableUser *) user{
     
-    if(![self.detailUser[@"code"] isEqual:[user valueForKeyPath:@"code"]]){
+    if(![self.detailUser[@"place"] isEqual:[user valueForKeyPath:@"place"]]){
         self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"code"]];
         [self.urlDetailUser setValue:[user valueForKeyPath:@"code"]];
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"country"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"country"]];
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"place"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"place"]];
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"timezone"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"timezone"]];
+        self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"nameTimezone"]];
+        [self.urlDetailUser setValue:[user valueForKeyPath:@"nameTimezone"]];
     }
     if(![self.detailUser[@"name"] isEqual:[user valueForKeyPath:@"name"]]){
         self.urlDetailUser = [_myRootRef childByAppendingPath:[self urlDetailUser:@"name"]];
