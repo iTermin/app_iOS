@@ -42,13 +42,9 @@
     self.tableView.allowsSelection = NO;
     self.tableView.scrollEnabled = NO;
     
-    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
+    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(tapAction:)];
     [self.guestPhoto addGestureRecognizer:tapImage];
-    
-    UIGestureRecognizer * tapper = [[UITapGestureRecognizer alloc]
-                                    initWithTarget:self action:@selector(handleSingleTap:)];
-    tapper.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapper];
 }
 
 - (void) layoutUITextFields{
@@ -85,9 +81,28 @@
 
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *) sender
-{
-    [self.view endEditing:YES];
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y -200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+        [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y +200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+    [UIView commitAnimations];
 }
 
 -(void) customCell {
