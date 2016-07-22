@@ -346,8 +346,6 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
 - (void) placeSearchResponseForSelectedPlace:(NSMutableDictionary *)responseDict{
     NSDictionary* locationPlaceSearch =[[[responseDict objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
     
-    NSString* addressPlaceSearch=[[responseDict objectForKey:@"result"] objectForKey:@"formatted_address"];
-    
     double latitude = [[locationPlaceSearch valueForKey:@"lat"] doubleValue];
     double longitude = [[locationPlaceSearch valueForKey:@"lng"] doubleValue];
     
@@ -358,12 +356,16 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     
     [reference reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSString * place = [[[NSString stringWithString:placemark.locality]
+                             stringByAppendingString:@", "]
+                            stringByAppendingString:placemark.country];
+        
         NSDictionary * locationGuest = @{
-                                        @"placeSelected": [NSString stringWithString:addressPlaceSearch],
-                                        @"timezone": [NSString stringWithString:placemark.timeZone.abbreviation],
-                                        @"nameTimezone": [NSString stringWithString:placemark.timeZone.name],
-                                        @"nameCountry": [NSString stringWithString:placemark.country],
-                                        @"code" : [NSString stringWithString:placemark.ISOcountryCode]
+                                        @"placeSelected": place,
+                                        @"timezone": placemark.timeZone.abbreviation,
+                                        @"nameTimezone": placemark.timeZone.name,
+                                        @"nameCountry": placemark.country,
+                                        @"code" : placemark.ISOcountryCode
                                         };
         [self changedCountryUpdateGuestInformation: locationGuest];
         [self.view endEditing:YES];
