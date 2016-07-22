@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ModelTableViewController.h"
+#import "MVPlaceSearchTextField.h"
 #import "ArrayOfCountries.h"
 
 #import "IGuestInformation.h"
@@ -16,12 +17,12 @@
 
 @interface EditGuestDetailViewController : ModelTableViewController
 <UITextFieldDelegate, IGuestInformation, UINavigationControllerDelegate,
-UIImagePickerControllerDelegate>
+UIImagePickerControllerDelegate, PlaceSearchTextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
-@property (weak, nonatomic) IBOutlet UITextField *locationGuest;
+@property (weak, nonatomic) IBOutlet MVPlaceSearchTextField *locationGuest;
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;

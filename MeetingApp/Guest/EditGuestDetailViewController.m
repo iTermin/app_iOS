@@ -5,6 +5,7 @@
 //  Created by Estefania Chavez Guardado on 1/31/16.
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
+#import <CoreLocation/CoreLocation.h>
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
@@ -68,6 +69,10 @@
     self.emailGuest.delegate = self;
     [self.emailGuest setReturnKeyType:UIReturnKeyDone];
     
+    [self layoutsLocationGuest];
+}
+
+- (void) layoutsLocationGuest{
     CALayer *locationBorder = [CALayer layer];
     locationBorder.frame = CGRectMake(0.0f,
                                       self.locationGuest.frame.size.height - 1,
@@ -77,7 +82,27 @@
     [self.locationGuest.layer addSublayer:locationBorder];
     self.locationGuest.delegate = self;
     [self.locationGuest setReturnKeyType:UIReturnKeyDone];
+    
+    self.locationGuest.placeSearchDelegate = self;
+    self.locationGuest.strApiKey = @"AIzaSyC4aUpefyLWIouxIezHOvhNodmyx8QVeqM";
+    self.locationGuest.superViewOfList = self.view;
+    self.locationGuest.autoCompleteShouldHideOnSelection = YES;
+    self.locationGuest.maximumNumberOfAutoCompleteRows = 4;
+}
 
+- (void)viewDidAppear:(BOOL)animated{    
+    self.locationGuest.autoCompleteRegularFontName =  @"Optima";
+    self.locationGuest.autoCompleteBoldFontName = @"Optima-Bold";
+    self.locationGuest.autoCompleteTableCornerRadius=0.0;
+    self.locationGuest.autoCompleteRowHeight=35;
+    self.locationGuest.autoCompleteTableCellTextColor=[UIColor colorWithWhite:0.131 alpha:1.000];
+    self.locationGuest.autoCompleteFontSize=14;
+    self.locationGuest.autoCompleteTableBorderWidth=1.0;
+    self.locationGuest.showTextFieldDropShadowWhenAutoCompleteTableIsOpen=NO;
+    self.locationGuest.autoCompleteShouldHideOnSelection=YES;
+    self.locationGuest.autoCompleteShouldHideClosingKeyboard=YES;
+    self.locationGuest.autoCompleteShouldSelectOnExactMatchAutomatically = YES;
+    self.locationGuest.autoCompleteTableFrame = CGRectMake(self.locationGuest.frame.origin.x, (self.locationGuest.frame.origin.y+self.locationGuest.frame.size.height), self.locationGuest.frame.size.width, 200.0);
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -261,19 +286,12 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
-//- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-//        didSelectCountry: (NSDictionary *) country
-//{
-//    [self changedCountryUpdateGuestInformation: country];
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
     changedInformation = YES;
     
     [self.guestInformation removeObjectForKey:@"codeCountry"];
     [self.guestInformation removeObjectForKey:@"nameCountry"];
-    [self.guestInformation setObject:newCountry[@"code"] forKey:@"codeCountry"];
+    [self.guestInformation setDictionary:newCountry];
     
     [self updateViewModel];
 }
@@ -323,6 +341,49 @@ static UIImage *circularImageWithImage(UIImage *inputImage)
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (void) placeSearchResponseForSelectedPlace:(NSMutableDictionary *)responseDict{
+    NSDictionary* locationPlaceSearch =[[[responseDict objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
+    
+    double latitude = [[locationPlaceSearch valueForKey:@"lat"] doubleValue];
+    double longitude = [[locationPlaceSearch valueForKey:@"lng"] doubleValue];
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude
+                                                      longitude:longitude];
+    
+    CLGeocoder * reference = [CLGeocoder new];
+    
+    [reference reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSString * place = [[[NSString stringWithString:placemark.locality]
+                             stringByAppendingString:@", "]
+                            stringByAppendingString:placemark.country];
+        
+        NSDictionary * locationGuest = @{
+                                        @"placeSelected": place,
+                                        @"timezone": placemark.timeZone.abbreviation,
+                                        @"nameTimezone": placemark.timeZone.name,
+                                        @"nameCountry": placemark.country,
+                                        @"code" : placemark.ISOcountryCode
+                                        };
+        [self changedCountryUpdateGuestInformation: locationGuest];
+        [self.view endEditing:YES];
+    }];
+}
+
+- (void) placeSearchWillShowResult{
+}
+
+-(void) placeSearchWillHideResult{
+}
+
+- (void) placeSearchResultCell:(UITableViewCell *)cell withPlaceObject:(PlaceObject *)placeObject atIndex:(NSInteger)index{
+    if(index%2==0){
+        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    }else{
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 @end
