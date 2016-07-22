@@ -88,7 +88,7 @@
     [self.locationTextField setReturnKeyType:UIReturnKeyDone];
     
     self.locationTextField.placeSearchDelegate = self;
-    self.locationTextField.strApiKey = @"AIzaSyCDi2dklT-95tEHqYoE7Tklwzn3eJP-MtM";
+    self.locationTextField.strApiKey = @"AIzaSyC4aUpefyLWIouxIezHOvhNodmyx8QVeqM";
     self.locationTextField.superViewOfList = self.view;
     self.locationTextField.autoCompleteShouldHideOnSelection = YES;
     self.locationTextField.maximumNumberOfAutoCompleteRows = 4;
