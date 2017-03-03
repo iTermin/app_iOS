@@ -21,10 +21,7 @@ For more detail about the project please take a look at the wiki.
 
 ## Server
 
-[API](https://github.com/iTermin/server)
-
-## License
-[Apache Version 2.0](https://github.com/iTermin/app_iOS/blob/github/%231_README-Wiki/License)
+[Server/API](http://itermin.github.io/server/)
 
 ## Libraries / Frameworks
 - [Realm](https://github.com/realm/realm-cocoa) - Apache 2.0 License
@@ -35,3 +32,6 @@ For more detail about the project please take a look at the wiki.
 - [UIImageView-Letters](https://github.com/bachonk/UIImageView-Letters) - MIT License
 - [SWTableViewCell](https://github.com/CEWendel/SWTableViewCell) - MIT License
 - [MProgressHUD](https://github.com/jdg/MBProgressHUD) - MIT License
+
+## License
+[Apache Version 2.0](https://github.com/iTermin/app_iOS/blob/github/%231_README-Wiki/License)
