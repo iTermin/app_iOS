@@ -6,6 +6,8 @@ Temin is developed in Objective for iOS platform.
 
 Initially, it was developed in a [repository](https://bitbucket.org/fachinota/termin) of Bitbucket.
 
+[Termin - Web page](http://blueberry-crumble-60073.herokuapp.com)
+
 ## Installation
 - Install [cocoapods](https://guides.cocoapods.org/using/getting-started.html).
 - Install the whole frameworks with all the extensions into the project:
@@ -14,12 +16,12 @@ Initially, it was developed in a [repository](https://bitbucket.org/fachinota/te
 ## Wiki
 For more detail about the project please take a look at the wiki.
 
-- [Basic architecture]()
-- [Database model definition]()
+- [Basic architecture](https://github.com/iTermin/app_iOS/wiki/Basic-Architecture)
+- [Database model definition](https://github.com/iTermin/app_iOS/wiki/Database-Model-Definition)
 
 ## Server
 
-
+[API](https://github.com/iTermin/server)
 
 ## License
 [Apache Version 2.0](https://github.com/iTermin/app_iOS/blob/github/%231_README-Wiki/License)
