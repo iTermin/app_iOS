@@ -8,19 +8,41 @@
 
 #import <UIKit/UIKit.h>
 #import "ArrayOfCountries.h"
-#import "IMeetingAllDayDelegate.h"
+#import "IMeetingDateSelectorDelegate.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
+#import "IUserDelegate.h"
+#import "IUserDatasource.h"
+#import "Meeting.h"
+#import "AlgorithmMain.h"
+#import "InvitationEmailGuest.h"
 
-@interface MeetingDateSelectorViewController : UITableViewController <IMeetingAllDayDelegate>
+@interface MeetingDateSelectorViewController : UITableViewController <IMeetingDateSelectorDelegate>
 
-@property(nonatomic, strong) NSDictionary * detailMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;
+
 @property(strong) NSArray *viewModel;
 
+@property(nonatomic, strong) NSArray * guestsOfMeeting;
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 @property (strong) NSArray * modelCountries;
 @property (strong) NSDictionary * userInformation;
 
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) NSDate * endDate;
+
 @property (strong) NSDate * dateCurrent;
-@property (strong) NSMutableArray * hoursArray;
+
+@property (strong) NSMutableArray * hoursArrayCurrent;
+@property (strong) NSMutableArray * arrayEditableHours;
+@property (strong) NSMutableArray * hoursArrayAlgorithm;
+
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
+
+@property (strong) AlgorithmMain * algoritmClass;
+@property (strong) InvitationEmailGuest * sendInvitationMeeting;
 
 - (IBAction)sharePressed:(id)sender;
 - (IBAction)trashPressed:(id)sender;

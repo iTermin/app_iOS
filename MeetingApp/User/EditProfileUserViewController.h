@@ -8,27 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ICountrySelectorDelegate.h"
 #import "ModelTableViewController.h"
+#import "MVPlaceSearchTextField.h"
 
-#import "IUserInformation.h"
-#import "IUserInformationDelegate.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 #import "ArrayOfCountries.h"
 
 @interface EditProfileUserViewController : ModelTableViewController
-<ICountrySelectorDelegate, IUserInformation,
-UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+<IUserDatasource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+PlaceSearchTextFieldDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoProfileEdit;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
+@property (weak, nonatomic) IBOutlet MVPlaceSearchTextField *locationTextField;
 
 @property(nonatomic, strong) NSDictionary * currentHost;
 @property(nonatomic, strong) NSMutableDictionary * hostInformation;
 
 @property(nonatomic, strong) NSDictionary * currentLocation;
 
-@property(weak) id<IUserInformationDelegate> userInformationDelegate;
+@property(weak) id<IUserDelegate> userInformationDelegate;
 
 
 @end

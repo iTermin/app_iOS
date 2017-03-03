@@ -3,79 +3,79 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "termin@2.png",
+      "filename" : "termin_Settings@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "termin@3.png",
+      "filename" : "termin_Settings@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "termin@2-1.png",
+      "filename" : "termin_Spothlight@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "termin@3-1.png",
+      "filename" : "termin_Spothlight@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "termin@2-2.png",
+      "filename" : "termin_AppIcon@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "termin@3-2.png",
+      "filename" : "termin_AppIcon@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "termin@1.png",
+      "filename" : "termin_SettingsIpad@1x.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "termin@2-3.png",
+      "filename" : "termin_SettingsIpad@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "termin@1-1.png",
+      "filename" : "termin_SpothlightIpad@1x.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "termin@2-4.png",
+      "filename" : "termin_SpothlightIpad@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "termin@1-2.png",
+      "filename" : "termin_AppIconIpad@1x.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "termin@2-5.png",
+      "filename" : "termin_AppIconIpad@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "termin@2-6.png",
+      "filename" : "termin_AppIconIpadP@2x.png",
       "scale" : "2x"
     }
   ],

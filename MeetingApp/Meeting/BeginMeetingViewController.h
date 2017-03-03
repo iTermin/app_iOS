@@ -8,29 +8,36 @@
 /* MeetingBeginViewController_h */
 
 #import <UIKit/UIKit.h>
-
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
+#import <SWTableViewCell.h>
 
 #import "UIScrollView+EmptyDataSet.h"
 #import "Meeting.h"
 #import "ModelTableViewController.h"
 #import "IGuestInformationDelegate.h"
 #import "ArrayOfCountries.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 
+#import "ContactAddress.h"
+#import "IContactInformation.h"
 
 @interface BeginMeetingViewController : ModelTableViewController <UITextFieldDelegate,
-DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
+DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate, SWTableViewCellDelegate, IContactInformation>
 
-@property (nonatomic, assign) ABAddressBookRef addressBook;
-@property (nonatomic, strong) NSMutableArray *menuArray;
+@property (strong) ContactAddress * pickerAddress;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameMeeting;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
-@property (strong, nonatomic) IBOutlet UIButton *search;
+@property (strong, nonatomic) IBOutlet UIImageView *addContactAddress;
+
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
 @property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingToUserDetail;
 
 @property (strong) NSMutableArray *listOfGuests;
 @property (strong) NSIndexPath *indexPathGuestSelected;
@@ -39,7 +46,6 @@ DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, IGuestInformationDelegate>
 @property (nonatomic, strong) ArrayOfCountries *arrayCountries;
 
 - (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)searchContacts:(id)sender;
 - (IBAction)nextPressed:(id)sender;
 
 @end

@@ -5,11 +5,12 @@
 //  Created by Estefania Chavez Guardado on 1/31/16.
 //  Copyright © 2016 Estefania Chavez Guardado. All rights reserved.
 //
+#import <CoreLocation/CoreLocation.h>
 
 #import "EditGuestDetailViewController.h"
 #import "UIImageView+Letters.h"
-#import "GuestListCountriesTableViewController.h"
 #import "ArrayOfCountries.h"
+#import "MBProgressHUD.h"
 
 
 @interface EditGuestDetailViewController ()
@@ -23,6 +24,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self updateViewModel];
 }
 
 - (void)viewDidLoad {
@@ -32,18 +35,98 @@
     self.modelCountries = [self.arrayCountries getModelCountries];
     
     self.guestInformation = [NSMutableDictionary dictionary];
-
-    [self updateViewModel];
     
-    self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-    self.guestPhoto.clipsToBounds = YES;
+    [self layoutUITextFields];
     
-    self.nameGuest.delegate = self;
-    self.emailGuest.delegate = self;
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.allowsSelection = NO;
+    self.tableView.scrollEnabled = NO;
     
-    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];    
+    UITapGestureRecognizer * tapImage = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(tapAction:)];
     [self.guestPhoto addGestureRecognizer:tapImage];
+}
+
+- (void) layoutUITextFields{
     
+    CALayer *nameBorder = [CALayer layer];
+    nameBorder.frame = CGRectMake(0.0f,
+                                  self.nameGuest.frame.size.height - 1,
+                                  self.nameGuest.frame.size.width,
+                                  1.0f);
+    nameBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.nameGuest.layer addSublayer:nameBorder];
+    self.nameGuest.delegate = self;
+    [self.nameGuest setReturnKeyType:UIReturnKeyDone];
+    
+    CALayer *emailBorder = [CALayer layer];
+    emailBorder.frame = CGRectMake(0.0f,
+                                   self.emailGuest.frame.size.height - 1,
+                                   self.emailGuest.frame.size.width,
+                                   1.0f);
+    emailBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.emailGuest.layer addSublayer:emailBorder];
+    self.emailGuest.delegate = self;
+    [self.emailGuest setReturnKeyType:UIReturnKeyDone];
+    
+    [self layoutsLocationGuest];
+}
+
+- (void) layoutsLocationGuest{
+    CALayer *locationBorder = [CALayer layer];
+    locationBorder.frame = CGRectMake(0.0f,
+                                      self.locationGuest.frame.size.height - 1,
+                                      self.locationGuest.frame.size.width,
+                                      1.0f);
+    locationBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.locationGuest.layer addSublayer:locationBorder];
+    self.locationGuest.delegate = self;
+    [self.locationGuest setReturnKeyType:UIReturnKeyDone];
+    
+    self.locationGuest.placeSearchDelegate = self;
+    self.locationGuest.strApiKey = @"AIzaSyC4aUpefyLWIouxIezHOvhNodmyx8QVeqM";
+    self.locationGuest.superViewOfList = self.view;
+    self.locationGuest.autoCompleteShouldHideOnSelection = YES;
+    self.locationGuest.maximumNumberOfAutoCompleteRows = 4;
+}
+
+- (void)viewDidAppear:(BOOL)animated{    
+    self.locationGuest.autoCompleteRegularFontName =  @"Optima";
+    self.locationGuest.autoCompleteBoldFontName = @"Optima-Bold";
+    self.locationGuest.autoCompleteTableCornerRadius=0.0;
+    self.locationGuest.autoCompleteRowHeight=35;
+    self.locationGuest.autoCompleteTableCellTextColor=[UIColor colorWithWhite:0.131 alpha:1.000];
+    self.locationGuest.autoCompleteFontSize=14;
+    self.locationGuest.autoCompleteTableBorderWidth=1.0;
+    self.locationGuest.showTextFieldDropShadowWhenAutoCompleteTableIsOpen=NO;
+    self.locationGuest.autoCompleteShouldHideOnSelection=YES;
+    self.locationGuest.autoCompleteShouldHideClosingKeyboard=YES;
+    self.locationGuest.autoCompleteShouldSelectOnExactMatchAutomatically = YES;
+    self.locationGuest.autoCompleteTableFrame = CGRectMake(self.locationGuest.frame.origin.x, (self.locationGuest.frame.origin.y+self.locationGuest.frame.size.height), self.locationGuest.frame.size.width, 200.0);
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y -200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+        [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:.3];
+    [UIView setAnimationBeginsFromCurrentState:TRUE];
+    self.view.frame = CGRectMake(self.view.frame.origin.x,
+                                 self.view.frame.origin.y +200.,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height);
+    
+    [UIView commitAnimations];
 }
 
 -(void) customCell {
@@ -59,14 +142,42 @@
             NSString *userName = self.guestInformation[@"name"];
             [self.guestPhoto setImageWithString:userName color:nil circular:YES];
         } else {
-            self.guestPhoto.layer.cornerRadius = self.guestPhoto.frame.size.width/2.0f;
-            self.guestPhoto.clipsToBounds = YES;
-            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", self.guestInformation[@"photo"]];
-            [self.guestPhoto setImage:[UIImage imageNamed:getPhoto]];
+            
+            [self.guestPhoto setImage:circularImageWithImage
+             ([UIImage imageWithData: [self decodeBase64ToImage:self.guestInformation[@"photo"]]])];
+
         }
     } else {
         [self.guestPhoto setImage:self.guestInformation[@"photo"]];
     }
+}
+
+static UIImage *circularImageWithImage(UIImage *inputImage)
+{
+    
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
+    
+    // Create an image context containing the original UIImage.
+    UIGraphicsBeginImageContext(inputImage.size);
+    
+    // Clip to the bezier path and clear that portion of the image.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddPath(context,bezierPath.CGPath);
+    CGContextClip(context);
+    
+    // Draw here when the context is clipped
+    [inputImage drawAtPoint:CGPointZero];
+    
+    // Build a new UIImage from the image context.
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
 }
 
 - (void) updateViewModel {
@@ -82,7 +193,7 @@
     NSArray *viewModel = @[
                   @{
                       @"nib" : @"LocationGuestTableViewCell",
-                      @"height" : @(60),
+                      @"height" : @(70),
                       @"segue" : @"guestListCountries",
                       @"data": [self.guestInformation copy]
                       }
@@ -175,41 +286,29 @@
     //ref:http://stackoverflow.com/a/22344769/5757715
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSDictionary *)sender {
-    if ([segue.identifier isEqualToString:@"guestListCountries"]){
-        GuestListCountriesTableViewController * guestListCountries = (GuestListCountriesTableViewController *)segue.destinationViewController;
-        [guestListCountries setCurrentGuest: sender];
-        [guestListCountries setCountrySelectorDelegate:self];
-    }
-}
-
-- (void) countrySelector: (UIViewController<ICountrySelector> *) countrySelector
-        didSelectCountry: (NSDictionary *) country
-{
-    [self changedCountryUpdateGuestInformation: country];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void) changedCountryUpdateGuestInformation: (NSDictionary *) newCountry{
-    NSDictionary *currentGuestInformation = self.currentGuest;
-
     changedInformation = YES;
     
-    self.guestInformation = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                        currentGuestInformation[@"name"], @"name",
-                        currentGuestInformation[@"codePhone"], @"codePhone",
-                        currentGuestInformation[@"email"], @"email",
-                        currentGuestInformation[@"photo"], @"photo",
-                        newCountry[@"code"], @"codeCountry", nil];
+    [self.guestInformation removeObjectForKey:@"codeCountry"];
+    [self.guestInformation removeObjectForKey:@"nameCountry"];
+    [self.guestInformation setDictionary:newCountry];
     
     [self updateViewModel];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.navigationBar.tintColor = [UIColor blueColor];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
@@ -220,11 +319,18 @@
     
     changedInformation = YES;
     
-    self.guestInformation[@"photo"] = [self imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
+    image = [self imageWithImage:image scaledToSize:CGSizeMake(220, 260)];
+    self.guestInformation[@"photo"] = [self encodeToBase64String:image];
+    
     [self updateViewModel];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image)
+            base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 - (UIImage*)imageWithImage:(UIImage *) image scaledToSize:(CGSize) newSize;
@@ -235,6 +341,49 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (void) placeSearchResponseForSelectedPlace:(NSMutableDictionary *)responseDict{
+    NSDictionary* locationPlaceSearch =[[[responseDict objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
+    
+    double latitude = [[locationPlaceSearch valueForKey:@"lat"] doubleValue];
+    double longitude = [[locationPlaceSearch valueForKey:@"lng"] doubleValue];
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude
+                                                      longitude:longitude];
+    
+    CLGeocoder * reference = [CLGeocoder new];
+    
+    [reference reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSString * place = [[[NSString stringWithString:placemark.locality]
+                             stringByAppendingString:@", "]
+                            stringByAppendingString:placemark.country];
+        
+        NSDictionary * locationGuest = @{
+                                        @"placeSelected": place,
+                                        @"timezone": placemark.timeZone.abbreviation,
+                                        @"nameTimezone": placemark.timeZone.name,
+                                        @"nameCountry": placemark.country,
+                                        @"code" : placemark.ISOcountryCode
+                                        };
+        [self changedCountryUpdateGuestInformation: locationGuest];
+        [self.view endEditing:YES];
+    }];
+}
+
+- (void) placeSearchWillShowResult{
+}
+
+-(void) placeSearchWillHideResult{
+}
+
+- (void) placeSearchResultCell:(UITableViewCell *)cell withPlaceObject:(PlaceObject *)placeObject atIndex:(NSInteger)index{
+    if(index%2==0){
+        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    }else{
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 @end

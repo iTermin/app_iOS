@@ -23,7 +23,7 @@
     [mainAssembly makeDefault];
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
+
     return YES;
 }
 

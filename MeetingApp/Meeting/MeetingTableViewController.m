@@ -7,10 +7,14 @@
 //
 
 #import "MeetingTableViewController.h"
+
+#import <SWTableViewCell.h>
+
 #import "MeetingDetailViewController.h"
 #import "BeginMeetingViewController.h"
-
 #import "MainAssembly.h"
+#import "MBProgressHUD.h"
+
 
 @interface MeetingTableViewController ()
 
@@ -21,14 +25,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.meetings = [[[MainAssembly defaultAssembly] meetingBusinessController] getAllMeetings];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
+    self.currentMeeting = [NSMutableDictionary dictionary];
+    self.currentMeetingInDetailUser = [NSMutableDictionary dictionary];
+    
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
+    self.navigationItem.title = @"Meetings";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self updateViewModel];
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        self.meetings = [handler getAllMeetings];
+        [self updateViewModel];
+        [self.tableView reloadData];
+    }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -63,13 +90,13 @@
 
 - (void) updateViewModel {
     NSMutableArray * viewModel = [NSMutableArray array];
-    [self.meetings enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
+    [self.meetings enumerateObjectsUsingBlock:^(id meeting, NSUInteger idx, BOOL * stop) {
         
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:meeting];
         
         [viewModel addObject:@{
                                @"nib" : @"MeetingTableViewCell",
-                               @"height" : @(60),
+                               @"height" : @(70),
                                @"segue" : @"meetingDetail",
                                @"data":cellModel }];
     }];
@@ -77,6 +104,110 @@
     self.viewModel = viewModel;
     
     [super updateViewModel];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary * cellViewModel = self.viewModel[indexPath.row];
+    NSString * cellIdentifier = cellViewModel[@"nib"];
+    
+    SWTableViewCell * cell = (SWTableViewCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
+    
+    if([cell respondsToSelector:@selector(setData:)]) {
+        [cell performSelector:@selector(setData:) withObject:cellViewModel[@"data"]];
+    }
+    
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
+    
+    return cell;
+}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            [self alertDeleteMeetingIn: cell];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void) deleteMeetingWhenAcceptAlert: (SWTableViewCell *)cell{
+    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+    
+    NSMutableArray * refreshMeetings = [NSMutableArray arrayWithArray:self.meetings];
+    [self setInactiveMeeting:refreshMeetings inIndex:(int)cellIndexPath.row];
+    [refreshMeetings removeObjectAtIndex:cellIndexPath.row];
+    [self removeIndexPathFromViewModel: cellIndexPath];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
+- (void) removeIndexPathFromViewModel: (NSIndexPath *) indexPath{
+    NSMutableArray *temporalViewModel = [NSMutableArray arrayWithArray:self.viewModel];
+    [temporalViewModel removeObjectAtIndex:indexPath.row];
+    self.viewModel = temporalViewModel;
+}
+
+- (void) setInactiveMeeting: (NSMutableArray *) meetings
+                    inIndex: (int) index{
+    NSMutableDictionary * inactiveMeeting =
+        [NSMutableDictionary dictionaryWithDictionary:[meetings objectAtIndex:index]];
+    
+    NSString * idMeeting = [NSString stringWithString:inactiveMeeting[@"meetingId"]];
+    
+    [self.meetingbusiness setInactiveInDetailOfMeeting:idMeeting];
+    
+    [self.userbusiness removeMeeting:inactiveMeeting
+        OfActiveOrSharedMeetingsInDetailUser:@"activeMeeting"];
+    
+    [self.userbusiness addMeetingOfActiveOrSharedMeetings:@"activeMeeting"
+                           ToInactiveMeetingsInDetailUser:inactiveMeeting];
+}
+
+- (NSString*) getDeviceId{
+    UIDevice *device = [UIDevice currentDevice];
+    
+    return [[device identifierForVendor]UUIDString];
+}
+
+- (void) alertDeleteMeetingIn: (SWTableViewCell *)cell {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Meeting"
+                                                                   message:@"Are you sure you want to delete this meeting?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       [self deleteMeetingWhenAcceptAlert:cell];
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action){
+                                                       [cell hideUtilityButtonsAnimated:YES];
+                                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                                   }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) performSegue: (NSIndexPath *)indexPath{
@@ -95,11 +226,58 @@
         [detailViewController setTitle:sender[@"name"]];
         [detailViewController setCurrentMeeting: sender];
     } else if ([segue.identifier isEqualToString:@"newMeeting"]){
-        MutableMeeting * newMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController] getTemporalMeeting];
+        
         UINavigationController *navigationBeginMeetin = (UINavigationController *)segue.destinationViewController;
         BeginMeetingViewController * beginMeetingViewController = (BeginMeetingViewController *)navigationBeginMeetin.topViewController;
-        [beginMeetingViewController setCurrentMeeting: newMeeting];
+        
+        [beginMeetingViewController setCurrentMeeting:self.currentMeeting];
+        [beginMeetingViewController setCurrentMeetingToUserDetail:self.currentMeetingInDetailUser];
+
     }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
+        
+        NSMutableDictionary * getCurrentMeetingInDetailUser =
+        [NSMutableDictionary dictionaryWithDictionary:[handler getCurrentMeetingIfExistInDetailUser]];
+
+        
+        if ([getCurrentMeetingInDetailUser count]) {
+            NSMutableDictionary * detailMeeting = [NSMutableDictionary dictionaryWithDictionary:
+                                                   [self.meetingbusiness getMeetingDetail:getCurrentMeetingInDetailUser]];
+            
+            self.currentMeeting = [NSMutableDictionary dictionaryWithDictionary: @{
+                [getCurrentMeetingInDetailUser valueForKey:@"meetingId"]: detailMeeting
+                }];
+            self.currentMeetingInDetailUser = [NSMutableDictionary dictionaryWithDictionary:getCurrentMeetingInDetailUser];
+            
+        } else{
+            self.currentMeeting = [[[MainAssembly defaultAssembly] meetingBusinessController]
+                                           getTemporalMeeting];
+            [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+            
+            self.currentMeetingInDetailUser = [[[MainAssembly defaultAssembly] userBusinessController]
+                                                  getTemporalNewMeeting:[[self.currentMeeting allKeys] objectAtIndex:0]];
+            
+            [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingInDetailUser];
+        }
+        
+        [self performSegueWithIdentifier:@"newMeeting" sender:sender];
+    }];
+    return NO;
+}
+
+- (IBAction)reloadData:(UIRefreshControl *)sender {
+    [self.meetingbusiness updateMeetingsWithCallback:^(id<IMeetingDatasource> handler) {
+        
+        // TODO: Extract to new method
+        self.meetings = [handler getAllMeetings];;
+        [self updateViewModel];
+        [self.tableView reloadData];
+        
+        [sender endRefreshing];
+    }];
 }
 
 @end

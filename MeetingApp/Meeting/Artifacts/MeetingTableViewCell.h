@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MeetingTableViewCell : UITableViewCell
+#import <SWTableViewCell.h>
+
+@interface MeetingTableViewCell : SWTableViewCell
 
 @property(nonatomic, weak) NSDictionary * data;
 

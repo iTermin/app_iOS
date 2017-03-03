@@ -126,7 +126,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
         [(*cell).datePicker setDate:self.startDate animated:NO];
         
         // Can pick any date (a minimum may have been set by the end date cell - see below)
-        (*cell).datePicker.minimumDate = nil;
+        (*cell).datePicker.minimumDate = [NSDate date];
     }
     // If date picker is for endDate:
     else {
@@ -347,6 +347,8 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
     }
+    
+    [self.cellDateSelector selectedCellDateSelector];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -416,7 +418,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
             [((UXDatePickerCell *) cell).datePicker setDate:self.startDate animated:NO];
             
             // Can pick any date (a minimum may have been set by the end date cell - see below)
-            ((UXDatePickerCell *) cell).datePicker.minimumDate = nil;
+            ((UXDatePickerCell *) cell).datePicker.minimumDate = [NSDate date];
         }
         // If date picker is for endDate:
         else {
@@ -468,7 +470,7 @@ indexPathForEndDateCell:(NSIndexPath *)indexPathForEndDateCell
     
     // Update all-day property
     self.allDay = onButton.on;
-    [self.switchCellData meetingAllDay:self.allDay];
+    [self.cellDateSelector meetingAllDay:self.allDay];
     
     // Reload datePicker if it's visible to display appropriate mode
     NSIndexPath *pickerPath = self.indexPathOfVisibleDatePicker;

@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Firebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Kiwi.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,7 +52,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2AAAFC293BFC8281703F944DF10952E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CEEB13054615608889AFCD4F115CF2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D8673B2709650AF2C7DA4ACAB135991</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41C803AC48E96C36F565F840EB5C53E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +77,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5693172177555AB2D1D03F5848ABC21E</key>
+		<key>569735B422E0E4CEEFC5C6955AFDE3A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,17 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>89E96104598D83EA8844901E882E224E</key>
+		<key>818BDF66A0ED011CBC215B216F813EDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EACC1708E8A2B4A462992826EEE1397</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A1C922A2147FA690772CC47FFF3808AB</key>
+		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

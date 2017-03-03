@@ -11,9 +11,21 @@
 #import "IMeetingDelegate.h"
 #import "IMeetingDatasource.h"
 
+#import "IUserDelegate.h"
+#import "IUserDatasource.h"
+
+#import "AlgorithmMain.h"
+
+#import "InvitationEmailGuest.h"
+
+#import "ContactAddress.h"
 
 @interface MainAssembly : TyphoonAssembly
 
 - (id<IMeetingDatasource, IMeetingDelegate>) meetingBusinessController;
+- (id<IUserDelegate, IUserDatasource>) userBusinessController;
+- (AlgorithmMain *) algorithmMain;
+- (InvitationEmailGuest *) sendInvitationsMeeting;
+- (ContactAddress *) contactAddress;
 
 @end

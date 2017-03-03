@@ -10,15 +10,24 @@
 
 #import "Meeting.h"
 
+typedef enum  NotificationType {
+    NOTIFICATION_TYPE_EMAIL,
+    NOTIFICATION_TYPE_CALENDAR
+} NotificationType;
+
 @protocol IMeetingDelegate <NSObject>
 
 @optional
 
-- (void) updateDetail: (MutableMeeting *) meeting;
+- (void) updateNewMeeting: (MutableMeeting *) newMeeting;
 
-- (void) deleteMeeting: (Meeting *) meeting;
-- (void) deleteMeetingAtIndex: (NSUInteger) index;
+- (void) updateNewMeeting: (MutableMeeting *) newMeeting withCallback: (void (^)()) callback;
 
-- (void) saveNewMeeting: (MutableMeeting *) meeting;
+- (void) updateNotifications: (MutableMeeting *) detailMeeting InMeeting:(Meeting *) meeting;
+
+- (void) setInactiveInDetailOfMeeting: (NSString *) meetingId;
+
+// TODO: Send to update the notification
+- (void) updateNotification: (NotificationType) type withCallback:(void (^)(BOOL updated)) callback;
 
 @end

@@ -6,16 +6,15 @@
 //  Copyright © 2015 Estefania Chavez Guardado. All rights reserved.
 //
 
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import <SWTableViewCell.h>
 
 #import "BeginMeetingViewController.h"
 #import "MeetingDateSelectorViewController.h"
 #import "EditGuestDetailViewController.h"
 #import "ArrayOfCountries.h"
+#import "MainAssembly.h"
 
-@interface BeginMeetingViewController () < ABPeoplePickerNavigationControllerDelegate,ABPersonViewControllerDelegate>
+@interface BeginMeetingViewController () <CNContactPickerDelegate, CNContactViewControllerDelegate>
 {
     BOOL changedInformation;
 }
@@ -24,18 +23,19 @@
 
 @implementation BeginMeetingViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setToolbarHidden:YES animated:YES];
-
-    [self updateViewModel];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.listOfGuests = [NSMutableArray arrayWithArray:self.currentMeeting[@"guests"]];
-
+    self.meetingbusiness = [[MainAssembly defaultAssembly] meetingBusinessController];
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
+    self.pickerAddress = [[MainAssembly defaultAssembly] contactAddress];
+    self.pickerAddress.viewController = self;
+    self.pickerAddress.contactInformation = self;
+    
+    self.listOfGuests = [NSMutableArray array];
+    
+    [self verifyDataOfCurrentMeeting];
+    
     self.indexPathGuestSelected = [NSIndexPath new];
     
     CGSize nameSize = self.nameMeeting.frame.size;
@@ -63,6 +63,40 @@
     self.nameMeeting.delegate = self;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    [self.addContactAddress addGestureRecognizer:tapRecognizer];
+    
+    UIGestureRecognizer * tapper = [[UITapGestureRecognizer alloc]
+                                  initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    
+    [self updateViewModel];
+}
+
+- (void) verifyDataOfCurrentMeeting{
+    [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary * meeting, BOOL * stop) {
+        if (![[meeting[@"guests"] objectAtIndex:0] isKindOfClass:[NSString class]]) {
+            self.listOfGuests = [NSMutableArray arrayWithArray:meeting[@"guests"]];
+        }
+        
+        NSString * nameMeeting = [NSString stringWithString:self.currentMeetingToUserDetail[@"name"]];
+        if (![nameMeeting isEqualToString:@"init"]) {
+            self.nameMeeting.text = nameMeeting;
+        }
+    }];
+    
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -73,23 +107,27 @@
 - (void) updateViewModel {
     
     NSMutableArray * viewModel = [NSMutableArray array];
+    __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    
     [self.listOfGuests enumerateObjectsUsingBlock:^(NSDictionary * guests, NSUInteger idx, BOOL * stop) {
         
-        NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
-        
-        UIImage * contactPhoto = [UIImage imageNamed:
-                                  [NSString stringWithFormat:@"%@.png",
-                                   guests[@"photo"]]];
-        if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
-        
-        [viewModel addObject:@{
-                               @"nib" : @"GuestViewCellCountry",
-                               @"height" : @(60),
-                               @"segue" : @"editGuestDetails",
-                               @"data":cellModel }];
+        if (![self existUser:detailUser AsGuest:guests]) {
+            NSMutableDictionary * cellModel = [NSMutableDictionary dictionaryWithDictionary:guests];
+            
+            UIImage * contactPhoto = [UIImage imageNamed:
+                                      [NSString stringWithFormat:@"%@.png",
+                                       guests[@"photo"]]];
+            if(contactPhoto) [cellModel setObject:contactPhoto forKey:@"contactPhoto"];
+            
+            [viewModel addObject:@{
+                                   @"nib" : @"GuestViewCellCountry",
+                                   @"height" : @(70),
+                                   @"segue" : @"editGuestDetails",
+                                   @"data":cellModel }];
+        }
     }];
     
-    self.viewModel = viewModel;
+    self.viewModel = [NSArray arrayWithArray:viewModel];
     
     if (changedInformation){
         [self.tableView beginUpdates];
@@ -101,9 +139,12 @@
     [super updateViewModel];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
+- (BOOL) existUser:(NSDictionary *) userDetail AsGuest:(NSDictionary *) guestDetail {
+    BOOL existUser = NO;
+    if ([[userDetail valueForKey:@"email"] isEqualToString:[guestDetail valueForKey:@"email"]]) {
+        existUser = YES;
+    }
+    return existUser;
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -114,33 +155,35 @@
     BOOL guestIsValid = NO;
     if (textField == self.emailGuest) {
         [textField resignFirstResponder];
-        guestIsValid = [self validateEmail:self.emailGuest.text];
-        if(guestIsValid){
-            BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
-            if (isDiferentGuest) {
-                [self addNewGuestWith:self.emailGuest.text];
-                textField.text = nil;
-                return guestIsValid;
+        if (![self.emailGuest.text isEqualToString:@""]) {
+            guestIsValid = [self validateEmail:self.emailGuest.text];
+            if(guestIsValid){
+                BOOL isDiferentGuest = [self isDiferentGuest: @{ @"email" : self.emailGuest.text }];
+                if (isDiferentGuest) {
+                    [self addNewGuestWith:self.emailGuest.text];
+                    textField.text = nil;
+                    return guestIsValid;
+                }
+                else{
+                    [self alertGuestRegistered];
+                    return guestIsValid = NO;
+                }
+            } else{
+                UIAlertController *alert = [UIAlertController
+                                            alertControllerWithTitle:@"Wrong Email!"
+                                            message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
+                                            preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action){
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                
+                [alert addAction:ok];
+                [self presentViewController:alert animated:YES completion:nil];
             }
-            else{
-                [self alertGuestRegistered];
-                return guestIsValid = NO;
-            }
-        } else{
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Wrong Email!"
-                                        message:@"The email is incorrect. Please enter the correct email (email@gmail.com)."
-                                        preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action){
-                                     [alert dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            
-            [alert addAction:ok];
-            [self presentViewController:alert animated:YES completion:nil];
         }
     }
     if (textField == self.nameMeeting)
@@ -183,7 +226,7 @@
         if ([registerdGuests[@"email"] isEqualToString:information[@"email"]])
             if ([information[@"email"] length])
                 isDiferentGuest = NO;
-            
+        
         if (isDiferentGuest)
             if ([registerdGuests[@"name"] isEqualToString:information[@"name"]])
                 isDiferentGuest =  NO;
@@ -195,13 +238,10 @@
 
     NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
                                             @"photo" : @"",
-                                            @"codePhone" : @"",
                                             @"email" : email,
-                                            @"name" : @""
+                                            @"name" : @"",
+                                            @"codeCountry" : [self getCodeCountryUser]
                                                                                               }];
-    NSString * code = [self getFlagCodeWithCodePhoneGuest:guestInformation[@"codePhone"]];
-    
-    [guestInformation setObject:code forKey:@"codeCountry"];
     
     [self.listOfGuests addObject: guestInformation];
     [self updateViewModel];
@@ -212,181 +252,35 @@
 
 }
 
-- (IBAction)searchContacts:(id)sender {
-    switch (ABAddressBookGetAuthorizationStatus())
-    {
-            // Update our UI if the user has granted access to their Contacts
-        case  kABAuthorizationStatusAuthorized:
-            [self accessGrantedForAddressBook];
-            break;
-            // Prompt the user for access to Contacts if there is no definitive answer
-        case  kABAuthorizationStatusNotDetermined :
-            [self requestAddressBookAccess];
-            break;
-            // Display a message if the user has denied or restricted access to Contacts
-        case  kABAuthorizationStatusDenied:
-        case  kABAuthorizationStatusRestricted:
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Privacy Warning"
-                                                            message:@"Permission was not granted for Contacts."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-            break;
-        default:
-            break;
-    }
+- (void)tapAction:(UITapGestureRecognizer *)tap {
+    [self.pickerAddress contactScan];
 }
 
--(void)requestAddressBookAccess
-{
-    BeginMeetingViewController * __weak weakSelf = self;
-    
-    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef error)
-                                             {
-                                                 if (granted)
-                                                 {
-                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                         [weakSelf accessGrantedForAddressBook];
-                                                         
-                                                     });
-                                                 }
-                                             });
-}
-
--(void)accessGrantedForAddressBook
-{
-    // Load data from the plist file
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Menu" ofType:@"plist"];
-    self.menuArray = [NSMutableArray arrayWithContentsOfFile:plistPath];
-    [self showPeoplePickerController];
-    
-    //[self.tableView reloadData];
-}
-
--(void)showPeoplePickerController
-{
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-    picker.peoplePickerDelegate = self;
-    // Display only a person's phone, email, and birthdate
-    NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty],
-                               [NSNumber numberWithInt:kABPersonEmailProperty],
-                               [NSNumber numberWithInt:kABPersonBirthdayProperty], nil];
-    
-    
-    picker.displayedProperties = displayedItems;
-    // Show the picker
-    [self presentViewController:picker animated:YES completion:nil];
-}
-
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
-    
-    NSString *first_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-    
-    NSString *middle_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
-    
-    NSString *last_Name = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
-    
-    ABMutableMultiValueRef multiEmail = ABRecordCopyValue(person, kABPersonEmailProperty);
-    NSString *email = (__bridge NSString *) ABMultiValueCopyValueAtIndex(multiEmail, 0);
-    
-    ABMultiValueRef phoneNumberProperty = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    NSArray *phoneNumbers = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
-    
-    UIImage *retrievedImage;
-    if (person != nil && ABPersonHasImageData(person))
-        retrievedImage = [UIImage imageWithData:(__bridge_transfer NSData*)ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail)];
-    else retrievedImage = nil;
-    
-    NSString *retrievedName;
-    
-    if (![self existName:first_Name Middle:middle_Name Last:last_Name])
-        retrievedName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonOrganizationProperty));
-    else retrievedName = [self extractCompleteName:first_Name Middle:middle_Name Last:last_Name];
-
-    if ([self isDiferentGuest:@{@"email" : email ? email : @"", @"name" : retrievedName ? retrievedName : @""}]){
-        [self dismissViewControllerAnimated:NO completion:^(){}];
-        [self addName:retrievedName phone:phoneNumbers email:email photoToViewModel:retrievedImage];
-    }
-    else{
-        [self dismissViewControllerAnimated:NO completion:^(){}];
+- (void)getContactSelected:(NSDictionary *)contactInformation{
+    if ([self isDiferentGuest:contactInformation])
+        [self addGuest:[NSMutableDictionary dictionaryWithDictionary:contactInformation]];
+    else
         [self alertGuestRegistered];
-    }
 }
 
-- (BOOL) existName: (NSString *) name Middle: (NSString *) middle Last: (NSString *) last{
-    if (![name length])
-        if (![middle length])
-            if (![last length]) return NO;
+-(void) addGuest: (NSMutableDictionary *) guestInfo {
     
-    return YES;
-}
-
-- (NSString *) extractCompleteName: (NSString *) firstName Middle: (NSString *) middleName Last: (NSString *) lastName{
-    NSString * completeName = [NSString new];
-    
-    if (firstName != NULL && middleName != NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
-    }
-    
-    if (firstName != NULL && middleName != NULL & lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName, middleName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",firstName,lastName];
-    }
-    
-    if (firstName != NULL && middleName == NULL && lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@",firstName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@ %@",middleName, lastName];
-    }
-    
-    if (firstName == NULL && middleName != NULL && lastName == NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@",middleName];
-    }
-    
-    if (firstName == NULL && middleName == NULL && lastName != NULL)
-    {
-        completeName = [[NSString alloc] initWithFormat:@"%@", lastName];
-    }
-    
-    return completeName;
-}
-
-
--(void) addName: (NSString *) nameGuest phone:(NSArray *)phoneGuest email:(NSString *)emailGuest photoToViewModel:(UIImage *)photoContact{
-    
-    NSArray *codeContact = [self codesCountriesWith:phoneGuest];
+    NSArray *codeContact = [self codesCountriesWith:guestInfo[@"phone"]];
     NSString * code = [self getFlagCodeWithCodePhoneGuest:codeContact];
     
-    NSMutableDictionary * guestInformation = [NSMutableDictionary dictionaryWithDictionary: @{
-                                                                                              @"photo" : photoContact ? photoContact : @"",
-                                                                                              @"codePhone" : codeContact ? codeContact : @"",
-                                                                                              @"email" : emailGuest ? emailGuest : @"",
-                                                                                              @"name" : nameGuest,
-                                                                                              @"codeCountry" : code
-                                                                                              }];
-    if ([guestInformation[@"email"] isEqualToString:@""])
-        [self warningRegisterEmailGuest:guestInformation[@"name"]];
+    [guestInfo setValue:code forKey:@"codeCountry"];
     
-    [self.listOfGuests addObject:guestInformation];
+    [self.listOfGuests addObject:guestInfo];
+
     [self updateViewModel];
-    
+        
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.listOfGuests count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+    
+    if ([guestInfo[@"email"] isEqualToString:@""]) {
+        [self warningRegisterEmailGuest:guestInfo[@"name"]];
+    }
 }
 
 - (void) warningRegisterEmailGuest: (NSMutableString *) nameGuest{
@@ -459,17 +353,17 @@
     return codesCountries;
 }
 
--(NSString *) getCountryUser {
-    NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
-    NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
-    return countryCode;
+-(NSString *) getCodeCountryUser {
+    NSDictionary *detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+
+    return detailUser[@"code"];
 }
 
 - (NSString *)getFlagCodeWithCodePhoneGuest:(NSArray *)codePhone {
     __block NSString * code = [NSString new];
 
-    if (codePhone.count == 0) {
-        code = [self getCountryUser];
+    if (![codePhone count]) {
+        code = [self getCodeCountryUser];
     } else{
         [codePhone enumerateObjectsUsingBlock:^(id codePhone, NSUInteger idx, BOOL * stop){
             NSArray *countriesInformation = self.modelCountries;
@@ -510,8 +404,7 @@
     }
     
     cell.rightUtilityButtons = [self rightButtons];
-    //cell.delegate = self;
-    //[cell setCellHeight:cell.frame.size.height];
+    cell.delegate = self;
     
     return cell;
 }
@@ -564,13 +457,61 @@
         [editGuestDetailViewController setGuestInformationDelegate:self];
         
     } else if ([segue.identifier isEqualToString:@"setMeeting"]){
-        MeetingDateSelectorViewController *meetingDateSelectorViewController = (MeetingDateSelectorViewController *)segue.destinationViewController;
-        //SetMeetingViewController * guestDateMeetingViewController = (SetMeetingViewController *)segue.destinationViewController;
-        NSDictionary *detailInformation = @{ @"name" : self.nameMeeting.text,
-                                             @"guests" : self.listOfGuests };
-        [meetingDateSelectorViewController setTitle:detailInformation[@"name"]];
-        [meetingDateSelectorViewController setDetailMeeting:detailInformation];
+        MeetingDateSelectorViewController *meetingDateSelectorViewController =
+            (MeetingDateSelectorViewController *)segue.destinationViewController;
+        
+        [self.currentMeetingToUserDetail setValue:self.nameMeeting.text forKey:@"name"];
+        [self.userbusiness updateCurrentMeetingToUser:self.currentMeetingToUserDetail];
+        
+        NSMutableDictionary * meeting = [NSMutableDictionary dictionary];
+        [self.currentMeeting enumerateKeysAndObjectsUsingBlock:^(NSString * key, id obj, BOOL * stop) {
+            [meeting setDictionary:[NSMutableDictionary
+                                     dictionaryWithDictionary:self.currentMeeting[key]]];
+            
+            if ([meeting[@"detail"] count] < 2) {
+                [meeting setValue:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                  @"name" : self.nameMeeting.text,
+                                                                                }] forKey:@"detail"];
+            }
+            
+            [self clearInformationOfGuests];
+            [meeting setValue:self.listOfGuests forKey:@"guests"];
+            
+            [meeting setDictionary:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                   key: [NSMutableDictionary dictionaryWithDictionary:meeting]
+                                                                                   }]];
+        }];
+        
+        [self.currentMeeting setDictionary:meeting];
+        [self.meetingbusiness updateNewMeeting:self.currentMeeting];
+
+        [meetingDateSelectorViewController setTitle:self.nameMeeting.text];
+        [meetingDateSelectorViewController setCurrentMeeting:self.currentMeeting];
+        [meetingDateSelectorViewController setCurrentMeetingToUserDetail:self.currentMeetingToUserDetail];
     }
+}
+
+- (void) clearInformationOfGuests{
+    __block NSDictionary * detailUser = [NSDictionary dictionaryWithDictionary:[self.userbusiness getUser]];
+    __block NSMutableArray * guestInformation = [NSMutableArray array];
+    
+    [self.listOfGuests enumerateObjectsUsingBlock:^(NSMutableDictionary * guest, NSUInteger idx, BOOL * stop) {
+        if (![self existUser:detailUser AsGuest:guest]) {
+            NSMutableDictionary * tempGuest = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                    @"codeCountry": guest[@"codeCountry"],
+                                                                    @"email": guest[@"email"],
+                                                                    @"name": guest[@"name"],
+                                                                    @"photo": guest[@"photo"],
+                                                                    @"status": @0
+                                                                    }];
+            [guestInformation addObject:tempGuest];
+        } else{
+            [guestInformation addObject:guest];
+        }
+    }];
+    
+    [self.listOfGuests removeAllObjects];
+    [self.listOfGuests addObjectsFromArray:guestInformation];
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{

@@ -22,15 +22,6 @@
     // Configure the view for the selected state
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2.0f;
-    self.profilePicture.clipsToBounds = YES;
-    self.profilePicture.layer.borderWidth = 4.0f;
-    self.profilePicture.layer.borderColor = [UIColor whiteColor].CGColor;
-}
-
 - (void) setData:(NSDictionary *)data {
     _data = data;
     
@@ -41,8 +32,8 @@
         } else {
             self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2.0f;
             self.profilePicture.clipsToBounds = YES;
-            NSString *getPhoto = [NSString stringWithFormat:@"%@.png", _data[@"photo"]];
-            [self.profilePicture setImage:[UIImage imageNamed:getPhoto]];
+            [self.profilePicture setImage:circularImageWithImage
+                ([UIImage imageWithData: [self decodeBase64ToImage:_data[@"photo"]]])];
         }
     } else {
         [self.profilePicture setImage:_data[@"photo"]];
@@ -55,6 +46,34 @@
     NSString *identifyFlagPhoto = [NSString stringWithFormat:@"%@.png", _data[@"code"]];
     [self.countryphoto setImage:[UIImage imageNamed:identifyFlagPhoto]];
     
+}
+
+- (NSData *)decodeBase64ToImage:(NSString *)strEncodeData {
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:strEncodeData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
+}
+
+static UIImage *circularImageWithImage(UIImage *inputImage)
+{
+    
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 20, 220, 220)];
+    
+    // Create an image context containing the original UIImage.
+    UIGraphicsBeginImageContext(inputImage.size);
+    
+    // Clip to the bezier path and clear that portion of the image.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddPath(context,bezierPath.CGPath);
+    CGContextClip(context);
+    
+    // Draw here when the context is clipped
+    [inputImage drawAtPoint:CGPointZero];
+    
+    // Build a new UIImage from the image context.
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

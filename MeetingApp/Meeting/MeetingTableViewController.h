@@ -8,14 +8,26 @@
 
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell.h>
 
 #import "ModelTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "Meeting.h"
+#import "IMeetingDelegate.h"
+#import "IMeetingDatasource.h"
+#import "IUserDatasource.h"
+#import "IUserDelegate.h"
 
-@interface MeetingTableViewController : ModelTableViewController <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface MeetingTableViewController : ModelTableViewController
+<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, SWTableViewCellDelegate>
 
 @property(strong) NSArray<Meeting *> *meetings;
+@property (weak) id<IMeetingDelegate, IMeetingDatasource> meetingbusiness;
+@property (weak) id<IUserDelegate, IUserDatasource> userbusiness;
 
+@property(nonatomic, strong) MutableMeeting * currentMeeting;
+@property(nonatomic, strong) MutableMeeting * currentMeetingInDetailUser;
+
+- (IBAction)reloadData:(id)sender;
 @end
 

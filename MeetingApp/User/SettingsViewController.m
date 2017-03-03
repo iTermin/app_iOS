@@ -7,7 +7,13 @@
 //
 
 #import "SettingsViewController.h"
+#import <AdSupport/ASIdentifierManager.h>
+
+#import "MainAssembly.h"
+#import "MBProgressHUD.h"
+
 #import "EditProfileUserViewController.h"
+#import "RegisterUserViewController.h"
 
 @interface SettingsViewController ()
 {
@@ -21,20 +27,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    hud.color = [UIColor lightGrayColor];
+    
     self.arrayCountries = [ArrayOfCountries new];
     self.modelCountries = [self.arrayCountries getModelCountries];
     
+    self.userbusiness = [[MainAssembly defaultAssembly] userBusinessController];
+    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
 
-    self.currentUser = [NSMutableDictionary dictionaryWithDictionary: @{
-                         @"name" : @"Estefania Chavez Guardado",
-                         @"email" : @"correo@gmail.com.mx",
-                         @"code": @"MX",
-                         @"photo" : @"",
-                         }];
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-    [self updateViewModel];
-    
+    [self.userbusiness updateUserWithCallback:^(id<IUserDatasource> handler) {
+        self.currentUser = [NSMutableDictionary dictionaryWithDictionary:[handler getUser]];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //if (![self.currentUser count]) [self presentRegisterUserViewController];
+        //else{
+            [self updateViewModel];
+            [self.tableView reloadData];
+        //}
+    }];
+}
+
+- (void) presentRegisterUserViewController{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RegisterUserViewController* myVC = [sb instantiateViewControllerWithIdentifier:@"RegisterUser"];
+    [self presentViewController:myVC animated:YES completion:nil];
 }
 
 - (void) updateViewModel {
@@ -45,33 +67,33 @@
     NSArray * viewModel = @[
                             @{
                                 @"nib" : @"GeneralInformationUserTableViewCell",
-                                @"height" : @(255),
+                                @"height" : @(300),
                                 @"data" : [self.currentUser copy]
                                 },
                             @{
                                 @"nib" : @"HeaderTableViewCell",
-                                @"height" : @(50),
+                                @"height" : @(60),
                                 @"data" : @{
                                         @"text" : @"Help"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Report Bug"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Privacy"
                                         }
                                 },
                             @{
                                 @"nib" : @"OptionsSettingsTableViewCell",
-                                @"height" : @(45),
+                                @"height" : @(50),
                                 @"data" : @{
                                         @"option" : @"Terms of Service"
                                         }
@@ -105,10 +127,11 @@
     return nameCountry;
 }
 
-- (void)userInformation:(id<IUserInformation>)userDetail didChangedInformation:(NSDictionary *)user{
+- (void)userInformation:(id<IUserDatasource>)userDetail didChangedInformation:(NSDictionary *)user{
     changedInformation = YES;
     [self.currentUser removeAllObjects];
     self.currentUser =  [NSMutableDictionary dictionaryWithDictionary:user];
+    [self.userbusiness updateDetailUser:self.currentUser];
     
     [self updateViewModel];
 }

@@ -15,5 +15,7 @@
 @interface MeetingBusinessController : NSObject <IMeetingDatasource, IMeetingDelegate>
 
 @property (nonatomic, retain) NSMutableDictionary <NSString *, Meeting *> * detailMeetings;
+@property (nonatomic, retain) NSArray * meetingsUser;
+@property (nonatomic, retain) NSMutableDictionary * allMeetings;
 
 @end

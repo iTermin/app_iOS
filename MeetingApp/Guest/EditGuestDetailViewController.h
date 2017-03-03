@@ -9,19 +9,20 @@
 #import <UIKit/UIKit.h>
 
 #import "ModelTableViewController.h"
-#import "ICountrySelectorDelegate.h"
+#import "MVPlaceSearchTextField.h"
 #import "ArrayOfCountries.h"
 
 #import "IGuestInformation.h"
 #import "IGuestInformationDelegate.h"
 
 @interface EditGuestDetailViewController : ModelTableViewController
-<UITextFieldDelegate, ICountrySelectorDelegate, IGuestInformation,
-UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+<UITextFieldDelegate, IGuestInformation, UINavigationControllerDelegate,
+UIImagePickerControllerDelegate, PlaceSearchTextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *guestPhoto;
 @property (strong, nonatomic) IBOutlet UITextField *nameGuest;
 @property (strong, nonatomic) IBOutlet UITextField *emailGuest;
+@property (weak, nonatomic) IBOutlet MVPlaceSearchTextField *locationGuest;
 
 @property(nonatomic, strong) NSDictionary * currentGuest;
 @property(nonatomic, strong) NSMutableDictionary *guestInformation;
