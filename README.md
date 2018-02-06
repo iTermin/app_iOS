@@ -24,7 +24,7 @@ For more detail about the project please take a look at the wiki.
 [Server/API](http://itermin.github.io/server/)
 
 ## Libraries / Frameworks
-- [Realm](https://github.com/realm/realm-cocoa) - Apache 2.0 License
+- [Firebase](https://github.com/firebase/firebase-ios-sdk) - Apache 2.0 License
 - [Typhoon](https://github.com/appsquickly/Typhoon) - Apache 2.0 License
 - [SlackTextViewController](https://github.com/slackhq/SlackTextViewController) - MIT License
 - [Kiwi](https://github.com/kiwi-bdd/Kiwi) - MIT License
